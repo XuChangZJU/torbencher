@@ -6,7 +6,7 @@
 
 先`git clone`项目到本地
 
-在需要运行的程序中添加如下代码：
+将需要运行的程序改写为如下代码：
 
 ```python
 from src.Wrapper import Wrapper
@@ -17,8 +17,13 @@ wrapper = Wrapper({
     "file_max_size": "512MB",
     "file_name_spec": "time"
 })
-# 此处为需要运行的程序
-wrapper.start()
+
+def my_code():
+    """
+    此处写需要运行的程序
+    """
+
+wrapper.start(my_code)
 ```
 
 然后执行程序，对pytorch的调用序列就会被顺序输出到`out_dir`目录下的文件中
