@@ -6,19 +6,19 @@
 
 先`git clone`项目到本地
 
-在需要运行的程序之前加上如下代码：
+在需要运行的程序中添加如下代码：
 
 ```python
 from src.Wrapper import Wrapper
 
-if __name__ == '__main__':
-    wrapper = Wrapper({
-        "out_dir": "/var/wrapper_log",
-        "format": "csv",
-        "file_max_size": "512MB",
-        "file_name_spec": "time"
-    })
-    wrapper.start()
+wrapper = Wrapper({
+    "out_dir": "/var/wrapper_log",
+    "format": "csv",
+    "file_max_size": "512MB",
+    "file_name_spec": "time"
+})
+# 此处为需要运行的程序
+wrapper.start()
 ```
 
 然后执行程序，对pytorch的调用序列就会被顺序输出到`out_dir`目录下的文件中
