@@ -8,7 +8,7 @@ wrapper = Wrapper(
         "out_dir": "/home/torbencher",
         "format": "csv",
         "file_max_size": "512MB",
-        "file_name_spec": "time",
+        "file_name_spec": "timestamp"
     }
 )
 

@@ -25,6 +25,7 @@ def timing_decorator(func):
 class Wrapper:
     DEFAULT_FORMAT = "csv"
     SUPPORTED_FORMATS = ["json", "csv"]
+    SUPPORETD_NAME_SPEC = ["timestamp", "datetime", "serial"]
 
     class ConfigKey:
         OUT_DIR = "out_dir"
@@ -32,18 +33,40 @@ class Wrapper:
         FILE_MAX_SIZE = "file_max_size"
         FILE_NAME_SPEC = "file_name_spec"
 
+    class ResultKey:
+        COUNT = "count"
+        TOTAL_TIME = "total_time(ms)"
+        SCALE = "scale"
+
+        class ScaleKey:
+            CALL_NUMBER = "call#"
+            START_TIMESTAMP = "start_timestamp"
+            COST_TIME = "cost_time(ms)"
+
     def __init__(self, config: dict):
         self.call_count = {}  # 创建一个字典来存储调用信息
         self.config = self._parse_config(config)
 
     def _parse_config(self, config: dict):
+        if Wrapper.ConfigKey.OUT_DIR not in config:
+            raise ValueError("Output directory is required")
 
         if Wrapper.ConfigKey.FORMAT in config:
+            assert isinstance(config[Wrapper.ConfigKey.FORMAT], str)
             format = config[Wrapper.ConfigKey.FORMAT]
             if format not in Wrapper.SUPPORTED_FORMATS:
                 raise ValueError(f"Unsupported format {format} for saving result")
         else:
             config[Wrapper.ConfigKey.FORMAT] = Wrapper.DEFAULT_FORMAT
+
+        if Wrapper.ConfigKey.FILE_MAX_SIZE in config:
+            assert isinstance(config[Wrapper.ConfigKey.FILE_MAX_SIZE], str)
+
+        if Wrapper.ConfigKey.FILE_NAME_SPEC in config:
+            assert isinstance(config[Wrapper.ConfigKey.FILE_NAME_SPEC], str)
+            name_spec = config[Wrapper.ConfigKey.FILE_NAME_SPEC]
+            if name_spec not in Wrapper.SUPPORETD_NAME_SPEC:
+                raise ValueError(f"Unsupported file name spec {name_spec}")
 
         return config
 
@@ -53,37 +76,79 @@ class Wrapper:
         self.save_result(
             self.config[Wrapper.ConfigKey.OUT_DIR],
             self.config[Wrapper.ConfigKey.FORMAT],
+            self.config[Wrapper.ConfigKey.FILE_MAX_SIZE],
+            self.config[Wrapper.ConfigKey.FILE_NAME_SPEC],
         )
         return ret
 
-    def save_result(self, path: str, format: str):
+    def save_result(
+        self, path: str, format: str, file_max_size: str, file_name_spec: str
+    ):
+        def parse_file_max_size_str(file_max_size: str):
+            max_size = 0
+            if file_max_size.endswith("KB"):
+                max_size = int(file_max_size[:-2]) * 1024
+            elif file_max_size.endswith("MB"):
+                max_size = int(file_max_size[:-2]) * 1024 * 1024
+            elif file_max_size.endswith("GB"):
+                max_size = int(file_max_size[:-2]) * 1024 * 1024 * 1024
+            else:
+                raise ValueError(f"Unsupported file max size format {file_max_size}")
+
+            if max_size <= 0:
+                raise ValueError("File max size must be positive")
+
+            return max_size
+
+        def get_file_name_suffix(file_name_spec: str):
+            if file_name_spec == "timestamp":
+                return time.time_ns()
+            elif file_name_spec == "datetime":
+                return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            elif file_name_spec == "serial":
+                raise NotImplementedError
+
         if os.path.exists(path):
             if not os.path.isdir(path):
                 raise ValueError(f"Path {path} is not a directory")
         else:
             os.makedirs(path)
 
-        if not path.endswith("/"):
-            path += "/"
-        elif not path.endswith("\\"):
-            path += "\\"
-
+        max_size = parse_file_max_size_str(file_max_size)
+        name_suffix = get_file_name_suffix(file_name_spec)
         if format == "json":
-            self.save_json_result(path)
+            self.save_json_result(path, max_size, name_suffix)
         elif format == "csv":
-            self.save_csv_result(path)
+            self.save_csv_result(path, max_size, name_suffix)
         else:
             raise NotImplementedError
 
-    def save_json_result(self, path: str):
-        save_timestamp = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
-        with open(f"torbencher_wrapper_{save_timestamp}.json", "w") as f:
+    def save_json_result(self, path: str, max_size: int, name_suffix: str):
+        file_name = f"wrapper_result_{name_suffix}.json"
+        with open(file_name, "w") as f:
             json.dump(self.call_count, f)
 
-    def save_csv_result(self, path: str):
-        filename = f"wrapper_result.csv"
-        with open(path + filename, "w") as f:
-            f.write("api_name,count,start_time,total_time(ms),scale\n")
+    def save_csv_result(self, path: str, max_size: int, name_suffix: str):
+        file_name = f"wrapper_result_{name_suffix}.csv"
+        with open(os.path.join(path, file_name), "w") as f:
+            f.write("api_name,call_number,start_time,cost_time(ms),scale\n")
+            for api_name, api_info in self.call_count.items():
+                scale_list = api_info[Wrapper.ResultKey.SCALE]
+                for scale_obj in scale_list:
+                    assert isinstance(scale_obj, dict)
+
+                    call_number = scale_obj[Wrapper.ResultKey.ScaleKey.CALL_NUMBER]
+                    start_time = scale_obj[Wrapper.ResultKey.ScaleKey.START_TIMESTAMP]
+                    cost_time = scale_obj[Wrapper.ResultKey.ScaleKey.COST_TIME]
+
+                    scale_obj.pop(Wrapper.ResultKey.ScaleKey.CALL_NUMBER)
+                    scale_obj.pop(Wrapper.ResultKey.ScaleKey.START_TIMESTAMP)
+                    scale_obj.pop(Wrapper.ResultKey.ScaleKey.COST_TIME)
+
+                    scale_str = json.dumps(scale_obj, ensure_ascii=False)
+                    f.write(
+                        f"{api_name},{call_number},{start_time},{cost_time},{scale_str}\n"
+                    )
 
     def call_count_decorator(self, func, module_name=None):
         """author: zym, fg"""
@@ -101,13 +166,6 @@ class Wrapper:
 
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            COUNT = "count"
-            TOTAL_TIME = "total_time(ms)"
-            SCALE = "scale"
-            CALL_NUMBER = "call#"
-            START_TIMESTAMP = "start_timestamp"
-            COST_TIME = "cost_time(ms)"
-
             start_time = time.time_ns()
             result, elapsed_time = timing_decorator(func)(
                 *args, **kwargs
@@ -115,27 +173,33 @@ class Wrapper:
 
             full_name = module_name + "." + func.__name__
             if full_name not in self.call_count:
-                self.call_count[full_name] = {COUNT: 0, TOTAL_TIME: 0.0, SCALE: []}
+                self.call_count[full_name] = {
+                    Wrapper.ResultKey.COUNT: 0,
+                    Wrapper.ResultKey.TOTAL_TIME: 0.0,
+                    Wrapper.ResultKey.SCALE: [],
+                }
 
             log_str = "call #{:d} of {:s}, start at {}, cost {:f} ms".format(
-                self.call_count[full_name][COUNT],
+                self.call_count[full_name][Wrapper.ResultKey.COUNT],
                 full_name,
                 start_time,
                 elapsed_time,
             )
 
             scale_obj = {}
-            scale_obj[CALL_NUMBER] = self.call_count[full_name][COUNT]
-            scale_obj[START_TIMESTAMP] = start_time
-            scale_obj[COST_TIME] = elapsed_time
+            scale_obj[Wrapper.ResultKey.ScaleKey.CALL_NUMBER] = self.call_count[
+                full_name
+            ][Wrapper.ResultKey.COUNT]
+            scale_obj[Wrapper.ResultKey.ScaleKey.START_TIMESTAMP] = start_time
+            scale_obj[Wrapper.ResultKey.ScaleKey.COST_TIME] = elapsed_time
 
             scale_info = get_scale_info(args)
             for desc, value in scale_info:
                 scale_obj[desc] = value
 
-            self.call_count[full_name][COUNT] += 1
-            self.call_count[full_name][TOTAL_TIME] += elapsed_time
-            self.call_count[full_name][SCALE].append(scale_obj)
+            self.call_count[full_name][Wrapper.ResultKey.COUNT] += 1
+            self.call_count[full_name][Wrapper.ResultKey.TOTAL_TIME] += elapsed_time
+            self.call_count[full_name][Wrapper.ResultKey.SCALE].append(scale_obj)
 
             return result
 
