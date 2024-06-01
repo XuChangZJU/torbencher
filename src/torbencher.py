@@ -7,6 +7,7 @@ import psutil
 import torch
 import torch.version
 
+from .TorchWrapper import TorchWrapper
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
@@ -140,8 +141,14 @@ class torbencher:
         if torch.__version__ < (2, 0, 0):
             raise RuntimeError("Torch version must be greater than 2.0.0")
 
+        torch.manual_seed(seed)
         for name in devices:
             torch.set_default_device(torch.device(name))
+            wrapper = TorchWrapper({
+                "out_dir" : ""
+            })
+            wrapper.decorate_module(torch)
             result = runner.run(suite)
-
+            print(wrapper.call_count)
+        
         return output_results

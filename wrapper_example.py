@@ -1,9 +1,9 @@
-from torbencher import Wrapper
+from torbencher import TorchWrapper
 
 import torch
 import torch.nn.functional as F
 
-wrapper = Wrapper(
+wrapper = TorchWrapper(
     {
         "out_dir": "./result",
         "format": "csv",

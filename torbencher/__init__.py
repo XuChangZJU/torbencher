@@ -1,2 +1,2 @@
 from src.torbencher import torbencher
-from src.Wrapper import Wrapper
+from src.TorchWrapper import TorchWrapper

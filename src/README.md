@@ -1,4 +1,4 @@
-# Wrapper
+# TorchWrapper
 
 一个对pytorch包进行封装，对调用进行记录的工具
 
@@ -9,7 +9,7 @@
 将需要运行的程序改写为如下代码：
 
 ```python
-from src.Wrapper import Wrapper
+from torbencher import TorchWrapper
 
 wrapper = Wrapper({
     "out_dir": "path/to/output",

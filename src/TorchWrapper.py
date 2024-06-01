@@ -22,7 +22,7 @@ def get_scale_info(args: tuple):
     return scale_info
 
 
-class Wrapper:
+class TorchWrapper:
     DEFAULT_FORMAT = "csv"
     SUPPORTED_FORMATS = ["json", "csv", "html"]
     SUPPORETD_NAME_SPEC = ["timestamp", "datetime", "serial"]
@@ -48,24 +48,26 @@ class Wrapper:
         self.config = self._parse_config(config)
 
     def _parse_config(self, config: dict):
-        if Wrapper.ConfigKey.OUT_DIR not in config:
+        if TorchWrapper.ConfigKey.OUT_DIR not in config:
             raise ValueError("Output directory is required")
+        else:
+            assert isinstance(config[TorchWrapper.ConfigKey.OUT_DIR], str)
 
-        if Wrapper.ConfigKey.FORMAT in config:
-            assert isinstance(config[Wrapper.ConfigKey.FORMAT], str)
-            format = config[Wrapper.ConfigKey.FORMAT]
-            if format not in Wrapper.SUPPORTED_FORMATS:
+        if TorchWrapper.ConfigKey.FORMAT in config:
+            assert isinstance(config[TorchWrapper.ConfigKey.FORMAT], str)
+            format = config[TorchWrapper.ConfigKey.FORMAT]
+            if format not in TorchWrapper.SUPPORTED_FORMATS:
                 raise ValueError(f"Unsupported format {format} for saving result")
         else:
-            config[Wrapper.ConfigKey.FORMAT] = Wrapper.DEFAULT_FORMAT
+            config[TorchWrapper.ConfigKey.FORMAT] = TorchWrapper.DEFAULT_FORMAT
 
-        if Wrapper.ConfigKey.FILE_MAX_SIZE in config:
-            assert isinstance(config[Wrapper.ConfigKey.FILE_MAX_SIZE], str)
+        if TorchWrapper.ConfigKey.FILE_MAX_SIZE in config:
+            assert isinstance(config[TorchWrapper.ConfigKey.FILE_MAX_SIZE], str)
 
-        if Wrapper.ConfigKey.FILE_NAME_SPEC in config:
-            assert isinstance(config[Wrapper.ConfigKey.FILE_NAME_SPEC], str)
-            name_spec = config[Wrapper.ConfigKey.FILE_NAME_SPEC]
-            if name_spec not in Wrapper.SUPPORETD_NAME_SPEC:
+        if TorchWrapper.ConfigKey.FILE_NAME_SPEC in config:
+            assert isinstance(config[TorchWrapper.ConfigKey.FILE_NAME_SPEC], str)
+            name_spec = config[TorchWrapper.ConfigKey.FILE_NAME_SPEC]
+            if name_spec not in TorchWrapper.SUPPORETD_NAME_SPEC:
                 raise ValueError(f"Unsupported file name spec {name_spec}")
 
         return config
@@ -74,10 +76,10 @@ class Wrapper:
         self.decorate_module(torch)
         ret = func(*args, **kwargs)
         self.save_result(
-            self.config[Wrapper.ConfigKey.OUT_DIR],
-            self.config[Wrapper.ConfigKey.FORMAT],
-            self.config[Wrapper.ConfigKey.FILE_MAX_SIZE],
-            self.config[Wrapper.ConfigKey.FILE_NAME_SPEC],
+            self.config[TorchWrapper.ConfigKey.OUT_DIR],
+            self.config[TorchWrapper.ConfigKey.FORMAT],
+            self.config[TorchWrapper.ConfigKey.FILE_MAX_SIZE],
+            self.config[TorchWrapper.ConfigKey.FILE_NAME_SPEC],
         )
         return ret
 
@@ -142,17 +144,17 @@ class Wrapper:
             f.write("api_name,call_number,start_time,cost_time(ms),scale\n")
             call_count_dict = self.call_count.copy()
             for api_name, api_info in call_count_dict.items():
-                scale_list = api_info[Wrapper.ResultKey.SCALE]
+                scale_list = api_info[TorchWrapper.ResultKey.SCALE]
                 for scale_obj in scale_list:
                     assert isinstance(scale_obj, dict)
 
-                    call_number = scale_obj[Wrapper.ResultKey.ScaleKey.CALL_NUMBER]
-                    start_time = scale_obj[Wrapper.ResultKey.ScaleKey.START_TIMESTAMP]
-                    cost_time = scale_obj[Wrapper.ResultKey.ScaleKey.COST_TIME]
+                    call_number = scale_obj[TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER]
+                    start_time = scale_obj[TorchWrapper.ResultKey.ScaleKey.START_TIMESTAMP]
+                    cost_time = scale_obj[TorchWrapper.ResultKey.ScaleKey.COST_TIME]
 
-                    scale_obj.pop(Wrapper.ResultKey.ScaleKey.CALL_NUMBER)
-                    scale_obj.pop(Wrapper.ResultKey.ScaleKey.START_TIMESTAMP)
-                    scale_obj.pop(Wrapper.ResultKey.ScaleKey.COST_TIME)
+                    scale_obj.pop(TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER)
+                    scale_obj.pop(TorchWrapper.ResultKey.ScaleKey.START_TIMESTAMP)
+                    scale_obj.pop(TorchWrapper.ResultKey.ScaleKey.COST_TIME)
 
                     scale_str = json.dumps(scale_obj, ensure_ascii=False)
                     f.write(
@@ -163,17 +165,17 @@ class Wrapper:
         call_count_dict = self.call_count.copy()
         call_count_list = []
         for api_name, api_info in call_count_dict.items():
-            scale_list = api_info[Wrapper.ResultKey.SCALE]
+            scale_list = api_info[TorchWrapper.ResultKey.SCALE]
             for scale_obj in scale_list:
                 assert isinstance(scale_obj, dict)
 
-                call_number = scale_obj[Wrapper.ResultKey.ScaleKey.CALL_NUMBER]
-                start_time = scale_obj[Wrapper.ResultKey.ScaleKey.START_TIMESTAMP]
-                cost_time = scale_obj[Wrapper.ResultKey.ScaleKey.COST_TIME]
+                call_number = scale_obj[TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER]
+                start_time = scale_obj[TorchWrapper.ResultKey.ScaleKey.START_TIMESTAMP]
+                cost_time = scale_obj[TorchWrapper.ResultKey.ScaleKey.COST_TIME]
 
-                scale_obj.pop(Wrapper.ResultKey.ScaleKey.CALL_NUMBER)
-                scale_obj.pop(Wrapper.ResultKey.ScaleKey.START_TIMESTAMP)
-                scale_obj.pop(Wrapper.ResultKey.ScaleKey.COST_TIME)
+                scale_obj.pop(TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER)
+                scale_obj.pop(TorchWrapper.ResultKey.ScaleKey.START_TIMESTAMP)
+                scale_obj.pop(TorchWrapper.ResultKey.ScaleKey.COST_TIME)
 
                 scale_str = json.dumps(scale_obj, ensure_ascii=False)
 
@@ -221,32 +223,32 @@ class Wrapper:
             full_name = module_name + "." + func.__name__
             if full_name not in self.call_count:
                 self.call_count[full_name] = {
-                    Wrapper.ResultKey.COUNT: 0,
-                    Wrapper.ResultKey.TOTAL_TIME: 0.0,
-                    Wrapper.ResultKey.SCALE: [],
+                    TorchWrapper.ResultKey.COUNT: 0,
+                    TorchWrapper.ResultKey.TOTAL_TIME: 0.0,
+                    TorchWrapper.ResultKey.SCALE: [],
                 }
 
             log_str = "call #{:d} of {:s}, start at {}, cost {:f} ms".format(
-                self.call_count[full_name][Wrapper.ResultKey.COUNT],
+                self.call_count[full_name][TorchWrapper.ResultKey.COUNT],
                 full_name,
                 start_time,
                 elapsed_time,
             )
 
             scale_obj = {}
-            scale_obj[Wrapper.ResultKey.ScaleKey.CALL_NUMBER] = self.call_count[
+            scale_obj[TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER] = self.call_count[
                 full_name
-            ][Wrapper.ResultKey.COUNT]
-            scale_obj[Wrapper.ResultKey.ScaleKey.START_TIMESTAMP] = start_time
-            scale_obj[Wrapper.ResultKey.ScaleKey.COST_TIME] = elapsed_time
+            ][TorchWrapper.ResultKey.COUNT]
+            scale_obj[TorchWrapper.ResultKey.ScaleKey.START_TIMESTAMP] = start_time
+            scale_obj[TorchWrapper.ResultKey.ScaleKey.COST_TIME] = elapsed_time
 
             scale_info = get_scale_info(args)
             for desc, value in scale_info:
                 scale_obj[desc] = value
 
-            self.call_count[full_name][Wrapper.ResultKey.COUNT] += 1
-            self.call_count[full_name][Wrapper.ResultKey.TOTAL_TIME] += elapsed_time
-            self.call_count[full_name][Wrapper.ResultKey.SCALE].append(scale_obj)
+            self.call_count[full_name][TorchWrapper.ResultKey.COUNT] += 1
+            self.call_count[full_name][TorchWrapper.ResultKey.TOTAL_TIME] += elapsed_time
+            self.call_count[full_name][TorchWrapper.ResultKey.SCALE].append(scale_obj)
 
             return result
 
