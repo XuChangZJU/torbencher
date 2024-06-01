@@ -5,7 +5,7 @@ import torch.nn.functional as F
 
 wrapper = Wrapper(
     {
-        "out_dir": "/var/wrapper_log",
+        "out_dir": "/home/torbencher",
         "format": "csv",
         "file_max_size": "512MB",
         "file_name_spec": "time",
@@ -23,4 +23,4 @@ def my_code(*args, **kwargs):
     return c
 
 
-result = wrapper.start(my_code, 1, b=2)
+result = wrapper.start(my_code, 1, 2, x=3, y=4)
