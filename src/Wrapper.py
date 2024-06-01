@@ -4,6 +4,7 @@ import os
 import time
 import types
 
+import pandas as pd
 import torch
 
 
@@ -20,6 +21,18 @@ def timing_decorator(func):
         return ret, delta
 
     return wrapper
+
+
+def get_scale_info(args: tuple):
+    """
+    获取参数的维度信息
+    """
+    scale_info = []
+    for i in range(len(args)):
+        arg = args[i]
+        if type(arg) == torch.Tensor:
+            scale_info.append((f"arg{i}_size", arg.size()))  # (desc, value)
+    return scale_info
 
 
 class Wrapper:
@@ -117,22 +130,26 @@ class Wrapper:
         max_size = parse_file_max_size_str(file_max_size)
         name_suffix = get_file_name_suffix(file_name_spec)
         if format == "json":
-            self.save_json_result(path, max_size, name_suffix)
+            self._save_result_to_json(path, max_size, name_suffix)
         elif format == "csv":
-            self.save_csv_result(path, max_size, name_suffix)
+            self._save_result_to_csv(path, max_size, name_suffix)
         else:
             raise NotImplementedError
 
-    def save_json_result(self, path: str, max_size: int, name_suffix: str):
+    def _save_result_to_json(self, path: str, max_size: int, name_suffix: str):
         file_name = f"wrapper_result_{name_suffix}.json"
-        with open(file_name, "w") as f:
+        with open(os.path.join(path, file_name), "w") as f:
             json.dump(self.call_count, f)
 
-    def save_csv_result(self, path: str, max_size: int, name_suffix: str):
+    def _save_result_to_csv(self, path: str, max_size: int, name_suffix: str):
+        self._save_df_result_to_csv(path, max_size, name_suffix)
+
+    def _save_result_to_single_csv(self, path: str, max_size: int, name_suffix: str):
         file_name = f"wrapper_result_{name_suffix}.csv"
         with open(os.path.join(path, file_name), "w") as f:
             f.write("api_name,call_number,start_time,cost_time(ms),scale\n")
-            for api_name, api_info in self.call_count.items():
+            call_count_dict = self.call_count.copy()
+            for api_name, api_info in call_count_dict.items():
                 scale_list = api_info[Wrapper.ResultKey.SCALE]
                 for scale_obj in scale_list:
                     assert isinstance(scale_obj, dict)
@@ -150,19 +167,43 @@ class Wrapper:
                         f"{api_name},{call_number},{start_time},{cost_time},{scale_str}\n"
                     )
 
-    def call_count_decorator(self, func, module_name=None):
-        """author: zym, fg"""
+    def _save_df_result_to_csv(self, path: str, max_size: int, name_suffix: str):
+        call_count_dict = self.call_count.copy()
+        call_count_list = []
+        for api_name, api_info in call_count_dict.items():
+            scale_list = api_info[Wrapper.ResultKey.SCALE]
+            for scale_obj in scale_list:
+                assert isinstance(scale_obj, dict)
 
-        def get_scale_info(args: tuple):
-            """
-            获取参数的维度信息
-            """
-            scale_info = []
-            for i in range(len(args)):
-                arg = args[i]
-                if type(arg) == torch.Tensor:
-                    scale_info.append((f"arg{i}_size", arg.size()))  # (desc, value)
-            return scale_info
+                call_number = scale_obj[Wrapper.ResultKey.ScaleKey.CALL_NUMBER]
+                start_time = scale_obj[Wrapper.ResultKey.ScaleKey.START_TIMESTAMP]
+                cost_time = scale_obj[Wrapper.ResultKey.ScaleKey.COST_TIME]
+
+                scale_obj.pop(Wrapper.ResultKey.ScaleKey.CALL_NUMBER)
+                scale_obj.pop(Wrapper.ResultKey.ScaleKey.START_TIMESTAMP)
+                scale_obj.pop(Wrapper.ResultKey.ScaleKey.COST_TIME)
+
+                scale_str = json.dumps(scale_obj, ensure_ascii=False)
+
+                new_row = [api_name, call_number, start_time, cost_time, scale_obj]
+                call_count_list.append(new_row)
+
+        df = pd.DataFrame(
+            call_count_list,
+            index=range(1, len(call_count_list) + 1),
+            columns=[
+                "api_name",
+                "call_number",
+                "start_time",
+                "cost_time(ms)",
+                "scale",
+            ],
+        )
+        file_name = f"wrapper_result_{name_suffix}.csv"
+        df.to_csv(os.path.join(path, file_name), chunksize=1024 * 1024)
+
+    def _call_count_decorator(self, func, module_name=None):
+        """author: zym, fg"""
 
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
@@ -206,10 +247,10 @@ class Wrapper:
         wrapper._is_decorated = True
         return wrapper
 
-    def set_new_attr(self, module, attr_name, attr):
+    def _set_new_attr(self, module, attr_name, attr):
         """author: zym"""
         if not hasattr(attr, "_is_decorated"):
-            decorated_attr = self.call_count_decorator(attr, module.__name__)
+            decorated_attr = self._call_count_decorator(attr, module.__name__)
             decorated_attr._is_decorated = True
             setattr(module, attr_name, decorated_attr)
 
@@ -231,7 +272,7 @@ class Wrapper:
             try:
                 attr = getattr(module, attr_name)
                 if isinstance(attr, types.FunctionType):
-                    self.set_new_attr(module, attr_name, attr)
+                    self._set_new_attr(module, attr_name, attr)
                     # print(f"Decorated function: {module_name}.{attr_name}")
                 elif isinstance(attr, types.ModuleType) and attr.__name__.startswith(
                     "torch"
@@ -240,30 +281,31 @@ class Wrapper:
                     self.decorate_module(attr, visited)
                 elif isinstance(attr, type):
                     # print(f"Descending into class: {attr.__name__} in {module_name}")
-                    self.decorate_class(attr)
+                    self._decorate_class(attr)
                 elif callable(attr):
-                    self.set_new_attr(module, attr_name, attr)
+                    self._set_new_attr(module, attr_name, attr)
             except AttributeError:
                 continue
 
-    def decorate_class(self, cls):
+    def _decorate_class(self, cls):
         """author: zym"""
         for attr_name in dir(cls):
-            # if attr_name.startswith('__') and attr_name.endswith('__'):
-            #     continue  # Skip special attributes
+            if attr_name.startswith("__") and attr_name.endswith("__"):
+                continue  # Skip special attributes
             try:
                 attr = getattr(cls, attr_name)
                 if isinstance(attr, types.FunctionType):
-                    self.set_new_attr(cls, attr_name, attr)
-                elif attr_name in [
-                    "__add__",
-                    "__mul__",
-                    "__sub__",
-                    "__truediv__",
-                    "__matmul__",
-                    "__pow__",
-                    "__mod__",
-                ]:
-                    self.set_new_attr(cls, attr_name, attr)  # 特殊处理运算符重载方法
+                    self._set_new_attr(cls, attr_name, attr)
+                # elif attr_name in [
+                #     "__add__",
+                #     "__mul__",
+                #     "__sub__",
+                #     "__truediv__",
+                #     "__matmul__",
+                #     "__pow__",
+                #     "__mod__",
+                # ]:
+                #     # 特殊处理运算符重载方法
+                #     self._set_new_attr(cls, attr_name, attr)
             except (AttributeError, TypeError) as e:
                 continue

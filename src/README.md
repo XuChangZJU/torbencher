@@ -12,7 +12,7 @@
 from src.Wrapper import Wrapper
 
 wrapper = Wrapper({
-    "out_dir": "/home/torbencher",
+    "out_dir": "./result",
     "format": "csv",
     "file_max_size": "512MB",
     "file_name_spec": "timestamp"
