@@ -103,6 +103,8 @@ print(result)
 一个接口的测试用例如下（以`torch.add`为例）：
 
 ```python
+"""add.py"""
+
 import torch
 import src.util.test_api_version as test_api_version
 from src.testcase.TorBencherBase import TorBencherTestCaseBase
@@ -120,6 +122,11 @@ class TorchAddTestCase(TorBencherTestCaseBase):
         b = torch.randn(4)
         result = torch.add(a, b, alpha=10)
         return [result, [a, b, 10]]
+```
+
+测试用例编写完成后，在对应模块的`__init__.py`文件中导出该用例（如果不导出该用例，框架将不会发现并测试它），如
+```python
+from .add import TorchAddTestCase
 ```
 
 要点：

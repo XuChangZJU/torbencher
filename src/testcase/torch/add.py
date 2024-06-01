@@ -1,6 +1,8 @@
+"""add.py"""
+
 import torch
 import src.util.test_api_version as test_api_version
-from src.testcase.TorBencherBase import TorBencherTestCaseBase
+from ..TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util.decorator import test_api
 
 

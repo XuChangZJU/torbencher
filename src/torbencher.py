@@ -1,7 +1,13 @@
+import importlib
+import inspect
 import platform
 import time
+import unittest
 import psutil
 import torch
+import torch.version
+
+from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
 class torbencher:
@@ -108,5 +114,34 @@ class torbencher:
         return result
 
     def _run_tests(self, seed: int, devices: list, test_modules: list):
-        test_results = []
-        return test_results
+        output_results = []
+
+        loader = unittest.TestLoader()
+        runner = unittest.TextTestRunner()
+
+        names = [f"src.testcase.{test_module}" for test_module in test_modules]
+        modules = [importlib.import_module(name) for name in names]
+
+        testcases_info = []
+        for module in modules:
+            module_info = {
+                "module": module,
+                "testcases": [],
+            }
+            for name in dir(module):
+                attr = getattr(module, name)
+                if inspect.isclass(attr) and issubclass(attr, TorBencherTestCaseBase):
+                    module_info["testcases"].append(attr)
+            testcases_info.append(module_info)
+        print(testcases_info)
+
+        suite = loader.loadTestsFromNames(names)
+
+        if torch.__version__ < (2, 0, 0):
+            raise RuntimeError("Torch version must be greater than 2.0.0")
+
+        for name in devices:
+            torch.set_default_device(torch.device(name))
+            result = runner.run(suite)
+
+        return output_results

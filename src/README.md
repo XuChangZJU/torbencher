@@ -12,7 +12,7 @@
 from src.Wrapper import Wrapper
 
 wrapper = Wrapper({
-    "out_dir": "./result",
+    "out_dir": "path/to/output",
     "format": "csv",
     "file_max_size": "512MB",
     "file_name_spec": "timestamp"
@@ -31,7 +31,7 @@ wrapper.start(my_code)
 ## 配置参数
 
 - `out_dir`: 输出目录（必需）
-- `format`: 输出格式目前支持`csv`和`json`，默认为`csv`
+- `format`: 输出格式目前支持`csv`,`json`和`html`，默认为`csv`
 - `file_max_size`：输出文件的最大值，超过会自动输出到下一个文件中
 - `file_name_spec`：输出文件名规范，`timestamp`时间戳，`datetime`以时间值（字符串），`serial`以6位正整数（如果文件夹下原来就有输出文件，会接着最大文件名命名）
 

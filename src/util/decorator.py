@@ -1,7 +1,20 @@
 import functools
+import time
+
+from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
-from src.testcase.TorBencherBase import TorBencherTestCaseBase
+def timing_decorator(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter_ns()
+        ret = func(*args, **kwargs)
+        end = time.perf_counter_ns()
+        delta = (end - start) / 1000 / 1000  # ns -> us -> ms
+        timing_log = f"{func.__name__}() cost {delta} ms"
+        return ret, delta
+
+    return wrapper
 
 
 def test_api(api):

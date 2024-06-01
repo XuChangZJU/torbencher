@@ -7,20 +7,7 @@ import types
 import pandas as pd
 import torch
 
-
-def timing_decorator(func):
-    """author: fg"""
-
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        start = time.perf_counter_ns()
-        ret = func(*args, **kwargs)
-        end = time.perf_counter_ns()
-        delta = (end - start) / 1000 / 1000  # ns -> us -> ms
-        timing_log = f"{func.__name__}() cost {delta} ms"
-        return ret, delta
-
-    return wrapper
+from .util.decorator import timing_decorator
 
 
 def get_scale_info(args: tuple):
@@ -37,7 +24,7 @@ def get_scale_info(args: tuple):
 
 class Wrapper:
     DEFAULT_FORMAT = "csv"
-    SUPPORTED_FORMATS = ["json", "csv"]
+    SUPPORTED_FORMATS = ["json", "csv", "html"]
     SUPPORETD_NAME_SPEC = ["timestamp", "datetime", "serial"]
 
     class ConfigKey:
@@ -133,6 +120,8 @@ class Wrapper:
             self._save_result_to_json(path, max_size, name_suffix)
         elif format == "csv":
             self._save_result_to_csv(path, max_size, name_suffix)
+        elif format == "html":
+            self._save_result_to_html(path, max_size, name_suffix)
         else:
             raise NotImplementedError
 
@@ -143,6 +132,9 @@ class Wrapper:
 
     def _save_result_to_csv(self, path: str, max_size: int, name_suffix: str):
         self._save_df_result_to_csv(path, max_size, name_suffix)
+
+    def _save_result_to_html(self, path: str, max_size: int, name_suffix: str):
+        self._save_df_result_to_html(path, max_size, name_suffix)
 
     def _save_result_to_single_csv(self, path: str, max_size: int, name_suffix: str):
         file_name = f"wrapper_result_{name_suffix}.csv"
@@ -167,7 +159,7 @@ class Wrapper:
                         f"{api_name},{call_number},{start_time},{cost_time},{scale_str}\n"
                     )
 
-    def _save_df_result_to_csv(self, path: str, max_size: int, name_suffix: str):
+    def _get_df_result(self):
         call_count_dict = self.call_count.copy()
         call_count_list = []
         for api_name, api_info in call_count_dict.items():
@@ -199,8 +191,22 @@ class Wrapper:
                 "scale",
             ],
         )
+        return df
+
+    def _save_df_result_to_csv(self, path: str, max_size: int, name_suffix: str):
         file_name = f"wrapper_result_{name_suffix}.csv"
+        df = self._get_df_result()
         df.to_csv(os.path.join(path, file_name), chunksize=1024 * 1024)
+
+    def _save_df_result_to_json(self, path: str, max_size: int, name_suffix: str):
+        file_name = f"wrapper_result_{name_suffix}.json"
+        df = self._get_df_result()
+        df.to_json(os.path.join(path, file_name))
+
+    def _save_df_result_to_html(self, path: str, max_size: int, name_suffix: str):
+        file_name = f"wrapper_result_{name_suffix}.html"
+        df = self._get_df_result()
+        df.to_html(os.path.join(path, file_name))
 
     def _call_count_decorator(self, func, module_name=None):
         """author: zym, fg"""
