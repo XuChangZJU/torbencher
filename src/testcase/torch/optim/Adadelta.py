@@ -16,4 +16,3 @@ class TorchOptimAdadeltaTestCase(TorBencherTestCaseBase):
         optimizer = torch.optim.Adadelta([a], lr=0.01)
         result = optimizer.step()
         return [result, [a, b, optimizer]]
-

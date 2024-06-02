@@ -24,4 +24,3 @@ class TorchSpecialNdtriTestCase(TorBencherTestCaseBase):
         a = torch.rand(5)
         result = torch.special.ndtri(a)
         return [result, [a]]
-
