@@ -1,6 +1,6 @@
 import torch
 
-from src.testcase.TorBencherBase import TorBencherTestCaseBase
+from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
