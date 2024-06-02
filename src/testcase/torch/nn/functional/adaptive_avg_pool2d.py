@@ -1,3 +1,4 @@
+
 import torch
 
 from src.testcase.TorBencherBase import TorBencherTestCaseBase
@@ -11,8 +12,9 @@ class TorchNNFunctionalAdaptiveAvgPool2dTestCase(TorBencherTestCaseBase):
         if input is not None:
             result = torch.nn.functional.adaptive_avg_pool2d(input[0], input[1])
             return [result, input]
-        a = torch.randn(2, 3, 8, 8)
-        b = (4, 4)
+        a = torch.randn(1, 8, 6, 4)
+        b = (2, 2)
         result = torch.nn.functional.adaptive_avg_pool2d(a, b)
         return [result, [a, b]]
+
 

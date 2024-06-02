@@ -1,3 +1,4 @@
+
 import torch
 
 from src.testcase.TorBencherBase import TorBencherTestCaseBase
@@ -7,7 +8,7 @@ from src.util.decorator import test_api
 @test_api(torch.ceil)
 class TorchCeilTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_ceil_4d(self, input=None):
+    def test_ceil(self, input=None):
         if input is not None:
             result = torch.ceil(input[0])
             return [result, input]

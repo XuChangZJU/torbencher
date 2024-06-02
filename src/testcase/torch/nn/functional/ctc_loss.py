@@ -1,3 +1,4 @@
+
 import torch
 
 from src.testcase.TorBencherBase import TorBencherTestCaseBase
@@ -7,16 +8,18 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.ctc_loss)
 class TorchNNFunctionalCTCLossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_ctc_loss_4d(self, input=None):
+    def test_ctc_loss_common(self, input=None):
         if input is not None:
-            result = torch.nn.functional.ctc_loss(input[0], input[1], input[2], input[3], input[4], input[5], input[6])
+            result = torch.nn.functional.ctc_loss(input[0], input[1], input[2], input[3], blank=input[4], reduction=input[5], zero_infinity=input[6])
             return [result, input]
-        log_probs = torch.randn(50, 16, 20).log_softmax(2).detach().requires_grad_()
-        targets = torch.randint(1, 20, (16, 30), dtype=torch.long)
-        input_lengths = torch.full((16,), 50, dtype=torch.long)
-        target_lengths = torch.randint(10, 30, (16,), dtype=torch.long)
-        blank = 0
-        reduction = 'mean'
-        zero_infinity = False
-        result = torch.nn.functional.ctc_loss(log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity)
-        return [result, [log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity]]
+        a = torch.randn(30, 8, 20).log_softmax(2)
+        b = torch.randint(1, 20, (8, 30), dtype=torch.long)
+        c = torch.tensor([12, 15, 17, 20, 23, 26, 28, 30], dtype=torch.long)
+        d = torch.tensor([30, 29, 28, 27, 26, 25, 24, 23], dtype=torch.long)
+        e = 0
+        f = 'mean'
+        g = False
+        result = torch.nn.functional.ctc_loss(a, b, c, d, blank=e, reduction=f, zero_infinity=g)
+        return [result, [a, b, c, d, e, f, g]]
+
+

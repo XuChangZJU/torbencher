@@ -1,3 +1,4 @@
+
 import torch
 
 from src.testcase.TorBencherBase import TorBencherTestCaseBase
@@ -7,17 +8,17 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.avg_pool1d)
 class TorchNNFunctionalAvgPool1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_avg_pool1d_4d(self, input=None):
+    def test_avg_pool1d_common(self, input=None):
         if input is not None:
-            result = torch.nn.functional.avg_pool1d(input[0], input[1], input[2], input[3], input[4], input[5], input[6])
+            result = torch.nn.functional.avg_pool1d(input[0], input[1], stride=input[2], padding=input[3], ceil_mode=input[4], count_include_pad=input[5])
             return [result, input]
-        a = torch.randn(2, 3, 24)
-        kernel_size = 3
-        stride = 2
-        padding = 1
-        ceil_mode = False
-        count_include_pad = True
-        divisor_override = None
-        result = torch.nn.functional.avg_pool1d(a, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override)
-        return [result, [a, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override]]
+        a = torch.randn(1, 3, 8)
+        b = 2
+        c = 2
+        d = 0
+        e = False
+        f = True
+        result = torch.nn.functional.avg_pool1d(a, b, stride=c, padding=d, ceil_mode=e, count_include_pad=f)
+        return [result, [a, b, c, d, e, f]]
+
 
