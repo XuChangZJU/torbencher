@@ -196,9 +196,12 @@ class TorchWrapper:
         return df
 
     def _save_df_result_to_csv(self, path: str, max_size: int, name_suffix: str):
-        file_name = f"wrapper_result_{name_suffix}.csv"
+        file_name = f"wrapper_result_{name_suffix}"
+        MAX_CHUNK_SIZE = 1024 * 1024
         df = self._get_df_result()
-        df.to_csv(os.path.join(path, file_name), chunksize=1024 * 1024)
+        for i in range(int(len(df) / MAX_CHUNK_SIZE) + 1):
+            chunk = df.iloc[i * MAX_CHUNK_SIZE : (i + 1) * MAX_CHUNK_SIZE]
+            chunk.to_csv(os.path.join(path, f"{file_name}_{i}.csv"), index=False)
 
     def _save_df_result_to_json(self, path: str, max_size: int, name_suffix: str):
         file_name = f"wrapper_result_{name_suffix}.json"
@@ -236,9 +239,7 @@ class TorchWrapper:
             )
 
             scale_obj = {}
-            scale_obj[TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER] = self.call_count[
-                full_name
-            ][TorchWrapper.ResultKey.COUNT]
+            scale_obj[TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER] = self.call_count[full_name][TorchWrapper.ResultKey.COUNT]
             scale_obj[TorchWrapper.ResultKey.ScaleKey.START_TIMESTAMP] = start_time
             scale_obj[TorchWrapper.ResultKey.ScaleKey.COST_TIME] = elapsed_time
 
@@ -298,22 +299,22 @@ class TorchWrapper:
     def _decorate_class(self, cls):
         """author: zym"""
         for attr_name in dir(cls):
-            if attr_name.startswith("__") and attr_name.endswith("__"):
-                continue  # Skip special attributes
+            # if attr_name.startswith("__") and attr_name.endswith("__"):
+            #     continue  # Skip special attributes
             try:
                 attr = getattr(cls, attr_name)
                 if isinstance(attr, types.FunctionType):
                     self._set_new_attr(cls, attr_name, attr)
-                # elif attr_name in [
-                #     "__add__",
-                #     "__mul__",
-                #     "__sub__",
-                #     "__truediv__",
-                #     "__matmul__",
-                #     "__pow__",
-                #     "__mod__",
-                # ]:
-                #     # 特殊处理运算符重载方法
-                #     self._set_new_attr(cls, attr_name, attr)
+                elif attr_name in [
+                    "__add__",
+                    "__mul__",
+                    "__sub__",
+                    "__truediv__",
+                    "__matmul__",
+                    "__pow__",
+                    "__mod__",
+                ]:
+                    # 特殊处理运算符重载方法
+                    self._set_new_attr(cls, attr_name, attr)
             except (AttributeError, TypeError) as e:
                 continue

@@ -1,14 +1,14 @@
-from torbencher import TorchWrapper
-
 import torch
 import torch.nn.functional as F
+
+from torbencher import TorchWrapper
 
 wrapper = TorchWrapper(
     {
         "out_dir": "./result",
         "format": "csv",
         "file_max_size": "512MB",
-        "file_name_spec": "timestamp"
+        "file_name_spec": "timestamp",
     }
 )
 

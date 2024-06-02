@@ -18,9 +18,9 @@ wrapper = Wrapper({
     "file_name_spec": "timestamp"
 })
 
-def my_code():
+def my_code(*args, **kwargs):
     """
-    此处写需要运行的程序
+    此处为需要运行的程序
     """
 
 wrapper.start(my_code)
