@@ -299,22 +299,22 @@ class TorchWrapper:
     def _decorate_class(self, cls):
         """author: zym"""
         for attr_name in dir(cls):
-            # if attr_name.startswith("__") and attr_name.endswith("__"):
-            #     continue  # Skip special attributes
+            if attr_name.startswith("__") and attr_name.endswith("__"):
+                continue  # Skip special attributes
             try:
                 attr = getattr(cls, attr_name)
                 if isinstance(attr, types.FunctionType):
                     self._set_new_attr(cls, attr_name, attr)
-                elif attr_name in [
-                    "__add__",
-                    "__mul__",
-                    "__sub__",
-                    "__truediv__",
-                    "__matmul__",
-                    "__pow__",
-                    "__mod__",
-                ]:
-                    # 特殊处理运算符重载方法
-                    self._set_new_attr(cls, attr_name, attr)
+                # elif attr_name in [
+                #     "__add__",
+                #     "__mul__",
+                #     "__sub__",
+                #     "__truediv__",
+                #     "__matmul__",
+                #     "__pow__",
+                #     "__mod__",
+                # ]:
+                #     # 特殊处理运算符重载方法
+                #     self._set_new_attr(cls, attr_name, attr)
             except (AttributeError, TypeError) as e:
                 continue
