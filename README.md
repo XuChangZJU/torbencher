@@ -81,7 +81,7 @@ print(result)
 ## 结果说明
 
 对于每个包的每个接口，会有若干测试用例，每个测试用例的测试结果会同CPU运行结果比对较以确定其正确性。
-如果测试通过，其输出格式为：`[运行时间(ms), 测试规模(scale)]`，如果测试不通过，则输出`failed`
+如果测试通过，其输出格式为：`[运行时间(ms), 测试规模(scale)]`，如果测试不通过，则输出`failed`，如果该API不存在，则输出`missed`
 
 ## 测试scale
 
@@ -103,6 +103,8 @@ print(result)
 一个接口的测试用例如下（以`torch.add`为例）：
 
 ```python
+"""add.py"""
+
 import torch
 import src.util.test_api_version as test_api_version
 from src.testcase.TorBencherBase import TorBencherTestCaseBase
@@ -120,6 +122,11 @@ class TorchAddTestCase(TorBencherTestCaseBase):
         b = torch.randn(4)
         result = torch.add(a, b, alpha=10)
         return [result, [a, b, 10]]
+```
+
+测试用例编写完成后，在对应模块的`__init__.py`文件中导出该用例（如果不导出该用例，框架将不会发现并测试它），如
+```python
+from .add import TorchAddTestCase
 ```
 
 要点：
