@@ -123,16 +123,21 @@ class torbencher:
         names = [f"src.testcase.{test_module}" for test_module in test_modules]
         modules = [importlib.import_module(name) for name in names]
 
+        def discover_testcases(module):
+            assert inspect.ismodule(module)
+            testcases = []
+            for name in dir(module):
+                attr = getattr(module, name)
+                if inspect.isclass(attr) and issubclass(attr, TorBencherTestCaseBase):
+                    testcases.append(attr)
+            return testcases
+
         testcases_info = []
         for module in modules:
             module_info = {
                 "module": module,
-                "testcases": [],
+                "testcases": discover_testcases(module),
             }
-            for name in dir(module):
-                attr = getattr(module, name)
-                if inspect.isclass(attr) and issubclass(attr, TorBencherTestCaseBase):
-                    module_info["testcases"].append(attr)
             testcases_info.append(module_info)
         print(testcases_info)
 
@@ -143,12 +148,9 @@ class torbencher:
 
         torch.manual_seed(seed)
         for name in devices:
-            torch.set_default_device(torch.device(name))
-            wrapper = TorchWrapper({
-                "out_dir" : ""
-            })
+            wrapper = TorchWrapper({"out_dir": ""})
             wrapper.decorate_module(torch)
             result = runner.run(suite)
-            print(wrapper.call_count)
-        
+            # print(wrapper.call_count)
+
         return output_results
