@@ -5,14 +5,14 @@ import torch
 
 
 class torbencher:
+    SUPPORTED_FORMATS = ["json"]
+    AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+
     class ConfigKey:
         SEED = "seed"
         DEVICES = "devices"
         TEST_MODULES = "test_modules"
         FORMAT = "format"
-
-    SUPPORTED_FORMATS = ["json"]
-    AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
 
     class ResultKey:
         CPU = "cpu"
