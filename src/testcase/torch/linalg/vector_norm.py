@@ -10,24 +10,24 @@ class TorchLinalgVectorNormTestCase(TorBencherTestCaseBase):
     def test_vector_norm_4d_ord_str(self, input=None):
         if input is not None:
             result = torch.linalg.vector_norm(input[0], ord=input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 3, 3)
         ord = 'fro'
         result = torch.linalg.vector_norm(a, ord=ord)
-        return [result, [a, ord]]
+        return result
     def test_vector_norm_4d_ord_float(self, input=None):
         if input is not None:
             result = torch.linalg.vector_norm(input[0], ord=input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 3, 3)
         ord = 2.0
         result = torch.linalg.vector_norm(a, ord=ord)
-        return [result, [a, ord]]
+        return result
     def test_vector_norm_4d_ord_int(self, input=None):
         if input is not None:
             result = torch.linalg.vector_norm(input[0], ord=input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 3, 3)
         ord = 2
         result = torch.linalg.vector_norm(a, ord=ord)
-        return [result, [a, ord]]
+        return result

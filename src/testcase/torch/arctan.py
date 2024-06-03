@@ -11,9 +11,9 @@ class TorchArctanTestCase(TorBencherTestCaseBase):
     def test_arctan(self, input=None):
         if input is not None:
             result = torch.arctan(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.arctan(a)
-        return [result, [a]]
+        return result
 
 

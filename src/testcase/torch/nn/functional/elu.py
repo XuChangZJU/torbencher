@@ -11,11 +11,11 @@ class TorchNNFunctionalELUTestCase(TorBencherTestCaseBase):
     def test_elu_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.elu(input[0], input[1], inplace=input[2])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = 1.5
         c = False
         result = torch.nn.functional.elu(a, b, inplace=c)
-        return [result, [a, b, c]]
+        return result
 
 

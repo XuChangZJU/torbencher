@@ -11,9 +11,9 @@ class TorchCrossTestCase(TorBencherTestCaseBase):
     def test_cross(self, input=None):
         if input is not None:
             result = torch.cross(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 3)
         b = torch.randn(4, 3)
         result = torch.cross(a, b, dim=1)
-        return [result, [a, b]]
+        return result
 

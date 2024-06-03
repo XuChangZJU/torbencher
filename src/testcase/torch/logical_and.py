@@ -11,9 +11,9 @@ class TorchLogicalAndTestCase(TorBencherTestCaseBase):
     def test_logical_and(self, input=None):
         if input is not None:
             result = torch.logical_and(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([True, False, True])
         b = torch.tensor([False, False, True])
         result = torch.logical_and(a, b)
-        return [result, [a, b]]
+        return result
 

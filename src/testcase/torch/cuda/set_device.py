@@ -11,17 +11,17 @@ class TorchCudaSetDeviceTestCase(TorBencherTestCaseBase):
         if input is not None:
             torch.cuda.set_device(input[0])
             result = torch.cuda.current_device()
-            return [result, input]
+            return result
         a = 0
         torch.cuda.set_device(a)
         result = torch.cuda.current_device()
-        return [result, [a]]
+        return result
     
     def test_set_device_1(self, input=None):
         if input is not None:
             torch.cuda.set_device(input[0])
             result = torch.cuda.current_device()
-            return [result, input]
+            return result
         torch.cuda.set_device('cuda:0')
         result = torch.cuda.current_device()
-        return [result, ['cuda:0']]
+        return result

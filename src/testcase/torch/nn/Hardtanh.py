@@ -11,9 +11,9 @@ class TorchNNHardtanhTestCase(TorBencherTestCaseBase):
     def test_hardtanh(self, input=None):
         if input is not None:
             result = torch.nn.Hardtanh()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         hardtanh = torch.nn.Hardtanh()
         result = hardtanh(a)
-        return [result, [a]]
+        return result
 

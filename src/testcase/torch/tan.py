@@ -11,8 +11,8 @@ class TorchTanTestCase(TorBencherTestCaseBase):
     def test_tan(self, input=None):
         if input is not None:
             result = torch.tan(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.tan(a)
-        return [result, [a]]
+        return result
 

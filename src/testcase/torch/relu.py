@@ -11,8 +11,8 @@ class TorchReluTestCase(TorBencherTestCaseBase):
     def test_relu_4d(self, input=None):
         if input is not None:
             result = torch.relu(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.relu(a)
-        return [result, [a]]
+        return result
 

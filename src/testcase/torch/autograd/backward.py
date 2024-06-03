@@ -16,7 +16,7 @@ class TorchAutogradBackwardTestCase(TorBencherTestCaseBase):
         b = a ** 2
         c = b.mean()
         c.backward(retain_graph=True, create_graph=True)
-        return [c.grad, [c, None, True, True]]
+        return c.grad
 
     @test_api_version.larger_than("1.1.3")
     def test_backward_1d(self, input=None):
@@ -27,6 +27,6 @@ class TorchAutogradBackwardTestCase(TorBencherTestCaseBase):
         b = a ** 2
         c = b.mean()
         c.backward(retain_graph=True, create_graph=True)
-        return [c.grad, [c, None, True, True]]
+        return c.grad
 
 

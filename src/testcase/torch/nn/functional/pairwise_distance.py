@@ -11,13 +11,13 @@ class TorchNNFunctionalPairwiseDistanceTestCase(TorBencherTestCaseBase):
     def test_pairwise_distance_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.pairwise_distance(input[0], input[1], p=input[2], eps=input[3], keepdim=input[4])
-            return [result, input]
+            return result
         a = torch.randn(100, 128)
         b = torch.randn(100, 128)
         c = 2.0
         d = 1e-06
         e = False
         result = torch.nn.functional.pairwise_distance(a, b, p=c, eps=d, keepdim=e)
-        return [result, [a, b, c, d, e]]
+        return result
 
 

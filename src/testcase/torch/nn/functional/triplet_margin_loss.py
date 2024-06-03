@@ -11,7 +11,7 @@ class TorchNNFunctionalTripletMarginLossTestCase(TorBencherTestCaseBase):
     def test_triplet_margin_loss_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.triplet_margin_loss(input[0], input[1], input[2], margin=input[3], p=input[4], eps=input[5], swap=input[6], size_average=input[7], reduce=input[8], reduction=input[9])
-            return [result, input]
+            return result
         a = torch.randn(3, 2)
         b = torch.randn(3, 2)
         c = torch.randn(3, 2)
@@ -23,6 +23,6 @@ class TorchNNFunctionalTripletMarginLossTestCase(TorBencherTestCaseBase):
         i = True
         j = 'mean'
         result = torch.nn.functional.triplet_margin_loss(a, b, c, margin=d, p=e, eps=f, swap=g, size_average=h, reduce=i, reduction=j)
-        return [result, [a, b, c, d, e, f, g, h, i, j]]
+        return result
 
 

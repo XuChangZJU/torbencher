@@ -11,17 +11,17 @@ class TorchArgmaxTestCase(TorBencherTestCaseBase):
     def test_argmax_dim(self, input=None):
         if input is not None:
             result = torch.argmax(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.argmax(a, dim=1)
-        return [result, [a, 1]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_argmax(self, input=None):
         if input is not None:
             result = torch.argmax(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.argmax(a)
-        return [result, [a]]
+        return result
         

@@ -11,9 +11,9 @@ class TorchGreater_equalTestCase(TorBencherTestCaseBase):
     def test_greater_equal(self, input=None):
         if input is not None:
             result = torch.greater_equal(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([1, 2, 3])
         b = torch.tensor([1, 1, 4])
         result = torch.greater_equal(a, b)
-        return [result, [a, b]]
+        return result
 

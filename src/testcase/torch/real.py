@@ -11,9 +11,9 @@ class TorchRealTestCase(TorBencherTestCaseBase):
     def test_real(self, input=None):
         if input is not None:
             result = torch.real(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, dtype=torch.cfloat)
         result = torch.real(a)
-        return [result, [a]]
+        return result
 
 

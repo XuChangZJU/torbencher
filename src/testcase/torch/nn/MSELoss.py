@@ -11,10 +11,10 @@ class TorchNNMSELossTestCase(TorBencherTestCaseBase):
     def test_mse_loss(self, input=None):
         if input is not None:
             result = torch.nn.MSELoss()(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(10, 5, requires_grad=True)
         target = torch.empty(10, 5).random_(5)
         loss = torch.nn.MSELoss()
         result = loss(a, target)
-        return [result, [a, target]]
+        return result
 

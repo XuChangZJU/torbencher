@@ -11,9 +11,9 @@ class TorchNNGLUTestCase(TorBencherTestCaseBase):
     def test_glu(self, input=None):
         if input is not None:
             result = torch.nn.GLU()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(1, 2, 4)
         glu = torch.nn.GLU()
         result = glu(a)
-        return [result, [a]]
+        return result
 

@@ -13,13 +13,13 @@ class TorchFakeQuantizePerTensorAffineTestCase(TorBencherTestCaseBase):
             result = torch.fake_quantize_per_tensor_affine(
                 input[0], input[1], input[2], input[3], input[4]
             )
-            return [result, input]
+            return result
         a = torch.randn(2, 3, 4, 4)
         b = 0.1
         c = 1
         d = 0
         e = 255
         result = torch.fake_quantize_per_tensor_affine(a, b, c, d, e)
-        return [result, [a, b, c, d, e]]
+        return result
 
 

@@ -11,8 +11,8 @@ class TorchUnsqueezeTestCase(TorBencherTestCaseBase):
     def test_unsqueeze(self, input=None):
         if input is not None:
             result = torch.unsqueeze(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([1, 2, 3, 4])
         result = torch.unsqueeze(a, 1)
-        return [result, [a, 1]]
+        return result
 

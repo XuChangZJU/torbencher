@@ -10,8 +10,8 @@ class TorchCudaManualSeedTestCase(TorBencherTestCaseBase):
     def test_manual_seed(self, input=None):
         if input is not None:
             result = torch.cuda.manual_seed(input[0])
-            return [result, input]
+            return result
         a = 10
         result = torch.cuda.manual_seed(a)
-        return [result, [a]]
+        return result
 

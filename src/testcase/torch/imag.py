@@ -11,9 +11,9 @@ class TorchImagTestCase(TorBencherTestCaseBase):
     def test_imag(self, input=None):
         if input is not None:
             result = torch.imag(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, dtype=torch.cfloat)
         result = torch.imag(a)
-        return [result, [a]]
+        return result
 
 

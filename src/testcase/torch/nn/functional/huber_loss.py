@@ -11,10 +11,10 @@ class TorchNNFunctionalHuberLossTestCase(TorBencherTestCaseBase):
     def test_huber_loss(self, input=None):
         if input is not None:
             result = torch.nn.functional.huber_loss(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.nn.functional.huber_loss(a, b)
-        return [result, [a, b]]
+        return result
 
 

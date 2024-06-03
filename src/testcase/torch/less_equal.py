@@ -11,9 +11,9 @@ class TorchLess_equalTestCase(TorBencherTestCaseBase):
     def test_less_equal(self, input=None):
         if input is not None:
             result = torch.less_equal(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([1, 2, 3])
         b = torch.tensor([2, 2, 4])
         result = torch.less_equal(a, b)
-        return [result, [a, b]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchCudaCudartTestCase(TorBencherTestCaseBase):
     def test_cudart(self, input=None):
         if input is not None:
             result = torch.cuda.cudart()
-            return [result, input]
+            return result
         result = torch.cuda.cudart()
-        return [result, None]
+        return result
 
 
 

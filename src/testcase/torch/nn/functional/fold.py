@@ -11,7 +11,7 @@ class TorchNNFunctionalFoldTestCase(TorBencherTestCaseBase):
     def test_fold_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.fold(input[0], output_size=input[1], kernel_size=input[2], dilation=input[3], padding=input[4], stride=input[5])
-            return [result, input]
+            return result
         a = torch.randn(1, 3 * 2 * 2, 12)
         b = (3, 4)
         c = (2, 2)
@@ -19,6 +19,6 @@ class TorchNNFunctionalFoldTestCase(TorBencherTestCaseBase):
         e = 0
         f = 1
         result = torch.nn.functional.fold(a, output_size=b, kernel_size=c, dilation=d, padding=e, stride=f)
-        return [result, [a, b, c, d, e, f]]
+        return result
 
 

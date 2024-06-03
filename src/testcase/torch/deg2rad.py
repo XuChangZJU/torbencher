@@ -11,9 +11,9 @@ class TorchDeg2radTestCase(TorBencherTestCaseBase):
     def test_deg2rad(self, input=None):
         if input is not None:
             result = torch.deg2rad(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.deg2rad(a)
-        return [result, [a]]
+        return result
 
 

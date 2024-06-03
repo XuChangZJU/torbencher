@@ -11,9 +11,9 @@ class TorchNNSoftminTestCase(TorBencherTestCaseBase):
     def test_softmin(self, input=None):
         if input is not None:
             result = torch.nn.Softmin(dim=input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(10)
         softmin = torch.nn.Softmin(dim=1)
         result = softmin(a)
-        return [result, [1, a]]
+        return result
 

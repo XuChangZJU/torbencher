@@ -11,11 +11,11 @@ class TorchNNFunctionalLeakyReLUTestCase(TorBencherTestCaseBase):
     def test_leaky_relu_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.leaky_relu(input[0], negative_slope=input[1], inplace=input[2])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = 0.01
         c = False
         result = torch.nn.functional.leaky_relu(a, negative_slope=b, inplace=c)
-        return [result, [a, b, c]]
+        return result
 
 

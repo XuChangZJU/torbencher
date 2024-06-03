@@ -10,7 +10,7 @@ class TorchCudaCurrentDeviceTestCase(TorBencherTestCaseBase):
     def test_current_device(self, input=None):
         if input is not None:
             result = torch.cuda.current_device()
-            return [result, input]
+            return result
         result = torch.cuda.current_device()
-        return [result, None]
+        return result
 

@@ -11,10 +11,10 @@ class TorchNNFunctionalReLU6TestCase(TorBencherTestCaseBase):
     def test_relu6_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.relu6(input[0], inplace=input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 4)
         b = False
         result = torch.nn.functional.relu6(a, inplace=b)
-        return [result, [a, b]]
+        return result
 
 

@@ -11,9 +11,9 @@ class TorchNNELUTestCase(TorBencherTestCaseBase):
     def test_elu(self, input=None):
         if input is not None:
             result = torch.nn.ELU()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         elu = torch.nn.ELU()
         result = elu(a)
-        return [result, [a]]
+        return result
 

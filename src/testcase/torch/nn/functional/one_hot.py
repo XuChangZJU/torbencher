@@ -11,10 +11,10 @@ class TorchNNFunctionalOneHotTestCase(TorBencherTestCaseBase):
     def test_one_hot_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.one_hot(input[0], num_classes=input[1])
-            return [result, input]
+            return result
         a = torch.arange(0, 5) % 3
         b = 5
         result = torch.nn.functional.one_hot(a, num_classes=b)
-        return [result, [a, b]]
+        return result
 
 

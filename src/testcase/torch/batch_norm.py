@@ -11,12 +11,12 @@ class TorchBatch_normTestCase(TorBencherTestCaseBase):
     def test_batch_norm(self, input=None):
         if input is not None:
             result = torch.batch_norm(input[0], input[1], input[2], input[3], input[4], training=input[5])
-            return [result, input]
+            return result
         input = torch.randn(20, 100)
         mean = torch.randn(100)
         var = torch.randn(100)
         weight = torch.randn(100)
         bias = torch.randn(100)
         result = torch.batch_norm(input, mean, var, weight, bias, training=True)
-        return [result, [input, mean, var, weight, bias, True]]
+        return result
 

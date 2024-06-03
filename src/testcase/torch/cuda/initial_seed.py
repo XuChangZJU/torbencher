@@ -10,7 +10,7 @@ class TorchCudaInitialSeedTestCase(TorBencherTestCaseBase):
     def test_initial_seed(self, input=None):
         if input is not None:
             result = torch.cuda.initial_seed()
-            return [result, input]
+            return result
         result = torch.cuda.initial_seed()
-        return [result, None]
+        return result
 

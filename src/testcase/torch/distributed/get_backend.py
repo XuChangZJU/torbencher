@@ -11,8 +11,8 @@ class TorchDistributedGetBackendTestCase(TorBencherTestCaseBase):
     def test_get_backend_0(self, input=None):
         if input is not None:
             result = torch.distributed.get_backend()
-            return [result, input]
+            return result
         result = torch.distributed.get_backend()
-        return [result, None]
+        return result
 
 

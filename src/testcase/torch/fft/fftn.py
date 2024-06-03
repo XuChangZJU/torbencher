@@ -11,11 +11,11 @@ class TorchFftnTestCase(TorBencherTestCaseBase):
     def test_fftn_5d(self, input=None):
         if input is not None:
             result = torch.fft.fftn(input[0], input[1], input[2], input[3], input[4])
-            return [result, input]
+            return result
         a = torch.randn(4, 3, 4, 5, 6)
         b = [2, 3, 5]
         c = [-3, -2, -1]
         e = "ortho"
         result = torch.fft.fftn(a, b, c, e)
-        return [result, [a, b, c, e]]
+        return result
 

@@ -11,25 +11,25 @@ class TorchCudaSynchronizeTestCase(TorBencherTestCaseBase):
     def test_synchronize_0(self, input=None):
         if input is not None:
             result = torch.cuda.synchronize()
-            return [result, input]
+            return result
         result = torch.cuda.synchronize()
-        return [result, None]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_synchronize_1(self, input=None):
         if input is not None:
             result = torch.cuda.synchronize(input[0])
-            return [result, input]
+            return result
         a = 0
         result = torch.cuda.synchronize(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_synchronize_2(self, input=None):
         if input is not None:
             result = torch.cuda.synchronize(device=input[0])
-            return [result, input]
+            return result
         a = 0
         result = torch.cuda.synchronize(device=a)
-        return [result, [a]]
+        return result
 

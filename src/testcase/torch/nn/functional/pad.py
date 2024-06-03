@@ -11,12 +11,12 @@ class TorchNNFunctionalPadTestCase(TorBencherTestCaseBase):
     def test_pad_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.pad(input[0], pad=input[1], mode=input[2], value=input[3])
-            return [result, input]
+            return result
         a = torch.ones(5)
         b = (0, 2)
         c = 'constant'
         d = 0.0
         result = torch.nn.functional.pad(a, pad=b, mode=c, value=d)
-        return [result, [a, b, c, d]]
+        return result
 
 

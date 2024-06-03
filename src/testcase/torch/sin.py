@@ -11,8 +11,8 @@ class TorchSinTestCase(TorBencherTestCaseBase):
     def test_sin(self, input=None):
         if input is not None:
             result = torch.sin(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.sin(a)
-        return [result, [a]]
+        return result
 

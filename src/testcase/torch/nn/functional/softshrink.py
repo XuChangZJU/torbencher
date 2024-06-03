@@ -11,10 +11,10 @@ class TorchNNFunctionalSoftshrinkTestCase(TorBencherTestCaseBase):
     def test_softshrink_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.softshrink(input[0], lambd=input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = 0.5
         result = torch.nn.functional.softshrink(a, lambd=b)
-        return [result, [a, b]]
+        return result
 
 

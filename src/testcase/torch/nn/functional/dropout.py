@@ -11,12 +11,12 @@ class TorchNNFunctionalDropoutTestCase(TorBencherTestCaseBase):
     def test_dropout_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.dropout(input[0], input[1], training=input[2], inplace=input[3])
-            return [result, input]
+            return result
         a = torch.randn(1, 1, 1, 1)
         b = 0.5
         c = True
         d = False
         result = torch.nn.functional.dropout(a, b, training=c, inplace=d)
-        return [result, [a, b, c, d]]
+        return result
 
 

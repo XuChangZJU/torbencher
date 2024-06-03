@@ -11,17 +11,17 @@ class TorchSpecialGammalnTestCase(TorBencherTestCaseBase):
     def test_gammaln_0d(self, input=None):
         if input is not None:
             result = torch.special.gammaln(input[0])
-            return [result, input]
+            return result
         a = torch.rand([])
         result = torch.special.gammaln(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_gammaln_1d(self, input=None):
         if input is not None:
             result = torch.special.gammaln(input[0])
-            return [result, input]
+            return result
         a = torch.rand(5)
         result = torch.special.gammaln(a)
-        return [result, [a]]
+        return result
 

@@ -11,8 +11,8 @@ class TorchSpecialExpm1TestCase(TorBencherTestCaseBase):
     def test_special_expm1_4d(self, input=None):
         if input is not None:
             result = torch.special.expm1(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.special.expm1(a)
-        return [result, [a]]
+        return result
 

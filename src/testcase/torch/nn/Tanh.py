@@ -11,9 +11,9 @@ class TorchNNTanhTestCase(TorBencherTestCaseBase):
     def test_tanh(self, input=None):
         if input is not None:
             result = torch.nn.Tanh()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         tanh = torch.nn.Tanh()
         result = tanh(a)
-        return [result, [a]]
+        return result
 

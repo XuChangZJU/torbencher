@@ -11,10 +11,10 @@ class TorchNNMultiLabelSoftMarginLossTestCase(TorBencherTestCaseBase):
     def test_multilabel_soft_margin_loss(self, input=None):
         if input is not None:
             result = torch.nn.MultiLabelSoftMarginLoss()(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 5, requires_grad=True)
         target = torch.empty(3, 5).random_(5)
         loss = torch.nn.MultiLabelSoftMarginLoss()
         result = loss(a, target)
-        return [result, [a, target]]
+        return result
 

@@ -11,8 +11,8 @@ class TorchRoundTestCase(TorBencherTestCaseBase):
     def test_round(self, input=None):
         if input is not None:
             result = torch.round(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.round(a)
-        return [result, [a]]
+        return result
 

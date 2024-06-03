@@ -11,17 +11,17 @@ class TorchEigTestCase(TorBencherTestCaseBase):
     def test_eig_2d(self, input=None):
         if input is not None:
             result = torch.eig(input[0])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.eig(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_eig_2d_eigenvectors(self, input=None):
         if input is not None:
             result = torch.eig(input[0], eigenvectors=input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         eigenvectors = True
         result = torch.eig(a, eigenvectors=eigenvectors)
-        return [result, [a, eigenvectors]]
+        return result

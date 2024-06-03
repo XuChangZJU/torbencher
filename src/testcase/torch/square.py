@@ -11,8 +11,8 @@ class TorchSquareTestCase(TorBencherTestCaseBase):
     def test_square(self, input=None):
         if input is not None:
             result = torch.square(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.square(a)
-        return [result, [a]]
+        return result
 

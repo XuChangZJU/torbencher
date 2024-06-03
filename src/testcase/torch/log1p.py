@@ -11,9 +11,9 @@ class TorchLog1pTestCase(TorBencherTestCaseBase):
     def test_log1p(self, input=None):
         if input is not None:
             result = torch.log1p(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.log1p(a)
-        return [result, [a]]
+        return result
 
 

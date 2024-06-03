@@ -11,17 +11,17 @@ class TorchSpecialLogNdtrTestCase(TorBencherTestCaseBase):
     def test_log_ndtr_0d(self, input=None):
         if input is not None:
             result = torch.special.log_ndtr(input[0])
-            return [result, input]
+            return result
         a = torch.randn([])
         result = torch.special.log_ndtr(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.8.0")
     def test_log_ndtr_1d(self, input=None):
         if input is not None:
             result = torch.special.log_ndtr(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.special.log_ndtr(a)
-        return [result, [a]]
+        return result
 

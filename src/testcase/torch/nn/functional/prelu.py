@@ -11,10 +11,10 @@ class TorchNNFunctionalPReLUTestCase(TorBencherTestCaseBase):
     def test_prelu_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.prelu(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 4)
         b = torch.tensor([0.1, -0.2])
         result = torch.nn.functional.prelu(a, b)
-        return [result, [a, b]]
+        return result
 
 

@@ -11,10 +11,10 @@ class TorchPowTestCase(TorBencherTestCaseBase):
     def test_pow(self, input=None):
         if input is not None:
             result = torch.pow(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4).uniform_(0, 10)
         b = torch.randn(4).uniform_(0, 2)
         result = torch.pow(a, b)
-        return [result, [a, b]]
+        return result
 
 

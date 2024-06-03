@@ -11,11 +11,11 @@ class TorchNNFunctionalFeatureAlphaDropoutTestCase(TorBencherTestCaseBase):
     def test_feature_alpha_dropout_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.feature_alpha_dropout(input[0], input[1], training=input[2])
-            return [result, input]
+            return result
         a = torch.randn(1, 1, 1, 1)
         b = 0.5
         c = True
         result = torch.nn.functional.feature_alpha_dropout(a, b, training=c)
-        return [result, [a, b, c]]
+        return result
 
 

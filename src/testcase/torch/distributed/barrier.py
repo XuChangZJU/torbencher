@@ -11,8 +11,8 @@ class TorchDistributedBarrierTestCase(TorBencherTestCaseBase):
     def test_barrier_0(self, input=None):
         if input is not None:
             result = torch.distributed.barrier()
-            return [result, input]
+            return result
         result = torch.distributed.barrier()
-        return [result, None]
+        return result
 
 

@@ -10,7 +10,7 @@ class TorchOptimAdamTestCase(TorBencherTestCaseBase):
     def test_adam(self, input=None):
         if input is not None:
             result = torch.optim.Adam(input[0], lr=input[1], betas=input[2], eps=input[3], weight_decay=input[4], amsgrad=input[5])
-            return [result, input]
+            return result
         params = [torch.randn(10, requires_grad=True), torch.randn(20, requires_grad=True)]
         lr = 1e-3
         betas = (0.9, 0.999)
@@ -18,5 +18,5 @@ class TorchOptimAdamTestCase(TorBencherTestCaseBase):
         weight_decay = 0
         amsgrad = False
         result = torch.optim.Adam(params, lr=lr, betas=betas, eps=eps, weight_decay=weight_decay, amsgrad=amsgrad)
-        return [result, [params, lr, betas, eps, weight_decay, amsgrad]]
+        return result
 

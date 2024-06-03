@@ -11,7 +11,7 @@ class TorchDiagonalTestCase(TorBencherTestCaseBase):
     def test_diagonal(self, input=None):
         if input is not None:
             result = torch.diagonal(input[0], offset=input[1], dim1=input[2], dim2=input[3])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.diagonal(a, offset=0, dim1=0, dim2=1)
-        return [result, [a, 0, 0, 1]]
+        return result

@@ -11,10 +11,10 @@ class TorchBitwiseAndTestCase(TorBencherTestCaseBase):
     def test_bitwise_and(self, input=None):
         if input is not None:
             result = torch.bitwise_and(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([True, True, False, False])
         b = torch.tensor([True, False, True, False])
         result = torch.bitwise_and(a, b)
-        return [result, [a, b]]
+        return result
 
 

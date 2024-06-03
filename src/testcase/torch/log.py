@@ -11,8 +11,8 @@ class TorchLogTestCase(TorBencherTestCaseBase):
     def test_log(self, input=None):
         if input is not None:
             result = torch.log(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.log(a)
-        return [result, [a]]
+        return result
 

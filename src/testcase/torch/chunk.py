@@ -11,8 +11,8 @@ class TorchChunkTestCase(TorBencherTestCaseBase):
     def test_chunk_4d(self, input=None):
         if input is not None:
             result = torch.chunk(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(8)
         result = torch.chunk(a, 4)
-        return [result, [a, 4]]
+        return result
 

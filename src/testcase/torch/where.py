@@ -11,10 +11,10 @@ class TorchWhereTestCase(TorBencherTestCaseBase):
     def test_where_4d(self, input=None):
         if input is not None:
             result = torch.where(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         b = torch.randn(4, 4)
         c = torch.randn(4, 4)
         result = torch.where(a > 0, b, c)
-        return [result, [a, b, c]]
+        return result
 

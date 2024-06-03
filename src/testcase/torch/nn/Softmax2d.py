@@ -11,9 +11,9 @@ class TorchNNSoftmax2dTestCase(TorBencherTestCaseBase):
     def test_softmax2d(self, input=None):
         if input is not None:
             result = torch.nn.Softmax2d()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(1, 5, 5, 5)
         softmax = torch.nn.Softmax2d()
         result = softmax(a)
-        return [result, [a]]
+        return result
 

@@ -11,8 +11,8 @@ class TorchDropoutTestCase(TorBencherTestCaseBase):
     def test_dropout(self, input=None):
         if input is not None:
             result = torch.dropout(input[0], p=input[1], training=input[2])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.dropout(a, p=0.5, training=True)
-        return [result, [a, 0.5, True]]
+        return result
 

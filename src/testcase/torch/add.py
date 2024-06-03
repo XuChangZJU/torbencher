@@ -11,9 +11,9 @@ class TorchAddTestCase(TorBencherTestCaseBase):
     def test_add(self, input=None):
         if input is not None:
             result = torch.add(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.add(a, b, alpha=10)
-        return [result, [a, b, 10]]
+        return result
 

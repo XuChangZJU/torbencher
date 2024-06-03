@@ -11,9 +11,9 @@ class TorchCatTestCase(TorBencherTestCaseBase):
     def test_cat(self, input=None):
         if input is not None:
             result = torch.cat(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 3)
         b = torch.randn(4, 3)
         result = torch.cat([a, b], 0)
-        return [result, [[a, b], 0]]
+        return result
  

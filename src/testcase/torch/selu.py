@@ -11,8 +11,8 @@ class TorchSeluTestCase(TorBencherTestCaseBase):
     def test_selu_4d(self, input=None):
         if input is not None:
             result = torch.nn.functional.selu(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.nn.functional.selu(a)
-        return [result, [a]]
+        return result
 

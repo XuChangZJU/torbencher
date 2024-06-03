@@ -11,9 +11,9 @@ class TorchDotTestCase(TorBencherTestCaseBase):
     def test_dot(self, input=None):
         if input is not None:
             result = torch.dot(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(5)
         b = torch.randn(5)
         result = torch.dot(a, b)
-        return [result, [a, b]]
+        return result
 

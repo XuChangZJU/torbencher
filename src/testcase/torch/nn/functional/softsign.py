@@ -11,9 +11,9 @@ class TorchNNFunctionalSoftsignTestCase(TorBencherTestCaseBase):
     def test_softsign_2d(self, input=None):
         if input is not None:
             result = torch.nn.functional.softsign(input[0])
-            return [result, input]
+            return result
         a = torch.randn(3, 2)
         result = torch.nn.functional.softsign(a)
-        return [result, [a]]
+        return result
 
 

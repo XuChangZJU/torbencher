@@ -11,9 +11,9 @@ class TorchMvlgammaTestCase(TorBencherTestCaseBase):
     def test_mvlgamma(self, input=None):
         if input is not None:
             result = torch.mvlgamma(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4).uniform_(1, 10)
         result = torch.mvlgamma(a, 2)
-        return [result, [a, 2]]
+        return result
 
 

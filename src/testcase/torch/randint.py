@@ -11,7 +11,7 @@ class TorchRandIntTestCase(TorBencherTestCaseBase):
     def test_randint(self, input=None):
         if input is not None:
             result = torch.randint(low=input[0], high=input[1], size=input[2])
-            return [result, input]
+            return result
         result = torch.randint(low=0, high=10, size=(2, 2))
-        return [result, [0, 10, (2, 2)]]
+        return result
 

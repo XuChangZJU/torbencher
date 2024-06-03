@@ -10,8 +10,8 @@ class TorchLinalgLuTestCase(TorBencherTestCaseBase):
     def test_lu_4d(self, input=None):
         if input is not None:
             result = torch.linalg.lu(input[0])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 3, 3)
         result = torch.linalg.lu(a)
-        return [result, [a]]
+        return result
 

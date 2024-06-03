@@ -11,8 +11,8 @@ class TorchAbsTestCase(TorBencherTestCaseBase):
     def test_abs(self, input=None):
         if input is not None:
             result = torch.abs(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.abs(a)
-        return [result, [a]]
+        return result
 

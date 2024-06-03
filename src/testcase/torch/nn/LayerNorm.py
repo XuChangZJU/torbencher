@@ -11,9 +11,9 @@ class TorchNNLayerNormTestCase(TorBencherTestCaseBase):
     def test_layer_norm(self, input=None):
         if input is not None:
             result = torch.nn.LayerNorm(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(20, 5, 10, 10)
         norm = torch.nn.LayerNorm([5, 10, 10])
         result = norm(a)
-        return [result, [[5, 10, 10], a]]
+        return result
 

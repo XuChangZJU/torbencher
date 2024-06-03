@@ -11,9 +11,9 @@ class TorchNNGRUTestCase(TorBencherTestCaseBase):
     def test_gru(self, input=None):
         if input is not None:
             result = torch.nn.GRU(input[0], input[1], input[2])(input[3])
-            return [result, input]
+            return result
         a = torch.randn(5, 3, 10)
         gru = torch.nn.GRU(10, 20, 2)
         result = gru(a)
-        return [result, [10, 20, 2, a]]
+        return result
 

@@ -11,13 +11,13 @@ class TorchNNFunctionalRReLUTestCase(TorBencherTestCaseBase):
     def test_rrelu_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.rrelu(input[0], lower=input[1], upper=input[2], training=input[3], inplace=input[4])
-            return [result, input]
+            return result
         a = torch.randn(2, 4)
         b = 1.0 / 8
         c = 1.0 / 3
         d = False
         e = False
         result = torch.nn.functional.rrelu(a, lower=b, upper=c, training=d, inplace=e)
-        return [result, [a, b, c, d, e]]
+        return result
 
 

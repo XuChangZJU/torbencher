@@ -11,8 +11,8 @@ class TorchLinalgVecdotTestCase(TorBencherTestCaseBase):
     def test_vecdot(self, input=None):
         if input is not None:
             result = torch.linalg.vecdot(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3)
         b = torch.randn(3)
         result = torch.linalg.vecdot(a, b)
-        return [result, [a, b]]
+        return result

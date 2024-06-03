@@ -11,9 +11,9 @@ class TorchNNConvTranspose3dTestCase(TorBencherTestCaseBase):
     def test_conv_transpose3d(self, input=None):
         if input is not None:
             result = torch.nn.ConvTranspose3d(input[0], input[1], input[2])(input[3])
-            return [result, input]
+            return result
         a = torch.randn(1, 2, 4, 4, 4)
         conv = torch.nn.ConvTranspose3d(2, 4, 3)
         result = conv(a)
-        return [result, [2, 4, 3, a]]
+        return result
 

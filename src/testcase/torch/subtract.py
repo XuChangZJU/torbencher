@@ -11,10 +11,10 @@ class TorchSubtractTestCase(TorBencherTestCaseBase):
     def test_subtract(self, input=None):
         if input is not None:
             result = torch.subtract(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.subtract(a, b)
-        return [result, [a, b]]
+        return result
 
 

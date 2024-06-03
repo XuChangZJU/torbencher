@@ -11,8 +11,8 @@ class TorchNonzeroTestCase(TorBencherTestCaseBase):
     def test_nonzero_4d(self, input=None):
         if input is not None:
             result = torch.nonzero(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.nonzero(a)
-        return [result, [a]]
+        return result
 

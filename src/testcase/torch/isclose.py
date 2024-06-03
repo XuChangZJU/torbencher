@@ -11,9 +11,9 @@ class TorchIscloseTestCase(TorBencherTestCaseBase):
     def test_isclose(self, input=None):
         if input is not None:
             result = torch.isclose(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([10000., 1e-07])
         b = torch.tensor([10000.1, 1e-08])
         result = torch.isclose(a, b, rtol=1e-05, atol=1e-08)
-        return [result, [a, b]]
+        return result
 

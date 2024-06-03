@@ -11,8 +11,8 @@ class TorchMatrixExpTestCase(TorBencherTestCaseBase):
     def test_matrix_exp_4d(self, input=None):
         if input is not None:
             result = torch.matrix_exp(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.matrix_exp(a)
-        return [result, [a]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchNNUpsamplingNearest2dTestCase(TorBencherTestCaseBase):
     def test_upsampling_nearest2d(self, input=None):
         if input is not None:
             result = torch.nn.UpsamplingNearest2d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 2, 4, 4)
         upsample = torch.nn.UpsamplingNearest2d(scale_factor=2)
         result = upsample(a)
-        return [result, [None, a]]
+        return result
 

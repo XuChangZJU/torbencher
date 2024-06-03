@@ -11,9 +11,9 @@ class TorchNNChannelShuffleTestCase(TorBencherTestCaseBase):
     def test_channel_shuffle(self, input=None):
         if input is not None:
             result = torch.nn.ChannelShuffle(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 20, 10, 10)
         cs = torch.nn.ChannelShuffle(4)
         result = cs(a)
-        return [result, [4, a]]
+        return result
 

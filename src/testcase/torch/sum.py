@@ -11,17 +11,17 @@ class TorchSumTestCase(TorBencherTestCaseBase):
     def test_sum_dim(self, input=None):
         if input is not None:
             result = torch.sum(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.sum(a, 1)
-        return [result, [a, 1]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_sum(self, input=None):
         if input is not None:
             result = torch.sum(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.sum(a)
-        return [result, [a]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchBincountTestCase(TorBencherTestCaseBase):
     def test_bincount(self, input=None):
         if input is not None:
             result = torch.bincount(input[0], weights=input[1])
-            return [result, input]
+            return result
         a = torch.randint(0, 8, (10,))
         b = torch.randn(10)
         result = torch.bincount(a, weights = b)
-        return [result, [a, b]]
+        return result
 

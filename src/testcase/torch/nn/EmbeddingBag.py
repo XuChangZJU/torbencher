@@ -11,9 +11,9 @@ class TorchNNEmbeddingBagTestCase(TorBencherTestCaseBase):
     def test_embedding_bag(self, input=None):
         if input is not None:
             result = torch.nn.EmbeddingBag(input[0], input[1])(input[2])
-            return [result, input]
+            return result
         a = torch.randint(0, 10, (2, 3))
         embedding_bag = torch.nn.EmbeddingBag(10, 3)
         result = embedding_bag(a)
-        return [result, [10, 3, a]]
+        return result
 

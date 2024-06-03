@@ -11,9 +11,9 @@ class TorchStackTestCase(TorBencherTestCaseBase):
     def test_stack_4d(self, input=None):
         if input is not None:
             result = torch.stack(input)
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.stack([a, b])
-        return [result, [a, b]]
+        return result
 

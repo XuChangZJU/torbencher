@@ -11,9 +11,9 @@ class TorchNNBatchNorm1dTestCase(TorBencherTestCaseBase):
     def test_batch_norm1d(self, input=None):
         if input is not None:
             result = torch.nn.BatchNorm1d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(10, 100)
         bn = torch.nn.BatchNorm1d(100)
         result = bn(a)
-        return [result, [100, a]]
+        return result
 

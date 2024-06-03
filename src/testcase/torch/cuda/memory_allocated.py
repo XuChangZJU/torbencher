@@ -11,8 +11,8 @@ class TorchCudaMemoryAllocatedTestCase(TorBencherTestCaseBase):
     def test_memory_allocated(self, input=None):
         if input is not None:
             result = torch.cuda.memory_allocated(input[0])
-            return [result, input]
+            return result
         a = 0
         result = torch.cuda.memory_allocated(a)
-        return [result, [a]]
+        return result
 

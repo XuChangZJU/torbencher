@@ -11,8 +11,8 @@ class TorchEmpty_likeTestCase(TorBencherTestCaseBase):
     def test_empty_like(self, input=None):
         if input is not None:
             result = torch.empty_like(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.empty_like(a)
-        return [result, [a]]
+        return result
 

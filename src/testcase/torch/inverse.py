@@ -11,8 +11,8 @@ class TorchInverseTestCase(TorBencherTestCaseBase):
     def test_inverse(self, input=None):
         if input is not None:
             result = torch.inverse(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.inverse(a)
-        return [result, [a]]
+        return result
 

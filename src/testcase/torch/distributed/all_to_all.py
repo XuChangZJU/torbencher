@@ -11,11 +11,11 @@ class TorchDistributedAllToAllTestCase(TorBencherTestCaseBase):
     def test_all_to_all_0(self, input=None):
         if input is not None:
             result = torch.distributed.all_to_all(input[0], input[1], group=input[2])
-            return [result, input]
+            return result
         a = torch.tensor([1, 2, 3, 4])
         b = torch.tensor([4, 3, 2, 1])
         c = torch.distributed.group.WORLD
         result = torch.distributed.all_to_all(a, b, group=c)
-        return [result, [a, b, c]]
+        return result
 
 

@@ -11,8 +11,8 @@ class TorchStftTestCase(TorBencherTestCaseBase):
     def test_stft_4d(self, input=None):
         if input is not None:
             result = torch.stft(input[0], input[1], input[2], input[3])
-            return [result, input]
+            return result
         a = torch.randn(10)
         result = torch.stft(a, n_fft=4, hop_length=2, win_length=4)
-        return [result, [a, 4, 2, 4]]
+        return result
 

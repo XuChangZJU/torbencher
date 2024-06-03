@@ -11,8 +11,8 @@ class TorchBernoulliTestCase(TorBencherTestCaseBase):
     def test_bernoulli(self, input=None):
         if input is not None:
             result = torch.bernoulli(input[0])
-            return [result, input]
+            return result
         a = torch.tensor([0.3, 0.5, 0.9])
         result = torch.bernoulli(a)
-        return [result, [a]]
+        return result
 

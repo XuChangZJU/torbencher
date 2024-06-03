@@ -11,8 +11,8 @@ class TorchAsinTestCase(TorBencherTestCaseBase):
     def test_asin(self, input=None):
         if input is not None:
             result = torch.asin(input[0])
-            return [result, input]
+            return result
         a = torch.rand(4)
         result = torch.asin(a)
-        return [result, [a]]
+        return result
 

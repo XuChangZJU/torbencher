@@ -11,8 +11,8 @@ class TorchTopkTestCase(TorBencherTestCaseBase):
     def test_topk_4d(self, input=None):
         if input is not None:
             result = torch.topk(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.topk(a, 2)
-        return [result, [a, 2]]
+        return result
 

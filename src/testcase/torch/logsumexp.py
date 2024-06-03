@@ -11,8 +11,8 @@ class TorchLogsumexpTestCase(TorBencherTestCaseBase):
     def test_logsumexp(self, input=None):
         if input is not None:
             result = torch.logsumexp(input[0], input[1], keepdim=input[2])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.logsumexp(a, 1, keepdim=True)
-        return [result, [a, 1, True]]
+        return result
 

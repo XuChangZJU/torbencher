@@ -11,10 +11,10 @@ class TorchNNNLLLossTestCase(TorBencherTestCaseBase):
     def test_nll_loss(self, input=None):
         if input is not None:
             result = torch.nn.NLLLoss()(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 5, requires_grad=True)
         target = torch.empty(3, dtype=torch.long).random_(5)
         loss = torch.nn.NLLLoss()
         result = loss(a, target)
-        return [result, [a, target]]
+        return result
 

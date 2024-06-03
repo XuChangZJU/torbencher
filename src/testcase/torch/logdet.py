@@ -11,8 +11,8 @@ class TorchLogdetTestCase(TorBencherTestCaseBase):
     def test_logdet_4d(self, input=None):
         if input is not None:
             result = torch.logdet(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.logdet(a)
-        return [result, [a]]
+        return result
 

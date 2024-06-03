@@ -11,9 +11,9 @@ class TorchNNLeakyReLUTestCase(TorBencherTestCaseBase):
     def test_leaky_relu(self, input=None):
         if input is not None:
             result = torch.nn.LeakyReLU()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         leaky_relu = torch.nn.LeakyReLU()
         result = leaky_relu(a)
-        return [result, [a]]
+        return result
 

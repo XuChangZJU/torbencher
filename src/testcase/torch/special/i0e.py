@@ -11,17 +11,17 @@ class TorchSpecialI0eTestCase(TorBencherTestCaseBase):
     def test_i0e_0d(self, input=None):
         if input is not None:
             result = torch.special.i0e(input[0])
-            return [result, input]
+            return result
         a = torch.randn([])
         result = torch.special.i0e(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_i0e_1d(self, input=None):
         if input is not None:
             result = torch.special.i0e(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.special.i0e(a)
-        return [result, [a]]
+        return result
 

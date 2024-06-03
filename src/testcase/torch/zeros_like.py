@@ -11,10 +11,10 @@ class TorchZeros_likeTestCase(TorBencherTestCaseBase):
     def test_zeros_like(self, input=None):
         if input is not None:
             result = torch.zeros_like(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.zeros_like(a)
-        return [result, [a]]
+        return result
 
 
 

@@ -11,9 +11,9 @@ class TorchNNReplicationPad1dTestCase(TorBencherTestCaseBase):
     def test_replication_pad1d(self, input=None):
         if input is not None:
             result = torch.nn.ReplicationPad1d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 2, 4)
         pad = torch.nn.ReplicationPad1d(2)
         result = pad(a)
-        return [result, [2, a]]
+        return result
 

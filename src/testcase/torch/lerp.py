@@ -11,11 +11,11 @@ class TorchLerpTestCase(TorBencherTestCaseBase):
     def test_lerp(self, input=None):
         if input is not None:
             result = torch.lerp(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         c = 0.5
         result = torch.lerp(a, b, c)
-        return [result, [a, b, c]]
+        return result
 
 

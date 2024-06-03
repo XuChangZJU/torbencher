@@ -11,10 +11,10 @@ class TorchNNRNNCellTestCase(TorBencherTestCaseBase):
     def test_rnn_cell(self, input=None):
         if input is not None:
             result = torch.nn.RNNCell(input[0], input[1])(input[2])
-            return [result, input]
+            return result
         a = torch.randn(3, 10)
         hx = torch.randn(3, 20)
         rnn = torch.nn.RNNCell(10, 20)
         result = rnn(a, hx)
-        return [result, [10, 20, a, hx]]
+        return result
 

@@ -11,17 +11,17 @@ class TorchSpecialErfcTestCase(TorBencherTestCaseBase):
     def test_erfc_0d(self, input=None):
         if input is not None:
             result = torch.special.erfc(input[0])
-            return [result, input]
+            return result
         a = torch.randn([])
         result = torch.special.erfc(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_erfc_1d(self, input=None):
         if input is not None:
             result = torch.special.erfc(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.special.erfc(a)
-        return [result, [a]]
+        return result
 

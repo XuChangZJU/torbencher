@@ -11,7 +11,7 @@ class TorchFloorTestCase(TorBencherTestCaseBase):
     def test_floor(self, input=None):
         if input is not None:
             result = torch.floor(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.floor(a)
-        return [result, [a]]
+        return result

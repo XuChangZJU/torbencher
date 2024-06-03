@@ -11,8 +11,8 @@ class TorchLinalgPinvTestCase(TorBencherTestCaseBase):
     def test_pinv(self, input=None):
         if input is not None:
             result = torch.linalg.pinv(input[0])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.linalg.pinv(a)
-        return [result, [a]]
+        return result
 

@@ -11,11 +11,11 @@ class TorchDistributedAllGatherTestCase(TorBencherTestCaseBase):
     def test_all_gather_0(self, input=None):
         if input is not None:
             result = torch.distributed.all_gather(input[0], input[1], group=input[2])
-            return [result, input]
+            return result
         a = [torch.tensor([1, 2, 3, 4]) for _ in range(4)]
         b = torch.tensor([1, 2, 3, 4])
         c = torch.distributed.group.WORLD
         result = torch.distributed.all_gather(a, b, group=c)
-        return [result, [a, b, c]]
+        return result
 
 

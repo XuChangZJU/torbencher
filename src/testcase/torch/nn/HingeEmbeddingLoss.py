@@ -11,10 +11,10 @@ class TorchNNHingeEmbeddingLossTestCase(TorBencherTestCaseBase):
     def test_hinge_embedding_loss(self, input=None):
         if input is not None:
             result = torch.nn.HingeEmbeddingLoss()(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(10, 5)
         target = torch.randint(low=-1, high=2, size=(10,))
         loss = torch.nn.HingeEmbeddingLoss()
         result = loss(a, target)
-        return [result, [a, target]]
+        return result
 

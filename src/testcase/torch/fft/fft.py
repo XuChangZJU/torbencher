@@ -11,11 +11,11 @@ class TorchFftTestCase(TorBencherTestCaseBase):
     def test_fft_4d(self, input=None):
         if input is not None:
             result = torch.fft.fft(input[0], input[1], input[2], input[3], input[4])
-            return [result, input]
+            return result
         a = torch.randn(4, 3, 8, 8)
         b = None
         c = 1
         d = "forward"
         result = torch.fft.fft(a, b, c, d)
-        return [result, [a, b, c, d]]
+        return result
 

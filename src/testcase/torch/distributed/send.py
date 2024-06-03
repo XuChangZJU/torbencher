@@ -11,10 +11,10 @@ class TorchDistributedSendTestCase(TorBencherTestCaseBase):
     def test_send_0(self, input=None):
         if input is not None:
             result = torch.distributed.send(input[0], dst=input[1])
-            return [result, input]
+            return result
         a = torch.tensor([1, 2, 3, 4])
         b = 0
         result = torch.distributed.send(a, dst=b)
-        return [result, [a, b]]
+        return result
 
 

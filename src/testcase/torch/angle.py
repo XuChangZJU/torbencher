@@ -11,9 +11,9 @@ class TorchAngleTestCase(TorBencherTestCaseBase):
     def test_angle(self, input=None):
         if input is not None:
             result = torch.angle(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.angle(a)
-        return [result, [a]]
+        return result
 
 

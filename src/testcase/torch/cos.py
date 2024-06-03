@@ -11,8 +11,8 @@ class TorchCosTestCase(TorBencherTestCaseBase):
     def test_cos(self, input=None):
         if input is not None:
             result = torch.cos(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.cos(a)
-        return [result, [a]]
+        return result
 

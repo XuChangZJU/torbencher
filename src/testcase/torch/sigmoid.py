@@ -11,8 +11,8 @@ class TorchSigmoidTestCase(TorBencherTestCaseBase):
     def test_sigmoid(self, input=None):
         if input is not None:
             result = torch.sigmoid(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.sigmoid(a)
-        return [result, [a]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchMmTestCase(TorBencherTestCaseBase):
     def test_mm(self, input=None):
         if input is not None:
             result = torch.mm(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 3)
         b = torch.randn(3, 5)
         result = torch.mm(a, b)
-        return [result, [a, b]]
+        return result
 

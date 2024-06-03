@@ -11,11 +11,11 @@ class TorchDistributedReduceTestCase(TorBencherTestCaseBase):
     def test_reduce_0(self, input=None):
         if input is not None:
             result = torch.distributed.reduce(input[0], dst=input[1], op=input[2])
-            return [result, input]
+            return result
         a = torch.tensor([1, 2, 3, 4])
         b = 1
         c = torch.distributed.reduce_op.SUM
         result = torch.distributed.reduce(a, dst=b, op=c)
-        return [result, [a, b, c]]
+        return result
 
 

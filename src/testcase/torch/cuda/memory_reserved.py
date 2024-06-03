@@ -11,8 +11,8 @@ class TorchCudaMemoryReservedTestCase(TorBencherTestCaseBase):
     def test_memory_reserved(self, input=None):
         if input is not None:
             result = torch.cuda.memory_reserved(input[0])
-            return [result, input]
+            return result
         a = 0
         result = torch.cuda.memory_reserved(a)
-        return [result, [a]]
+        return result
 

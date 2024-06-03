@@ -11,9 +11,9 @@ class TorchNNGELUTestCase(TorBencherTestCaseBase):
     def test_gelu(self, input=None):
         if input is not None:
             result = torch.nn.GELU()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         gelu = torch.nn.GELU()
         result = gelu(a)
-        return [result, [a]]
+        return result
 

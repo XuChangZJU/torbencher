@@ -11,10 +11,10 @@ class TorchNNFunctionalAdaptiveMaxPool1dTestCase(TorBencherTestCaseBase):
     def test_adaptive_max_pool1d_3d(self, input=None):
         if input is not None:
             result = torch.nn.functional.adaptive_max_pool1d(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 8, 6)
         b = 4
         result = torch.nn.functional.adaptive_max_pool1d(a, b)
-        return [result, [a, b]]
+        return result
 
 

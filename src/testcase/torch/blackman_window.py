@@ -11,8 +11,8 @@ class TorchBlackmanWindowTestCase(TorBencherTestCaseBase):
     def test_blackman_window(self, input=None):
         if input is not None:
             result = torch.blackman_window(input[0])
-            return [result, input]
+            return result
         a = 10
         result = torch.blackman_window(a)
-        return [result, [a]]
+        return result
 

@@ -10,7 +10,7 @@ class TorchCudaDeviceCountTestCase(TorBencherTestCaseBase):
     def test_device_count(self, input=None):
         if input is not None:
             result = torch.cuda.device_count()
-            return [result, input]
+            return result
         result = torch.cuda.device_count()
-        return [result, None]
+        return result
 

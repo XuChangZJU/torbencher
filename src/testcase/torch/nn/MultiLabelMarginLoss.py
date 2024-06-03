@@ -11,10 +11,10 @@ class TorchNNMultiLabelMarginLossTestCase(TorBencherTestCaseBase):
     def test_multilabel_margin_loss(self, input=None):
         if input is not None:
             result = torch.nn.MultiLabelMarginLoss()(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 5, requires_grad=True)
         target = torch.empty(3, 5).random_(5)
         loss = torch.nn.MultiLabelMarginLoss()
         result = loss(a, target)
-        return [result, [a, target]]
+        return result
 

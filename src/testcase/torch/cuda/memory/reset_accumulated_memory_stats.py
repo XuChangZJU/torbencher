@@ -12,7 +12,7 @@ class TorchCudaMemoryResetAccumulatedMemoryStatsTestCase(TorBencherTestCaseBase)
     def test_reset_accumulated_memory_stats(self, input=None):
         if input is not None:
             result = torch.cuda.memory.reset_accumulated_memory_stats(input[0])
-            return [result, input]
+            return result
         a = torch.device('cuda')
         result = torch.cuda.memory.reset_accumulated_memory_stats(a)
-        return [result, [a]]
+        return result

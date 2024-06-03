@@ -11,7 +11,7 @@ class TorchEmptyTestCase(TorBencherTestCaseBase):
     def test_empty(self, input=None):
         if input is not None:
             result = torch.empty(input[0])
-            return [result, input]
+            return result
         result = torch.empty(4)
-        return [result, [(4,)]]
+        return result
 

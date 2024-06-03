@@ -11,9 +11,9 @@ class TorchNNHardsigmoidTestCase(TorBencherTestCaseBase):
     def test_hardsigmoid(self, input=None):
         if input is not None:
             result = torch.nn.Hardsigmoid()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         hardsigmoid = torch.nn.Hardsigmoid()
         result = hardsigmoid(a)
-        return [result, [a]]
+        return result
 

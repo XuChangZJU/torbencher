@@ -11,11 +11,11 @@ class TorchNNMarginRankingLossTestCase(TorBencherTestCaseBase):
     def test_margin_ranking_loss(self, input=None):
         if input is not None:
             result = torch.nn.MarginRankingLoss()(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(10, 5)
         b = torch.randn(10, 5)
         target = torch.randint(low=-1, high=2, size=(10,))
         loss = torch.nn.MarginRankingLoss()
         result = loss(a, b, target)
-        return [result, [a, b, target]]
+        return result
 

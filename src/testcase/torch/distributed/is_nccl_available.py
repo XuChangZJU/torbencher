@@ -11,8 +11,8 @@ class TorchDistributedIsNcclAvailableTestCase(TorBencherTestCaseBase):
     def test_is_nccl_available_0(self, input=None):
         if input is not None:
             result = torch.distributed.is_nccl_available()
-            return [result, input]
+            return result
         result = torch.distributed.is_nccl_available()
-        return [result, None]
+        return result
 
 

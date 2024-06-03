@@ -11,9 +11,9 @@ class TorchNNBatchNorm3dTestCase(TorBencherTestCaseBase):
     def test_batch_norm3d(self, input=None):
         if input is not None:
             result = torch.nn.BatchNorm3d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(10, 100, 10, 10, 10)
         bn = torch.nn.BatchNorm3d(100)
         result = bn(a)
-        return [result, [100, a]]
+        return result
 

@@ -11,18 +11,18 @@ class TorchAtleast1dTestCase(TorBencherTestCaseBase):
     def test_atleast_1d(self, input=None):
         if input is not None:
             result = torch.atleast_1d(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.atleast_1d(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_atleast_1d_scalar(self, input=None):
         if input is not None:
             result = torch.atleast_1d(input[0])
-            return [result, input]
+            return result
         a = torch.tensor(1.2)
         result = torch.atleast_1d(a)
-        return [result, [a]]
+        return result
 
 

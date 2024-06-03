@@ -11,9 +11,9 @@ class TorchNNAdaptiveMaxPool1dTestCase(TorBencherTestCaseBase):
     def test_adaptive_max_pool1d(self, input=None):
         if input is not None:
             result = torch.nn.AdaptiveMaxPool1d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 10)
         pool = torch.nn.AdaptiveMaxPool1d(5)
         result = pool(a)
-        return [result, [5, a]]
+        return result
 

@@ -11,8 +11,8 @@ class TorchCovTestCase(TorBencherTestCaseBase):
     def test_cov(self, input=None):
         if input is not None:
             result = torch.cov(input[0], correction=input[1])
-            return [result, input]
+            return result
         input = torch.rand(10, 3)
         result = torch.cov(input, correction=1)
-        return [result, [input, 1]]
+        return result
 

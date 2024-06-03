@@ -11,9 +11,9 @@ class TorchNNConstantPad2dTestCase(TorBencherTestCaseBase):
     def test_constant_pad2d(self, input=None):
         if input is not None:
             result = torch.nn.ConstantPad2d(input[0], input[1])(input[2])
-            return [result, input]
+            return result
         a = torch.randn(1, 2, 4, 4)
         pad = torch.nn.ConstantPad2d(2, 3.5)
         result = pad(a)
-        return [result, [(2, 2, 2, 2), 3.5, a]]
+        return result
 

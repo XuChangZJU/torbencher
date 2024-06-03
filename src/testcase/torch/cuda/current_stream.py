@@ -10,8 +10,8 @@ class TorchCudaCurrentStreamTestCase(TorBencherTestCaseBase):
     def test_current_stream(self, input=None):
         if input is not None:
             result = torch.cuda.current_stream(input[0])
-            return [result, input]
+            return result
         a = torch.device('cuda')
         result = torch.cuda.current_stream(a)
-        return [result, [a]]
+        return result
 

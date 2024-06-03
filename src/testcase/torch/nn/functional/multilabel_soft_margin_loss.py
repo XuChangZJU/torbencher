@@ -13,10 +13,10 @@ class TorchNNFunctionalMultilabelSoftMarginLossTestCase(TorBencherTestCaseBase):
             result = torch.nn.functional.multilabel_soft_margin_loss(
                 input[0], input[1]
             )
-            return [result, input]
+            return result
         a = torch.randn(3, 2).sigmoid()
         b = torch.randn(3, 2)
         result = torch.nn.functional.multilabel_soft_margin_loss(a, b)
-        return [result, [a, b]]
+        return result
 
 

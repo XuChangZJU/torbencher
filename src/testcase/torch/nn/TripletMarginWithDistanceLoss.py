@@ -11,11 +11,11 @@ class TorchNNTripletMarginWithDistanceLossTestCase(TorBencherTestCaseBase):
     def test_triplet_margin_with_distance_loss(self, input=None):
         if input is not None:
             result = torch.nn.TripletMarginWithDistanceLoss()(input[0], input[1], input[2])
-            return [result, input]
+            return result
         anchor = torch.randn(100, 128)
         positive = torch.randn(100, 128)
         negative = torch.randn(100, 128)
         loss = torch.nn.TripletMarginWithDistanceLoss()
         result = loss(anchor, positive, negative)
-        return [result, [anchor, positive, negative]]
+        return result
 

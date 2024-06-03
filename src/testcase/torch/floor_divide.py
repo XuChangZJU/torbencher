@@ -11,10 +11,10 @@ class TorchFloorDivideTestCase(TorBencherTestCaseBase):
     def test_floor_divide(self, input=None):
         if input is not None:
             result = torch.floor_divide(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.floor_divide(a, b)
-        return [result, [a, b]]
+        return result
 
 

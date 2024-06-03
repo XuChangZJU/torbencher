@@ -11,8 +11,8 @@ class TorchHammingWindowTestCase(TorBencherTestCaseBase):
     def test_hamming_window(self, input=None):
         if input is not None:
             result = torch.hamming_window(input[0])
-            return [result, input]
+            return result
         a = 10
         result = torch.hamming_window(a)
-        return [result, [a]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchLogicalXorTestCase(TorBencherTestCaseBase):
     def test_logical_xor(self, input=None):
         if input is not None:
             result = torch.logical_xor(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([True, False, True])
         b = torch.tensor([False, False, True])
         result = torch.logical_xor(a, b)
-        return [result, [a, b]]
+        return result
 

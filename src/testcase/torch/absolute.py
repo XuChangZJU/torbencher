@@ -11,9 +11,9 @@ class TorchAbsoluteTestCase(TorBencherTestCaseBase):
     def test_absolute(self, input=None):
         if input is not None:
             result = torch.absolute(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.absolute(a)
-        return [result, [a]]
+        return result
 
 

@@ -12,8 +12,8 @@ class TorchLinalgNormNuclearNormTestCase(TorBencherTestCaseBase):
     def test_nuclear_norm(self, input=None):
         if input is not None:
             result = torch.linalg.norm.nuclear_norm(input[0])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.linalg.norm.nuclear_norm(a)
-        return [result, [a]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchOuterTestCase(TorBencherTestCaseBase):
     def test_outer_4d(self, input=None):
         if input is not None:
             result = torch.outer(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.outer(a, b)
-        return [result, [a, b]]
+        return result
 

@@ -10,7 +10,7 @@ class TorchCudaEmptyCacheTestCase(TorBencherTestCaseBase):
     def test_empty_cache(self, input=None):
         if input is not None:
             result = torch.cuda.empty_cache()
-            return [result, input]
+            return result
         result = torch.cuda.empty_cache()
-        return [result, None]
+        return result
 

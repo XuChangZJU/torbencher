@@ -11,7 +11,7 @@ class TorchNNFunctionalCrossEntropyTestCase(TorBencherTestCaseBase):
     def test_cross_entropy_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.cross_entropy(input[0], input[1], weight=input[2], size_average=input[3], ignore_index=input[4], reduce=input[5], reduction=input[6])
-            return [result, input]
+            return result
         a = torch.randn(3, 5)
         b = torch.empty(3, dtype=torch.long).random_(5)
         c = None
@@ -20,6 +20,6 @@ class TorchNNFunctionalCrossEntropyTestCase(TorBencherTestCaseBase):
         f = True
         g = 'mean'
         result = torch.nn.functional.cross_entropy(a, b, weight=c, size_average=d, ignore_index=e, reduce=f, reduction=g)
-        return [result, [a, b, c, d, e, f, g]]
+        return result
 
 

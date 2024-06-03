@@ -10,15 +10,15 @@ class TorchCudaSetSyncDebugModeTestCase(TorBencherTestCaseBase):
     def test_set_sync_debug_mode_0(self, input=None):
         if input is not None:
             result = torch.cuda.set_sync_debug_mode(input[0])
-            return [result, input]
+            return result
         a = 0
         result = torch.cuda.set_sync_debug_mode(a)
-        return [result, [a]]
+        return result
     def test_set_sync_debug_mode_1(self, input=None):
         if input is not None:
             result = torch.cuda.set_sync_debug_mode(mode=input[0])
-            return [result, input]
+            return result
         a = 0
         result = torch.cuda.set_sync_debug_mode(mode=a)
-        return [result, [a]]
+        return result
 

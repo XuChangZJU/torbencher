@@ -11,9 +11,9 @@ class TorchLuUnpackTestCase(TorBencherTestCaseBase):
     def test_lu_unpack_4d(self, input=None):
         if input is not None:
             result = torch.lu_unpack(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         lu_data, pivots = torch.lu(a)
         result = torch.lu_unpack(lu_data, pivots)
-        return [result, [lu_data, pivots]]
+        return result
 

@@ -11,11 +11,11 @@ class TorchIhfftnTestCase(TorBencherTestCaseBase):
     def test_ihfftn_5d(self, input=None):
         if input is not None:
             result = torch.fft.ihfftn(input[0], input[1], input[2], input[3], input[4])
-            return [result, input]
+            return result
         a = torch.randn(4, 3, 4, 5, 6)
         b = [2, 3, 5]
         c = [-3, -2, -1]
         e = "ortho"
         result = torch.fft.ihfftn(a, b, c, e)
-        return [result, [a, b, c, e]]
+        return result
 

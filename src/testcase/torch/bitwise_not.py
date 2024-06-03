@@ -11,9 +11,9 @@ class TorchBitwiseNotTestCase(TorBencherTestCaseBase):
     def test_bitwise_not(self, input=None):
         if input is not None:
             result = torch.bitwise_not(input[0])
-            return [result, input]
+            return result
         a = torch.tensor([True, False])
         result = torch.bitwise_not(a)
-        return [result, [a]]
+        return result
 
 

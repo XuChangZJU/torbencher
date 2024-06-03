@@ -11,9 +11,9 @@ class TorchLinalgMatrixPowerTestCase(TorBencherTestCaseBase):
     def test_matrix_power(self, input=None):
         if input is not None:
             result = torch.linalg.matrix_power(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         n = 2
         result = torch.linalg.matrix_power(a, n)
-        return [result, [a, n]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchNNTanhshrinkTestCase(TorBencherTestCaseBase):
     def test_tanhshrink(self, input=None):
         if input is not None:
             result = torch.nn.Tanhshrink()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         tanhshrink = torch.nn.Tanhshrink()
         result = tanhshrink(a)
-        return [result, [a]]
+        return result
 

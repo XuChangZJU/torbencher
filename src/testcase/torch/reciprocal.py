@@ -11,8 +11,8 @@ class TorchReciprocalTestCase(TorBencherTestCaseBase):
     def test_reciprocal(self, input=None):
         if input is not None:
             result = torch.reciprocal(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.reciprocal(a)
-        return [result, [a]]
+        return result
 

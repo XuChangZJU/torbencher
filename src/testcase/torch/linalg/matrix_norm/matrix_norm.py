@@ -11,8 +11,8 @@ class TorchLinalgMatrixNormMatrixNormTestCase(TorBencherTestCaseBase):
     def test_matrix_norm(self, input=None):
         if input is not None:
             result = torch.linalg.matrix_norm.matrix_norm(input[0], ord=input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.linalg.matrix_norm.matrix_norm(a, ord='fro')
-        return [result, [a, 'fro']]
+        return result
 

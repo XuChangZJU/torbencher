@@ -13,11 +13,11 @@ class TorchNNFunctionalGaussianNLLLossTestCase(TorBencherTestCaseBase):
             result = torch.nn.functional.gaussian_nll_loss(
                 input[0], input[1], input[2]
             )
-            return [result, input]
+            return result
         a = torch.randn(10, 3)
         b = torch.randn(10, 3)
         c = torch.randn(10, 3)
         result = torch.nn.functional.gaussian_nll_loss(a, b, c)
-        return [result, [a, b, c]]
+        return result
 
 

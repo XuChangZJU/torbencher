@@ -11,7 +11,7 @@ class TorchZerosTestCase(TorBencherTestCaseBase):
     def test_zeros(self, input=None):
         if input is not None:
             result = torch.zeros(input[0])
-            return [result, input]
+            return result
         a = (2, 3)
         result = torch.zeros(a)
-        return [result, [a]]
+        return result

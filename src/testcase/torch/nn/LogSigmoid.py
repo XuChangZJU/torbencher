@@ -11,9 +11,9 @@ class TorchNNLogSigmoidTestCase(TorBencherTestCaseBase):
     def test_log_sigmoid(self, input=None):
         if input is not None:
             result = torch.nn.LogSigmoid()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         log_sigmoid = torch.nn.LogSigmoid()
         result = log_sigmoid(a)
-        return [result, [a]]
+        return result
 

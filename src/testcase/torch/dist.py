@@ -11,9 +11,9 @@ class TorchDistTestCase(TorBencherTestCaseBase):
     def test_dist(self, input=None):
         if input is not None:
             result = torch.dist(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.dist(a, b, p=2)
-        return [result, [a, b]]
+        return result
 

@@ -11,18 +11,18 @@ class TorchSpecialBesselY1TestCase(TorBencherTestCaseBase):
     def test_bessel_y1_0d(self, input=None):
         if input is not None:
             result = torch.special.bessel_y1(input[0])
-            return [result, input]
+            return result
         a = torch.randn([])
         result = torch.special.bessel_y1(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.7.0")
     def test_bessel_y1_1d(self, input=None):
         if input is not None:
             result = torch.special.bessel_y1(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.special.bessel_y1(a)
-        return [result, [a]]
+        return result
 
 

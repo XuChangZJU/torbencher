@@ -10,7 +10,7 @@ class TorchCudaIsBf16SupportedTestCase(TorBencherTestCaseBase):
     def test_is_bf16_supported_0(self, input=None):
         if input is not None:
             result = torch.cuda.is_bf16_supported()
-            return [result, input]
+            return result
         result = torch.cuda.is_bf16_supported()
-        return [result, None]
+        return result
 

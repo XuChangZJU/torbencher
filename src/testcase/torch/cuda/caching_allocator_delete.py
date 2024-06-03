@@ -11,8 +11,8 @@ class TorchCudaCachingAllocatorDeleteTestCase(TorBencherTestCaseBase):
     def test_caching_allocator_delete(self, input=None):
         if input is not None:
             result = torch.cuda.caching_allocator_delete(input[0])
-            return [result, input]
+            return result
         a = torch.cuda.caching_allocator_alloc(100)
         result = torch.cuda.caching_allocator_delete(a)
-        return [result, [a]]
+        return result
 

@@ -11,10 +11,10 @@ class TorchLinalgLstsqTestCase(TorBencherTestCaseBase):
     def test_lstsq(self, input=None):
         if input is not None:
             result = torch.linalg.lstsq(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 2)
         b = torch.randn(3, 1)
         result = torch.linalg.lstsq(a, b)
-        return [result, [a, b]]
+        return result
 
 

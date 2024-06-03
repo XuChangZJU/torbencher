@@ -11,40 +11,40 @@ class TorchSpecialXlogyTestCase(TorBencherTestCaseBase):
     def test_xlogy_0d(self, input=None):
         if input is not None:
             result = torch.special.xlogy(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn([])
         b = torch.randn([])
         result = torch.special.xlogy(a, b)
-        return [result, [a, b]]
+        return result
 
     @test_api_version.larger_than("1.7.0")
     def test_xlogy_1d_0d(self, input=None):
         if input is not None:
             result = torch.special.xlogy(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(5)
         b = torch.randn([])
         result = torch.special.xlogy(a, b)
-        return [result, [a, b]]
+        return result
 
     @test_api_version.larger_than("1.7.0")
     def test_xlogy_0d_1d(self, input=None):
         if input is not None:
             result = torch.special.xlogy(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn([])
         b = torch.randn(5)
         result = torch.special.xlogy(a, b)
-        return [result, [a, b]]
+        return result
 
     @test_api_version.larger_than("1.7.0")
     def test_xlogy_1d(self, input=None):
         if input is not None:
             result = torch.special.xlogy(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(5)
         b = torch.randn(5)
         result = torch.special.xlogy(a, b)
-        return [result, [a, b]]
+        return result
 
 

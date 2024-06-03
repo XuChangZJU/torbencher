@@ -11,10 +11,10 @@ class TorchNNFunctionalPixelShuffleTestCase(TorBencherTestCaseBase):
     def test_pixel_shuffle_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.pixel_shuffle(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 9, 4, 4)
         b = 3
         result = torch.nn.functional.pixel_shuffle(a, b)
-        return [result, [a, b]]
+        return result
 
 

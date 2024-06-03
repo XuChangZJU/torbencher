@@ -11,8 +11,8 @@ class TorchDistributedReduceOpTestCase(TorBencherTestCaseBase):
     def test_ReduceOp_0(self, input=None):
         if input is not None:
             result = torch.distributed.ReduceOp.SUM
-            return [result, input]
+            return result
         result = torch.distributed.ReduceOp.SUM
-        return [result, None]
+        return result
 
 

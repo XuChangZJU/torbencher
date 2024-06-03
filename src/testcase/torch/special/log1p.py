@@ -11,17 +11,17 @@ class TorchSpecialLog1pTestCase(TorBencherTestCaseBase):
     def test_log1p_0d(self, input=None):
         if input is not None:
             result = torch.special.log1p(input[0])
-            return [result, input]
+            return result
         a = torch.randn([])
         result = torch.special.log1p(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_log1p_1d(self, input=None):
         if input is not None:
             result = torch.special.log1p(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.special.log1p(a)
-        return [result, [a]]
+        return result
 

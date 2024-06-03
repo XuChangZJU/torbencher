@@ -11,8 +11,8 @@ class TorchTransposeTestCase(TorBencherTestCaseBase):
     def test_transpose(self, input=None):
         if input is not None:
             result = torch.transpose(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.transpose(a, 0, 1)
-        return [result, [a, 0, 1]]
+        return result
 

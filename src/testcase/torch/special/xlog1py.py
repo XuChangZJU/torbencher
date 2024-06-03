@@ -11,19 +11,19 @@ class TorchSpecialXlog1pyTestCase(TorBencherTestCaseBase):
     def test_xlog1py_0d(self, input=None):
         if input is not None:
             result = torch.special.xlog1py(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn([])
         b = torch.randn([])
         result = torch.special.xlog1py(a, b)
-        return [result, [a, b]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_xlog1py_1d(self, input=None):
         if input is not None:
             result = torch.special.xlog1py(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(5)
         b = torch.randn(5)
         result = torch.special.xlog1py(a, b)
-        return [result, [a, b]]
+        return result
 

@@ -11,10 +11,10 @@ class TorchTriangularSolveTestCase(TorBencherTestCaseBase):
     def test_triangular_solve_4d(self, input=None):
         if input is not None:
             result = torch.triangular_solve(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         a = torch.tril(a)  # Make lower triangular matrix
         b = torch.randn(4, 2)
         result = torch.triangular_solve(b, a)
-        return [result, [b, a]]
+        return result
 

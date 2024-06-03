@@ -11,9 +11,9 @@ class TorchNNFractionalMaxPool2dTestCase(TorBencherTestCaseBase):
     def test_fractional_max_pool2d(self, input=None):
         if input is not None:
             result = torch.nn.FractionalMaxPool2d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 2, 4, 4)
         pool = torch.nn.FractionalMaxPool2d(3)
         result = pool(a)
-        return [result, [3, a]]
+        return result
 

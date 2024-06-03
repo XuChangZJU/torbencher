@@ -11,8 +11,8 @@ class TorchDistributedDestroyProcessGroupTestCase(TorBencherTestCaseBase):
     def test_destroy_process_group_0(self, input=None):
         if input is not None:
             result = torch.distributed.destroy_process_group()
-            return [result, input]
+            return result
         result = torch.distributed.destroy_process_group()
-        return [result, None]
+        return result
 
 

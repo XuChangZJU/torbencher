@@ -11,8 +11,8 @@ class TorchCumprodTestCase(TorBencherTestCaseBase):
     def test_cumprod(self, input=None):
         if input is not None:
             result = torch.cumprod(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(10)
         result = torch.cumprod(a, dim=0)
-        return [result, [a, 0]]
+        return result
 

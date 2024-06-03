@@ -11,11 +11,11 @@ class TorchIfftshiftTestCase(TorBencherTestCaseBase):
     def test_ifftshift_4d(self, input=None):
         if input is not None:
             result = torch.fft.ifftshift(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 3, 8, 8)
         b = None
         result = torch.fft.ifftshift(a, dim=b)
-        return [result, [a, b]]
+        return result
 
 
 

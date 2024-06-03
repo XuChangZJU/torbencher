@@ -11,9 +11,9 @@ class TorchConjTestCase(TorBencherTestCaseBase):
     def test_conj(self, input=None):
         if input is not None:
             result = torch.conj(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4) + 1j * torch.randn(4)
         result = torch.conj(a)
-        return [result, [a]]
+        return result
 
 

@@ -11,8 +11,8 @@ class TorchTrilTestCase(TorBencherTestCaseBase):
     def test_tril(self, input=None):
         if input is not None:
             result = torch.tril(input[0], diagonal=input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.tril(a, diagonal=1)
-        return [result, [a, 1]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchNNRReLUTestCase(TorBencherTestCaseBase):
     def test_rrelu(self, input=None):
         if input is not None:
             result = torch.nn.RReLU()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         rrelu = torch.nn.RReLU()
         result = rrelu(a)
-        return [result, [a]]
+        return result
 

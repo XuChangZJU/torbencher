@@ -11,8 +11,8 @@ class TorchOnes_likeTestCase(TorBencherTestCaseBase):
     def test_ones_like(self, input=None):
         if input is not None:
             result = torch.ones_like(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.ones_like(a)
-        return [result, [a]]
+        return result
 

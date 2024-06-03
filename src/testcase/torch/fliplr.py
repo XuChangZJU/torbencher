@@ -11,8 +11,8 @@ class TorchFliplrTestCase(TorBencherTestCaseBase):
     def test_fliplr_4d(self, input=None):
         if input is not None:
             result = torch.fliplr(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.fliplr(a)
-        return [result, [a]]
+        return result
 

@@ -11,19 +11,19 @@ class TorchSpecialMultigammalnTestCase(TorBencherTestCaseBase):
     def test_multigammaln_0d(self, input=None):
         if input is not None:
             result = torch.special.multigammaln(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.rand([])
         b = torch.randint(1, 5, ())
         result = torch.special.multigammaln(a, b)
-        return [result, [a, b]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_multigammaln_1d(self, input=None):
         if input is not None:
             result = torch.special.multigammaln(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.rand(5)
         b = torch.randint(1, 5, ())
         result = torch.special.multigammaln(a, b)
-        return [result, [a, b]]
+        return result
 

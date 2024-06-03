@@ -13,11 +13,11 @@ class TorchNNFunctionalLPPool1DTestCase(TorBencherTestCaseBase):
             result = torch.nn.functional.lp_pool1d(
                 input[0], norm_type=input[1], kernel_size=input[2]
             )
-            return [result, input]
+            return result
         a = torch.randn(1, 3, 8)
         b = 2
         c = 2
         result = torch.nn.functional.lp_pool1d(a, norm_type=b, kernel_size=c)
-        return [result, [a, b, c]]
+        return result
 
 

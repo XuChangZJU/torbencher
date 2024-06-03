@@ -10,8 +10,8 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
     def test_cond_4d(self, input=None):
         if input is not None:
             result = torch.linalg.cond(input[0])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 3, 3)
         result = torch.linalg.cond(a)
-        return [result, [a]]
+        return result
 

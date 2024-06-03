@@ -11,8 +11,8 @@ class TorchMultinomialTestCase(TorBencherTestCaseBase):
     def test_multinomial(self, input=None):
         if input is not None:
             result = torch.multinomial(input[0], num_samples=input[1], replacement=input[2])
-            return [result, input]
+            return result
         a = torch.tensor([1., 1., 1., 1.])
         result = torch.multinomial(a, num_samples = 3, replacement = True)
-        return [result, [a, 3, True]]
+        return result
         

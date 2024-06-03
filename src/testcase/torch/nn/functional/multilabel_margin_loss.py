@@ -11,13 +11,13 @@ class TorchNNFunctionalMultilabelMarginLossTestCase(TorBencherTestCaseBase):
     def test_multilabel_margin_loss_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.multilabel_margin_loss(input[0], input[1], size_average=input[2], reduce=input[3], reduction=input[4])
-            return [result, input]
+            return result
         a = torch.tensor([[0.1, 0.2, 0.4, 0.8]])
         b = torch.tensor([[3, 0, -1, 1]])
         c = True
         d = True
         e = 'mean'
         result = torch.nn.functional.multilabel_margin_loss(a, b, size_average=c, reduce=d, reduction=e)
-        return [result, [a, b, c, d, e]]
+        return result
 
 

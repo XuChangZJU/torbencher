@@ -11,8 +11,8 @@ class TorchOnesTestCase(TorBencherTestCaseBase):
     def test_ones(self, input=None):
         if input is not None:
             result = torch.ones(input[0])
-            return [result, input]
+            return result
         a = (2, 3)
         result = torch.ones(a)
-        return [result, [a]]
+        return result
 

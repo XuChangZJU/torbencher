@@ -11,9 +11,9 @@ class TorchArctanhTestCase(TorBencherTestCaseBase):
     def test_arctanh(self, input=None):
         if input is not None:
             result = torch.arctanh(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4).uniform_(-1, 1)
         result = torch.arctanh(a)
-        return [result, [a]]
+        return result
 
 

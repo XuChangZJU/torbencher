@@ -11,11 +11,11 @@ class TorchNNFunctionalSoftplusTestCase(TorBencherTestCaseBase):
     def test_softplus_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.softplus(input[0], beta=input[1], threshold=input[2])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = 1
         c = 20
         result = torch.nn.functional.softplus(a, beta=b, threshold=c)
-        return [result, [a, b, c]]
+        return result
 
 

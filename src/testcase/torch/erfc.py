@@ -11,9 +11,9 @@ class TorchErfcTestCase(TorBencherTestCaseBase):
     def test_erfc(self, input=None):
         if input is not None:
             result = torch.erfc(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.erfc(a)
-        return [result, [a]]
+        return result
 
 

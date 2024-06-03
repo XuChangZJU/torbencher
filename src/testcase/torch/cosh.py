@@ -11,8 +11,8 @@ class TorchCoshTestCase(TorBencherTestCaseBase):
     def test_cosh(self, input=None):
         if input is not None:
             result = torch.cosh(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.cosh(a)
-        return [result, [a]]
+        return result
 

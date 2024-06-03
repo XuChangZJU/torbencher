@@ -11,7 +11,7 @@ class TorchRangeTestCase(TorBencherTestCaseBase):
     def test_range(self, input=None):
         if input is not None:
             result = torch.range(input[0], input[1], input[2])
-            return [result, input]
+            return result
         result = torch.range(1, 4, 0.5)
-        return [result, [1, 4, 0.5]]
+        return result
 

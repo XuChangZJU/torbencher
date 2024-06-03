@@ -11,11 +11,11 @@ class TorchNNFunctionalUnfoldTestCase(TorBencherTestCaseBase):
     def test_unfold_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.unfold(input[0], kernel_size=input[1], dilation=input[2], padding=input[3], stride=input[4])
-            return [result, input]
+            return result
         a = torch.randn(2, 3, 5, 5)
         b = 3
         c = 1
         d = 1
         e = 2
         result = torch.nn.functional.unfold(a, kernel_size=b, dilation=c, padding=d, stride=e)
-        return [result, [a, b, c, d, e]]
+        return result

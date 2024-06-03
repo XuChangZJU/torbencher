@@ -11,9 +11,9 @@ class TorchNNPixelUnshuffleTestCase(TorBencherTestCaseBase):
     def test_pixel_unshuffle(self, input=None):
         if input is not None:
             result = torch.nn.PixelUnshuffle(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 4, 8, 8)
         unshuffle = torch.nn.PixelUnshuffle(2)
         result = unshuffle(a)
-        return [result, [2, a]]
+        return result
 

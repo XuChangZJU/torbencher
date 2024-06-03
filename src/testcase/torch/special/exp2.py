@@ -11,17 +11,17 @@ class TorchSpecialExp2TestCase(TorBencherTestCaseBase):
     def test_exp2_0d(self, input=None):
         if input is not None:
             result = torch.special.exp2(input[0])
-            return [result, input]
+            return result
         a = torch.randn([])
         result = torch.special.exp2(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_exp2_1d(self, input=None):
         if input is not None:
             result = torch.special.exp2(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.special.exp2(a)
-        return [result, [a]]
+        return result
 

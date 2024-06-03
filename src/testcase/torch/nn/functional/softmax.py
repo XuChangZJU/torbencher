@@ -11,10 +11,10 @@ class TorchNNFunctionalSoftmaxTestCase(TorBencherTestCaseBase):
     def test_softmax_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.softmax(input[0], dim=input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 3)
         b = 1
         result = torch.nn.functional.softmax(a, dim=b)
-        return [result, [a, b]]
+        return result
 
 

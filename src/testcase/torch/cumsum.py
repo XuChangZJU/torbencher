@@ -11,8 +11,8 @@ class TorchCumsumTestCase(TorBencherTestCaseBase):
     def test_cumsum(self, input=None):
         if input is not None:
             result = torch.cumsum(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(10)
         result = torch.cumsum(a, dim=0)
-        return [result, [a, 0]]
+        return result
 

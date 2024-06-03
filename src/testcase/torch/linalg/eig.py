@@ -11,8 +11,8 @@ class TorchLinalgEigTestCase(TorBencherTestCaseBase):
     def test_eig(self, input=None):
         if input is not None:
             result = torch.linalg.eig(input[0])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.linalg.eig(a)
-        return [result, [a]]
+        return result
 

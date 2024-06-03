@@ -11,9 +11,9 @@ class TorchNNFunctionalLogSigmoidTestCase(TorBencherTestCaseBase):
     def test_logsigmoid_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.logsigmoid(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.nn.functional.logsigmoid(a)
-        return [result, [a]]
+        return result
 
 

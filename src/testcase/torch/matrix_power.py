@@ -11,8 +11,8 @@ class TorchMatrixPowerTestCase(TorBencherTestCaseBase):
     def test_matrix_power_4d(self, input=None):
         if input is not None:
             result = torch.matrix_power(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.matrix_power(a, 3)
-        return [result, [a, 3]]
+        return result
 

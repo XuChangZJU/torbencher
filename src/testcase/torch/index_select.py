@@ -11,10 +11,10 @@ class TorchIndexSelectTestCase(TorBencherTestCaseBase):
     def test_index_select(self, input=None):
         if input is not None:
             result = torch.index_select(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         b = 1
         c = torch.tensor([0, 2])
         result = torch.index_select(a, b, c)
-        return [result, [a, b, c]]
+        return result
 

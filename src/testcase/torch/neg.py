@@ -11,8 +11,8 @@ class TorchNegTestCase(TorBencherTestCaseBase):
     def test_neg(self, input=None):
         if input is not None:
             result = torch.neg(input[0])
-            return [result, input]
+            return result
         a = torch.randn(5)
         result = torch.neg(a)
-        return [result, [a]]
+        return result
 

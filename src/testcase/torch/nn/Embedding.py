@@ -11,9 +11,9 @@ class TorchNNEmbeddingTestCase(TorBencherTestCaseBase):
     def test_embedding(self, input=None):
         if input is not None:
             result = torch.nn.Embedding(input[0], input[1])(input[2])
-            return [result, input]
+            return result
         a = torch.randint(0, 10, (2, 3))
         embedding = torch.nn.Embedding(10, 3)
         result = embedding(a)
-        return [result, [10, 3, a]]
+        return result
 

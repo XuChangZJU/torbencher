@@ -20,7 +20,7 @@ class TorchNNFunctionalInstanceNormTestCase(TorBencherTestCaseBase):
                 momentum=0.1,
                 eps=1e-05,
             )
-            return [result, input]
+            return result
         a = torch.randn(20, 100, 35, 45)
         b = torch.zeros(100)
         c = torch.ones(100)
@@ -36,6 +36,6 @@ class TorchNNFunctionalInstanceNormTestCase(TorBencherTestCaseBase):
             momentum=0.1,
             eps=1e-05,
         )
-        return [result, [a, b, c, d, e]]
+        return result
 
 

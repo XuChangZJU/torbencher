@@ -11,19 +11,19 @@ class TorchSpecialSoftmaxTestCase(TorBencherTestCaseBase):
     def test_softmax_1d(self, input=None):
         if input is not None:
             result = torch.special.softmax(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(5)
         b = 0
         result = torch.special.softmax(a, b)
-        return [result, [a, b]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_softmax_2d(self, input=None):
         if input is not None:
             result = torch.special.softmax(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 3)
         b = 1
         result = torch.special.softmax(a, b)
-        return [result, [a, b]]
+        return result
 

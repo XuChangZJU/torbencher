@@ -11,8 +11,8 @@ class TorchDiagTestCase(TorBencherTestCaseBase):
     def test_diag(self, input=None):
         if input is not None:
             result = torch.diag(input[0], diagonal=input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.diag(a, diagonal=1)
-        return [result, [a, 1]]
+        return result
 

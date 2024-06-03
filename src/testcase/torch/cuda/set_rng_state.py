@@ -10,8 +10,8 @@ class TorchCudaSetRngStateTestCase(TorBencherTestCaseBase):
     def test_set_rng_state(self, input=None):
         if input is not None:
             result = torch.cuda.set_rng_state(input[0])
-            return [result, input]
+            return result
         a = torch.cuda.get_rng_state()
         result = torch.cuda.set_rng_state(a)
-        return [result, [a]]
+        return result
 

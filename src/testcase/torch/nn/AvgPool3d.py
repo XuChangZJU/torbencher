@@ -11,9 +11,9 @@ class TorchNNAvgPool3dTestCase(TorBencherTestCaseBase):
     def test_avg_pool3d(self, input=None):
         if input is not None:
             result = torch.nn.AvgPool3d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 10, 10, 10)
         pool = torch.nn.AvgPool3d(3)
         result = pool(a)
-        return [result, [3, a]]
+        return result
 

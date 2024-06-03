@@ -11,9 +11,9 @@ class TorchClipTestCase(TorBencherTestCaseBase):
     def test_clip(self, input=None):
         if input is not None:
             result = torch.clip(input[0], min=input[1], max=input[2])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.clip(a, min=-0.5, max=0.5)
-        return [result, [a, -0.5, 0.5]]
+        return result
 
 

@@ -11,9 +11,9 @@ class TorchNNHardswishTestCase(TorBencherTestCaseBase):
     def test_hardswish(self, input=None):
         if input is not None:
             result = torch.nn.Hardswish()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         hardswish = torch.nn.Hardswish()
         result = hardswish(a)
-        return [result, [a]]
+        return result
 

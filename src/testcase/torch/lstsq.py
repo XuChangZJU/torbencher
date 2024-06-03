@@ -11,9 +11,9 @@ class TorchLstsqTestCase(TorBencherTestCaseBase):
     def test_lstsq_4d(self, input=None):
         if input is not None:
             result = torch.lstsq(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         b = torch.randn(4, 2)
         result = torch.lstsq(b, a)
-        return [result, [a, b]]
+        return result
 

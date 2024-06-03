@@ -11,8 +11,8 @@ class TorchDiagflatTestCase(TorBencherTestCaseBase):
     def test_diagflat(self, input=None):
         if input is not None:
             result = torch.diagflat(input[0], offset=input[1])
-            return [result, input]
+            return result
         a = torch.randn(3)
         result = torch.diagflat(a, offset=1)
-        return [result, [a, 1]]
+        return result
 

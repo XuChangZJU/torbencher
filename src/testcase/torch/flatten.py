@@ -11,8 +11,8 @@ class TorchFlattenTestCase(TorBencherTestCaseBase):
     def test_flatten(self, input=None):
         if input is not None:
             result = torch.flatten(input[0], start_dim=input[1], end_dim=input[2])
-            return [result, input]
+            return result
         a = torch.randn(4, 1, 28, 28)
         result = torch.flatten(a, start_dim=1)
-        return [result, [a, 1, -1]]
+        return result
 

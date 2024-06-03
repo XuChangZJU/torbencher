@@ -11,7 +11,7 @@ class TorchNNFunctionalMultiMarginLossTestCase(TorBencherTestCaseBase):
     def test_multi_margin_loss_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.multi_margin_loss(input[0], input[1], p=input[2], margin=input[3], weight=input[4], size_average=input[5], reduce=input[6], reduction=input[7])
-            return [result, input]
+            return result
         a = torch.tensor([[0.1, 0.2, 0.4, 0.8]])
         b = torch.tensor([3])
         c = 1
@@ -21,6 +21,6 @@ class TorchNNFunctionalMultiMarginLossTestCase(TorBencherTestCaseBase):
         g = True
         h = 'mean'
         result = torch.nn.functional.multi_margin_loss(a, b, p=c, margin=d, weight=e, size_average=f, reduce=g, reduction=h)
-        return [result, [a, b, c, d, e, f, g, h]]
+        return result
 
 

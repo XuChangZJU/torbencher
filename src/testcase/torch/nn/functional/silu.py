@@ -11,9 +11,9 @@ class TorchNNFunctionalSiLUTestCase(TorBencherTestCaseBase):
     def test_silu(self, input=None):
         if input is not None:
             result = torch.nn.functional.silu(input[0])
-            return [result, input]
+            return result
         a = torch.randn(2, 3)
         result = torch.nn.functional.silu(a)
-        return [result, [a]]
+        return result
 
 

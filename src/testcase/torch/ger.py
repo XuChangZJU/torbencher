@@ -11,9 +11,9 @@ class TorchGerTestCase(TorBencherTestCaseBase):
     def test_ger_1d(self, input=None):
         if input is not None:
             result = torch.ger(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(5)
         b = torch.randn(4)
         result = torch.ger(a, b)
-        return [result, [a, b]]
+        return result
 

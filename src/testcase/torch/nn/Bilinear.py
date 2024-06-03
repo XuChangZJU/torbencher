@@ -11,10 +11,10 @@ class TorchNNBilinearTestCase(TorBencherTestCaseBase):
     def test_bilinear(self, input=None):
         if input is not None:
             result = torch.nn.Bilinear(input[0], input[1], input[2])(input[3], input[4])
-            return [result, input]
+            return result
         a = torch.randn(10, 20)
         b = torch.randn(10, 30)
         bilinear = torch.nn.Bilinear(20, 30, 40)
         result = bilinear(a, b)
-        return [result, [20, 30, 40, a, b]]
+        return result
 

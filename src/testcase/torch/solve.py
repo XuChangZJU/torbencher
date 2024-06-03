@@ -11,9 +11,9 @@ class TorchSolveTestCase(TorBencherTestCaseBase):
     def test_solve_4d(self, input=None):
         if input is not None:
             result = torch.solve(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         b = torch.randn(4, 2)
         result = torch.solve(b, a)
-        return [result, [a, b]]
+        return result
 

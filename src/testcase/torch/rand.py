@@ -11,8 +11,8 @@ class TorchRandTestCase(TorBencherTestCaseBase):
     def test_rand(self, input=None):
         if input is not None:
             result = torch.rand(input[0])
-            return [result, input]
+            return result
         a = (2, 3)
         result = torch.rand(a)
-        return [result, [a]]
+        return result
 

@@ -11,7 +11,7 @@ class TorchNNFunctionalConv3dTestCase(TorBencherTestCaseBase):
     def test_conv3d_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.conv3d(input[0], input[1], bias=input[2], stride=input[3], padding=input[4], dilation=input[5], groups=input[6])
-            return [result, input]
+            return result
         a = torch.randn(1, 3, 8, 8, 4)
         b = torch.randn(3, 3, 2, 2, 2)
         c = None
@@ -20,6 +20,6 @@ class TorchNNFunctionalConv3dTestCase(TorBencherTestCaseBase):
         f = 1
         g = 1
         result = torch.nn.functional.conv3d(a, b, bias=c, stride=d, padding=e, dilation=f, groups=g)
-        return [result, [a, b, c, d, e, f, g]]
+        return result
 
 

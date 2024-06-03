@@ -11,8 +11,8 @@ class TorchDistributedIsAvailableTestCase(TorBencherTestCaseBase):
     def test_is_available_0(self, input=None):
         if input is not None:
             result = torch.distributed.is_available()
-            return [result, input]
+            return result
         result = torch.distributed.is_available()
-        return [result, None]
+        return result
 
 

@@ -11,8 +11,8 @@ class TorchCudaSeedAllTestCase(TorBencherTestCaseBase):
     def test_seed_all(self, input=None):
         if input is not None:
             result = torch.cuda.seed_all()
-            return [result, input]
+            return result
         result = torch.cuda.seed_all()
-        return [result, None]
+        return result
 
 

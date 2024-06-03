@@ -12,7 +12,7 @@ class TorchLinspaceTestCase(TorBencherTestCaseBase):
     def test_linspace(self, input=None):
         if input is not None:
             result = torch.linspace(input[0], input[1], steps=input[2])
-            return [result, input]
+            return result
         result = torch.linspace(3, 10, steps=5)
-        return [result, [3, 10, 5]]
+        return result
 

@@ -10,9 +10,9 @@ class TorchLinalgTensorinvTestCase(TorBencherTestCaseBase):
     def test_tensorinv_4d(self, input=None):
         if input is not None:
             result = torch.linalg.tensorinv(input[0], ind=input[1])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 2, 2)
         ind = 2
         result = torch.linalg.tensorinv(a, ind=ind)
-        return [result, [a, ind]]
+        return result
 

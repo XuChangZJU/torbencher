@@ -11,9 +11,9 @@ class TorchNNIdentityTestCase(TorBencherTestCaseBase):
     def test_identity(self, input=None):
         if input is not None:
             result = torch.nn.Identity()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         identity = torch.nn.Identity()
         result = identity(a)
-        return [result, [a]]
+        return result
 

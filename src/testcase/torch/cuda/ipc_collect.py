@@ -10,7 +10,7 @@ class TorchCudaIpcCollectTestCase(TorBencherTestCaseBase):
     def test_ipc_collect(self, input=None):
         if input is not None:
             result = torch.cuda.ipc_collect()
-            return [result, input]
+            return result
         result = torch.cuda.ipc_collect()
-        return [result, None]
+        return result
 

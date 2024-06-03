@@ -11,10 +11,10 @@ class TorchNNPairwiseDistanceTestCase(TorBencherTestCaseBase):
     def test_pairwise_distance(self, input=None):
         if input is not None:
             result = torch.nn.PairwiseDistance()(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 5)
         b = torch.randn(3, 5)
         dist = torch.nn.PairwiseDistance()
         result = dist(a, b)
-        return [result, [a, b]]
+        return result
 

@@ -11,10 +11,10 @@ class TorchAddmmTestCase(TorBencherTestCaseBase):
     def test_addmm(self, input=None):
         if input is not None:
             result = torch.addmm(input[0], input[1], input[2], beta=input[3], alpha=input[4])
-            return [result, input]
+            return result
         a = torch.randn(2, 3)
         b = torch.randn(5, 2, 4)
         c = torch.randn(5, 4, 3)
         result = torch.addmm(a, b, c, beta = 0.2, alpha=5)
-        return [result, [a, b, c, 0.2, 5]]
+        return result
 

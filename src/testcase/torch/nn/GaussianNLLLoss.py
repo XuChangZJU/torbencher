@@ -11,11 +11,11 @@ class TorchNNGaussianNLLLossTestCase(TorBencherTestCaseBase):
     def test_gaussian_nll_loss(self, input=None):
         if input is not None:
             result = torch.nn.GaussianNLLLoss()(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(3, 5, requires_grad=True)
         target = torch.empty(3, 5).random_(5)
         var = torch.ones(3, 5)
         loss = torch.nn.GaussianNLLLoss()
         result = loss(a, target, var)
-        return [result, [a, target, var]]
+        return result
 

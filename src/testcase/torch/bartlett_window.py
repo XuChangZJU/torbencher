@@ -11,8 +11,8 @@ class TorchBartlettWindowTestCase(TorBencherTestCaseBase):
     def test_bartlett_window(self, input=None):
         if input is not None:
             result = torch.bartlett_window(input[0])
-            return [result, input]
+            return result
         a = 10
         result = torch.bartlett_window(a)
-        return [result, [a]]
+        return result
 

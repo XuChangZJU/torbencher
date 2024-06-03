@@ -11,7 +11,7 @@ class TorchEyeTestCase(TorBencherTestCaseBase):
     def test_eye(self, input=None):
         if input is not None:
             result = torch.eye(input[0], input[1])
-            return [result, input]
+            return result
         result = torch.eye(3, 4)
-        return [result, [3, 4]]
+        return result
 

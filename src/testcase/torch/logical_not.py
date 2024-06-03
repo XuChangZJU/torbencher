@@ -11,8 +11,8 @@ class TorchLogicalNotTestCase(TorBencherTestCaseBase):
     def test_logical_not(self, input=None):
         if input is not None:
             result = torch.logical_not(input[0])
-            return [result, input]
+            return result
         a = torch.tensor([True, False, True])
         result = torch.logical_not(a)
-        return [result, [a]]
+        return result
 

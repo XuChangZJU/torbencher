@@ -11,8 +11,8 @@ class TorchCudaInitTestCase(TorBencherTestCaseBase):
     def test_init(self, input=None):
         if input is not None:
             result = torch.cuda.init()
-            return [result, input]
+            return result
         result = torch.cuda.init()
-        return [result, None]
+        return result
 
 

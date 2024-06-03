@@ -11,9 +11,9 @@ class TorchBmmTestCase(TorBencherTestCaseBase):
     def test_bmm(self, input=None):
         if input is not None:
             result = torch.bmm(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(10, 3, 4)
         b = torch.randn(10, 4, 5)
         result = torch.bmm(a, b)
-        return [result, [a, b]]
+        return result
 

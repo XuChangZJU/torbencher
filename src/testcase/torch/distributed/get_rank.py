@@ -11,8 +11,8 @@ class TorchDistributedGetRankTestCase(TorBencherTestCaseBase):
     def test_get_rank_0(self, input=None):
         if input is not None:
             result = torch.distributed.get_rank()
-            return [result, input]
+            return result
         result = torch.distributed.get_rank()
-        return [result, None]
+        return result
 
 

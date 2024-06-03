@@ -11,7 +11,7 @@ class TorchFullTestCase(TorBencherTestCaseBase):
     def test_full(self, input=None):
         if input is not None:
             result = torch.full(input[0], input[1])
-            return [result, input]
+            return result
         result = torch.full((2, 3), 3.141592)
-        return [result, [(2, 3), 3.141592]]
+        return result
 

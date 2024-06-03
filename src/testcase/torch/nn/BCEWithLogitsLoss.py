@@ -11,10 +11,10 @@ class TorchNNBCEWithLogitsLossTestCase(TorBencherTestCaseBase):
     def test_bce_with_logits_loss(self, input=None):
         if input is not None:
             result = torch.nn.BCEWithLogitsLoss()(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, requires_grad=True)
         b = torch.empty(3).random_(2)
         loss = torch.nn.BCEWithLogitsLoss()
         result = loss(a, b)
-        return [result, [a, b]]
+        return result
 

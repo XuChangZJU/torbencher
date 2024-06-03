@@ -11,16 +11,16 @@ class TorchSpecialNdtriTestCase(TorBencherTestCaseBase):
     def test_ndtri_0d(self, input=None):
         if input is not None:
             result = torch.special.ndtri(input[0])
-            return [result, input]
+            return result
         a = torch.rand([])
         result = torch.special.ndtri(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_ndtri_1d(self, input=None):
         if input is not None:
             result = torch.special.ndtri(input[0])
-            return [result, input]
+            return result
         a = torch.rand(5)
         result = torch.special.ndtri(a)
-        return [result, [a]]
+        return result

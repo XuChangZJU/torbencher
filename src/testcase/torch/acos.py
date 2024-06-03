@@ -11,8 +11,8 @@ class TorchAcosTestCase(TorBencherTestCaseBase):
     def test_acos(self, input=None):
         if input is not None:
             result = torch.acos(input[0])
-            return [result, input]
+            return result
         a = torch.rand(4)
         result = torch.acos(a)
-        return [result, [a]]
+        return result
 

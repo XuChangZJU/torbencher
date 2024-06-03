@@ -11,9 +11,9 @@ class TorchLinalgCholeskyExTestCase(TorBencherTestCaseBase):
     def test_cholesky_ex(self, input=None):
         if input is not None:
             result = torch.linalg.cholesky_ex(input[0])
-            return [result, input]
+            return result
         a = torch.rand(3, 3)
         a = torch.mm(a, a.t())
         result = torch.linalg.cholesky_ex(a)
-        return [result, [a]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchExp2TestCase(TorBencherTestCaseBase):
     def test_exp2(self, input=None):
         if input is not None:
             result = torch.exp2(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.exp2(a)
-        return [result, [a]]
+        return result
 
 

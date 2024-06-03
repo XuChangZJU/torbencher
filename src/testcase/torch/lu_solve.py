@@ -11,10 +11,10 @@ class TorchLuSolveTestCase(TorBencherTestCaseBase):
     def test_lu_solve_4d(self, input=None):
         if input is not None:
             result = torch.lu_solve(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         b = torch.randn(4, 2)
         lu_data, pivots = torch.lu(a)
         result = torch.lu_solve(b, lu_data, pivots)
-        return [result, [b, lu_data, pivots]]
+        return result
 

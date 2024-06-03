@@ -11,9 +11,9 @@ class TorchDistributedInitProcessGroupTestCase(TorBencherTestCaseBase):
     def test_init_process_group_0(self, input=None):
         if input is not None:
             result = torch.distributed.init_process_group(input[0], backend='nccl', world_size=4, rank=0)
-            return [result, input]
+            return result
         a = 'nccl'
         result = torch.distributed.init_process_group(a, backend='nccl', world_size=4, rank=0)
-        return [result, [a]]
+        return result
 
 

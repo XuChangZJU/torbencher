@@ -11,8 +11,8 @@ class TorchCudaCurrentBlasHandleTestCase(TorBencherTestCaseBase):
     def test_current_blas_handle(self, input=None):
         if input is not None:
             result = torch.cuda.current_blas_handle()
-            return [result, input]
+            return result
         result = torch.cuda.current_blas_handle()
-        return [result, None]
+        return result
 
 

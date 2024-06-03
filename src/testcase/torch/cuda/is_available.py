@@ -10,7 +10,7 @@ class TorchCudaIsAvailableTestCase(TorBencherTestCaseBase):
     def test_is_available(self, input=None):
         if input is not None:
             result = torch.cuda.is_available()
-            return [result, input]
+            return result
         result = torch.cuda.is_available()
-        return [result, None]
+        return result
 

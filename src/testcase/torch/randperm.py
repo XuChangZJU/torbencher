@@ -11,7 +11,7 @@ class TorchRandPermTestCase(TorBencherTestCaseBase):
     def test_randperm(self, input=None):
         if input is not None:
             result = torch.randperm(input[0])
-            return [result, input]
+            return result
         result = torch.randperm(10)
-        return [result, [10]]
+        return result
 

@@ -11,10 +11,10 @@ class TorchDistributedNewGroupTestCase(TorBencherTestCaseBase):
     def test_new_group_0(self, input=None):
         if input is not None:
             result = torch.distributed.new_group(input[0])
-            return [result, input]
+            return result
         a = [0, 1, 2, 3]
         result = torch.distributed.new_group(a)
-        return [result, [a]]
+        return result
 
 
 

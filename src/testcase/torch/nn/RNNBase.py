@@ -11,9 +11,9 @@ class TorchNNRNNBaseTestCase(TorBencherTestCaseBase):
     def test_rnn_base(self, input=None):
         if input is not None:
             result = torch.nn.RNNBase(input[0], input[1], input[2], input[3], input[4])(input[5])
-            return [result, input]
+            return result
         a = torch.randn(5, 3, 10)
         rnn = torch.nn.RNNBase(2, 10, 20, 2, 0.5)
         result = rnn(a)
-        return [result, [2, 10, 20, 2, 0.5, a]]
+        return result
 

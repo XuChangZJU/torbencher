@@ -11,8 +11,8 @@ class TorchSqrtTestCase(TorBencherTestCaseBase):
     def test_sqrt(self, input=None):
         if input is not None:
             result = torch.sqrt(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.sqrt(a)
-        return [result, [a]]
+        return result
 

@@ -11,10 +11,10 @@ class TorchNNMaxUnpool2dTestCase(TorBencherTestCaseBase):
     def test_max_unpool2d(self, input=None):
         if input is not None:
             result = torch.nn.MaxUnpool2d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 1, 2, 2)
         indices = torch.tensor([[[[0, 1], [1, 2]]]], dtype=torch.long)
         pool = torch.nn.MaxUnpool2d(2)
         result = pool(a, indices)
-        return [result, [2, a, indices]]
+        return result
 

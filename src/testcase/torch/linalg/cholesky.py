@@ -10,9 +10,9 @@ class TorchLinalgCholeskyTestCase(TorBencherTestCaseBase):
     def test_cholesky_4d(self, input=None):
         if input is not None:
             result = torch.linalg.cholesky(input[0])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 2, 2)
         a = torch.matmul(a, a.transpose(-1, -2)) + 1e-05 * torch.eye(2, 2)
         result = torch.linalg.cholesky(a)
-        return [result, [a]]
+        return result
 

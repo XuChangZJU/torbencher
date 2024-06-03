@@ -11,7 +11,7 @@ class TorchNNFunctionalBinaryCrossEntropyWithLogitsTestCase(TorBencherTestCaseBa
     def test_binary_cross_entropy_with_logits_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.binary_cross_entropy_with_logits(input[0], input[1], weight=input[2], size_average=input[3], reduce=input[4], reduction=input[5], pos_weight=input[6])
-            return [result, input]
+            return result
         a = torch.randn(3, 2)
         b = torch.randn(3, 2)
         c = None
@@ -20,6 +20,6 @@ class TorchNNFunctionalBinaryCrossEntropyWithLogitsTestCase(TorBencherTestCaseBa
         f = 'mean'
         g = None
         result = torch.nn.functional.binary_cross_entropy_with_logits(a, b, weight=c, size_average=d, reduce=e, reduction=f, pos_weight=g)
-        return [result, [a, b, c, d, e, f, g]]
+        return result
 
 

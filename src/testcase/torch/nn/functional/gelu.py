@@ -11,9 +11,9 @@ class TorchNNFunctionalGELUTestCase(TorBencherTestCaseBase):
     def test_gelu_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.gelu(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.nn.functional.gelu(a)
-        return [result, [a]]
+        return result
 
 

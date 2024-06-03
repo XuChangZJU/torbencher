@@ -11,7 +11,7 @@ class TorchLinalgVectorNormVectorNormTestCase(TorBencherTestCaseBase):
     def test_vector_norm(self, input=None):
         if input is not None:
             result = torch.linalg.vector_norm.vector_norm(input[0], ord=input[1])
-            return [result, input]
+            return result
         a = torch.randn(3)
         result = torch.linalg.vector_norm.vector_norm(a, ord=2)
-        return [result, [a, 2]]
+        return result

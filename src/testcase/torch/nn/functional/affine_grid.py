@@ -11,10 +11,10 @@ class TorchNNFunctionalAffineGridTestCase(TorBencherTestCaseBase):
     def test_affine_grid_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.affine_grid(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([[[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0]]], dtype=torch.float)
         b = torch.Size([1, 1, 2, 2])
         result = torch.nn.functional.affine_grid(a, b)
-        return [result, [a, b]]
+        return result
 
 

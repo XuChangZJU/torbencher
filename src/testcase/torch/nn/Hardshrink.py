@@ -11,9 +11,9 @@ class TorchNNHardshrinkTestCase(TorBencherTestCaseBase):
     def test_hardshrink(self, input=None):
         if input is not None:
             result = torch.nn.Hardshrink()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         hardshrink = torch.nn.Hardshrink()
         result = hardshrink(a)
-        return [result, [a]]
+        return result
 

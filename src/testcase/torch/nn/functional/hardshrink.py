@@ -11,10 +11,10 @@ class TorchNNFunctionalHardshrinkTestCase(TorBencherTestCaseBase):
     def test_hardshrink_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.hardshrink(input[0], lambd=input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = 0.5
         result = torch.nn.functional.hardshrink(a, lambd=b)
-        return [result, [a, b]]
+        return result
 
 

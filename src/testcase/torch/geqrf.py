@@ -11,9 +11,9 @@ class TorchGeqrfTestCase(TorBencherTestCaseBase):
     def test_geqrf_2d(self, input=None):
         if input is not None:
             result = torch.geqrf(input[0])
-            return [result, input]
+            return result
         a = torch.randn(3, 4)
         result = torch.geqrf(a)
-        return [result, [a]]
+        return result
 
 # torch.ger

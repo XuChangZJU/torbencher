@@ -11,9 +11,9 @@ class TorchCartesianProdTestCase(TorBencherTestCaseBase):
     def test_cartesian_prod_4d(self, input=None):
         if input is not None:
             result = torch.cartesian_prod(*input)
-            return [result, input]
+            return result
         a = torch.tensor([1, 2])
         b = torch.tensor([3, 4])
         result = torch.cartesian_prod(a, b)
-        return [result, [a, b]]
+        return result
 

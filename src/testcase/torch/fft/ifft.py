@@ -11,10 +11,10 @@ class TorchIfftTestCase(TorBencherTestCaseBase):
     def test_ifft_4d(self, input=None):
         if input is not None:
             result = torch.fft.ifft(input[0], input[1], input[2], input[3], input[4])
-            return [result, input]
+            return result
         a = torch.randn(4, 3, 8, 8, dtype=torch.cfloat)
         b = None
         c = 1
         d = "forward"
         result = torch.fft.ifft(a, b, c, d)
-        return [result, [a, b, c, d]]
+        return result

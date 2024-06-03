@@ -11,11 +11,11 @@ class TorchRfftTestCase(TorBencherTestCaseBase):
     def test_rfft_4d(self, input=None):
         if input is not None:
             result = torch.fft.rfft(input[0], input[1], input[2], input[3], input[4])
-            return [result, input]
+            return result
         a = torch.randn(4, 3, 8, 8)
         b = None
         c = 0
         d = "ortho"
         result = torch.fft.rfft(a, b, c, d)
-        return [result, [a, b, c, d]]
+        return result
 

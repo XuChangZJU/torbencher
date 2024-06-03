@@ -11,10 +11,10 @@ class TorchGatherTestCase(TorBencherTestCaseBase):
     def test_gather(self, input=None):
         if input is not None:
             result = torch.gather(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.tensor([[1, 2], [3, 4]])
         b = 1
         c = torch.tensor([[0, 0], [1, 0]])
         result = torch.gather(a, b, c)
-        return [result, [a, b, c]]
+        return result
 

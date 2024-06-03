@@ -11,10 +11,10 @@ class TorchLcmTestCase(TorBencherTestCaseBase):
     def test_lcm(self, input=None):
         if input is not None:
             result = torch.lcm(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randint(1, 10, (4,))
         b = torch.randint(1, 10, (4,))
         result = torch.lcm(a, b)
-        return [result, [a, b]]
+        return result
 
 

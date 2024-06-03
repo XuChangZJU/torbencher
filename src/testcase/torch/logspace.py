@@ -11,7 +11,7 @@ class TorchLogspaceTestCase(TorBencherTestCaseBase):
     def test_logspace_4d(self, input=None):
         if input is not None:
             result = torch.logspace(input[0], input[1], input[2])
-            return [result, input]
+            return result
         result = torch.logspace(0, 2, 5)
-        return [result, [0, 2, 5]]
+        return result
 

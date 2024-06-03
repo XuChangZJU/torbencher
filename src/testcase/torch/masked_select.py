@@ -11,9 +11,9 @@ class TorchMasked_selectTestCase(TorBencherTestCaseBase):
     def test_masked_select(self, input=None):
         if input is not None:
             result = torch.masked_select(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         mask = a > 0
         result = torch.masked_select(a, mask)
-        return [result, [a, mask]]
+        return result
 

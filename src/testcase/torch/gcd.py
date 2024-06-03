@@ -11,10 +11,10 @@ class TorchGcdTestCase(TorBencherTestCaseBase):
     def test_gcd(self, input=None):
         if input is not None:
             result = torch.gcd(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randint(1, 10, (4,))
         b = torch.randint(1, 10, (4,))
         result = torch.gcd(a, b)
-        return [result, [a, b]]
+        return result
 
 

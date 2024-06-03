@@ -11,8 +11,8 @@ class TorchFlipudTestCase(TorBencherTestCaseBase):
     def test_flipud_4d(self, input=None):
         if input is not None:
             result = torch.flipud(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.flipud(a)
-        return [result, [a]]
+        return result
 

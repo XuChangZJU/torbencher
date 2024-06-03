@@ -11,9 +11,9 @@ class TorchNNLocalResponseNormTestCase(TorBencherTestCaseBase):
     def test_local_response_norm(self, input=None):
         if input is not None:
             result = torch.nn.LocalResponseNorm(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(10, 20, 50, 50)
         lrn = torch.nn.LocalResponseNorm(2)
         result = lrn(a)
-        return [result, [2, a]]
+        return result
 

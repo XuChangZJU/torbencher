@@ -11,8 +11,8 @@ class TorchCeilTestCase(TorBencherTestCaseBase):
     def test_ceil(self, input=None):
         if input is not None:
             result = torch.ceil(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.ceil(a)
-        return [result, [a]]
+        return result
 

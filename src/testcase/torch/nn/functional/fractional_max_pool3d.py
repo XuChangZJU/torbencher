@@ -11,13 +11,13 @@ class TorchNNFunctionalFractionalMaxPool3dTestCase(TorBencherTestCaseBase):
     def test_fractional_max_pool3d_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.fractional_max_pool3d(input[0], input[1], output_size=input[2], output_ratio=input[3], return_indices=input[4])
-            return [result, input]
+            return result
         a = torch.randn(1, 3, 8, 8, 8)
         b = (2, 2, 2)
         c = None
         d = (0.5, 0.5, 0.5)
         e = False
         result = torch.nn.functional.fractional_max_pool3d(a, b, output_size=c, output_ratio=d, return_indices=e)
-        return [result, [a, b, c, d, e]]
+        return result
 
 

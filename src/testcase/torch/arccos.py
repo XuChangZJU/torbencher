@@ -11,9 +11,9 @@ class TorchArccosTestCase(TorBencherTestCaseBase):
     def test_arccos(self, input=None):
         if input is not None:
             result = torch.arccos(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.arccos(a)
-        return [result, [a]]
+        return result
 
 

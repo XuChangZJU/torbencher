@@ -11,9 +11,9 @@ class TorchNNCELUTestCase(TorBencherTestCaseBase):
     def test_celu(self, input=None):
         if input is not None:
             result = torch.nn.CELU()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         celu = torch.nn.CELU()
         result = celu(a)
-        return [result, [a]]
+        return result
 

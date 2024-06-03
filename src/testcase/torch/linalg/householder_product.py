@@ -11,9 +11,9 @@ class TorchLinalgHouseholderProductTestCase(TorBencherTestCaseBase):
     def test_householder_product(self, input=None):
         if input is not None:
             result = torch.linalg.householder_product(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         tau = torch.randn(3)
         result = torch.linalg.householder_product(a, tau)
-        return [result, [a, tau]]
+        return result
 

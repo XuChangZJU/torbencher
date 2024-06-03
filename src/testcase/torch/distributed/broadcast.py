@@ -11,10 +11,10 @@ class TorchDistributedBroadcastTestCase(TorBencherTestCaseBase):
     def test_broadcast_0(self, input=None):
         if input is not None:
             result = torch.distributed.broadcast(input[0], src=input[1])
-            return [result, input]
+            return result
         a = torch.tensor([1, 2, 3, 4])
         b = 0
         result = torch.distributed.broadcast(a, src=b)
-        return [result, [a, b]]
+        return result
 
 

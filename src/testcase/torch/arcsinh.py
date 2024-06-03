@@ -11,9 +11,9 @@ class TorchArcsinhTestCase(TorBencherTestCaseBase):
     def test_arcsinh(self, input=None):
         if input is not None:
             result = torch.arcsinh(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.arcsinh(a)
-        return [result, [a]]
+        return result
 
 

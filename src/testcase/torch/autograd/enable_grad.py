@@ -10,9 +10,9 @@ class TorchAutogradEnableGradTestCase(TorBencherTestCaseBase):
     def test_enable_grad(self, input=None):
         if input is not None:
             result = torch.autograd.enable_grad()
-            return [result, input]
+            return result
         result = torch.autograd.enable_grad()
-        return [result, None]
+        return result
 
 
 

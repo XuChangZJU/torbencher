@@ -11,9 +11,9 @@ class TorchNNUnfoldTestCase(TorBencherTestCaseBase):
     def test_unfold(self, input=None):
         if input is not None:
             result = torch.nn.Unfold(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 3, 10, 12)
         unfold = torch.nn.Unfold(kernel_size=(3, 3))
         result = unfold(a)
-        return [result, [(3, 3), a]]
+        return result
 

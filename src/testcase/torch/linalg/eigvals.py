@@ -11,8 +11,8 @@ class TorchLinalgEigvalsTestCase(TorBencherTestCaseBase):
     def test_eigvals(self, input=None):
         if input is not None:
             result = torch.linalg.eigvals(input[0])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         result = torch.linalg.eigvals(a)
-        return [result, [a]]
+        return result
 

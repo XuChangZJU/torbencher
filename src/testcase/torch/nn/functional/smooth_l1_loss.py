@@ -11,13 +11,13 @@ class TorchNNFunctionalSmoothL1LossTestCase(TorBencherTestCaseBase):
     def test_smooth_l1_loss_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.smooth_l1_loss(input[0], input[1], size_average=input[2], reduce=input[3], reduction=input[4])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         c = True
         d = True
         e = 'mean'
         result = torch.nn.functional.smooth_l1_loss(a, b, size_average=c, reduce=d, reduction=e)
-        return [result, [a, b, c, d, e]]
+        return result
 
 

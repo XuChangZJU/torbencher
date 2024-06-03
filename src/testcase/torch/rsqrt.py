@@ -11,8 +11,8 @@ class TorchRsqrtTestCase(TorBencherTestCaseBase):
     def test_rsqrt(self, input=None):
         if input is not None:
             result = torch.rsqrt(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.rsqrt(a)
-        return [result, [a]]
+        return result
 

@@ -11,9 +11,9 @@ class TorchNNInstanceNorm2dTestCase(TorBencherTestCaseBase):
     def test_instance_norm2d(self, input=None):
         if input is not None:
             result = torch.nn.InstanceNorm2d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(10, 20, 30, 40)
         bn = torch.nn.InstanceNorm2d(20)
         result = bn(a)
-        return [result, [20, a]]
+        return result
 

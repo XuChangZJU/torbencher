@@ -11,9 +11,9 @@ class TorchLinalgLdlFactorTestCase(TorBencherTestCaseBase):
     def test_ldl_factor(self, input=None):
         if input is not None:
             result = torch.linalg.ldl_factor(input[0], hermitian=input[1])
-            return [result, input]
+            return result
         a = torch.randn(3, 3)
         a = (a + a.t()) / 2  # make symmetric
         result = torch.linalg.ldl_factor(a, hermitian=True)
-        return [result, [a, True]]
+        return result
 

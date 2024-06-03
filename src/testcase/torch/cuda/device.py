@@ -12,21 +12,21 @@ class TorchCudaDeviceTestCase(TorBencherTestCaseBase):
             with torch.cuda.device(input[0]):
                 a = torch.tensor([1])
                 result = a.to('cuda:0')
-            return [result, input]
+            return result
         a = 0
         with torch.cuda.device(a):
             b = torch.tensor([1])
             result = b.to('cuda:0')
-        return [result, [a]]
+        return result
     
     def test_device_1(self, input=None):
         if input is not None:
             with torch.cuda.device(input[0]):
                 a = torch.tensor([1])
                 result = a.to('cuda:0')
-            return [result, input]
+            return result
         with torch.cuda.device('cuda:0'):
             b = torch.tensor([1])
             result = b.to('cuda:0')
-        return [result, ['cuda:0']]
+        return result
 

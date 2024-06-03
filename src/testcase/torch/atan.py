@@ -11,8 +11,8 @@ class TorchAtanTestCase(TorBencherTestCaseBase):
     def test_atan(self, input=None):
         if input is not None:
             result = torch.atan(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.atan(a)
-        return [result, [a]]
+        return result
 

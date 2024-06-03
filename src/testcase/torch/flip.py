@@ -11,8 +11,8 @@ class TorchFlipTestCase(TorBencherTestCaseBase):
     def test_flip(self, input=None):
         if input is not None:
             result = torch.flip(input[0], dims=input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.flip(a, dims=[0])
-        return [result, [a, [0]]]
+        return result]
 

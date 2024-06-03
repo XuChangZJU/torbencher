@@ -11,9 +11,9 @@ class TorchSgnTestCase(TorBencherTestCaseBase):
     def test_sgn(self, input=None):
         if input is not None:
             result = torch.sgn(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.sgn(a)
-        return [result, [a]]
+        return result
 
 

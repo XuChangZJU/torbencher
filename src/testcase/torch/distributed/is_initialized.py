@@ -11,8 +11,8 @@ class TorchDistributedIsInitializedTestCase(TorBencherTestCaseBase):
     def test_is_initialized_0(self, input=None):
         if input is not None:
             result = torch.distributed.is_initialized()
-            return [result, input]
+            return result
         result = torch.distributed.is_initialized()
-        return [result, None]
+        return result
 
 

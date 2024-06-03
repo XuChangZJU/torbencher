@@ -11,12 +11,12 @@ class TorchNNFunctionalHardtanhTestCase(TorBencherTestCaseBase):
     def test_hardtanh_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.hardtanh(input[0], min_val=input[1], max_val=input[2], inplace=input[3])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = -1.0
         c = 1
         d = False
         result = torch.nn.functional.hardtanh(a, min_val=b, max_val=c, inplace=d)
-        return [result, [a, b, c, d]]
+        return result
 
 

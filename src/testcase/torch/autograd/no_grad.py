@@ -13,11 +13,11 @@ class TorchAutogradNoGradTestCase(TorBencherTestCaseBase):
                 a = torch.tensor([1., 2., 3.], requires_grad=True)
                 b = a + 2
                 c = b.mean()
-            return [c.requires_grad, []]
+            return c.requires_grad
         with torch.autograd.no_grad():
             a = torch.tensor([1., 2., 3.], requires_grad=True)
             b = a + 2
             c = b.mean()
-        return [c.requires_grad, []]
+        return c.requires_grad
 
 

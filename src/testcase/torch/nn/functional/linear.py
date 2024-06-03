@@ -11,11 +11,11 @@ class TorchNNFunctionalLinearTestCase(TorBencherTestCaseBase):
     def test_linear_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.linear(input[0], input[1], bias=input[2])
-            return [result, input]
+            return result
         a = torch.randn(20, 100)
         b = torch.randn(200, 100)
         c = None
         result = torch.nn.functional.linear(a, b, bias=c)
-        return [result, [a, b, c]]
+        return result
 
 

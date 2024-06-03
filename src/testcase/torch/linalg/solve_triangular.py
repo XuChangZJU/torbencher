@@ -10,8 +10,8 @@ class TorchLinalgSolveTriangularTestCase(TorBencherTestCaseBase):
     def test_solve_triangular_4d(self, input=None):
         if input is not None:
             result = torch.linalg.solve_triangular(input[0], input[1], upper=input[2])
-            return [result, input]
+            return result
         a = torch.randn(2, 2, 3, 3).triu()
         b = torch.randn(2, 2, 3, 1)
         result = torch.linalg.solve_triangular(a, b, upper=True)
-        return [result, [a, b, True]]
+        return result

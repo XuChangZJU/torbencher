@@ -11,13 +11,13 @@ class TorchNNFunctionalNormalizeTestCase(TorBencherTestCaseBase):
     def test_normalize_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.normalize(input[0], p=input[1], dim=input[2], eps=input[3], out=input[4])
-            return [result, input]
+            return result
         a = torch.randn(20, 100)
         b = 2.0
         c = 1
         d = 1e-12
         e = None
         result = torch.nn.functional.normalize(a, p=b, dim=c, eps=d, out=e)
-        return [result, [a, b, c, d, e]]
+        return result
 
 

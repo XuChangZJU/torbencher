@@ -11,9 +11,9 @@ class TorchLogicalOrTestCase(TorBencherTestCaseBase):
     def test_logical_or(self, input=None):
         if input is not None:
             result = torch.logical_or(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.tensor([True, False, True])
         b = torch.tensor([False, False, True])
         result = torch.logical_or(a, b)
-        return [result, [a, b]]
+        return result
 

@@ -11,11 +11,11 @@ class TorchAddcdivTestCase(TorBencherTestCaseBase):
     def test_addcdiv(self, input=None):
         if input is not None:
             result = torch.addcdiv(input[0], input[1], input[2], value=input[3])
-            return [result, input]
+            return result
         a = torch.randn(4)
         b = torch.randn(4)
         c = torch.randn(4)
         result = torch.addcdiv(a, b, c, value=10)
-        return [result, [a, b, c, 10]]
+        return result
 
 

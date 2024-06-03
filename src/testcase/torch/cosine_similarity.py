@@ -11,9 +11,9 @@ class TorchCosine_similarityTestCase(TorBencherTestCaseBase):
     def test_cosine_similarity(self, input=None):
         if input is not None:
             result = torch.cosine_similarity(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(100, 128)
         b = torch.randn(100, 128)
         result = torch.cosine_similarity(a, b, dim=1, eps=1e-8)
-        return [result, [a, b, 1]]
+        return result
 

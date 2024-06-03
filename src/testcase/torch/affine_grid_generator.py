@@ -11,12 +11,12 @@ class TorchAffine_grid_generatorTestCase(TorBencherTestCaseBase):
     def test_affine_grid_generator(self, input=None):
         if input is not None:
             result = torch.affine_grid_generator(input[0], input[1])
-            return [result, input]
+            return result
         theta = torch.rand(1, 2, 3)
         N = 1
         C = 3
         H = 5
         W = 5
         result = torch.affine_grid_generator(theta, torch.Size((N, C, H, W)))
-        return [result, [theta, torch.Size((N, C, H, W))]]
+        return result
 

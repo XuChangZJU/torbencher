@@ -11,8 +11,8 @@ class TorchPinverseTestCase(TorBencherTestCaseBase):
     def test_pinverse_4d(self, input=None):
         if input is not None:
             result = torch.pinverse(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.pinverse(a)
-        return [result, [a]]
+        return result
 

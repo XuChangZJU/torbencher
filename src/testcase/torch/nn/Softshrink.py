@@ -11,9 +11,9 @@ class TorchNNSoftshrinkTestCase(TorBencherTestCaseBase):
     def test_softshrink(self, input=None):
         if input is not None:
             result = torch.nn.Softshrink()(input[0])
-            return [result, input]
+            return result
         a = torch.randn(10)
         softshrink = torch.nn.Softshrink()
         result = softshrink(a)
-        return [result, [a]]
+        return result
 

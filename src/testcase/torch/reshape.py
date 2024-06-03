@@ -11,8 +11,8 @@ class TorchReshapeTestCase(TorBencherTestCaseBase):
     def test_reshape(self, input=None):
         if input is not None:
             result = torch.reshape(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.reshape(a, (16,))
-        return [result, [a, (16,)]]
+        return result
 

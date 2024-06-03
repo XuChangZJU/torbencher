@@ -11,45 +11,45 @@ class TorchLgammaTestCase(TorBencherTestCaseBase):
     def test_lgamma_0d(self, input=None):
         if input is not None:
             result = torch.lgamma(input[0])
-            return [result, input]
+            return result
         a = torch.randn(())
         result = torch.lgamma(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_lgamma_1d(self, input=None):
         if input is not None:
             result = torch.lgamma(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.lgamma(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_lgamma_2d(self, input=None):
         if input is not None:
             result = torch.lgamma(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4)
         result = torch.lgamma(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_lgamma_3d(self, input=None):
         if input is not None:
             result = torch.lgamma(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4, 4)
         result = torch.lgamma(a)
-        return [result, [a]]
+        return result
 
     @test_api_version.larger_than("1.1.3")
     def test_lgamma_4d(self, input=None):
         if input is not None:
             result = torch.lgamma(input[0])
-            return [result, input]
+            return result
         a = torch.randn(4, 4, 4, 4)
         result = torch.lgamma(a)
-        return [result, [a]]
+        return result
 
 # torch.log

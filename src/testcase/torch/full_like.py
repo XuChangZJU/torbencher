@@ -11,8 +11,8 @@ class TorchFull_likeTestCase(TorBencherTestCaseBase):
     def test_full_like(self, input=None):
         if input is not None:
             result = torch.full_like(input[0], input[1])
-            return [result, input]
+            return result
         a = torch.randn(4)
         result = torch.full_like(a, 3.141592)
-        return [result, [a, 3.141592]]
+        return result
 

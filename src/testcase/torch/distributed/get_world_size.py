@@ -11,8 +11,8 @@ class TorchDistributedGetWorldSizeTestCase(TorBencherTestCaseBase):
     def test_get_world_size_0(self, input=None):
         if input is not None:
             result = torch.distributed.get_world_size()
-            return [result, input]
+            return result
         result = torch.distributed.get_world_size()
-        return [result, None]
+        return result
 
 

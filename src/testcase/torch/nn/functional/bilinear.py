@@ -11,11 +11,11 @@ class TorchNNFunctionalBilinearTestCase(TorBencherTestCaseBase):
     def test_bilinear_common(self, input=None):
         if input is not None:
             result = torch.nn.functional.bilinear(input[0], input[1], input[2])
-            return [result, input]
+            return result
         a = torch.randn(1, 1, 1, 2)
         b = torch.randn(1, 2, 2, 1)
         c = torch.randn(1, 3, 1, 1)
         result = torch.nn.functional.bilinear(a, b, c)
-        return [result, [a, b, c]]
+        return result
 
 

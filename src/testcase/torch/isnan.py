@@ -11,8 +11,8 @@ class TorchIsnanTestCase(TorBencherTestCaseBase):
     def test_isnan(self, input=None):
         if input is not None:
             result = torch.isnan(input[0])
-            return [result, input]
+            return result
         a = torch.tensor([1, float('nan'), 2])
         result = torch.isnan(a)
-        return [result, [a]]
+        return result
 

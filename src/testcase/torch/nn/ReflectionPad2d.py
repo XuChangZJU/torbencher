@@ -11,9 +11,9 @@ class TorchNNReflectionPad2dTestCase(TorBencherTestCaseBase):
     def test_reflection_pad2d(self, input=None):
         if input is not None:
             result = torch.nn.ReflectionPad2d(input[0])(input[1])
-            return [result, input]
+            return result
         a = torch.randn(1, 2, 4, 4)
         pad = torch.nn.ReflectionPad2d(2)
         result = pad(a)
-        return [result, [2, a]]
+        return result
 
