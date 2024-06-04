@@ -7,10 +7,8 @@ from src.util.decorator import test_api
 
 @test_api(torch.optim.LBFGS)
 class TorchOptimLBFGSTestCase(TorBencherTestCaseBase):
-    def test_lbfgs(self, input=None):
-        if input is not None:
-            result = torch.optim.LBFGS(input[0], lr=input[1], max_iter=input[2], max_eval=input[3], tolerance_grad=input[4], tolerance_change=input[5], history_size=input[6], line_search_fn=input[7])
-            return result
+    def test_lbfgs(self):
+        
         params = [torch.randn(10, requires_grad=True), torch.randn(20, requires_grad=True)]
         lr = 1
         max_iter = 20

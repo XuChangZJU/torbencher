@@ -7,10 +7,8 @@ from src.util.decorator import test_api
 
 @test_api(torch.cuda.is_bf16_supported)
 class TorchCudaIsBf16SupportedTestCase(TorBencherTestCaseBase):
-    def test_is_bf16_supported_0(self, input=None):
-        if input is not None:
-            result = torch.cuda.is_bf16_supported()
-            return result
+    def test_is_bf16_supported_0(self):
+        
         result = torch.cuda.is_bf16_supported()
         return result
 

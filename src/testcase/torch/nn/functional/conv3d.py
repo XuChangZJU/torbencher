@@ -8,10 +8,8 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.conv3d)
 class TorchNNFunctionalConv3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_conv3d_common(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.conv3d(input[0], input[1], bias=input[2], stride=input[3], padding=input[4], dilation=input[5], groups=input[6])
-            return result
+    def test_conv3d_common(self):
+        
         a = torch.randn(1, 3, 8, 8, 4)
         b = torch.randn(3, 3, 2, 2, 2)
         c = None

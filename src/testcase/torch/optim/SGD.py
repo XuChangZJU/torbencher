@@ -7,10 +7,8 @@ from src.util.decorator import test_api
 
 @test_api(torch.optim.SGD)
 class TorchOptimSGDTestCase(TorBencherTestCaseBase):
-    def test_sgd(self, input=None):
-        if input is not None:
-            result = torch.optim.SGD(input[0], lr=input[1], momentum=input[2], dampening=input[3], weight_decay=input[4], nesterov=input[5])
-            return result
+    def test_sgd(self):
+        
         params = [torch.randn(10, requires_grad=True), torch.randn(20, requires_grad=True)]
         lr = 1e-3
         momentum = 0

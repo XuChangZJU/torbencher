@@ -8,12 +8,8 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.lp_pool1d)
 class TorchNNFunctionalLPPool1DTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_lp_pool1d(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.lp_pool1d(
-                input[0], norm_type=input[1], kernel_size=input[2]
-            )
-            return result
+    def test_lp_pool1d(self):
+        
         a = torch.randn(1, 3, 8)
         b = 2
         c = 2

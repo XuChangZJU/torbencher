@@ -8,10 +8,8 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.max_unpool2d)
 class TorchNNFunctionalMaxUnpool2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_max_unpool2d_common(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.max_unpool2d(input[0], input[1], kernel_size=input[2], stride=input[3], padding=input[4], output_size=input[5])
-            return result
+    def test_max_unpool2d_common(self):
+        
         a = torch.tensor([[[[1, 2, 3], [4, 5, 6], [7, 8, 9]]]], dtype=torch.float)
         b = torch.tensor([[[[1, 3], [2, 4]]]], dtype=torch.long)
         c = 2

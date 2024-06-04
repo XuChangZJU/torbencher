@@ -7,10 +7,8 @@ from src.util.decorator import test_api
 
 @test_api(torch.optim.Adamax)
 class TorchOptimAdamaxTestCase(TorBencherTestCaseBase):
-    def test_adamax(self, input=None):
-        if input is not None:
-            result = torch.optim.Adamax(input[0], lr=input[1], betas=input[2], eps=input[3], weight_decay=input[4])
-            return result
+    def test_adamax(self):
+        
         params = [torch.randn(10, requires_grad=True), torch.randn(20, requires_grad=True)]
         lr = 1e-3
         betas = (0.9, 0.999)
