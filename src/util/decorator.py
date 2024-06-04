@@ -80,12 +80,12 @@ def test_api(api):
     def decorate_test_function(cls, method, operator):
         @functools.wraps(method)
         def wrapper(*args, **kwargs):
-            result, specs = method(*args, **kwargs)
+            result = method(*args, **kwargs)
             assert hasattr(cls, "final_stats")
             stat_obj = {
                 "operator_name": f"{operator.__module__}.{operator.__name__}",
                 "operator_result": result,
-                "specs": specs,
+                "specs": None,
             }
             cls.final_stats.append(stat_obj)
 
