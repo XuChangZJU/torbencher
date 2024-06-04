@@ -8,11 +8,8 @@ from src.util.decorator import test_api
 @test_api(torch.atan)
 class TorchAtanTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_atan(self, input=None):
-        if input is not None:
-            result = torch.atan(input[0])
-            return [result, input]
+    def test_atan(self):
         a = torch.randn(4)
         result = torch.atan(a)
-        return [result, [a]]
+        return result
 

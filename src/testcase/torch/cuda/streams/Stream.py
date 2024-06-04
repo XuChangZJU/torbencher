@@ -8,11 +8,8 @@ from src.util.decorator import test_api
 
 @test_api(torch.cuda.streams.Stream)
 class TorchCudaStreamsStreamTestCase(TorBencherTestCaseBase):
-    def test_stream(self, input=None):
-        if input is not None:
-            result = torch.cuda.streams.Stream(input[0], input[1])
-            return [result, input]
+    def test_stream(self):
         a = torch.device('cuda')
         b = 0
         result = torch.cuda.streams.Stream(a, b)
-        return [result, [a, b]]
+        return result

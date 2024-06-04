@@ -7,10 +7,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.cuda.memory_snapshot)
 class TorchCudaMemorySnapshotTestCase(TorBencherTestCaseBase):
-    def test_memory_snapshot(self, input=None):
-        if input is not None:
-            result = torch.cuda.memory_snapshot()
-            return [result, input]
+    def test_memory_snapshot(self):
         result = torch.cuda.memory_snapshot()
-        return [result, None]
+        return result
 

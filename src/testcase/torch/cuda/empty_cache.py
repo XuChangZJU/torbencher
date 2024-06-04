@@ -7,10 +7,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.cuda.empty_cache)
 class TorchCudaEmptyCacheTestCase(TorBencherTestCaseBase):
-    def test_empty_cache(self, input=None):
-        if input is not None:
-            result = torch.cuda.empty_cache()
-            return [result, input]
+    def test_empty_cache(self):
         result = torch.cuda.empty_cache()
-        return [result, None]
+        return result
 
