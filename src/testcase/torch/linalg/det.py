@@ -8,7 +8,6 @@ from src.util.decorator import test_api
 @test_api(torch.linalg.det)
 class TorchLinalgDetTestCase(TorBencherTestCaseBase):
     def test_det_4d(self):
-        
         a = torch.randn(2, 2, 3, 3)
         result = torch.linalg.det(a)
         return result

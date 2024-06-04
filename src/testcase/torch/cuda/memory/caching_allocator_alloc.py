@@ -12,7 +12,6 @@ from src.util.decorator import test_api
 class TorchCudaMemoryCachingAllocatorAllocTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.9.0")
     def test_caching_allocator_alloc(self):
-        
         a = 100
         b = torch.device('cuda:0')
         c = 0

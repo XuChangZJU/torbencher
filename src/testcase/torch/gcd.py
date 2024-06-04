@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchGcdTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_gcd(self):
-        
         a = torch.randint(1, 10, (4,))
         b = torch.randint(1, 10, (4,))
         result = torch.gcd(a, b)

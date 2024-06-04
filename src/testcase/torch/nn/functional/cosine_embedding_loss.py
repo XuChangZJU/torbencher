@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalCosineEmbeddingLossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cosine_embedding_loss_common(self):
-        
         a = torch.randn(100, 128)
         b = torch.randn(100, 128)
         c = torch.ones(100)

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchLinalgHouseholderProductTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.10")
     def test_householder_product(self):
-        
         a = torch.randn(3, 3)
         tau = torch.randn(3)
         result = torch.linalg.householder_product(a, tau)

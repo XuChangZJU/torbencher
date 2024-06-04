@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchBilinearTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_bilinear(self):
-        
         input1 = torch.randn(100, 10)
         input2 = torch.randn(100, 20)
         weight = torch.randn(30, 10, 20)

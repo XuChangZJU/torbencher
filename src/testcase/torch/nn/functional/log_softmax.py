@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalLogSoftmaxTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_log_softmax_common(self):
-        
         a = torch.randn(2, 3)
         b = 1
         result = torch.nn.functional.log_softmax(a, dim=b)

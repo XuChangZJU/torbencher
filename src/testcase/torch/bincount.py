@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchBincountTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_bincount(self):
-        
         a = torch.randint(0, 8, (10,))
         b = torch.randn(10)
         result = torch.bincount(a, weights = b)

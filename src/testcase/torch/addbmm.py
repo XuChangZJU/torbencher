@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchAddbmmTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_addbmm(self):
-        
         a = torch.randn(3, 5)
         b = torch.randn(10, 3, 4)
         c = torch.randn(10, 4, 5)

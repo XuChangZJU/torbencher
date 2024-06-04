@@ -8,7 +8,6 @@ from src.util.decorator import test_api
 @test_api(torch.cuda.manual_seed_all)
 class TorchCudaManualSeedAllTestCase(TorBencherTestCaseBase):
     def test_manual_seed_all(self):
-        
         a = 10
         result = torch.cuda.manual_seed_all(a)
         return result

@@ -8,7 +8,6 @@ from src.util.decorator import test_api
 @test_api(torch.optim.RMSprop)
 class TorchOptimRMSpropTestCase(TorBencherTestCaseBase):
     def test_rmsprop(self):
-        
         params = [torch.randn(10, requires_grad=True), torch.randn(20, requires_grad=True)]
         lr = 1e-3
         alpha = 0.99

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchfftrfftfreqTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.7.0")
     def test_rfftfreq_1d(self):
-        
         a = 10
         b = 0.1
         result = torch.fft.rfftfreq(a, d=b)
@@ -17,7 +16,6 @@ class TorchfftrfftfreqTestCase(TorBencherTestCaseBase):
 
     @test_api_version.larger_than("1.7.0")
     def test_rfftfreq_1d_out(self):
-        
         a = 10
         b = 0.1
         c = torch.empty(6)

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchPinverseTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_pinverse_4d(self):
-        
         a = torch.randn(4, 4)
         result = torch.pinverse(a)
         return result

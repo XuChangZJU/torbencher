@@ -9,14 +9,12 @@ from src.util.decorator import test_api
 class TorchArgmaxTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_argmax_dim(self):
-        
         a = torch.randn(4, 4)
         result = torch.argmax(a, dim=1)
         return result
 
     @test_api_version.larger_than("1.1.3")
     def test_argmax(self):
-        
         a = torch.randn(4, 4)
         result = torch.argmax(a)
         return result

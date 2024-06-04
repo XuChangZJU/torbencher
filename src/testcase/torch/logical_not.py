@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchLogicalNotTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_logical_not(self):
-        
         a = torch.tensor([True, False, True])
         result = torch.logical_not(a)
         return result

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalConvTranspose1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_conv_transpose1d_common(self):
-        
         a = torch.randn(1, 3, 8)
         b = torch.randn(3, 3, 2)
         c = None

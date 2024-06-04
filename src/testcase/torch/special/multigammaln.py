@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchSpecialMultigammalnTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_multigammaln_0d(self):
-        
         a = torch.rand([])
         b = torch.randint(1, 5, ())
         result = torch.special.multigammaln(a, b)
@@ -17,7 +16,6 @@ class TorchSpecialMultigammalnTestCase(TorBencherTestCaseBase):
 
     @test_api_version.larger_than("1.1.3")
     def test_multigammaln_1d(self):
-        
         a = torch.rand(5)
         b = torch.randint(1, 5, ())
         result = torch.special.multigammaln(a, b)

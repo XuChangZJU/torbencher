@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalInstanceNormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_instance_norm(self):
-        
         a = torch.randn(20, 100, 35, 45)
         b = torch.zeros(100)
         c = torch.ones(100)

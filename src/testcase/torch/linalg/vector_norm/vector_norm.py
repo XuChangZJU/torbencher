@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchLinalgVectorNormVectorNormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.11.0")
     def test_vector_norm(self):
-        
         a = torch.randn(3)
         result = torch.linalg.vector_norm.vector_norm(a, ord=2)
         return result

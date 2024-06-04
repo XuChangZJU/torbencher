@@ -8,7 +8,6 @@ from src.util.decorator import test_api
 @test_api(torch.optim.SparseAdam)
 class TorchOptimSparseAdamTestCase(TorBencherTestCaseBase):
     def test_sparse_adam(self):
-        
         params = [torch.randn(10, requires_grad=True)]
         lr = 1e-3
         betas = (0.9, 0.999)

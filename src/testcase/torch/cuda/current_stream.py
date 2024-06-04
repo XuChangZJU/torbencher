@@ -8,7 +8,6 @@ from src.util.decorator import test_api
 @test_api(torch.cuda.current_stream)
 class TorchCudaCurrentStreamTestCase(TorBencherTestCaseBase):
     def test_current_stream(self):
-        
         a = torch.device('cuda')
         result = torch.cuda.current_stream(a)
         return result

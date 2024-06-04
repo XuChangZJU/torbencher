@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalAdaptiveAvgPool3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_adaptive_avg_pool3d_5d(self):
-        
         a = torch.randn(1, 8, 6, 4, 2)
         b = (2, 2, 2)
         result = torch.nn.functional.adaptive_avg_pool3d(a, b)

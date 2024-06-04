@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNegTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_neg(self):
-        
         a = torch.randn(5)
         result = torch.neg(a)
         return result

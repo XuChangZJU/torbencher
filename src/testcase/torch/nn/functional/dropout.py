@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalDropoutTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_dropout_common(self):
-        
         a = torch.randn(1, 1, 1, 1)
         b = 0.5
         c = True

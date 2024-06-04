@@ -9,14 +9,12 @@ from src.util.decorator import test_api
 class TorchCudaStreamTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_stream_0(self):
-        
         a = torch.cuda.Stream()
         result = torch.cuda.stream(a)
         return result
 
     @test_api_version.larger_than("1.1.3")
     def test_stream_1(self):
-        
         a = torch.cuda.Stream()
         result = torch.cuda.stream(stream=a)
         return result

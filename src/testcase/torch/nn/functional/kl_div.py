@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalKLDivTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_kl_div_common(self):
-        
         a = torch.randn(4, 2)
         b = torch.randn(4, 2)
         c = True

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchLinalgPinvTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.8.2")
     def test_pinv(self):
-        
         a = torch.randn(3, 3)
         result = torch.linalg.pinv(a)
         return result

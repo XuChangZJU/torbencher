@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchZeros_likeTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_zeros_like(self):
-        
         a = torch.randn(4)
         result = torch.zeros_like(a)
         return result

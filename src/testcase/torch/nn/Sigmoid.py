@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNSigmoidTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_sigmoid(self):
-        
         a = torch.randn(10)
         sigmoid = torch.nn.Sigmoid()
         result = sigmoid(a)

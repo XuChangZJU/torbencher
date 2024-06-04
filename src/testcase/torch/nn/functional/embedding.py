@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalEmbeddingTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_embedding_common(self):
-        
         a = torch.tensor([[1, 2, 4, 5, 4, 3, 2, 9]])
         b = torch.randn(10, 3)
         c = None

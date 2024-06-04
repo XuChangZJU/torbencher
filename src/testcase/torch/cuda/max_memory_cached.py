@@ -9,13 +9,11 @@ from src.util.decorator import test_api
 class TorchCudaMaxMemoryCachedTestCase(TorBencherTestCaseBase):
 
     def test_max_memory_cached_0(self):
-        
         a = 0
         result = torch.cuda.max_memory_cached(a)
         return result
 
     def test_max_memory_cached_1(self):
-        
         a = 0
         result = torch.cuda.max_memory_cached(device=a)
         return result

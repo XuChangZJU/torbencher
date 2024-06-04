@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchCholeskySolveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cholesky_solve_2d_2d(self):
-        
         a = torch.randn(3, 3)
         a = torch.mm(a, a.t()) + 1e-05 * torch.eye(3) # make symmetric positive-definite
         b = torch.randn(3, 2)
@@ -19,7 +18,6 @@ class TorchCholeskySolveTestCase(TorBencherTestCaseBase):
 
     @test_api_version.larger_than("1.1.3")
     def test_cholesky_solve_2d_2d_upper(self):
-        
         a = torch.randn(3, 3)
         a = torch.mm(a, a.t()) + 1e-05 * torch.eye(3) # make symmetric positive-definite
         b = torch.randn(3, 2)

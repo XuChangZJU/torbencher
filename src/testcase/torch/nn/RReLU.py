@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNRReLUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_rrelu(self):
-        
         a = torch.randn(10)
         rrelu = torch.nn.RReLU()
         result = rrelu(a)

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchDistributedGetWorldSizeTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_get_world_size_0(self):
-        
         result = torch.distributed.get_world_size()
         return result
 

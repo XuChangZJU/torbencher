@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalMaxPool3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_max_pool3d_common(self):
-        
         a = torch.randn(20, 16, 50, 44, 32)
         b = 3
         c = 2

@@ -11,6 +11,5 @@ from src.util.decorator import test_api
 class TorchCudaMemoryEmptyCacheTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.9.0")
     def test_empty_cache(self):
-        
         result = torch.cuda.memory.empty_cache()
         return result

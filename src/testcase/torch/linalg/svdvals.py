@@ -8,7 +8,6 @@ from src.util.decorator import test_api
 @test_api(torch.linalg.svdvals)
 class TorchLinalgSvdvalsTestCase(TorBencherTestCaseBase):
     def test_svdvals_4d(self):
-        
         a = torch.randn(2, 2, 3, 3)
         result = torch.linalg.svdvals(a)
         return result

@@ -10,7 +10,6 @@ from src.util.decorator import test_api
 class TorchLinalgNormNuclearNormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.10.0")
     def test_nuclear_norm(self):
-        
         a = torch.randn(3, 3)
         result = torch.linalg.norm.nuclear_norm(a)
         return result

@@ -8,7 +8,6 @@ from src.util.decorator import test_api
 @test_api(torch.linalg.diagonal)
 class TorchLinalgDiagonalTestCase(TorBencherTestCaseBase):
     def test_diagonal_4d(self):
-        
         a = torch.randn(2, 2, 3, 3)
         offset = 1
         dim1 = 2

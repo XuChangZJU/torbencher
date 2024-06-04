@@ -11,14 +11,12 @@ from src.util.decorator import test_api
 class TorchCudaMemoryResetMaxMemoryAllocatedTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_reset_max_memory_allocated_0(self):
-        
         a = torch.device('cuda')
         result = torch.cuda.memory.reset_max_memory_allocated(a)
         return result
 
     @test_api_version.larger_than("1.1.3")
     def test_reset_max_memory_allocated_1(self):
-        
         a = torch.device('cuda')
         result = torch.cuda.memory.reset_max_memory_allocated(device=a)
         return result

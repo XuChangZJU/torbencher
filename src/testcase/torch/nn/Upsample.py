@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNUpsampleTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_upsample(self):
-        
         a = torch.randn(1, 2, 4, 4)
         upsample = torch.nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
         result = upsample(a)

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchRealTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_real(self):
-        
         a = torch.randn(4, dtype=torch.cfloat)
         result = torch.real(a)
         return result

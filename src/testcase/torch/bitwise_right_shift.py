@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchBitwiseRightShiftTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_bitwise_right_shift_0d(self):
-        
         a = torch.tensor(12)
         b = 2
         result = torch.bitwise_right_shift(a, b)
@@ -17,7 +16,6 @@ class TorchBitwiseRightShiftTestCase(TorBencherTestCaseBase):
 
     @test_api_version.larger_than("1.1.3")
     def test_bitwise_right_shift_1d(self):
-        
         a = torch.randint(0, 10, (4,), dtype=torch.int32)
         b = 2
         result = torch.bitwise_right_shift(a, b)
@@ -25,7 +23,6 @@ class TorchBitwiseRightShiftTestCase(TorBencherTestCaseBase):
 
     @test_api_version.larger_than("1.1.3")
     def test_bitwise_right_shift_2d(self):
-        
         a = torch.randint(0, 10, (4, 4), dtype=torch.int32)
         b = 2
         result = torch.bitwise_right_shift(a, b)
@@ -33,7 +30,6 @@ class TorchBitwiseRightShiftTestCase(TorBencherTestCaseBase):
 
     @test_api_version.larger_than("1.1.3")
     def test_bitwise_right_shift_3d(self):
-        
         a = torch.randint(0, 10, (4, 4, 4), dtype=torch.int32)
         b = 2
         result = torch.bitwise_right_shift(a, b)
@@ -41,7 +37,6 @@ class TorchBitwiseRightShiftTestCase(TorBencherTestCaseBase):
 
     @test_api_version.larger_than("1.1.3")
     def test_bitwise_right_shift_4d(self):
-        
         a = torch.randint(0, 10, (4, 4, 4, 4), dtype=torch.int32)
         b = 2
         result = torch.bitwise_right_shift(a, b)

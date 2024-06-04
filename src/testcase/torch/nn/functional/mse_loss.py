@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalMSELossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_mse_loss_common(self):
-        
         a = torch.randn(3)
         b = torch.randn(3)
         c = True

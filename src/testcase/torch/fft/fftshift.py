@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchFftshiftTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.7.0")
     def test_fftshift_4d(self):
-        
         a = torch.randn(4, 3, 8, 8)
         b = None
         result = torch.fft.fftshift(a, dim=b)

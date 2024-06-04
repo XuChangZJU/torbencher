@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalCrossEntropyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cross_entropy_common(self):
-        
         a = torch.randn(3, 5)
         b = torch.empty(3, dtype=torch.long).random_(5)
         c = None

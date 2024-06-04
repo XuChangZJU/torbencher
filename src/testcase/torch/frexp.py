@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchFrexpTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_frexp(self):
-        
         a = torch.randn(4)
         result = torch.frexp(a)
         return result

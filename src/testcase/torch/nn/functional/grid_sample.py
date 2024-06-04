@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalGridSampleTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_grid_sample_common(self):
-        
         a = torch.randn(1, 1, 3, 3)
         b = torch.tensor([[[[0.0000, 1.0000], [0.0000, 0.0000]], [[0.0000, 0.0000], [0.0000, 1.0000]]]])
         c = 'bilinear'

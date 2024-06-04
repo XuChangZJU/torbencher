@@ -9,14 +9,12 @@ from src.util.decorator import test_api
 class TorchSubTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_sub_number(self):
-        
         a = torch.randn(4)
         result = torch.sub(a, 10)
         return result
 
     @test_api_version.larger_than("1.1.3")
     def test_sub(self):
-        
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.sub(a, b, alpha=10)

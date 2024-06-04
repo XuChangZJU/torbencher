@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchRsqrtTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_rsqrt(self):
-        
         a = torch.randn(4)
         result = torch.rsqrt(a)
         return result

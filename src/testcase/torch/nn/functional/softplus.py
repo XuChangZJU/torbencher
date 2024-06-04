@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalSoftplusTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_softplus_common(self):
-        
         a = torch.randn(4)
         b = 1
         c = 20

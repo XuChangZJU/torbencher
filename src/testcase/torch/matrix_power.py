@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchMatrixPowerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_matrix_power_4d(self):
-        
         a = torch.randn(4, 4)
         result = torch.matrix_power(a, 3)
         return result

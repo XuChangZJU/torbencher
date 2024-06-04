@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNFunctionalRReLUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_rrelu_common(self):
-        
         a = torch.randn(2, 4)
         b = 1.0 / 8
         c = 1.0 / 3

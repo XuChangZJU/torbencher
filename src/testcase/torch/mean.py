@@ -9,14 +9,12 @@ from src.util.decorator import test_api
 class TorchMeanTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_mean_dim(self):
-        
         a = torch.randn(4, 4)
         result = torch.mean(a, 1)
         return result
 
     @test_api_version.larger_than("1.1.3")
     def test_mean(self):
-        
         a = torch.randn(4, 4)
         result = torch.mean(a)
         return result

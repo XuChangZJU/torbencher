@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchLogTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_log(self):
-        
         a = torch.randn(5)
         result = torch.log(a)
         return result

@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchExp2TestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_exp2(self):
-        
         a = torch.randn(4)
         result = torch.exp2(a)
         return result

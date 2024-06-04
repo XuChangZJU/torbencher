@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchNNLayerNormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_layer_norm(self):
-        
         a = torch.randn(20, 5, 10, 10)
         norm = torch.nn.LayerNorm([5, 10, 10])
         result = norm(a)

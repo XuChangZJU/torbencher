@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchLinalgNormNormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.11.0")
     def test_norm(self):
-        
         a = torch.randn(3, 3)
         result = torch.linalg.norm.norm(a, ord='fro')
         return result

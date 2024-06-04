@@ -9,7 +9,6 @@ from src.util.decorator import test_api
 class TorchRandNTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_randn(self):
-        
         a = (2, 3)
         result = torch.randn(a)
         return result
