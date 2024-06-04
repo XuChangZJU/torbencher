@@ -139,18 +139,20 @@ class torbencher:
                 "testcases": discover_testcases(module),
             }
             testcases_info.append(module_info)
-        print(testcases_info)
-
-        suite = loader.loadTestsFromNames(names)
 
         if torch.__version__ < (2, 0, 0):
             raise RuntimeError("Torch version must be greater than 2.0.0")
 
         torch.manual_seed(seed)
-        for name in devices:
+        for device in devices:
             wrapper = TorchWrapper({"out_dir": ""})
             wrapper.decorate_module(torch)
-            result = runner.run(suite)
-            # print(wrapper.call_count)
+            for module_info in testcases_info:
+                wrapper.call_count = {}
+                for testcase in module_info["testcases"]:
+                    print(f"\nstart running {testcase.__name__} on {device}:\n")
+                    suite = loader.loadTestsFromTestCase(testcase)
+                    result = runner.run(suite)
+                # print(wrapper.call_count)
 
         return output_results
