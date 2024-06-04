@@ -8,7 +8,7 @@ wrapper = TorchWrapper(
         "out_dir": "./result",
         "format": "csv",
         "file_max_size": "512MB",
-        "file_name_spec": "timestamp",
+        "file_name_spec": "datetime",
     }
 )
 
@@ -24,3 +24,4 @@ def my_code(*args, **kwargs):
 
 
 result = wrapper.start(my_code, 1, 2, x=3, y=4)
+print(result)
