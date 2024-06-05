@@ -679,4 +679,6 @@ class TorchMpsTensorTestCase(TorBencherTestCaseBase):
     def test_tensor_bitwise_xor(self):
         dim = random.randint(1, 10)
         tensor1 = torch.randint(0, 10, (dim,))
-        tensor2 = torch.randint(0,
+        tensor2 = torch.randint(0, 10, (dim,))
+        result = tensor1.bitwise_xor(tensor2)
+        return result

@@ -401,3 +401,4 @@ class TorchFxGraphModuleTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.11")
     def test_graphmodule_register_parameter_correctness(self):
         # TODO: No concrete test case
+        return None
