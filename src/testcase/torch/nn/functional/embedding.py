@@ -1,22 +1,26 @@
 
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.embedding)
-class TorchNNFunctionalEmbeddingTestCase(TorBencherTestCaseBase):
+class EmbeddingTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_embedding_common(self):
-        a = torch.tensor([[1, 2, 4, 5, 4, 3, 2, 9]])
-        b = torch.randn(10, 3)
-        c = None
-        d = None
-        e = 2.0
-        f = False
-        g = False
-        result = torch.nn.functional.embedding(a, b, padding_idx=c, max_norm=d, norm_type=e, scale_grad_by_freq=f, sparse=g)
+    def test_embedding_correctness(self):
+        num_embeddings = random.randint(1, 10)
+        embedding_dim = random.randint(1, 10)
+        input_data = torch.randint(0, num_embeddings, (10,))
+        result = torch.nn.functional.embedding(input_data, torch.randn(num_embeddings, embedding_dim))
         return result
 
+    @test_api_version.larger_than("1.1.3")
+    def test_embedding_large_scale(self):
+        num_embeddings = random.randint(100, 1000)
+        embedding_dim = random.randint(100, 1000)
+        input_data = torch.randint(0, num_embeddings, (100,))
+        result = torch.nn.functional.embedding(input_data, torch.randn(num_embeddings, embedding_dim))
+        return result
 

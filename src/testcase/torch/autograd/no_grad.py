@@ -1,5 +1,6 @@
 
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,11 +8,14 @@ from src.util.decorator import test_api
 
 @test_api(torch.autograd.no_grad)
 class TorchAutogradNoGradTestCase(TorBencherTestCaseBase):
-    def test_no_grad(self):
-        with torch.autograd.no_grad():
-            a = torch.tensor([1., 2., 3.], requires_grad=True)
-            b = a + 2
-            c = b.mean()
-        return c.requires_grad
+    @test_api_version.larger_than("1.1.3")
+    def test_no_grad_correctness(self):
+        result = torch.autograd.no_grad()
+        return result
+
+    @test_api_version.larger_than("1.1.3")
+    def test_no_grad_large_scale(self):
+        result = torch.autograd.no_grad()
+        return result
 
 

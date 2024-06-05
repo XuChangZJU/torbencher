@@ -1,5 +1,6 @@
 
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,11 +9,20 @@ from src.util.decorator import test_api
 @test_api(torch.addcdiv)
 class TorchAddcdivTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_addcdiv(self):
-        a = torch.randn(4)
-        b = torch.randn(4)
-        c = torch.randn(4)
-        result = torch.addcdiv(a, b, c, value=10)
+    def test_addcdiv_correctness(self):
+        input = torch.randn(random.randint(1, 10))
+        tensor1 = torch.randn(random.randint(1, 10))
+        tensor2 = torch.randn(random.randint(1, 10))
+        value = random.uniform(0.1, 10.0)
+        result = torch.addcdiv(input, tensor1, tensor2, value=value)
         return result
 
+    @test_api_version.larger_than("1.1.3")
+    def test_addcdiv_large_scale(self):
+        input = torch.randn(random.randint(1000, 10000))
+        tensor1 = torch.randn(random.randint(1000, 10000))
+        tensor2 = torch.randn(random.randint(1000, 10000))
+        value = random.uniform(0.1, 10.0)
+        result = torch.addcdiv(input, tensor1, tensor2, value=value)
+        return result
 

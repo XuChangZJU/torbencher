@@ -1,18 +1,28 @@
 
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.MarginRankingLoss)
-class TorchNNMarginRankingLossTestCase(TorBencherTestCaseBase):
+class TorchMarginRankingLossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_margin_ranking_loss(self):
-        a = torch.randn(10, 5)
-        b = torch.randn(10, 5)
-        target = torch.randint(low=-1, high=2, size=(10,))
-        loss = torch.nn.MarginRankingLoss()
-        result = loss(a, b, target)
+    def test_marginrankingloss_correctness(self):
+        input1 = torch.randn(random.randint(1, 10))
+        input2 = torch.randn(random.randint(1, 10))
+        target = torch.randint(0, 2, (random.randint(1, 10),), dtype=torch.long)
+        margin_ranking_loss = torch.nn.MarginRankingLoss()
+        result = margin_ranking_loss(input1, input2, target)
+        return result
+
+    @test_api_version.larger_than("1.1.3")
+    def test_marginrankingloss_large_scale(self):
+        input1 = torch.randn(random.randint(1000, 10000))
+        input2 = torch.randn(random.randint(1000, 10000))
+        target = torch.randint(0, 2, (random.randint(1000, 10000),), dtype=torch.long)
+        margin_ranking_loss = torch.nn.MarginRankingLoss()
+        result = margin_ranking_loss(input1, input2, target)
         return result
 

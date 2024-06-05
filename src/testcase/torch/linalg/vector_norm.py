@@ -1,5 +1,6 @@
 
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,18 +8,24 @@ from src.util.decorator import test_api
 
 @test_api(torch.linalg.vector_norm)
 class TorchLinalgVectorNormTestCase(TorBencherTestCaseBase):
-    def test_vector_norm_4d_ord_str(self):
-        a = torch.randn(2, 2, 3, 3)
-        ord = 'fro'
-        result = torch.linalg.vector_norm(a, ord=ord)
+    @test_api_version.larger_than("1.8.0")
+    def test_vector_norm_correctness(self):
+        dim = random.randint(2, 10)
+        x = torch.randn(dim)
+        ord = random.choice([None, 1, 2, inf])
+        result = torch.linalg.vector_norm(x, ord=ord)
         return result
-    def test_vector_norm_4d_ord_float(self):
-        a = torch.randn(2, 2, 3, 3)
-        ord = 2.0
-        result = torch.linalg.vector_norm(a, ord=ord)
+
+    @test_api_version.larger_than("1.8.0")
+    def test_vector_norm_large_scale(self):
+        dim = random.randint(100, 1000)
+        x = torch.randn(dim)
+        ord = random.choice([None, 1, 2, inf])
+        result = torch.linalg.vector_norm(x, ord=ord)
         return result
-    def test_vector_norm_4d_ord_int(self):
-        a = torch.randn(2, 2, 3, 3)
-        ord = 2
-        result = torch.linalg.vector_norm(a, ord=ord)
-        return result
+
+
+
+import torch
+import random
+

@@ -1,5 +1,6 @@
 
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,15 +9,18 @@ from src.util.decorator import test_api
 @test_api(torch.div)
 class TorchDivTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_div_number(self):
-        a = torch.randn(4)
-        result = torch.div(a, 10)
+    def test_div_correctness(self):
+        dim = random.randint(1, 10)
+        tensor1 = torch.randn(dim)
+        tensor2 = torch.randn(dim)
+        result = torch.div(tensor1, tensor2)
         return result
 
     @test_api_version.larger_than("1.1.3")
-    def test_div(self):
-        a = torch.randn(4)
-        b = torch.randn(4)
-        result = torch.div(a, b)
+    def test_div_large_scale(self):
+        dim = random.randint(1000, 10000)
+        tensor1 = torch.randn(dim)
+        tensor2 = torch.randn(dim)
+        result = torch.div(tensor1, tensor2)
         return result
 

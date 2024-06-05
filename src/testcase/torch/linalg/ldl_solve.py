@@ -1,5 +1,6 @@
 
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,12 +8,21 @@ from src.util.decorator import test_api
 
 @test_api(torch.linalg.ldl_solve)
 class TorchLinalgLdlSolveTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.10.0")
-    def test_ldl_solve(self):
-        a = torch.randn(3, 3)
-        a = (a + a.t()) / 2  # make symmetric
-        LD, pivots = torch.linalg.ldl_factor(a, hermitian=True)
-        b = torch.randn(3, 1)
-        result = torch.linalg.ldl_solve(LD, pivots, b, hermitian=True)
+    @test_api_version.larger_than("1.8.0")
+    def test_ldl_solve_correctness(self):
+        dim = random.randint(2, 10)
+        A = torch.randn(dim, dim)
+        A = A @ A.T  # Ensure A is symmetric
+        b = torch.randn(dim)
+        result = torch.linalg.ldl_solve(b, A)
+        return result
+
+    @test_api_version.larger_than("1.8.0")
+    def test_ldl_solve_large_scale(self):
+        dim = random.randint(100, 1000)
+        A = torch.randn(dim, dim)
+        A = A @ A.T
+        b = torch.randn(dim)
+        result = torch.linalg.ldl_solve(b, A)
         return result
 
