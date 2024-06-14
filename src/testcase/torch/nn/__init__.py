@@ -1,3 +1,0 @@
-from .AdaptiveAvgPool1d import TorchNNAdaptiveAvgPool1dTestCase
-from .AdaptiveAvgPool2d import TorchNNAdaptiveAvgPool2dTestCase
-from .AdaptiveAvgPool3d import TorchNNAdaptiveAvgPool3dTestCase
