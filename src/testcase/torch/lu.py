@@ -10,14 +10,15 @@ from src.util.decorator import test_api
 class TorchLuTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_lu_correctness(self):
-    # Randomly generate dimensions for the matrix
-    m = random.randint(2, 5)
-    n = random.randint(2, 5)
+        # Randomly generate dimensions for the matrix
+        m = random.randint(2, 5)
+        n = random.randint(2, 5)
+        
+        # Generate a random matrix (tensor) of size (m, n)
+        A = torch.randn(m, n)
+        
+        # Perform LU factorization
+        LU, pivots = torch.lu(A)
+        
+        return LU, pivots
     
-    # Generate a random matrix (tensor) of size (m, n)
-    A = torch.randn(m, n)
-    
-    # Perform LU factorization
-    LU, pivots = torch.lu(A)
-    
-    return LU, pivots

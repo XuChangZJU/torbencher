@@ -10,21 +10,22 @@ from src.util.decorator import test_api
 class TorchNnBatchnorm2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_batchnorm2d_correctness(self):
-    # Randomly generate the number of features (channels)
-    num_features = random.randint(1, 10)
+        # Randomly generate the number of features (channels)
+        num_features = random.randint(1, 10)
+        
+        # Randomly generate the dimensions for the input tensor
+        batch_size = random.randint(1, 5)
+        height = random.randint(1, 10)
+        width = random.randint(1, 10)
+        
+        # Create a random input tensor with the shape (N, C, H, W)
+        input_tensor = torch.randn(batch_size, num_features, height, width)
+        
+        # Initialize BatchNorm2d with the randomly generated number of features
+        batch_norm = torch.nn.BatchNorm2d(num_features)
+        
+        # Apply BatchNorm2d to the input tensor
+        output_tensor = batch_norm(input_tensor)
+        
+        return output_tensor
     
-    # Randomly generate the dimensions for the input tensor
-    batch_size = random.randint(1, 5)
-    height = random.randint(1, 10)
-    width = random.randint(1, 10)
-    
-    # Create a random input tensor with the shape (N, C, H, W)
-    input_tensor = torch.randn(batch_size, num_features, height, width)
-    
-    # Initialize BatchNorm2d with the randomly generated number of features
-    batch_norm = torch.nn.BatchNorm2d(num_features)
-    
-    # Apply BatchNorm2d to the input tensor
-    output_tensor = batch_norm(input_tensor)
-    
-    return output_tensor

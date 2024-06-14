@@ -10,12 +10,13 @@ from src.util.decorator import test_api
 class TorchTensorDimorderTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_dim_order_correctness(self):
-    # Randomly choose dimensions for the tensor
-    dim = random.randint(1, 4)
-    num_of_elements_each_dim = random.randint(1, 5)
-    input_size = [num_of_elements_each_dim for _ in range(dim)]
-
-    # Create a random tensor with the chosen dimensions
-    tensor = torch.randn(input_size)
-    result = tensor.dim_order()
-    return result
+        # Randomly choose dimensions for the tensor
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
+    
+        # Create a random tensor with the chosen dimensions
+        tensor = torch.randn(input_size)
+        result = tensor.dim_order()
+        return result
+    

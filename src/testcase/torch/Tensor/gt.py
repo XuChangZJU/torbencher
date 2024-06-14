@@ -10,16 +10,17 @@ from src.util.decorator import test_api
 class TorchTensorGtTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_gt_correctness(self):
-    # Generate random dimension and size for the tensors
-    dim = random.randint(1, 4)
-    num_of_elements_each_dim = random.randint(1, 5)
-    input_size = [num_of_elements_each_dim for i in range(dim)]
-
-    # Generate random tensors
-    tensor1 = torch.randn(input_size)
-    tensor2 = torch.randn(input_size)
+        # Generate random dimension and size for the tensors
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for i in range(dim)]
     
-    # Calculate gt result
-    result = tensor1.gt(tensor2)
+        # Generate random tensors
+        tensor1 = torch.randn(input_size)
+        tensor2 = torch.randn(input_size)
+        
+        # Calculate gt result
+        result = tensor1.gt(tensor2)
+        
+        return result
     
-    return result

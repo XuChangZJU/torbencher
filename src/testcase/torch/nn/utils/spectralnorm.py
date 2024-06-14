@@ -10,22 +10,23 @@ from src.util.decorator import test_api
 class TorchNnUtilsSpectralnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_spectral_norm_correctness(self):
-    # Define the input size for the Linear layer
-    in_features = random.randint(1, 10)
-    out_features = random.randint(1, 10)
+        # Define the input size for the Linear layer
+        in_features = random.randint(1, 10)
+        out_features = random.randint(1, 10)
+        
+        # Create a Linear layer
+        linear_layer = torch.nn.Linear(in_features, out_features)
+        
+        # Apply spectral normalization to the Linear layer
+        spectral_norm_linear = torch.nn.utils.spectral_norm(linear_layer)
+        
+        # Generate random input data
+        input_data = torch.randn(random.randint(1, 10), in_features)
+        
+        # Perform inference using both the original and spectral normalized layers
+        output_original = linear_layer(input_data)
+        output_spectral_norm = spectral_norm_linear(input_data)
+        
+        # Return the output from the spectral normalized layer
+        return output_spectral_norm
     
-    # Create a Linear layer
-    linear_layer = torch.nn.Linear(in_features, out_features)
-    
-    # Apply spectral normalization to the Linear layer
-    spectral_norm_linear = torch.nn.utils.spectral_norm(linear_layer)
-    
-    # Generate random input data
-    input_data = torch.randn(random.randint(1, 10), in_features)
-    
-    # Perform inference using both the original and spectral normalized layers
-    output_original = linear_layer(input_data)
-    output_spectral_norm = spectral_norm_linear(input_data)
-    
-    # Return the output from the spectral normalized layer
-    return output_spectral_norm

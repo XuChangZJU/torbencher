@@ -10,6 +10,7 @@ from src.util.decorator import test_api
 class TorchNnModulesModuleRegistermoduleforwardprehookTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_register_module_forward_pre_hook_correctness(self):
-    class SimpleModule(torch.nn.Module):
-        def forward(self, x):
-            return x * 2
+        class SimpleModule(torch.nn.Module):
+            def forward(self, x):
+                return x * 2
+    

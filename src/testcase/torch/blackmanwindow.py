@@ -10,11 +10,12 @@ from src.util.decorator import test_api
 class TorchBlackmanwindowTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_blackman_window_correctness(self):
-    # Randomly generate the window length (positive integer)
-    window_length = random.randint(1, 10)
+        # Randomly generate the window length (positive integer)
+        window_length = random.randint(1, 10)
+        
+        # Randomly generate the periodic flag (boolean value)
+        periodic = random.choice([True, False])
+        
+        result = torch.blackman_window(window_length, periodic)
+        return result
     
-    # Randomly generate the periodic flag (boolean value)
-    periodic = random.choice([True, False])
-    
-    result = torch.blackman_window(window_length, periodic)
-    return result

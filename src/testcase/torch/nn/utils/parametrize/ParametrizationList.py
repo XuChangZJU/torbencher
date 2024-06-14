@@ -12,6 +12,7 @@ from src.util.decorator import test_api
 class TorchNnUtilsParametrizeParametrizationlistTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_parametrization_list_correctness(self):
-    class MyParametrization(nn.Module):
-        def forward(self, X):
-            return X * 2
+        class MyParametrization(nn.Module):
+            def forward(self, X):
+                return X * 2
+    

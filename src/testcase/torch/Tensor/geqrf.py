@@ -10,14 +10,15 @@ from src.util.decorator import test_api
 class TorchTensorGeqrfTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_geqrf_correctness(self):
-    # Randomly generate the number of rows and columns for the matrix
-    num_rows = random.randint(2, 5)
-    num_cols = random.randint(2, 5)
+        # Randomly generate the number of rows and columns for the matrix
+        num_rows = random.randint(2, 5)
+        num_cols = random.randint(2, 5)
+        
+        # Generate a random matrix of size (num_rows, num_cols)
+        matrix = torch.randn(num_rows, num_cols)
+        
+        # Perform QR factorization using geqrf
+        q, r = matrix.geqrf()
+        
+        return q, r
     
-    # Generate a random matrix of size (num_rows, num_cols)
-    matrix = torch.randn(num_rows, num_cols)
-    
-    # Perform QR factorization using geqrf
-    q, r = matrix.geqrf()
-    
-    return q, r

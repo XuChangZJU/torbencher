@@ -10,11 +10,12 @@ from src.util.decorator import test_api
 class TorchTensorTriuTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_triu_correctness(self):
-    dim = random.randint(2, 4)  # Random dimension for the tensors, at least 2 to form a matrix
-    num_of_elements_each_dim = random.randint(2, 5)  # Random number of elements each dimension, at least 2 to form a matrix
-    input_size = [num_of_elements_each_dim for _ in range(dim)] 
-
-    tensor = torch.randn(input_size)
-    diagonal = random.randint(-num_of_elements_each_dim, num_of_elements_each_dim)  # Random diagonal value within valid range
-    result = tensor.triu(diagonal)
-    return result
+        dim = random.randint(2, 4)  # Random dimension for the tensors, at least 2 to form a matrix
+        num_of_elements_each_dim = random.randint(2, 5)  # Random number of elements each dimension, at least 2 to form a matrix
+        input_size = [num_of_elements_each_dim for _ in range(dim)] 
+    
+        tensor = torch.randn(input_size)
+        diagonal = random.randint(-num_of_elements_each_dim, num_of_elements_each_dim)  # Random diagonal value within valid range
+        result = tensor.triu(diagonal)
+        return result
+    

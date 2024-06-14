@@ -10,7 +10,8 @@ from src.util.decorator import test_api
 class TorchTTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_t_correctness(self):
-    # For 0-D tensor
-    input_tensor = torch.randn(())
-    result = torch.t(input_tensor)
-    return result
+        # For 0-D tensor
+        input_tensor = torch.randn(())
+        result = torch.t(input_tensor)
+        return result
+    

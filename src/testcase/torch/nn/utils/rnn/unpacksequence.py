@@ -11,16 +11,17 @@ from src.util.decorator import test_api
 class TorchNnUtilsRnnUnpacksequenceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_unpack_sequence_correctness(self):
-    # Randomly generate the number of sequences
-    num_sequences = random.randint(1, 5)
+        # Randomly generate the number of sequences
+        num_sequences = random.randint(1, 5)
+        
+        # Randomly generate the length of each sequence
+        sequences = [torch.randn(random.randint(1, 5)) for _ in range(num_sequences)]
+        
+        # Pack the sequences
+        packed_sequences = pack_sequence(sequences)
+        
+        # Unpack the sequences
+        unpacked_sequences = unpack_sequence(packed_sequences)
+        
+        return unpacked_sequences
     
-    # Randomly generate the length of each sequence
-    sequences = [torch.randn(random.randint(1, 5)) for _ in range(num_sequences)]
-    
-    # Pack the sequences
-    packed_sequences = pack_sequence(sequences)
-    
-    # Unpack the sequences
-    unpacked_sequences = unpack_sequence(packed_sequences)
-    
-    return unpacked_sequences

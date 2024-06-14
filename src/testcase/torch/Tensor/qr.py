@@ -10,15 +10,16 @@ from src.util.decorator import test_api
 class TorchTensorQrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_qr_correctness(self):
-    # Randomly generate dimensions for the tensor
-    rows = random.randint(2, 5)  # Number of rows (must be at least 2 for QR decomposition)
-    cols = random.randint(2, 5)  # Number of columns (must be at least 2 for QR decomposition)
+        # Randomly generate dimensions for the tensor
+        rows = random.randint(2, 5)  # Number of rows (must be at least 2 for QR decomposition)
+        cols = random.randint(2, 5)  # Number of columns (must be at least 2 for QR decomposition)
+        
+        # Generate a random tensor with the specified dimensions
+        tensor = torch.randn(rows, cols)
+        
+        # Perform QR decomposition
+        Q, R = tensor.qr()
+        
+        # Return the Q and R matrices
+        return Q, R
     
-    # Generate a random tensor with the specified dimensions
-    tensor = torch.randn(rows, cols)
-    
-    # Perform QR decomposition
-    Q, R = tensor.qr()
-    
-    # Return the Q and R matrices
-    return Q, R

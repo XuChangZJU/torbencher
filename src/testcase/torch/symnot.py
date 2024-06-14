@@ -10,7 +10,8 @@ from src.util.decorator import test_api
 class TorchSymnotTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_sym_not_correctness(self):
-    # Testing torch.sym_not with a SymBool
-    random_bool_val = random.choice([True, False])  # Generate a random boolean value
-    result = torch.sym_not(random_bool_val)
-    return result
+        # Testing torch.sym_not with a SymBool
+        random_bool_val = random.choice([True, False])  # Generate a random boolean value
+        result = torch.sym_not(random_bool_val)
+        return result
+    

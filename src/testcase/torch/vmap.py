@@ -10,6 +10,7 @@ from src.util.decorator import test_api
 class TorchVmapTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_vmap_correctness(self):
-    # Function to be vectorized
-    def simple_function(tensor1, tensor2):
-        return tensor1 + tensor2
+        # Function to be vectorized
+        def simple_function(tensor1, tensor2):
+            return tensor1 + tensor2
+    

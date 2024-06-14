@@ -10,12 +10,13 @@ from src.util.decorator import test_api
 class TorchEmptystridedTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_empty_strided_correctness(self):
-    # Randomly generate valid parameters for torch.empty_strided
-    dim = random.randint(1, 4)  
-    size = [random.randint(1, 10) for _ in range(dim)]
-    stride = [random.randint(1, 10) for _ in range(dim)] # stride should be positive integers
-
-    # Generate the tensor using torch.empty_strided
-    result = torch.empty_strided(size, stride)
-
-    return result
+        # Randomly generate valid parameters for torch.empty_strided
+        dim = random.randint(1, 4)  
+        size = [random.randint(1, 10) for _ in range(dim)]
+        stride = [random.randint(1, 10) for _ in range(dim)] # stride should be positive integers
+    
+        # Generate the tensor using torch.empty_strided
+        result = torch.empty_strided(size, stride)
+    
+        return result
+    

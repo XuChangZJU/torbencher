@@ -10,16 +10,17 @@ from src.util.decorator import test_api
 class TorchTensorVdotTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_vdot_correctness(self):
-    dim = random.randint(1, 4)  # Random dimension for the tensors
-    num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
-    input_size = [num_of_elements_each_dim for _ in range(dim)]
-
-    tensor1 = torch.randn(input_size)
-    tensor2 = torch.randn(input_size)
+        dim = random.randint(1, 4)  # Random dimension for the tensors
+        num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
     
-    # Flatten the tensors to 1D for vdot operation
-    tensor1_flat = tensor1.flatten()
-    tensor2_flat = tensor2.flatten()
+        tensor1 = torch.randn(input_size)
+        tensor2 = torch.randn(input_size)
+        
+        # Flatten the tensors to 1D for vdot operation
+        tensor1_flat = tensor1.flatten()
+        tensor2_flat = tensor2.flatten()
+        
+        result = tensor1_flat.vdot(tensor2_flat)
+        return result
     
-    result = tensor1_flat.vdot(tensor2_flat)
-    return result

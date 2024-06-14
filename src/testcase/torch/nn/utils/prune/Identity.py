@@ -12,19 +12,20 @@ from src.util.decorator import test_api
 class TorchNnUtilsPruneIdentityTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_identity_pruning_correctness(self):
-    # Randomly generate dimensions for the Linear layer
-    in_features = random.randint(1, 10)
-    out_features = random.randint(1, 10)
+        # Randomly generate dimensions for the Linear layer
+        in_features = random.randint(1, 10)
+        out_features = random.randint(1, 10)
+        
+        # Create a Linear layer with random dimensions
+        linear_layer = nn.Linear(in_features, out_features)
+        
+        # Apply identity pruning to the 'weight' parameter of the Linear layer
+        pruned_layer = prune.identity(linear_layer, 'weight')
+        
+        # Check if the mask and original weight are correctly added
+        weight_mask = pruned_layer.weight_mask
+        weight_orig = pruned_layer.weight_orig
+        
+        # Return the mask and original weight for verification
+        return weight_mask, weight_orig
     
-    # Create a Linear layer with random dimensions
-    linear_layer = nn.Linear(in_features, out_features)
-    
-    # Apply identity pruning to the 'weight' parameter of the Linear layer
-    pruned_layer = prune.identity(linear_layer, 'weight')
-    
-    # Check if the mask and original weight are correctly added
-    weight_mask = pruned_layer.weight_mask
-    weight_orig = pruned_layer.weight_orig
-    
-    # Return the mask and original weight for verification
-    return weight_mask, weight_orig

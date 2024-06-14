@@ -10,12 +10,13 @@ from src.util.decorator import test_api
 class TorchAredeterministicalgorithmsenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_are_deterministic_algorithms_enabled_correctness(self):
-    # Test with deterministic algorithms enabled
-    torch.use_deterministic_algorithms(True)
-    result_true = torch.are_deterministic_algorithms_enabled()
-
-    # Test with deterministic algorithms disabled
-    torch.use_deterministic_algorithms(False)
-    result_false = torch.are_deterministic_algorithms_enabled()
-
-    return result_true, result_false
+        # Test with deterministic algorithms enabled
+        torch.use_deterministic_algorithms(True)
+        result_true = torch.are_deterministic_algorithms_enabled()
+    
+        # Test with deterministic algorithms disabled
+        torch.use_deterministic_algorithms(False)
+        result_false = torch.are_deterministic_algorithms_enabled()
+    
+        return result_true, result_false
+    
