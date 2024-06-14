@@ -30,3 +30,6 @@ class TorchTensorGatherTestCase(TorBencherTestCaseBase):
         result = input_tensor.gather(gather_dim, index_tensor)
         return result
     
+    
+    
+    

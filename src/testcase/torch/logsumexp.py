@@ -16,3 +16,9 @@ class TorchLogsumexpTestCase(TorBencherTestCaseBase):
         result = torch.logsumexp(input_tensor, dim, keepdim)
         return result
     
+    
+    
+    
+    
+    
+    

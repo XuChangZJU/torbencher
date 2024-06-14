@@ -16,3 +16,9 @@ class TorchRandnTestCase(TorBencherTestCaseBase):
         result = torch.randn(input_size)
         return result
     
+    
+    
+    
+    
+    
+    

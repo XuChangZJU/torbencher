@@ -21,3 +21,6 @@ class TorchStackTestCase(TorBencherTestCaseBase):
         result = torch.stack(tensors, dim)
         return result
     
+    
+    
+    

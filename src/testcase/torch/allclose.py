@@ -20,3 +20,9 @@ class TorchAllcloseTestCase(TorBencherTestCaseBase):
         result = torch.allclose(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

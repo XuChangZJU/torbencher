@@ -20,3 +20,6 @@ class TorchTensorQuantileTestCase(TorBencherTestCaseBase):
         result = input_tensor.quantile(q, dim)
         return result
     
+    
+    
+    

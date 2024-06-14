@@ -19,3 +19,6 @@ class TorchTensorFlipudTestCase(TorBencherTestCaseBase):
         result = input_tensor.flipud()
         return result
     
+    
+    
+    

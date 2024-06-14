@@ -22,3 +22,6 @@ class TorchTensorMulTestCase(TorBencherTestCaseBase):
         result = tensor.mul(value)
         return result
     
+    
+    
+    

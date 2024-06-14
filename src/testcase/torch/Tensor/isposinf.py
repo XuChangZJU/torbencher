@@ -23,3 +23,6 @@ class TorchTensorIsposinfTestCase(TorBencherTestCaseBase):
         result = tensor.isposinf()
         return result
     
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchModeTestCase(TorBencherTestCaseBase):
         result = torch.mode(input_tensor, dim, keepdim)
         return result
     
+    
+    
+    
+    
+    
+    

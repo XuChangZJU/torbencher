@@ -31,4 +31,9 @@ class TorchFrombufferTestCase(TorBencherTestCaseBase):
         offset = random.randint(0, dtype_size * (num_elements - (count if count > 0 else 1)))
     
         # Invoke torch.frombuffer and return the tensor
+        result = torch.frombuffer(buffer, dtype=dtype, count=count, offset=offset)
+        return result
+    
+    
+    
     

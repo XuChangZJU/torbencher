@@ -22,3 +22,6 @@ class TorchInverseTestCase(TorBencherTestCaseBase):
         result = torch.inverse(tensor)
         return result
     
+    
+    
+    

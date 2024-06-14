@@ -31,3 +31,6 @@ class TorchNnRnnTestCase(TorBencherTestCaseBase):
     
         return output, hn
     
+    
+    
+    

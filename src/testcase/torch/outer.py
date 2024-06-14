@@ -22,3 +22,9 @@ class TorchOuterTestCase(TorBencherTestCaseBase):
         result = torch.outer(input_vector1, input_vector2)
         return result
     
+    
+    
+    
+    
+    
+    

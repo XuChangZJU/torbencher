@@ -20,3 +20,9 @@ class TorchTileTestCase(TorBencherTestCaseBase):
         result = torch.tile(input_tensor, dims)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -20,3 +20,6 @@ class TorchTensorLogsumexpTestCase(TorBencherTestCaseBase):
         result = tensor.logsumexp(dim_to_reduce)  # Apply logsumexp on the chosen dimension
         return result
     
+    
+    
+    

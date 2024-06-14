@@ -18,3 +18,9 @@ class TorchErfcTestCase(TorBencherTestCaseBase):
         result = torch.erfc(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

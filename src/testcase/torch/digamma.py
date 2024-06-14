@@ -21,3 +21,9 @@ class TorchDigammaTestCase(TorBencherTestCaseBase):
         result = torch.digamma(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

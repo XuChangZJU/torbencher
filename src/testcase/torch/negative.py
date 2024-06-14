@@ -22,3 +22,9 @@ class TorchNegativeTestCase(TorBencherTestCaseBase):
         result = torch.negative(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

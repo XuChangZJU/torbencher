@@ -23,3 +23,9 @@ class TorchNeTestCase(TorBencherTestCaseBase):
         result = torch.ne(tensor1, tensor2)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchSignTestCase(TorBencherTestCaseBase):
         result = torch.sign(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

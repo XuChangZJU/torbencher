@@ -22,3 +22,6 @@ class TorchNnFunctionalTanhshrinkTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.tanhshrink(input_tensor)
         return result
     
+    
+    
+    

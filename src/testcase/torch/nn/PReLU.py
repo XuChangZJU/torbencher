@@ -22,3 +22,6 @@ class TorchNnPreluTestCase(TorBencherTestCaseBase):
         result = prelu(input_tensor)  # Apply PReLU to the input tensor
         return result
     
+    
+    
+    

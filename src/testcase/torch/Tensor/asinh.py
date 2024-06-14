@@ -21,3 +21,6 @@ class TorchTensorAsinhTestCase(TorBencherTestCaseBase):
         result = input_tensor.asinh()
         return result
     
+    
+    
+    

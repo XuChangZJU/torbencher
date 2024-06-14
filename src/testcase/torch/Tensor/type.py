@@ -26,3 +26,6 @@ class TorchTensorTypeTestCase(TorBencherTestCaseBase):
         result = tensor.type(dtype)
         return result
     
+    
+    
+    

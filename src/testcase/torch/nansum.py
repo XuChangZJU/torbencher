@@ -19,3 +19,9 @@ class TorchNansumTestCase(TorBencherTestCaseBase):
         result = torch.nansum(input)
         return result
     
+    
+    
+    
+    
+    
+    

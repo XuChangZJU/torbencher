@@ -22,3 +22,9 @@ class TorchExpm1TestCase(TorBencherTestCaseBase):
         result = torch.expm1(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

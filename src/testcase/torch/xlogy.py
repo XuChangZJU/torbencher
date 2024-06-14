@@ -23,3 +23,9 @@ class TorchXlogyTestCase(TorBencherTestCaseBase):
         result = torch.xlogy(input_tensor, other_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

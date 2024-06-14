@@ -30,3 +30,6 @@ class TorchNnBilinearTestCase(TorBencherTestCaseBase):
         
         return output
     
+    
+    
+    

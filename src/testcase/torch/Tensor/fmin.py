@@ -23,3 +23,6 @@ class TorchTensorFminTestCase(TorBencherTestCaseBase):
         result = tensor1.fmin(tensor2)
         return result
     
+    
+    
+    

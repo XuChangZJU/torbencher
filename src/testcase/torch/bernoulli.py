@@ -18,3 +18,9 @@ class TorchBernoulliTestCase(TorBencherTestCaseBase):
         result = torch.bernoulli(input)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -25,3 +25,9 @@ class TorchBaddbmmTestCase(TorBencherTestCaseBase):
         result = torch.baddbmm(input_tensor, batch1, batch2)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -29,3 +29,6 @@ class TorchTensorMatmulTestCase(TorBencherTestCaseBase):
         result = tensor1.matmul(tensor2)
         return result
     
+    
+    
+    

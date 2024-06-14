@@ -23,3 +23,6 @@ class TorchNnFunctionalHardsigmoidTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchArgmaxTestCase(TorBencherTestCaseBase):
         result = torch.argmax(input)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -26,3 +26,6 @@ class TorchNnLazybatchnorm1dTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

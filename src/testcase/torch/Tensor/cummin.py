@@ -18,3 +18,6 @@ class TorchTensorCumminTestCase(TorBencherTestCaseBase):
         result, indices = tensor.cummin(dim)  # Perform the cummin operation along the specified dimension
         return result, indices
     
+    
+    
+    

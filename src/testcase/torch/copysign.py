@@ -19,3 +19,9 @@ class TorchCopysignTestCase(TorBencherTestCaseBase):
         result = torch.copysign(input_tensor, other_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

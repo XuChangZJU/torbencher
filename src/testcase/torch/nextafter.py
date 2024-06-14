@@ -19,3 +19,9 @@ class TorchNextafterTestCase(TorBencherTestCaseBase):
         result = torch.nextafter(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

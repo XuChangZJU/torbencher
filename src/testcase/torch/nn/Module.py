@@ -26,3 +26,17 @@ class TorchNnModuleTestCase(TorBencherTestCaseBase):
                 x = torch.nn.functional.relu(self.conv1(x))
                 return torch.nn.functional.relu(self.conv2(x))
     
+        # Randomly generate input tensor dimensions
+        batch_size = random.randint(1, 4)
+        in_channels = random.randint(1, 10)
+        height = random.randint(10, 20)
+        width = random.randint(10, 20)
+        input_tensor = torch.randn(batch_size, in_channels, height, width)
+    
+        model = RandomModel()
+        result = model(input_tensor)
+        return result
+    
+    
+    
+    

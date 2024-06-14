@@ -20,3 +20,9 @@ class TorchErfinvTestCase(TorBencherTestCaseBase):
         result = torch.erfinv(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

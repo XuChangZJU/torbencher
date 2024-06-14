@@ -32,3 +32,6 @@ class TorchNnUpsamplingbilinear2dTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

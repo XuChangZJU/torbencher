@@ -24,3 +24,6 @@ class TorchTensorFmaxTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

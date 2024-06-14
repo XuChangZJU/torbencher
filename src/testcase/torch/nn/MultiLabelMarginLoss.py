@@ -34,3 +34,6 @@ class TorchNnMultilabelmarginlossTestCase(TorBencherTestCaseBase):
         
         return loss
     
+    
+    
+    

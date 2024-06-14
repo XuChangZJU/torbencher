@@ -19,3 +19,9 @@ class TorchTrilTestCase(TorBencherTestCaseBase):
         result = torch.tril(input_tensor, diagonal)
         return result
     
+    
+    
+    
+    
+    
+    

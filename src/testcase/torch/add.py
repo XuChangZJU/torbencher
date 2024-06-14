@@ -23,3 +23,9 @@ class TorchAddTestCase(TorBencherTestCaseBase):
         result = torch.add(input_tensor, other_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

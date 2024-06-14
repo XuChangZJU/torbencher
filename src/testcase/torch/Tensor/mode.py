@@ -23,3 +23,6 @@ class TorchTensorModeTestCase(TorBencherTestCaseBase):
         result = tensor.mode(random_dim)
         return result
     
+    
+    
+    

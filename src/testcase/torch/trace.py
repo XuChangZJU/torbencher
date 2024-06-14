@@ -17,3 +17,6 @@ class TorchTraceTestCase(TorBencherTestCaseBase):
         result = torch.trace(input_matrix)
         return result
     
+    
+    
+    

@@ -18,3 +18,6 @@ class TorchTensorMsortTestCase(TorBencherTestCaseBase):
         result = input_tensor.msort()
         return result
     
+    
+    
+    

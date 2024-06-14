@@ -25,3 +25,5 @@ class TorchTensorDiagTestCase(TorBencherTestCaseBase):
         # Return the result
         return result
     
+    
+    

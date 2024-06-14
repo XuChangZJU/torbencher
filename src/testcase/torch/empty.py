@@ -19,3 +19,9 @@ class TorchEmptyTestCase(TorBencherTestCaseBase):
         result = torch.empty(input_size)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -28,3 +28,5 @@ class TorchNnL1lossTestCase(TorBencherTestCaseBase):
         # Return the calculated loss
         return output_loss
     
+    
+    

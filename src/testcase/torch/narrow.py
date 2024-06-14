@@ -21,3 +21,9 @@ class TorchNarrowTestCase(TorBencherTestCaseBase):
         result = torch.narrow(input_tensor, dim, start, length)
         return result
     
+    
+    
+    
+    
+    
+    

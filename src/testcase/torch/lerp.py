@@ -25,3 +25,9 @@ class TorchLerpTestCase(TorBencherTestCaseBase):
         result = torch.lerp(start, end, weight)
         return result
     
+    
+    
+    
+    
+    
+    

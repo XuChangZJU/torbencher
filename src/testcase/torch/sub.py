@@ -19,3 +19,9 @@ class TorchSubTestCase(TorBencherTestCaseBase):
         result = torch.sub(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

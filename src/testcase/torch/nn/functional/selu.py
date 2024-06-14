@@ -21,3 +21,6 @@ class TorchNnFunctionalSeluTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.selu(input_tensor)
         return result
     
+    
+    
+    

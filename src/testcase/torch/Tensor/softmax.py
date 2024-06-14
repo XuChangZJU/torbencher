@@ -24,3 +24,6 @@ class TorchTensorSoftmaxTestCase(TorBencherTestCaseBase):
         result = tensor.softmax(dim)
         return result
     
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchCumminTestCase(TorBencherTestCaseBase):
         result = torch.cummin(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

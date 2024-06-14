@@ -31,3 +31,6 @@ class TorchNnLstmcellTestCase(TorBencherTestCaseBase):
         # Return the next hidden state and cell state
         return hx_next, cx_next
     
+    
+    
+    

@@ -24,3 +24,6 @@ class TorchNnTanhTestCase(TorBencherTestCaseBase):
     
         return output_tensor
     
+    
+    
+    

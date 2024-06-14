@@ -19,3 +19,9 @@ class TorchFmodTestCase(TorBencherTestCaseBase):
         result = torch.fmod(dividend, divisor)
         return result
     
+    
+    
+    
+    
+    
+    

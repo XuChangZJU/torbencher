@@ -24,3 +24,6 @@ class TorchTensorIgammaTestCase(TorBencherTestCaseBase):
         result = tensor1.igamma(tensor2)
         return result
     
+    
+    
+    

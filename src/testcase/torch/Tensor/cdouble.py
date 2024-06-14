@@ -22,3 +22,6 @@ class TorchTensorCdoubleTestCase(TorBencherTestCaseBase):
         result = input_tensor.cdouble()
         return result
     
+    
+    
+    

@@ -22,3 +22,6 @@ class TorchTensorHalfTestCase(TorBencherTestCaseBase):
         result = input_tensor.half()
         return result
     
+    
+    
+    

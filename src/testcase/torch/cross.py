@@ -19,3 +19,9 @@ class TorchCrossTestCase(TorBencherTestCaseBase):
         result = torch.cross(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

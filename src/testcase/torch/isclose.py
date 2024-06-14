@@ -20,3 +20,9 @@ class TorchIscloseTestCase(TorBencherTestCaseBase):
         result = torch.isclose(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

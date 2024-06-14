@@ -19,3 +19,9 @@ class TorchSvdTestCase(TorBencherTestCaseBase):
         u, s, v = torch.svd(input_tensor)
         return torch.dist(input_tensor, torch.matmul(torch.matmul(u, torch.diag_embed(s)), v.mT)) # Calculate the distance between input and reconstructed matrix
     
+    
+    
+    
+    
+    
+    

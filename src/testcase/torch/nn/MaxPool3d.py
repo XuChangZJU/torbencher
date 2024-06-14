@@ -40,4 +40,14 @@ class TorchNnMaxpool3dTestCase(TorBencherTestCaseBase):
         dilation = (dilation_d, dilation_h, dilation_w)
     
         # Randomly choose whether to return indices
+        return_indices = random.choice([True, False])
+    
+        # Randomly choose ceil_mode
+        ceil_mode = random.choice([True, False])
+    
+        input_tensor = torch.randn(input_size)
+        max_pool_3d = torch.nn.MaxPool3d(kernel_size, stride, padding, dilation, return_indices, ceil_mode)
+        result = max_pool_3d(input_tensor)
+        return result 
+    
     

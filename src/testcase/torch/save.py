@@ -20,3 +20,9 @@ class TorchSaveTestCase(TorBencherTestCaseBase):
         result = torch.save(tensor, buffer)
         return result
     
+    
+    
+    
+    
+    
+    

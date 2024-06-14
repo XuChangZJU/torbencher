@@ -22,3 +22,6 @@ class TorchTensorMaximumTestCase(TorBencherTestCaseBase):
         result = tensor1.maximum(tensor2)  # Calculate the element-wise maximum of tensor1 and tensor2
         return result
     
+    
+    
+    

@@ -23,3 +23,6 @@ class TorchTensorIsnanTestCase(TorBencherTestCaseBase):
         result = tensor.isnan()
         return result
     
+    
+    
+    

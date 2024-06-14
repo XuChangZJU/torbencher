@@ -17,3 +17,9 @@ class TorchSumTestCase(TorBencherTestCaseBase):
         result = torch.sum(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

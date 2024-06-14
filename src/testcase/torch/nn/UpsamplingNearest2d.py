@@ -32,3 +32,6 @@ class TorchNnUpsamplingnearest2dTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

@@ -27,3 +27,16 @@ class TorchOptimAsgdTestCase(TorBencherTestCaseBase):
         def loss_fn(weights):
             return (weights * torch.randn(input_size)).sum()
     
+        # Perform a few optimization steps
+        num_steps = random.randint(5, 10)
+        for _ in range(num_steps):
+            optimizer.zero_grad()
+            loss = loss_fn(weights)
+            loss.backward()
+            optimizer.step()
+    
+        return weights
+        
+    
+    
+    

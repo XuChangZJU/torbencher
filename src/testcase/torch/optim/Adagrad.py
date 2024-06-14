@@ -34,4 +34,7 @@ class TorchOptimAdagradTestCase(TorBencherTestCaseBase):
             optimizer.step()
     
         return tensor
+        
+    
+    
     

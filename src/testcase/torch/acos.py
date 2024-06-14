@@ -18,3 +18,9 @@ class TorchAcosTestCase(TorBencherTestCaseBase):
         result = torch.acos(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

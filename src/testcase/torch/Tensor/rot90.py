@@ -25,3 +25,6 @@ class TorchTensorRot90TestCase(TorBencherTestCaseBase):
         result = input_tensor.rot90(k, dims)
         return result
     
+    
+    
+    

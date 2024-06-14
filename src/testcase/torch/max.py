@@ -18,3 +18,9 @@ class TorchMaxTestCase(TorBencherTestCaseBase):
         result = torch.max(input)
         return result
     
+    
+    
+    
+    
+    
+    

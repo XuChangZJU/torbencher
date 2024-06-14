@@ -12,7 +12,7 @@ class TorchNnModulesLazyLazymodulemixinTestCase(TorBencherTestCaseBase):
     def test_lazy_module_mixin_correctness(self):
         class LazyMLP(torch.nn.Module):
             def __init__(self):
-                super().__init__()
+                super().
                 self.fc1 = torch.nn.LazyLinear(random.randint(5, 15))  # Random out_features between 5 and 15
                 self.relu1 = torch.nn.ReLU()
                 self.fc2 = torch.nn.LazyLinear(random.randint(1, 5))  # Random out_features between 1 and 5
@@ -22,4 +22,19 @@ class TorchNnModulesLazyLazymodulemixinTestCase(TorBencherTestCaseBase):
                 x = self.relu1(self.fc1(input))
                 y = self.relu2(self.fc2(x))
                 return y
+    
+        # Create a LazyMLP instance
+        lazy_mlp = LazyMLP()
+    
+        # Transform the network's device and dtype
+        lazy_mlp = lazy_mlp.cuda().double()
+    
+        # Perform a dry run to initialize the network's lazy modules
+        input_tensor = torch.ones(random.randint(5, 15), random.randint(5, 15)).cuda()  # Random input tensor size
+        result = lazy_mlp(input_tensor)
+    
+        return result
+    
+    
+    
     

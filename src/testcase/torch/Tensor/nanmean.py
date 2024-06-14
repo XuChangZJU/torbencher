@@ -24,3 +24,6 @@ class TorchTensorNanmeanTestCase(TorBencherTestCaseBase):
         result = tensor.nanmean(dim)
         return result
     
+    
+    
+    

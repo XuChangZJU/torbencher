@@ -28,3 +28,6 @@ class TorchNnAdaptiveavgpool3dTestCase(TorBencherTestCaseBase):
         output_tensor = adaptive_avg_pool_3d(input_tensor)
         return output_tensor
     
+    
+    
+    

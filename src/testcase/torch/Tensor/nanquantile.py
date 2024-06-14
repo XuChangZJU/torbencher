@@ -25,3 +25,6 @@ class TorchTensorNanquantileTestCase(TorBencherTestCaseBase):
         result = tensor.nanquantile(q, dim)
         return result
     
+    
+    
+    

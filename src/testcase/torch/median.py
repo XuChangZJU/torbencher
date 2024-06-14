@@ -18,3 +18,9 @@ class TorchMedianTestCase(TorBencherTestCaseBase):
         result = torch.median(input)
         return result
     
+    
+    
+    
+    
+    
+    

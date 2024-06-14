@@ -26,3 +26,6 @@ class TorchTensorIndicesTestCase(TorBencherTestCaseBase):
         result = sparse_tensor.indices()
         return result
     
+    
+    
+    

@@ -17,3 +17,9 @@ class TorchZerosTestCase(TorBencherTestCaseBase):
         result = torch.zeros(input_size)
         return result
     
+    
+    
+    
+    
+    
+    

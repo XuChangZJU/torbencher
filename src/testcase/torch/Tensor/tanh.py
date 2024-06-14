@@ -9,15 +9,16 @@ from src.util.decorator import test_api
 @test_api(torch.Tensor.tanh)
 class TorchTensorTanhTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_tanh__correctness(self):
-        """
-        Test the correctness of torch.Tensor.tanh_()
-        """
+    def test_tanh_correctness(self):
+        """Test the correctness of torch.Tensor.tanh."""
         dim = random.randint(1, 4)  # Random dimension for the tensors
         num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
         input_size=[num_of_elements_each_dim for i in range(dim)] 
     
-        input_tensor = torch.randn(input_size)  # Random tensor 
-        input_tensor.tanh_()
-        return input_tensor
+        tensor = torch.randn(input_size)  # Random tensor
+        result = tensor.tanh()
+        return result
+    
+    
+    
     

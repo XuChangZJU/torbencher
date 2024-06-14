@@ -22,3 +22,20 @@ class TorchLuTestCase(TorBencherTestCaseBase):
         
         return LU, pivots
     
+    def test_lu_with_infos(self):
+        # Randomly generate dimensions for the matrix
+        m = random.randint(2, 5)
+        n = random.randint(2, 5)
+        
+        # Generate a random matrix (tensor) of size (m, n)
+        A = torch.randn(m, n)
+        
+        # Perform LU factorization and get info
+        LU, pivots, info = torch.lu(A, get_infos=True)
+        
+        return LU, pivots, info
+    
+    
+    
+    
+    

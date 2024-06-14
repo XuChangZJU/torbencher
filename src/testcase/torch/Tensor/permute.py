@@ -24,3 +24,6 @@ class TorchTensorPermuteTestCase(TorBencherTestCaseBase):
         result = tensor.permute(dims)
         return result
     
+    
+    
+    

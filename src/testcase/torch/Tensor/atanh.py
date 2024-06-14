@@ -21,3 +21,6 @@ class TorchTensorAtanhTestCase(TorBencherTestCaseBase):
         result = input_tensor.atanh()
         return result
     
+    
+    
+    

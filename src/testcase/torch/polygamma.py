@@ -23,3 +23,9 @@ class TorchPolygammaTestCase(TorBencherTestCaseBase):
         result = torch.polygamma(n, input)
         return result
     
+    
+    
+    
+    
+    
+    

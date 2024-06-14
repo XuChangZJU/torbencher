@@ -30,3 +30,6 @@ class TorchNnCosineembeddinglossTestCase(TorBencherTestCaseBase):
         
         return loss
     
+    
+    
+    

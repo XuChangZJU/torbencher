@@ -25,3 +25,6 @@ class TorchTensorHistogramTestCase(TorBencherTestCaseBase):
         # Return the histogram and bin edges
         return hist, bin_edges
     
+    
+    
+    

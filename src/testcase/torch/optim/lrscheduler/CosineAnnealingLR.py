@@ -6,7 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.optim.lrscheduler.CosineAnnealingLR)
+@test_api(torch.optim.lr_scheduler.CosineAnnealingLR)
 class TorchOptimLrschedulerCosineannealinglrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_CosineAnnealingLR_correctness(self):
@@ -32,4 +32,7 @@ class TorchOptimLrschedulerCosineannealinglrTestCase(TorBencherTestCaseBase):
         lr_after_step = optimizer.param_groups[0]['lr']
     
         return lr_before_step, lr_after_step # return lr before and after stepping to show the effect of scheduler
+    
+    
+    
     

@@ -25,3 +25,6 @@ class TorchTensorSmmTestCase(TorBencherTestCaseBase):
         result = matrix.smm(mat)
         return result
     
+    
+    
+    

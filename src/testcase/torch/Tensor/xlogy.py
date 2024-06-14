@@ -25,3 +25,6 @@ class TorchTensorXlogyTestCase(TorBencherTestCaseBase):
         result = tensor1.xlogy(tensor2)
         return result
     
+    
+    
+    

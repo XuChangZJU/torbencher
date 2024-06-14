@@ -21,3 +21,6 @@ class TorchTensorI0TestCase(TorBencherTestCaseBase):
         result = input_tensor.i0()
         return result
     
+    
+    
+    

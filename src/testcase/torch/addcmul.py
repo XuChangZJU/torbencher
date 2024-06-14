@@ -20,3 +20,9 @@ class TorchAddcmulTestCase(TorBencherTestCaseBase):
         result = torch.addcmul(input_tensor, tensor1, tensor2)
         return result
     
+    
+    
+    
+    
+    
+    

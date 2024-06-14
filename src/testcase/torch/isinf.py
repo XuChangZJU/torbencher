@@ -28,4 +28,9 @@ class TorchIsinfTestCase(TorBencherTestCaseBase):
             input_tensor.view(-1)[idx] = value_to_insert
     
         # Step 3: Apply torch.isinf and return the result
+        result = torch.isinf(input_tensor)
+        return result
+    
+    
+    
     

@@ -23,3 +23,6 @@ class TorchTensorSelectTestCase(TorBencherTestCaseBase):
         result = input_tensor.select(dim, index)
         return result
     
+    
+    
+    

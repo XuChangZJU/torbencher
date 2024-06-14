@@ -24,3 +24,6 @@ class TorchTensorDimTestCase(TorBencherTestCaseBase):
         result = tensor.dim()
         return result
     
+    
+    
+    

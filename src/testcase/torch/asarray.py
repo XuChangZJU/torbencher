@@ -18,3 +18,9 @@ class TorchAsarrayTestCase(TorBencherTestCaseBase):
         result = torch.asarray(obj_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

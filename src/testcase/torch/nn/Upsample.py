@@ -33,3 +33,6 @@ class TorchNnUpsampleTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

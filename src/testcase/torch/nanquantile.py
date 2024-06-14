@@ -33,3 +33,6 @@ class TorchNanquantileTestCase(TorBencherTestCaseBase):
         result = torch.nanquantile(tensor, quantile, dim)
         return result
     
+    
+    
+    

@@ -27,3 +27,6 @@ class TorchNnGaussiannlllossTestCase(TorBencherTestCaseBase):
         loss = loss_fn(input_tensor, target_tensor, var_tensor)
         return loss
     
+    
+    
+    

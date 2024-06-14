@@ -22,3 +22,6 @@ class TorchNnFunctionalSoftsignTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.softsign(input_tensor)
         return result
     
+    
+    
+    

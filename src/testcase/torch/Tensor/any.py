@@ -22,3 +22,5 @@ class TorchTensorAnyTestCase(TorBencherTestCaseBase):
         result = tensor.any()
         return result
     
+    
+    

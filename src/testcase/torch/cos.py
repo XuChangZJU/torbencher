@@ -18,3 +18,9 @@ class TorchCosTestCase(TorBencherTestCaseBase):
         result = torch.cos(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

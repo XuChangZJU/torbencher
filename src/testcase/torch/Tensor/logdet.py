@@ -21,3 +21,6 @@ class TorchTensorLogdetTestCase(TorBencherTestCaseBase):
         result = tensor.logdet()
         return result
     
+    
+    
+    

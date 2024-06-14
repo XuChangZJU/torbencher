@@ -32,3 +32,6 @@ class TorchNnPixelshuffleTestCase(TorBencherTestCaseBase):
     
         return output_tensor
     
+    
+    
+    

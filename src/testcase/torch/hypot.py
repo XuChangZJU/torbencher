@@ -21,3 +21,9 @@ class TorchHypotTestCase(TorBencherTestCaseBase):
         result = torch.hypot(input_tensor, other_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

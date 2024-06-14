@@ -20,3 +20,6 @@ class TorchTensorSqrtTestCase(TorBencherTestCaseBase):
         result = input_tensor.sqrt()
         return result
     
+    
+    
+    

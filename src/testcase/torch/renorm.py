@@ -35,3 +35,6 @@ class TorchRenormTestCase(TorBencherTestCaseBase):
         # Return the result tensor
         return result
     
+    
+    
+    

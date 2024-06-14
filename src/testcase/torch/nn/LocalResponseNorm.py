@@ -29,3 +29,6 @@ class TorchNnLocalresponsenormTestCase(TorBencherTestCaseBase):
         output_tensor = lrn(input_tensor)
         return output_tensor
     
+    
+    
+    

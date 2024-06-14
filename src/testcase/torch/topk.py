@@ -19,3 +19,9 @@ class TorchTopkTestCase(TorBencherTestCaseBase):
         result = torch.topk(input, k, dim)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -22,3 +22,6 @@ class TorchTensorFliplrTestCase(TorBencherTestCaseBase):
         result = input_tensor.fliplr()
         return result
     
+    
+    
+    

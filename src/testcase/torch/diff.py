@@ -21,3 +21,6 @@ class TorchDiffTestCase(TorBencherTestCaseBase):
         result = torch.diff(tensor, n=n, dim=compute_dim)
         return result
     
+    
+    
+    

@@ -19,3 +19,6 @@ class TorchNnFunctionalDropout1dTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.dropout1d(input_tensor, p)
         return result
     
+    
+    
+    

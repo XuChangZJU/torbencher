@@ -23,3 +23,9 @@ class TorchMultiplyTestCase(TorBencherTestCaseBase):
         result = torch.multiply(tensor1, tensor2)
         return result
     
+    
+    
+    
+    
+    
+    

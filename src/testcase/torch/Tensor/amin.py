@@ -22,3 +22,6 @@ class TorchTensorAminTestCase(TorBencherTestCaseBase):
         result = input_tensor.amin()
         return result
     
+    
+    
+    

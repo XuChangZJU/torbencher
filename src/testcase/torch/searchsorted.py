@@ -25,3 +25,9 @@ class TorchSearchsortedTestCase(TorBencherTestCaseBase):
         result = torch.searchsorted(sorted_sequence, values)
         return result
     
+    
+    
+    
+    
+    
+    

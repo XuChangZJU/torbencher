@@ -18,3 +18,9 @@ class TorchSinTestCase(TorBencherTestCaseBase):
         result = torch.sin(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

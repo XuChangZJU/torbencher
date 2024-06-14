@@ -25,3 +25,6 @@ class TorchTensorPolygammaTestCase(TorBencherTestCaseBase):
         result = tensor.polygamma(n)
         return result
     
+    
+    
+    

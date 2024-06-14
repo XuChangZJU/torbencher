@@ -24,3 +24,6 @@ class TorchTensorDistTestCase(TorBencherTestCaseBase):
         result = tensor1.dist(tensor2)
         return result
     
+    
+    
+    

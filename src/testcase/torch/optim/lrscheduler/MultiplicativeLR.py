@@ -6,7 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.optim.lrscheduler.MultiplicativeLR)
+@test_api(torch.optim.lr_scheduler.MultiplicativeLR)
 class TorchOptimLrschedulerMultiplicativelrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_multiplicativelr_correctness(self):
@@ -36,4 +36,7 @@ class TorchOptimLrschedulerMultiplicativelrTestCase(TorBencherTestCaseBase):
     
         # Return the updated learning rate of the first parameter group
         return optimizer.param_groups[0]['lr']
+    
+    
+    
     

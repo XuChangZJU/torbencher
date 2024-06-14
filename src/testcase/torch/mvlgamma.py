@@ -22,3 +22,9 @@ class TorchMvlgammaTestCase(TorBencherTestCaseBase):
         result = torch.mvlgamma(input_tensor, p)
         return result
     
+    
+    
+    
+    
+    
+    

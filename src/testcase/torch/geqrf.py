@@ -17,3 +17,9 @@ class TorchGeqrfTestCase(TorBencherTestCaseBase):
         a, tau = torch.geqrf(input)
         return a
     
+    
+    
+    
+    
+    
+    

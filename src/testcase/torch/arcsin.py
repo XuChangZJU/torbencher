@@ -19,3 +19,9 @@ class TorchArcsinTestCase(TorBencherTestCaseBase):
         result = torch.arcsin(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

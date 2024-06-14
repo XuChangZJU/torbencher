@@ -6,7 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.optim.lrscheduler.CyclicLR)
+@test_api(torch.optim.lr_scheduler.CyclicLR)
 class TorchOptimLrschedulerCycliclrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_CyclicLR_correctness(self):
@@ -36,4 +36,7 @@ class TorchOptimLrschedulerCycliclrTestCase(TorBencherTestCaseBase):
     
         # Return the last learning rate
         return scheduler.get_last_lr()
+    
+    
+    
     

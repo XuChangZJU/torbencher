@@ -21,3 +21,6 @@ class TorchTensorNegTestCase(TorBencherTestCaseBase):
         result = input_tensor.neg()
         return result
     
+    
+    
+    

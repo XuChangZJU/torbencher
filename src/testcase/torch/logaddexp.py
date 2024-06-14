@@ -19,3 +19,9 @@ class TorchLogaddexpTestCase(TorBencherTestCaseBase):
         result = torch.logaddexp(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -1,41 +1,40 @@
 import torch
-import torch.nn as nn
-import torch.nn.utils.prune as prune
 import random
+import torch.nn.utils.prune as prune
 
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.nn.utils.prune.randomstructured)
+@test_api(torch.nn.utils.prune.RandomStructured)
 class TorchNnUtilsPruneRandomstructuredTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_random_structured_correctness(self):
-        # Randomly generate dimensions for the Linear layer
-        in_features = random.randint(2, 10)
-        out_features = random.randint(2, 10)
+        # Random dimension for the tensor
+        dim = random.randint(2, 4)
+        # Random number of elements each dimension
+        num_of_elements_each_dim = random.randint(2, 5)
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
         
-        # Create a Linear layer with random dimensions
-        module = nn.Linear(in_features, out_features)
+        # Create a random tensor
+        tensor = torch.randn(input_size)
         
-        # Randomly choose the parameter name to prune
-        param_name = 'weight'
-        
-        # Randomly generate the amount to prune
-        amount = random.uniform(0.1, 0.9)  # Fraction of parameters to prune
-        
-        # Randomly choose the dimension along which to prune
-        dim = random.randint(0, 1)
-        
-        # Apply random structured pruning
-        pruned_module = prune.random_structured(module, param_name, amount, dim)
-        
-        # Check the number of pruned channels
-        if dim == 0:
-            pruned_channels = int(sum(torch.sum(pruned_module.weight, dim=1) == 0))
+        # Random amount to prune (either as a fraction or an absolute number)
+        if random.choice([True, False]):
+            amount = random.uniform(0.1, 0.9)  # Fraction of parameters to prune
         else:
-            pruned_channels = int(sum(torch.sum(pruned_module.weight, dim=0) == 0))
+            amount = random.randint(1, num_of_elements_each_dim)  # Absolute number of parameters to prune
         
-        return pruned_channels
+        # Random dimension along which to prune
+        prune_dim = random.randint(0, dim - 1)
+        
+        # Apply RandomStructured pruning
+        pruner = prune.RandomStructured(amount, prune_dim)
+        pruner.apply(tensor)
+        
+        return tensor
+    
+    
+    
     

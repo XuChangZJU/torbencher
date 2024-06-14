@@ -18,3 +18,9 @@ class TorchCloneTestCase(TorBencherTestCaseBase):
         cloned_tensor = torch.clone(input_tensor)
         return cloned_tensor
     
+    
+    
+    
+    
+    
+    

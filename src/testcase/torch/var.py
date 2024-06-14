@@ -18,3 +18,9 @@ class TorchVarTestCase(TorBencherTestCaseBase):
         result = torch.var(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

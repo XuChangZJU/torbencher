@@ -27,3 +27,6 @@ class TorchNnSoftminTestCase(TorBencherTestCaseBase):
         # Return the output tensor
         return output_tensor
     
+    
+    
+    

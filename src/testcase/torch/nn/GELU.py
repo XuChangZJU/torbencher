@@ -22,3 +22,5 @@ class TorchNnGeluTestCase(TorBencherTestCaseBase):
         output_tensor = gelu(input_tensor)
         return output_tensor
     
+    
+    

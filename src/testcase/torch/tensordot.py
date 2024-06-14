@@ -31,3 +31,9 @@ class TorchTensordotTestCase(TorBencherTestCaseBase):
         result = torch.tensordot(a, b, dims)
         return result
     
+    
+    
+    
+    
+    
+    

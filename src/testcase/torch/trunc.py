@@ -18,3 +18,9 @@ class TorchTruncTestCase(TorBencherTestCaseBase):
         result = torch.trunc(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

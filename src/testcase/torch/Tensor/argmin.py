@@ -22,3 +22,6 @@ class TorchTensorArgminTestCase(TorBencherTestCaseBase):
         result = tensor.argmin()
         return result
     
+    
+    
+    

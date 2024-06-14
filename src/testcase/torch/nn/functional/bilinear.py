@@ -32,3 +32,6 @@ class TorchNnFunctionalBilinearTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.bilinear(input1, input2, weight)
         return result
     
+    
+    
+    

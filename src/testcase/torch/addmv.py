@@ -22,3 +22,9 @@ class TorchAddmvTestCase(TorBencherTestCaseBase):
         result = torch.addmv(input_tensor, mat_tensor, vec_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

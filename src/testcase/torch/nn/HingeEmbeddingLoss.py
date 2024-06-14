@@ -30,3 +30,6 @@ class TorchNnHingeembeddinglossTestCase(TorBencherTestCaseBase):
         loss = loss_fn(input_tensor, labels_tensor)
         return loss
     
+    
+    
+    

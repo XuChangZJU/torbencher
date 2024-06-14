@@ -21,3 +21,5 @@ class TorchNnHardsigmoidTestCase(TorBencherTestCaseBase):
         result = hardsigmoid(input_tensor)
         return result
     
+    
+    

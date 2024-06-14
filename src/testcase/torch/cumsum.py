@@ -19,3 +19,9 @@ class TorchCumsumTestCase(TorBencherTestCaseBase):
         result = torch.cumsum(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

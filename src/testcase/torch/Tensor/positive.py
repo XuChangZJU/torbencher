@@ -21,3 +21,6 @@ class TorchTensorPositiveTestCase(TorBencherTestCaseBase):
         result = input_tensor.positive()
         return result
     
+    
+    
+    

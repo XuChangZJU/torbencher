@@ -22,3 +22,6 @@ class TorchTensorHardshrinkTestCase(TorBencherTestCaseBase):
         result = input_tensor.hardshrink()
         return result
     
+    
+    
+    

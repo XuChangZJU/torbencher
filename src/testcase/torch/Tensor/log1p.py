@@ -23,3 +23,6 @@ class TorchTensorLog1pTestCase(TorBencherTestCaseBase):
         # Return the result tensor
         return result
     
+    
+    
+    

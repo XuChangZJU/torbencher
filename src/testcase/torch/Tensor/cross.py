@@ -21,3 +21,6 @@ class TorchTensorCrossTestCase(TorBencherTestCaseBase):
         result = torch.cross(tensor1, tensor2, dim)
         return result
     
+    
+    
+    

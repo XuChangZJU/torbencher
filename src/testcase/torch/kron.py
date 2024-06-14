@@ -18,3 +18,9 @@ class TorchKronTestCase(TorBencherTestCaseBase):
         result = torch.kron(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

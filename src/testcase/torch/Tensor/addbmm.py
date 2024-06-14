@@ -9,8 +9,8 @@ from src.util.decorator import test_api
 @test_api(torch.Tensor.addbmm)
 class TorchTensorAddbmmTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_addbmm__correctness(self):
-        # Random dimensions for the batch tensors
+    def test_addbmm_correctness(self):
+        # Random dimensions for the batch matrices
         batch_size = random.randint(1, 4)
         M = random.randint(1, 5)
         N = random.randint(1, 5)
@@ -23,8 +23,11 @@ class TorchTensorAddbmmTestCase(TorBencherTestCaseBase):
         # Random tensor for the input tensor
         input_tensor = torch.randn(M, P)
         
-        # Perform the in-place addbmm_ operation
-        result = input_tensor.addbmm_(batch1, batch2)
+        # Perform the addbmm operation
+        result = input_tensor.addbmm(batch1, batch2)
         
         return result
+    
+    
+    
     

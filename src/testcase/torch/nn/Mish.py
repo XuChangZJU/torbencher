@@ -19,3 +19,6 @@ class TorchNnMishTestCase(TorBencherTestCaseBase):
         result = m(input_tensor)
         return result
     
+    
+    
+    

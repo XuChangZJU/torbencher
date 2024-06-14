@@ -19,3 +19,9 @@ class TorchGeTestCase(TorBencherTestCaseBase):
         result = torch.ge(tensor1, tensor2)
         return result
     
+    
+    
+    
+    
+    
+    

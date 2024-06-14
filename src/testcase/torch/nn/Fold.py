@@ -41,3 +41,6 @@ class TorchNnFoldTestCase(TorBencherTestCaseBase):
         output_tensor = fold(input_tensor)
         return output_tensor
     
+    
+    
+    

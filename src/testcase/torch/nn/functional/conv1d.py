@@ -26,3 +26,6 @@ class TorchNnFunctionalConv1dTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.conv1d(input_tensor, filter_tensor)
         return result
     
+    
+    
+    

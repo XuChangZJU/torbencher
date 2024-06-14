@@ -20,3 +20,9 @@ class TorchEqTestCase(TorBencherTestCaseBase):
         result = torch.eq(tensor1, tensor2)
         return result
     
+    
+    
+    
+    
+    
+    

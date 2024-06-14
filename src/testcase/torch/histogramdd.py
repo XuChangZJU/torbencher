@@ -28,3 +28,6 @@ class TorchHistogramddTestCase(TorBencherTestCaseBase):
         
         return hist, bin_edges
     
+    
+    
+    

@@ -23,3 +23,9 @@ class TorchAddbmmTestCase(TorBencherTestCaseBase):
         result = torch.addbmm(input_tensor, batch1, batch2)
         return result
     
+    
+    
+    
+    
+    
+    

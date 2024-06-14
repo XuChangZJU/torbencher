@@ -23,3 +23,6 @@ class TorchTensorAminmaxTestCase(TorBencherTestCaseBase):
         # Return result
         return min_val, max_val
     
+    
+    
+    

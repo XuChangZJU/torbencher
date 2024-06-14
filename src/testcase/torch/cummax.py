@@ -18,3 +18,9 @@ class TorchCummaxTestCase(TorBencherTestCaseBase):
         result = torch.cummax(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

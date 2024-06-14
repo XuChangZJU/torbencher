@@ -30,3 +30,6 @@ class TorchNnAvgpool1dTestCase(TorBencherTestCaseBase):
         result = avg_pool(input_tensor)
         return result
     
+    
+    
+    

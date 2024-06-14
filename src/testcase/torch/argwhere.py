@@ -22,3 +22,9 @@ class TorchArgwhereTestCase(TorBencherTestCaseBase):
         result = torch.argwhere(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -17,3 +17,9 @@ class TorchSlogdetTestCase(TorBencherTestCaseBase):
         sign, logabsdet = torch.slogdet(input_tensor)
         return sign, logabsdet
     
+    
+    
+    
+    
+    
+    

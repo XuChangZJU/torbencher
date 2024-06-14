@@ -28,3 +28,6 @@ class TorchNnLazylinearTestCase(TorBencherTestCaseBase):
         result = lazy_linear(input_tensor)
         return result
     
+    
+    
+    

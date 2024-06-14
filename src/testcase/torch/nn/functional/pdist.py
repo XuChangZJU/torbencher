@@ -24,3 +24,6 @@ class TorchNnFunctionalPdistTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.pdist(input_tensor, p=p_value)
         return result
     
+    
+    
+    

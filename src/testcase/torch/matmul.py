@@ -16,3 +16,9 @@ class TorchMatmulTestCase(TorBencherTestCaseBase):
         result = torch.matmul(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

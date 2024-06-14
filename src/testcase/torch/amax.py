@@ -16,3 +16,9 @@ class TorchAmaxTestCase(TorBencherTestCaseBase):
         result = torch.amax(input_tensor, dim, keepdim)
         return result
     
+    
+    
+    
+    
+    
+    

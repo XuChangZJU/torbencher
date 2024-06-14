@@ -21,3 +21,6 @@ class TorchTensorLgammaTestCase(TorBencherTestCaseBase):
         result = input_tensor.lgamma()  # Calculate the lgamma of the tensor
         return result
     
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchFrexpTestCase(TorBencherTestCaseBase):
         mantissa, exponent = torch.frexp(input)
         return torch.ldexp(mantissa, exponent)
     
+    
+    
+    
+    
+    
+    

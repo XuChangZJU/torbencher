@@ -20,3 +20,6 @@ class TorchLogspaceTestCase(TorBencherTestCaseBase):
         result = torch.logspace(start, end, steps)
         return result
     
+    
+    
+    

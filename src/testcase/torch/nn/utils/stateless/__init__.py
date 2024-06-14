@@ -1,1 +1,1 @@
-from .functionalcall import TorchNnUtilsStatelessFunctionalcallTestCase
+from .functional_call import TorchNnUtilsStatelessFunctionalcallTestCase

@@ -19,3 +19,9 @@ class TorchDistTestCase(TorBencherTestCaseBase):
         result = torch.dist(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

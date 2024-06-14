@@ -23,3 +23,6 @@ class TorchNnFunctionalHardshrinkTestCase(TorBencherTestCaseBase):
         # Return the result tensor
         return result
     
+    
+    
+    

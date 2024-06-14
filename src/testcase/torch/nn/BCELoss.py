@@ -28,3 +28,6 @@ class TorchNnBcelossTestCase(TorBencherTestCaseBase):
         result = bce_loss(input_tensor, target_tensor)
         return result
     
+    
+    
+    

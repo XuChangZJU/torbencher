@@ -48,3 +48,6 @@ class TorchOptimAdamaxTestCase(TorBencherTestCaseBase):
     
         return model.weight
     
+    
+    
+    

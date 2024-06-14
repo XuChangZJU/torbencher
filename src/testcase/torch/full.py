@@ -17,3 +17,9 @@ class TorchFullTestCase(TorBencherTestCaseBase):
         result = torch.full(input_size, fill_value)
         return result
     
+    
+    
+    
+    
+    
+    

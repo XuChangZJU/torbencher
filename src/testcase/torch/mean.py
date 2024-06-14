@@ -18,3 +18,9 @@ class TorchMeanTestCase(TorBencherTestCaseBase):
         result = torch.mean(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

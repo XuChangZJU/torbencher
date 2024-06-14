@@ -18,3 +18,6 @@ class TorchMultinomialTestCase(TorBencherTestCaseBase):
         result = torch.multinomial(input_tensor, num_samples)
         return result
     
+    
+    
+    

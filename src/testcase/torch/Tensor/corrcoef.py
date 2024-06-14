@@ -17,3 +17,6 @@ class TorchTensorCorrcoefTestCase(TorBencherTestCaseBase):
         result = torch.corrcoef(tensor)
         return result
     
+    
+    
+    

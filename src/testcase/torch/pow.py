@@ -19,3 +19,9 @@ class TorchPowTestCase(TorBencherTestCaseBase):
         result = torch.pow(input, exponent)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -20,3 +20,9 @@ class TorchClampTestCase(TorBencherTestCaseBase):
         result = torch.clamp(input_tensor, min_value, max_value)
         return result
     
+    
+    
+    
+    
+    
+    

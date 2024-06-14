@@ -18,3 +18,9 @@ class TorchFliplrTestCase(TorBencherTestCaseBase):
         result = torch.fliplr(input)
         return result
     
+    
+    
+    
+    
+    
+    

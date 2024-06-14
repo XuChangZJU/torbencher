@@ -28,3 +28,6 @@ class TorchNnLayernormTestCase(TorBencherTestCaseBase):
         result = layer_norm(input_tensor)
         return result
     
+    
+    
+    

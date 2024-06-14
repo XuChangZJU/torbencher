@@ -35,3 +35,6 @@ class TorchNnLppool3dTestCase(TorBencherTestCaseBase):
         
         return output_tensor
     
+    
+    
+    

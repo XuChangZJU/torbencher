@@ -6,7 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.optim.lrscheduler.ReduceLROnPlateau)
+@test_api(torch.optim.lr_scheduler.ReduceLROnPlateau)
 class TorchOptimLrschedulerReducelronplateauTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_reduce_lr_on_plateau_correctness(self):
@@ -49,4 +49,7 @@ class TorchOptimLrschedulerReducelronplateauTestCase(TorBencherTestCaseBase):
             scheduler.step(metrics)
     
         return optimizer.param_groups[0]['lr']
+    
+    
+    
     

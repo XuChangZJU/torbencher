@@ -22,3 +22,6 @@ class TorchNnFunctionalSoftshrinkTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.softshrink(input_tensor)
         return result
     
+    
+    
+    

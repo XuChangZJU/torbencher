@@ -19,3 +19,9 @@ class TorchGatherTestCase(TorBencherTestCaseBase):
         result = torch.gather(input_tensor, dim, index_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

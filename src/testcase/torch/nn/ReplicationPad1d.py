@@ -29,3 +29,6 @@ class TorchNnReplicationpad1dTestCase(TorBencherTestCaseBase):
         result = replication_pad_1d(input_tensor)
         return result
     
+    
+    
+    

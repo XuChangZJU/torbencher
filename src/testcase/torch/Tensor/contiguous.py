@@ -18,3 +18,6 @@ class TorchTensorContiguousTestCase(TorBencherTestCaseBase):
         result = tensor.contiguous()  # Call contiguous method on the tensor
         return result
     
+    
+    
+    

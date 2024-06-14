@@ -23,3 +23,6 @@ class TorchTensorDeviceTestCase(TorBencherTestCaseBase):
         result = tensor.device
         return result
     
+    
+    
+    

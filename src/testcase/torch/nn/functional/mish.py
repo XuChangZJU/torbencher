@@ -18,3 +18,6 @@ class TorchNnFunctionalMishTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.mish(input_tensor)
         return result
     
+    
+    
+    

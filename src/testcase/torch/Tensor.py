@@ -22,3 +22,9 @@ class TorchTensorTestCase(TorBencherTestCaseBase):
         result = torch.tensor(data)
         return result
     
+    
+    
+    
+    
+    
+    

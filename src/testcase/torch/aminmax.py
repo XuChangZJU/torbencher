@@ -18,3 +18,9 @@ class TorchAminmaxTestCase(TorBencherTestCaseBase):
         result = torch.aminmax(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

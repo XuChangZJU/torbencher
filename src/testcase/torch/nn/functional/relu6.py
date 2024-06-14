@@ -22,3 +22,6 @@ class TorchNnFunctionalRelu6TestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.relu6(input_tensor)
         return result
     
+    
+    
+    

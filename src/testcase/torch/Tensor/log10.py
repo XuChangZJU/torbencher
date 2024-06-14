@@ -22,3 +22,6 @@ class TorchTensorLog10TestCase(TorBencherTestCaseBase):
         result = input_tensor.log10()
         return result
     
+    
+    
+    

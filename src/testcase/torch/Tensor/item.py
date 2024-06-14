@@ -24,3 +24,6 @@ class TorchTensorItemTestCase(TorBencherTestCaseBase):
         result = tensor.item()
         return result
     
+    
+    
+    

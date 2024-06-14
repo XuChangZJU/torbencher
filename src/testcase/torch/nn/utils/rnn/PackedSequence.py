@@ -24,4 +24,7 @@ class TorchNnUtilsRnnPackedsequenceTestCase(TorBencherTestCaseBase):
         packed_sequence = torch.nn.utils.rnn.PackedSequence(data, batch_sizes, sorted_indices, unsorted_indices)
     
         return packed_sequence
+        
+    
+    
     

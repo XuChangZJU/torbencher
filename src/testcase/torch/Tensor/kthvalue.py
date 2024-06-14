@@ -19,3 +19,6 @@ class TorchTensorKthvalueTestCase(TorBencherTestCaseBase):
         result = tensor.kthvalue(k)
         return result
     
+    
+    
+    

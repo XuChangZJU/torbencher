@@ -17,3 +17,9 @@ class TorchSeedTestCase(TorBencherTestCaseBase):
         tensor2 = torch.randn(random.randint(1, 10)) # Generate another random tensor after resetting the seed
         return seed1, seed2, tensor1, tensor2 # Return seeds and tensors to check if seeds are different and tensors are different
     
+    
+    
+    
+    
+    
+    

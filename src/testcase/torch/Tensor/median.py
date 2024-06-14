@@ -25,3 +25,6 @@ class TorchTensorMedianTestCase(TorBencherTestCaseBase):
         # Return median tensor and indices
         return median_tensor, indices
     
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchSquareTestCase(TorBencherTestCaseBase):
         result = torch.square(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

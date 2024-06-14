@@ -22,3 +22,6 @@ class TorchTensorByteTestCase(TorBencherTestCaseBase):
         result = input_tensor.byte()
         return result
     
+    
+    
+    

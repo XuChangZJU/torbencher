@@ -17,3 +17,9 @@ class TorchOnesTestCase(TorBencherTestCaseBase):
         result = torch.ones(input_size)
         return result
     
+    
+    
+    
+    
+    
+    

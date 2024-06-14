@@ -24,3 +24,6 @@ class TorchNnFlattenTestCase(TorBencherTestCaseBase):
         result = flatten(input_tensor)
         return result
     
+    
+    
+    

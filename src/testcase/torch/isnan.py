@@ -24,3 +24,9 @@ class TorchIsnanTestCase(TorBencherTestCaseBase):
         result = torch.isnan(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

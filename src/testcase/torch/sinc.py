@@ -18,3 +18,9 @@ class TorchSincTestCase(TorBencherTestCaseBase):
         result = torch.sinc(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -20,3 +20,9 @@ class TorchVdotTestCase(TorBencherTestCaseBase):
         result = torch.vdot(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

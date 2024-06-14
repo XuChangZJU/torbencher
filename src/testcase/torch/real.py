@@ -23,3 +23,9 @@ class TorchRealTestCase(TorBencherTestCaseBase):
         result = torch.real(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

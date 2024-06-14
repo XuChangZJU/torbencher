@@ -25,3 +25,6 @@ class TorchRollTestCase(TorBencherTestCaseBase):
             result = torch.roll(tensor, shifts)
         return result
     
+    
+    
+    

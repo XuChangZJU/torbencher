@@ -22,3 +22,6 @@ class TorchNnCosinesimilarityTestCase(TorBencherTestCaseBase):
         result = cosine_similarity(tensor1, tensor2)
         return result
     
+    
+    
+    

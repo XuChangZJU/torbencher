@@ -21,3 +21,6 @@ class TorchNnSoftmarginlossTestCase(TorBencherTestCaseBase):
         loss = criterion(input_tensor, target_tensor)
         return loss
     
+    
+    
+    

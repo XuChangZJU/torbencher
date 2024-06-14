@@ -26,3 +26,6 @@ class TorchNnLogsigmoidTestCase(TorBencherTestCaseBase):
     
         return output_tensor
     
+    
+    
+    

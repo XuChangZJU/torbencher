@@ -32,3 +32,6 @@ class TorchNnTripletmarginlossTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

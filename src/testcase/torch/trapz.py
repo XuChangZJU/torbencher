@@ -19,3 +19,9 @@ class TorchTrapzTestCase(TorBencherTestCaseBase):
         result = torch.trapz(y, x)
         return result
     
+    
+    
+    
+    
+    
+    

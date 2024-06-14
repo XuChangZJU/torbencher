@@ -23,3 +23,6 @@ class TorchNnFunctionalEluTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

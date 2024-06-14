@@ -25,3 +25,9 @@ class TorchDiagflatTestCase(TorBencherTestCaseBase):
         result = torch.diagflat(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

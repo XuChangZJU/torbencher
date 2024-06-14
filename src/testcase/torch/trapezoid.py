@@ -19,3 +19,9 @@ class TorchTrapezoidTestCase(TorBencherTestCaseBase):
         result = torch.trapezoid(y, x)
         return result
     
+    
+    
+    
+    
+    
+    

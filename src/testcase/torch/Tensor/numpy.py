@@ -25,3 +25,4 @@ class TorchTensorNumpyTestCase(TorBencherTestCaseBase):
     
         return numpy_array
     
+    

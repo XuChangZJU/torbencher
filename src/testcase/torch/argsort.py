@@ -18,3 +18,9 @@ class TorchArgsortTestCase(TorBencherTestCaseBase):
         result = torch.argsort(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

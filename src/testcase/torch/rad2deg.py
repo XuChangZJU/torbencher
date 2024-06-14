@@ -18,3 +18,9 @@ class TorchRad2degTestCase(TorBencherTestCaseBase):
         result = torch.rad2deg(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

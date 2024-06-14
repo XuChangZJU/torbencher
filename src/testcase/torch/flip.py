@@ -18,3 +18,9 @@ class TorchFlipTestCase(TorBencherTestCaseBase):
         result = torch.flip(input_tensor, dims)
         return result
     
+    
+    
+    
+    
+    
+    

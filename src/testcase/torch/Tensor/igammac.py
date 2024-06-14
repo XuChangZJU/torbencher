@@ -23,3 +23,6 @@ class TorchTensorIgammacTestCase(TorBencherTestCaseBase):
         result = input_tensor.igammac(other_tensor)
         return result
     
+    
+    
+    

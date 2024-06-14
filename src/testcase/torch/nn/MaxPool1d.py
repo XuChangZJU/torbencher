@@ -30,3 +30,6 @@ class TorchNnMaxpool1dTestCase(TorBencherTestCaseBase):
         
         return output
     
+    
+    
+    

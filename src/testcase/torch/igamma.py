@@ -19,3 +19,9 @@ class TorchIgammaTestCase(TorBencherTestCaseBase):
         result = torch.igamma(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

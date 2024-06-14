@@ -18,3 +18,9 @@ class TorchArgminTestCase(TorBencherTestCaseBase):
         result = torch.argmin(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

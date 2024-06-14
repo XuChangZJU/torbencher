@@ -17,4 +17,12 @@ class TorchExportTestCase(TorBencherTestCaseBase):
         # Setting up the function to export
         def model_to_export(x):
             return model(x)
+        
+        # Exporting the model
+        exported_model = torch.export(model_to_export, (tensor,))
+        
+        return exported_model
+    
+    
+    
     

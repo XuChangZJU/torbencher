@@ -24,3 +24,6 @@ class TorchNnFunctionalPadTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.pad(input_tensor, pad)
         return result
     
+    
+    
+    

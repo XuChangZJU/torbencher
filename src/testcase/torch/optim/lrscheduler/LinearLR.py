@@ -6,7 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.optim.lrscheduler.LinearLR)
+@test_api(torch.optim.lr_scheduler.LinearLR)
 class TorchOptimLrschedulerLinearlrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_LinearLR_correctness(self):
@@ -30,4 +30,7 @@ class TorchOptimLrschedulerLinearlrTestCase(TorBencherTestCaseBase):
             lrs.append(optimizer.param_groups[0]['lr'])
         
         return lrs
+            
+    
+    
     

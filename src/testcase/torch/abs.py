@@ -18,3 +18,9 @@ class TorchAbsTestCase(TorBencherTestCaseBase):
         result = torch.abs(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

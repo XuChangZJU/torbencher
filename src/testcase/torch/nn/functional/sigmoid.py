@@ -22,3 +22,6 @@ class TorchNnFunctionalSigmoidTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.sigmoid(input_tensor)
         return result
     
+    
+    
+    

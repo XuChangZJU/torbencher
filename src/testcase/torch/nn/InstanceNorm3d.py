@@ -23,3 +23,6 @@ class TorchNnInstancenorm3dTestCase(TorBencherTestCaseBase):
         result = instance_norm_3d(input_tensor)
         return result
     
+    
+    
+    

@@ -25,3 +25,6 @@ class TorchTensorIsinfTestCase(TorBencherTestCaseBase):
         result = tensor.isinf()
         return result
     
+    
+    
+    

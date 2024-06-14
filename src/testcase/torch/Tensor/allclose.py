@@ -19,3 +19,14 @@ class TorchTensorAllcloseTestCase(TorBencherTestCaseBase):
         result = tensor1.allclose(tensor2)
         return result
     
+    def test_allclose_not_close(self):
+        dim = random.randint(1, 4)  # Random dimension for the tensors
+        num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
+        input_size=[num_of_elements_each_dim for i in range(dim)] 
+    
+        tensor1 = torch.randn(input_size)
+        tensor2 = torch.randn(input_size) # Generate a completely different tensor
+        result = tensor1.allclose(tensor2)
+        return result
+    
+    

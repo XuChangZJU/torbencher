@@ -21,3 +21,6 @@ class TorchTensorSinhTestCase(TorBencherTestCaseBase):
         result = tensor.sinh()
         return result
     
+    
+    
+    

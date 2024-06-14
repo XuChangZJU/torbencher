@@ -18,3 +18,9 @@ class TorchCoshTestCase(TorBencherTestCaseBase):
         result = torch.cosh(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

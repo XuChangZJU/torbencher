@@ -35,3 +35,6 @@ class TorchNnMaxunpool1dTestCase(TorBencherTestCaseBase):
         
         return unpooled_output
     
+    
+    
+    

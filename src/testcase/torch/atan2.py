@@ -19,3 +19,9 @@ class TorchAtan2TestCase(TorBencherTestCaseBase):
         result = torch.atan2(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

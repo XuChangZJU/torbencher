@@ -18,3 +18,6 @@ class TorchTensorItemsizeTestCase(TorBencherTestCaseBase):
         item_size = tensor.element_size()
         return item_size
     
+    
+    
+    

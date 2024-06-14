@@ -25,3 +25,6 @@ class TorchNnChannelshuffleTestCase(TorBencherTestCaseBase):
         result = channel_shuffle(input_tensor)
         return result
     
+    
+    
+    

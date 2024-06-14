@@ -18,3 +18,9 @@ class TorchPoissonTestCase(TorBencherTestCaseBase):
         result = torch.poisson(rates)
         return result
     
+    
+    
+    
+    
+    
+    

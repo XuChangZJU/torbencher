@@ -26,3 +26,6 @@ class TorchNnLogsoftmaxTestCase(TorBencherTestCaseBase):
         result = logsoftmax(input_tensor)
         return result
     
+    
+    
+    

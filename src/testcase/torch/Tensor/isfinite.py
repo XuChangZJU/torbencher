@@ -31,3 +31,6 @@ class TorchTensorIsfiniteTestCase(TorBencherTestCaseBase):
         result = tensor.isfinite()
         return result
     
+    
+    
+    

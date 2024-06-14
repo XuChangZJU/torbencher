@@ -18,3 +18,9 @@ class TorchTanTestCase(TorBencherTestCaseBase):
         result = torch.tan(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

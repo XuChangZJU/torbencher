@@ -18,3 +18,6 @@ class TorchTensorTraceTestCase(TorBencherTestCaseBase):
         result = input_tensor.trace()
         return result
     
+    
+    
+    

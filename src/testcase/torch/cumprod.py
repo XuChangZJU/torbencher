@@ -18,3 +18,9 @@ class TorchCumprodTestCase(TorBencherTestCaseBase):
         result = torch.cumprod(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

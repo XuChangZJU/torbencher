@@ -37,3 +37,6 @@ class TorchQuantileTestCase(TorBencherTestCaseBase):
         result = torch.quantile(input_tensor, q, dim_to_reduce, interpolation=interpolation_method)
         return result
     
+    
+    
+    

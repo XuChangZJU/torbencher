@@ -22,3 +22,6 @@ class TorchTensorArgsortTestCase(TorBencherTestCaseBase):
         result = tensor.argsort()
         return result
     
+    
+    
+    

@@ -30,3 +30,15 @@ class TorchOptimOptimizerStepTestCase(TorBencherTestCaseBase):
             loss = torch.mean((output - target) ** 2)
             return loss
     
+        # Initialize an optimizer
+        optimizer = torch.optim.SGD([weight, bias], lr=0.1)
+    
+        # Perform a single optimization step
+        loss = loss_fn(weight, bias)
+        loss.backward()
+        optimizer.step()
+        return weight
+    
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchLogitTestCase(TorBencherTestCaseBase):
         result = torch.logit(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

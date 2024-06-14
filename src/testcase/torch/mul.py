@@ -19,3 +19,9 @@ class TorchMulTestCase(TorBencherTestCaseBase):
         result = torch.mul(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

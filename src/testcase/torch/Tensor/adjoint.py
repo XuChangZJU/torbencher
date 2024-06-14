@@ -22,3 +22,6 @@ class TorchTensorAdjointTestCase(TorBencherTestCaseBase):
         result = input_tensor.adjoint()
         return result
     
+    
+    
+    

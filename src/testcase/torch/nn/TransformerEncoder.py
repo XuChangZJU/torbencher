@@ -30,3 +30,6 @@ class TorchNnTransformerencoderTestCase(TorBencherTestCaseBase):
         output = transformer_encoder(src)
         return output
     
+    
+    
+    

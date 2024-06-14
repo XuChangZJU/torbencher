@@ -22,3 +22,6 @@ class TorchTensorOuterTestCase(TorBencherTestCaseBase):
         result = vec1.outer(vec2)
         return result
     
+    
+    
+    

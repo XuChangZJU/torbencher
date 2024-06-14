@@ -20,3 +20,19 @@ class TorchOptimRpropTestCase(TorBencherTestCaseBase):
         def objective_function(weights):
             return (weights ** 2).sum()
     
+        # Create an instance of the Rprop optimizer
+        optimizer = torch.optim.Rprop([weights])
+    
+        # Perform a few optimization steps
+        num_steps = random.randint(1, 10)
+        for _ in range(num_steps):
+            optimizer.zero_grad()
+            loss = objective_function(weights)
+            loss.backward()
+            optimizer.step()
+    
+        return weights
+    
+    
+    
+    

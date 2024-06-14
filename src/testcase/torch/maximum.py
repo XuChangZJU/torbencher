@@ -19,3 +19,9 @@ class TorchMaximumTestCase(TorBencherTestCaseBase):
         result = torch.maximum(tensor1, tensor2)
         return result
     
+    
+    
+    
+    
+    
+    

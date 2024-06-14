@@ -19,3 +19,9 @@ class TorchHistogramTestCase(TorBencherTestCaseBase):
         hist, bin_edges = torch.histogram(input_tensor, bins)
         return hist, bin_edges
     
+    
+    
+    
+    
+    
+    

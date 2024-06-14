@@ -20,3 +20,9 @@ class TorchMoveaxisTestCase(TorBencherTestCaseBase):
         result = torch.moveaxis(input_tensor, source, destination)
         return result
     
+    
+    
+    
+    
+    
+    

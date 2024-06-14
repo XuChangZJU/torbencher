@@ -34,3 +34,6 @@ class TorchNnTransformerdecoderTestCase(TorBencherTestCaseBase):
         result = transformer_decoder(tgt, memory)
         return result
     
+    
+    
+    

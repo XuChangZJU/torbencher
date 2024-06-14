@@ -22,3 +22,9 @@ class TorchTakeTestCase(TorBencherTestCaseBase):
         result = torch.take(input_tensor, indices)
         return result
     
+    
+    
+    
+    
+    
+    

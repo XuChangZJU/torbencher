@@ -18,3 +18,6 @@ class TorchTensorStrideTestCase(TorBencherTestCaseBase):
         result = torch.Tensor.stride(tensor, dim_stride)
         return result
     
+    
+    
+    

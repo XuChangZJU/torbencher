@@ -22,3 +22,6 @@ class TorchTensorChalfTestCase(TorBencherTestCaseBase):
         result = input_tensor.chalf()
         return result
     
+    
+    
+    

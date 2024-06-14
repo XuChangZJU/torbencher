@@ -21,3 +21,6 @@ class TorchTensorFixTestCase(TorBencherTestCaseBase):
         result = input_tensor.fix()
         return result
     
+    
+    
+    

@@ -21,3 +21,6 @@ class TorchTensorMultinomialTestCase(TorBencherTestCaseBase):
         result = tensor.multinomial(num_samples, replacement)
         return result
     
+    
+    
+    

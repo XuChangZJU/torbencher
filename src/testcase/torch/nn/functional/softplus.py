@@ -25,3 +25,6 @@ class TorchNnFunctionalSoftplusTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.softplus(input_tensor, beta)
         return result
     
+    
+    
+    

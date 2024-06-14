@@ -23,3 +23,9 @@ class TorchMinimumTestCase(TorBencherTestCaseBase):
         result = torch.minimum(input_tensor, other_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

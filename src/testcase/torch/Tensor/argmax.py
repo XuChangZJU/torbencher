@@ -24,3 +24,6 @@ class TorchTensorArgmaxTestCase(TorBencherTestCaseBase):
         result = tensor.argmax(dim=dim_to_calculate)
         return result
     
+    
+    
+    

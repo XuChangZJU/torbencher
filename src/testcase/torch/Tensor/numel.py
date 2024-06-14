@@ -21,3 +21,6 @@ class TorchTensorNumelTestCase(TorBencherTestCaseBase):
         result = tensor.numel()
         return result
     
+    
+    
+    

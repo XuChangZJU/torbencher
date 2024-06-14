@@ -21,3 +21,9 @@ class TorchHistcTestCase(TorBencherTestCaseBase):
         result = torch.histc(input_tensor, bins, min_val, max_val)
         return result
     
+    
+    
+    
+    
+    
+    

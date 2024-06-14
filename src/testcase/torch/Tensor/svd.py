@@ -22,3 +22,6 @@ class TorchTensorSvdTestCase(TorBencherTestCaseBase):
     
         return U, S, V
     
+    
+    
+    

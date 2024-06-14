@@ -17,3 +17,9 @@ class TorchProdTestCase(TorBencherTestCaseBase):
         result = torch.prod(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

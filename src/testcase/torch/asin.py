@@ -18,3 +18,9 @@ class TorchAsinTestCase(TorBencherTestCaseBase):
         result = torch.asin(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

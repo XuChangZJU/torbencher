@@ -24,3 +24,6 @@ class TorchTensorNansumTestCase(TorBencherTestCaseBase):
         result = tensor.nansum()
         return result
     
+    
+    
+    

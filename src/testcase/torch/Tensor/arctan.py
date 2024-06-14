@@ -21,3 +21,6 @@ class TorchTensorArctanTestCase(TorBencherTestCaseBase):
         result = input_tensor.arctan()
         return result
     
+    
+    
+    

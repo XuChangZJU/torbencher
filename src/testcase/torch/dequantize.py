@@ -17,3 +17,9 @@ class TorchDequantizeTestCase(TorBencherTestCaseBase):
         result = torch.dequantize(quantized_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

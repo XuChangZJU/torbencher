@@ -32,3 +32,6 @@ class TorchNnFunctionalUpsampleTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

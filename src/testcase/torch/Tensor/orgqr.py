@@ -23,3 +23,6 @@ class TorchTensorOrgqrTestCase(TorBencherTestCaseBase):
         result = input1.orgqr(input2)
         return result
     
+    
+    
+    

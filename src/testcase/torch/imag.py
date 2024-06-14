@@ -18,3 +18,9 @@ class TorchImagTestCase(TorBencherTestCaseBase):
         result = torch.imag(input)
         return result
     
+    
+    
+    
+    
+    
+    

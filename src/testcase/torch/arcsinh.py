@@ -21,3 +21,9 @@ class TorchArcsinhTestCase(TorBencherTestCaseBase):
         result = torch.arcsinh(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

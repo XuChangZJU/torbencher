@@ -24,3 +24,9 @@ class TorchDstackTestCase(TorBencherTestCaseBase):
         result = torch.dstack(tensors)
         return result
     
+    
+    
+    
+    
+    
+    

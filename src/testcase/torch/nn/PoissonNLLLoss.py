@@ -28,3 +28,6 @@ class TorchNnPoissonnlllossTestCase(TorBencherTestCaseBase):
         loss = loss_fn(input_tensor, target_tensor)
         return loss
     
+    
+    
+    

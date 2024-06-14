@@ -23,3 +23,6 @@ class TorchTensorPowTestCase(TorBencherTestCaseBase):
         result = input_tensor.pow(exponent)
         return result
     
+    
+    
+    

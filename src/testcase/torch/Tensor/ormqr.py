@@ -27,3 +27,6 @@ class TorchTensorOrmqrTestCase(TorBencherTestCaseBase):
         result = torch.Tensor.ormqr(input2, input3, left, transpose)
         return result
     
+    
+    
+    

@@ -36,3 +36,6 @@ class TorchNnLppool2dTestCase(TorBencherTestCaseBase):
         result = lp_pool(input_tensor)
         return result
     
+    
+    
+    

@@ -23,3 +23,9 @@ class TorchAddmmTestCase(TorBencherTestCaseBase):
         result = torch.addmm(input_tensor, mat1, mat2)
         return result
     
+    
+    
+    
+    
+    
+    

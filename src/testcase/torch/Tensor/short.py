@@ -18,3 +18,6 @@ class TorchTensorShortTestCase(TorBencherTestCaseBase):
         result = tensor.short()
         return result
     
+    
+    
+    

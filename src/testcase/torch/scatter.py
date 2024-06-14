@@ -24,3 +24,6 @@ class TorchScatterTestCase(TorBencherTestCaseBase):
         result = torch.scatter(input_tensor, dim, index_tensor, src_tensor)
         return result
     
+    
+    
+    

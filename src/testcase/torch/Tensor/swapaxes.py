@@ -26,3 +26,6 @@ class TorchTensorSwapaxesTestCase(TorBencherTestCaseBase):
         result = input_tensor.swapaxes(axis0, axis1)
         return result
     
+    
+    
+    

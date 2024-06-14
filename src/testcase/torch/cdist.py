@@ -19,3 +19,9 @@ class TorchCdistTestCase(TorBencherTestCaseBase):
         result = torch.cdist(x1, x2)
         return result
     
+    
+    
+    
+    
+    
+    

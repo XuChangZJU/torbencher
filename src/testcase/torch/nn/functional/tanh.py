@@ -22,3 +22,6 @@ class TorchNnFunctionalTanhTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.tanh(input_tensor)
         return result
     
+    
+    
+    

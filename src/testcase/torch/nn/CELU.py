@@ -22,3 +22,6 @@ class TorchNnCeluTestCase(TorBencherTestCaseBase):
         output_tensor = celu(input_tensor)
         return output_tensor
     
+    
+    
+    

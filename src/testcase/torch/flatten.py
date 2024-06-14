@@ -20,3 +20,9 @@ class TorchFlattenTestCase(TorBencherTestCaseBase):
         result = torch.flatten(input_tensor, start_dim, end_dim)
         return result
     
+    
+    
+    
+    
+    
+    

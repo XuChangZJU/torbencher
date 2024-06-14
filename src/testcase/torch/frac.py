@@ -18,3 +18,9 @@ class TorchFracTestCase(TorBencherTestCaseBase):
         result = torch.frac(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

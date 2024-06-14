@@ -19,3 +19,9 @@ class TorchIsinTestCase(TorBencherTestCaseBase):
         result = torch.isin(elements, test_elements)
         return result
     
+    
+    
+    
+    
+    
+    

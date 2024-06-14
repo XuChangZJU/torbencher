@@ -24,3 +24,5 @@ class TorchTensorAmaxTestCase(TorBencherTestCaseBase):
         # Return the output tensor
         return output_tensor
     
+    
+    

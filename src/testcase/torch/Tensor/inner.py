@@ -24,3 +24,6 @@ class TorchTensorInnerTestCase(TorBencherTestCaseBase):
         result = tensor1.inner(tensor2)
         return result
     
+    
+    
+    

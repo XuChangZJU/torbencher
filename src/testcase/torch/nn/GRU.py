@@ -33,3 +33,6 @@ class TorchNnGruTestCase(TorBencherTestCaseBase):
         # Return the output and final hidden state
         return output, hn
     
+    
+    
+    

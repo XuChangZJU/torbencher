@@ -30,3 +30,6 @@ class TorchTensorCudaTestCase(TorBencherTestCaseBase):
         result = tensor.cuda(device)
         return result
     
+    
+    
+    

@@ -26,3 +26,6 @@ class TorchNnFunctionalInterpolateTestCase(TorBencherTestCaseBase):
             result = torch.nn.functional.interpolate(input_tensor, scale_factor=scale_factor)
         return result
     
+    
+    
+    

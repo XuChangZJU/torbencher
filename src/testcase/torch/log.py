@@ -18,3 +18,9 @@ class TorchLogTestCase(TorBencherTestCaseBase):
         result = torch.log(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

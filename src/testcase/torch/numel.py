@@ -22,3 +22,9 @@ class TorchNumelTestCase(TorBencherTestCaseBase):
         result = torch.numel(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchIsfiniteTestCase(TorBencherTestCaseBase):
         result = torch.isfinite(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

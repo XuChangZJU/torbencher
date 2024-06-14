@@ -20,3 +20,9 @@ class TorchDotTestCase(TorBencherTestCaseBase):
         result = torch.dot(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

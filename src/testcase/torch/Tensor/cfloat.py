@@ -22,3 +22,6 @@ class TorchTensorCfloatTestCase(TorBencherTestCaseBase):
         result = input_tensor.cfloat()
         return result
     
+    
+    
+    

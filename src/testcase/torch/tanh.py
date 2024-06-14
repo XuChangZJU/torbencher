@@ -18,3 +18,9 @@ class TorchTanhTestCase(TorBencherTestCaseBase):
         result = torch.tanh(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

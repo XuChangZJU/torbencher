@@ -17,3 +17,16 @@ class TorchCompileTestCase(TorBencherTestCaseBase):
         def model_function(x):
             return torch.sin(x) + torch.cos(x)  # Simple function to test torch.compile
     
+        x = torch.randn(input_size)  # Generate random tensor for input
+    
+        # Possible modes for testing
+        modes = ["default", "reduce-overhead", "max-autotune", "max-autotune-no-cudagraphs"]
+        mode = random.choice(modes)  # Randomly choose a mode
+    
+        compiled_model = torch.compile(model_function, mode=mode)  # Compile the model function with a chosen mode
+        result = compiled_model(x)  # Execute the compiled model
+        return result
+    
+    
+    
+    

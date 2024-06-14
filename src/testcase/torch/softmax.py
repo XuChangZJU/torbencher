@@ -20,3 +20,6 @@ class TorchSoftmaxTestCase(TorBencherTestCaseBase):
         result = torch.softmax(input_tensor, dim_to_apply_softmax)
         return result
     
+    
+    
+    

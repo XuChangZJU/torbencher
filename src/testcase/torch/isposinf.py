@@ -26,3 +26,9 @@ class TorchIsposinfTestCase(TorBencherTestCaseBase):
         result = torch.isposinf(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

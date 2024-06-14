@@ -19,3 +19,6 @@ class TorchTensorViewTestCase(TorBencherTestCaseBase):
         result = tensor.view(total_elements)
         return result
     
+    
+    
+    

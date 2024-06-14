@@ -17,3 +17,9 @@ class TorchRandTestCase(TorBencherTestCaseBase):
         result = torch.rand(input_size)
         return result
     
+    
+    
+    
+    
+    
+    

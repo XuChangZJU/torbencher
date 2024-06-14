@@ -19,3 +19,6 @@ class TorchTensorTriuTestCase(TorBencherTestCaseBase):
         result = tensor.triu(diagonal)
         return result
     
+    
+    
+    

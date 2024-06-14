@@ -18,3 +18,9 @@ class TorchReciprocalTestCase(TorBencherTestCaseBase):
         result = torch.reciprocal(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

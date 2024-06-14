@@ -21,3 +21,5 @@ class TorchTensorNormTestCase(TorBencherTestCaseBase):
         result = torch.Tensor.norm(input_tensor, p)
         return result
     
+    
+    

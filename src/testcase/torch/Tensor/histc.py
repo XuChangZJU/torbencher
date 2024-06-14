@@ -22,3 +22,6 @@ class TorchTensorHistcTestCase(TorBencherTestCaseBase):
         result = input_tensor.histc()
         return result
     
+    
+    
+    

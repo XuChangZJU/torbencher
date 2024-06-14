@@ -25,3 +25,6 @@ class TorchIsneginfTestCase(TorBencherTestCaseBase):
         result = torch.isneginf(input_tensor)
         return result
     
+    
+    
+    

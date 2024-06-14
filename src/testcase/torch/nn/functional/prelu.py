@@ -32,3 +32,6 @@ class TorchNnFunctionalPreluTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.prelu(input_tensor, weight)
         return result
     
+    
+    
+    

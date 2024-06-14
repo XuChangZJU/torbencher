@@ -20,3 +20,9 @@ class TorchLcmTestCase(TorBencherTestCaseBase):
         result = torch.lcm(input_tensor, other_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

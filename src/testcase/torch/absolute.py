@@ -18,3 +18,9 @@ class TorchAbsoluteTestCase(TorBencherTestCaseBase):
         result = torch.absolute(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

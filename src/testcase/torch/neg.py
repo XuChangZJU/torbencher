@@ -18,3 +18,9 @@ class TorchNegTestCase(TorBencherTestCaseBase):
         result = torch.neg(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

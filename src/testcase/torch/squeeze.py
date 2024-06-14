@@ -19,3 +19,9 @@ class TorchSqueezeTestCase(TorBencherTestCaseBase):
         result = torch.squeeze(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -32,3 +32,6 @@ class TorchNnSequentialTestCase(TorBencherTestCaseBase):
         output_tensor = model(input_tensor)
         return output_tensor
     
+    
+    
+    

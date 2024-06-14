@@ -21,3 +21,5 @@ class TorchTensorSgnTestCase(TorBencherTestCaseBase):
         result = input_tensor.sgn()
         return result
     
+    
+    

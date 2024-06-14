@@ -19,3 +19,9 @@ class TorchAddrTestCase(TorBencherTestCaseBase):
         result = torch.addr(input_tensor, vec1, vec2)
         return result
     
+    
+    
+    
+    
+    
+    

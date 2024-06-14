@@ -17,3 +17,9 @@ class TorchSortTestCase(TorBencherTestCaseBase):
         result = torch.sort(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

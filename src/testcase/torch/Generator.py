@@ -30,3 +30,6 @@ class TorchGeneratorTestCase(TorBencherTestCaseBase):
         # Verify if the tensors from the same seed are equal
         return torch.equal(tensor_with_generator, tensor_with_same_generator)
     
+    
+    
+    

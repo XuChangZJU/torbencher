@@ -18,3 +18,6 @@ class TorchNnFunctionalSoftminTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.softmin(input_tensor, dim)
         return result
     
+    
+    
+    

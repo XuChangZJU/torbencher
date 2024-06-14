@@ -25,3 +25,6 @@ class TorchNnSoftmaxTestCase(TorBencherTestCaseBase):
         result = softmax(input_tensor)
         return result
     
+    
+    
+    

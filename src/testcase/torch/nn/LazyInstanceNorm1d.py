@@ -28,3 +28,6 @@ class TorchNnLazyinstancenorm1dTestCase(TorBencherTestCaseBase):
         
         return result
     
+    
+    
+    

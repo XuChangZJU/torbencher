@@ -28,3 +28,6 @@ class TorchNnEmbeddingbagTestCase(TorBencherTestCaseBase):
         result = embedding_bag(input_indices, offsets)
         return result
     
+    
+    
+    

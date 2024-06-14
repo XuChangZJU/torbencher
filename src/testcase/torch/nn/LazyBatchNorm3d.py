@@ -31,3 +31,6 @@ class TorchNnLazybatchnorm3dTestCase(TorBencherTestCaseBase):
         result = lazy_batch_norm_3d(input_tensor)
         return result
     
+    
+    
+    

@@ -21,3 +21,6 @@ class TorchTensorDotTestCase(TorBencherTestCaseBase):
         result = tensor1.dot(tensor2)
         return result
     
+    
+    
+    

@@ -22,3 +22,6 @@ class TorchNnSoftplusTestCase(TorBencherTestCaseBase):
         result = softplus_module(input_tensor)
         return result
     
+    
+    
+    

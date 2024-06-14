@@ -22,3 +22,6 @@ class TorchTensorArcsinTestCase(TorBencherTestCaseBase):
         result = input_tensor.arcsin()
         return result
     
+    
+    
+    

@@ -29,3 +29,6 @@ class TorchNnBatchnorm2dTestCase(TorBencherTestCaseBase):
         
         return output_tensor
     
+    
+    
+    

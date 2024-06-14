@@ -32,3 +32,6 @@ class TorchNnAdaptivelogsoftmaxwithlossTestCase(TorBencherTestCaseBase):
         
         return output
     
+    
+    
+    

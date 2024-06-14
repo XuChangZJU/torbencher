@@ -18,3 +18,9 @@ class TorchLgammaTestCase(TorBencherTestCaseBase):
         result = torch.lgamma(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

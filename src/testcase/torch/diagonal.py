@@ -22,3 +22,9 @@ class TorchDiagonalTestCase(TorBencherTestCaseBase):
         result = torch.diagonal(input_tensor, offset, dim1, dim2)
         return result
     
+    
+    
+    
+    
+    
+    

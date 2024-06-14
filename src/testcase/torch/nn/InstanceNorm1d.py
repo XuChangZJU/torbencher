@@ -34,3 +34,6 @@ class TorchNnInstancenorm1dTestCase(TorBencherTestCaseBase):
         
         return output_tensor
     
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchExpTestCase(TorBencherTestCaseBase):
         result = torch.exp(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

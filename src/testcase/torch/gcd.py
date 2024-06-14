@@ -20,3 +20,9 @@ class TorchGcdTestCase(TorBencherTestCaseBase):
         result = torch.gcd(tensor1, tensor2)
         return result
     
+    
+    
+    
+    
+    
+    

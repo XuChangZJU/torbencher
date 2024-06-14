@@ -40,3 +40,17 @@ class TorchOptimRmspropTestCase(TorBencherTestCaseBase):
         def objective(tensor):
             return torch.sum(tensor ** 2)
     
+        # Initialize the optimizer
+        optimizer = torch.optim.RMSprop([input_tensor], lr, alpha, eps, weight_decay, momentum, centered)
+    
+        # Perform a single optimization step
+        optimizer.zero_grad()
+        loss = objective(input_tensor)
+        loss.backward()
+        optimizer.step()
+    
+        return input_tensor
+    
+    
+    
+    

@@ -23,3 +23,6 @@ class TorchTensorIntTestCase(TorBencherTestCaseBase):
         result = input_tensor.int()
         return result
     
+    
+    
+    

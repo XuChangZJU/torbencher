@@ -21,3 +21,9 @@ class TorchErfTestCase(TorBencherTestCaseBase):
         result = torch.erf(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

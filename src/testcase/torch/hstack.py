@@ -24,3 +24,9 @@ class TorchHstackTestCase(TorBencherTestCaseBase):
         result = torch.hstack(tensors)
         return result
     
+    
+    
+    
+    
+    
+    

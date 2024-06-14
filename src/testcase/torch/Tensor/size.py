@@ -22,3 +22,19 @@ class TorchTensorSizeTestCase(TorBencherTestCaseBase):
         result = tensor.size()
         return result
     
+    def test_size_with_dim_correctness(self):
+        # Generate random dimension for the tensor
+        dim = random.randint(1, 4)
+        # Generate random number of elements each dimension
+        num_of_elements_each_dim = random.randint(1, 5)
+        # Generate input_size
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+        # Generate a random tensor
+        tensor = torch.randn(input_size)
+        # Generate random dim
+        dim = random.randint(0, len(input_size) - 1)
+        # Get the size of the tensor at the specified dimension
+        result = tensor.size(dim)
+        return result
+    
+    

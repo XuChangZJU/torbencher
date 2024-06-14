@@ -22,3 +22,9 @@ class TorchRangeTestCase(TorBencherTestCaseBase):
         result = torch.range(start, end, step)
         return result
     
+    
+    
+    
+    
+    
+    

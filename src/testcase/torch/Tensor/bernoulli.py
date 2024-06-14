@@ -9,19 +9,19 @@ from src.util.decorator import test_api
 @test_api(torch.Tensor.bernoulli)
 class TorchTensorBernoulliTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_bernoulli__correctness(self):
-        # Random dimension for the tensor
+    def test_bernoulli_correctness(self):
+        # Randomly generate dimension of the input tensor
         dim = random.randint(1, 4)
-        # Random number of elements each dimension
+        # Randomly generate number of elements each dimension for the input tensor
         num_of_elements_each_dim = random.randint(1, 5)
-        # Random input size
+        # Generate input size list for the input tensor
         input_size = [num_of_elements_each_dim for i in range(dim)]
-        # Generate a random tensor with integer dtype
-        input_tensor = torch.randint(0, 10, input_size)
-        # Generate a random probability between 0 and 1
-        p = random.uniform(0, 1)
-        # Apply bernoulli_ function
-        result = input_tensor.bernoulli_(p)
-        # Return the result tensor
+        # Generate a random tensor with floating point dtype
+        input_tensor = torch.rand(input_size) 
+        # Apply bernoulli function
+        result = input_tensor.bernoulli()
         return result
+    
+    
+    
     

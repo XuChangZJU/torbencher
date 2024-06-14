@@ -22,3 +22,6 @@ class TorchTensorNonzeroTestCase(TorBencherTestCaseBase):
         result = tensor.nonzero()
         return result
     
+    
+    
+    

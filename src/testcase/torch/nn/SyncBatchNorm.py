@@ -30,3 +30,6 @@ class TorchNnSyncbatchnormTestCase(TorBencherTestCaseBase):
         
         return output_tensor
     
+    
+    
+    

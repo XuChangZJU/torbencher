@@ -25,3 +25,6 @@ class TorchTensorIscloseTestCase(TorBencherTestCaseBase):
         result = tensor1.isclose(tensor2)
         return result
     
+    
+    
+    

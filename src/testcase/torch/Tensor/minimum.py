@@ -22,3 +22,6 @@ class TorchTensorMinimumTestCase(TorBencherTestCaseBase):
         result = tensor1.minimum(tensor2)  # Calculate element-wise minimum
         return result
     
+    
+    
+    

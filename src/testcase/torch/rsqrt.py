@@ -18,3 +18,9 @@ class TorchRsqrtTestCase(TorBencherTestCaseBase):
         result = torch.rsqrt(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

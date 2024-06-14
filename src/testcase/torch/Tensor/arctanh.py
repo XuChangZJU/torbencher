@@ -23,3 +23,6 @@ class TorchTensorArctanhTestCase(TorBencherTestCaseBase):
         result = input_tensor.arctanh()
         return result
     
+    
+    
+    

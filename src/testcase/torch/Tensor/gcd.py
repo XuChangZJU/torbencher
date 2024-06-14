@@ -9,13 +9,23 @@ from src.util.decorator import test_api
 @test_api(torch.Tensor.gcd)
 class TorchTensorGcdTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_gcd__correctness(self):
-        dim = random.randint(1, 4)  # Random dimension for the tensors
-        num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
-        input_size=[num_of_elements_each_dim for i in range(dim)] 
+    def test_gcd_correctness(self):
+        # Generate random dimensions for the tensors
+        dim = random.randint(1, 4)
+        # Generate random number of elements for each dimension
+        num_of_elements_each_dim = random.randint(1, 5)
+        # Create the input size list
+        input_size = [num_of_elements_each_dim for i in range(dim)]
     
-        input_tensor = torch.randint(1, 100, input_size) # Generate random tensor with integers between 1 and 100
-        other_tensor = torch.randint(1, 100, input_size) # Generate random tensor with integers between 1 and 100
-        input_tensor.gcd_(other_tensor)
-        return input_tensor
+        # Generate random tensors with integer values
+        tensor1 = torch.randint(low=-10, high=10, size=input_size)
+        tensor2 = torch.randint(low=-10, high=10, size=input_size)
+        
+        # Calculate the GCD
+        result = tensor1.gcd(tensor2)
+        
+        return result
+    
+    
+    
     

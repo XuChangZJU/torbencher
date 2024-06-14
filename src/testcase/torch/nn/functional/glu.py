@@ -18,3 +18,6 @@ class TorchNnFunctionalGluTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.glu(input_tensor, dim=-1)
         return result
     
+    
+    
+    

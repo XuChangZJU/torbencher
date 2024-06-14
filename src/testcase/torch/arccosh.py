@@ -21,3 +21,9 @@ class TorchArccoshTestCase(TorBencherTestCaseBase):
         result = torch.arccosh(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -10,11 +10,25 @@ from src.util.decorator import test_api
 class TorchTensorDetachTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_detach_correctness(self):
-        dim = random.randint(1, 4)  # Random dimension for the tensors
-        num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
-        input_size=[num_of_elements_each_dim for i in range(dim)] 
+        # Generate random dimension and size for the tensor
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for i in range(dim)]
     
-        tensor = torch.randn(input_size, requires_grad=True) # Create a tensor that requires gradient
-        detached_tensor = tensor.detach_()
+        # Create a random tensor
+        original_tensor = torch.randn(input_size, requires_grad=True)
+    
+        # Detach the tensor
+        detached_tensor = original_tensor.detach()
+    
+        # Check if the detached tensor requires gradient
+        assert not detached_tensor.requires_grad, "Detached tensor should not require gradient"
+    
+        # Check if the original and detached tensors share the same storage
+        assert detached_tensor.storage().data_ptr() == original_tensor.storage().data_ptr(), "Detached tensor should share storage with the original tensor"
+    
         return detached_tensor
+        
+    
+    
     

@@ -23,3 +23,9 @@ class TorchConjTestCase(TorBencherTestCaseBase):
         result = torch.conj(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

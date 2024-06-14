@@ -28,3 +28,6 @@ class TorchNnMarginrankinglossTestCase(TorBencherTestCaseBase):
         
         return loss
     
+    
+    
+    

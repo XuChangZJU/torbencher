@@ -15,3 +15,6 @@ class TorchDetTestCase(TorBencherTestCaseBase):
         result = torch.det(input_tensor)
         return result
     
+    
+    
+    

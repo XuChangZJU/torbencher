@@ -21,3 +21,6 @@ class TorchTensorDetTestCase(TorBencherTestCaseBase):
         result = random_matrix.det()
         return result
     
+    
+    
+    

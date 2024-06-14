@@ -24,3 +24,6 @@ class TorchTensorStdTestCase(TorBencherTestCaseBase):
         result = input_tensor.std(dim)
         return result
     
+    
+    
+    

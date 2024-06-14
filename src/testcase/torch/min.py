@@ -18,3 +18,9 @@ class TorchMinTestCase(TorBencherTestCaseBase):
         result = torch.min(input)
         return result
     
+    
+    
+    
+    
+    
+    

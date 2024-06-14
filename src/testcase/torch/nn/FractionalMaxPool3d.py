@@ -41,3 +41,6 @@ class TorchNnFractionalmaxpool3dTestCase(TorBencherTestCaseBase):
         output_tensor = pool_layer(input_tensor)
         return output_tensor
     
+    
+    
+    

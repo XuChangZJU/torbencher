@@ -33,3 +33,6 @@ class TorchNnAdaptiveavgpool2dTestCase(TorBencherTestCaseBase):
         
         return output_tensor
     
+    
+    
+    

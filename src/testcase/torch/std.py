@@ -18,3 +18,9 @@ class TorchStdTestCase(TorBencherTestCaseBase):
         result = torch.std(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

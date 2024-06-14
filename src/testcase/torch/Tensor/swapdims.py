@@ -20,3 +20,6 @@ class TorchTensorSwapdimsTestCase(TorBencherTestCaseBase):
         result = tensor.swapdims(dim0, dim1)
         return result
     
+    
+    
+    

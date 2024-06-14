@@ -15,3 +15,9 @@ class TorchRandpermTestCase(TorBencherTestCaseBase):
         result = torch.randperm(n)
         return result
     
+    
+    
+    
+    
+    
+    

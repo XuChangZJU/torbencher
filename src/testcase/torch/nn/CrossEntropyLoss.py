@@ -33,3 +33,6 @@ class TorchNnCrossentropylossTestCase(TorBencherTestCaseBase):
         
         return loss
     
+    
+    
+    

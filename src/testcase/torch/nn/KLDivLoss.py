@@ -46,3 +46,6 @@ class TorchNnKldivlossTestCase(TorBencherTestCaseBase):
     
         return result_mean, result_batchmean, result_sum, result_none, result_log_target
     
+    
+    
+    

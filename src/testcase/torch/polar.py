@@ -21,3 +21,9 @@ class TorchPolarTestCase(TorBencherTestCaseBase):
         result = torch.polar(abs_tensor, angle_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -23,3 +23,6 @@ class TorchTensorMmTestCase(TorBencherTestCaseBase):
         result = tensor1.mm(tensor2)
         return result
     
+    
+    
+    

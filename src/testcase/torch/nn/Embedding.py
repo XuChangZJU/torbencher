@@ -27,3 +27,6 @@ class TorchNnEmbeddingTestCase(TorBencherTestCaseBase):
         result = embedding_layer(input_indices)
         return result
     
+    
+    
+    

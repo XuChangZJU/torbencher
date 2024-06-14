@@ -20,3 +20,9 @@ class TorchClipTestCase(TorBencherTestCaseBase):
         result = torch.clip(input_tensor, min_val, max_val)
         return result
     
+    
+    
+    
+    
+    
+    

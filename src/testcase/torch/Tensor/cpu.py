@@ -22,3 +22,6 @@ class TorchTensorCpuTestCase(TorBencherTestCaseBase):
         result = input_tensor.cpu()
         return result
     
+    
+    
+    

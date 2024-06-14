@@ -23,3 +23,9 @@ class TorchMmTestCase(TorBencherTestCaseBase):
         result = torch.mm(input_matrix, mat2_matrix)
         return result
     
+    
+    
+    
+    
+    
+    

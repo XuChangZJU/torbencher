@@ -23,3 +23,6 @@ class TorchTensorQrTestCase(TorBencherTestCaseBase):
         # Return the Q and R matrices
         return Q, R
     
+    
+    
+    

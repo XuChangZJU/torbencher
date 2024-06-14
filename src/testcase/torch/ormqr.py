@@ -30,3 +30,9 @@ class TorchOrmqrTestCase(TorBencherTestCaseBase):
         result = torch.ormqr(input_tensor, tau_tensor, other_tensor, left, transpose)
         return result
     
+    
+    
+    
+    
+    
+    

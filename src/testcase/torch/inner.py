@@ -35,3 +35,9 @@ class TorchInnerTestCase(TorBencherTestCaseBase):
         result = torch.inner(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

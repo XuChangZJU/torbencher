@@ -33,3 +33,6 @@ class TorchNnAdaptivemaxpool3dTestCase(TorBencherTestCaseBase):
     
         return output_tensor
     
+    
+    
+    

@@ -6,7 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.optim.lrscheduler.MultiStepLR)
+@test_api(torch.optim.lr_scheduler.MultiStepLR)
 class TorchOptimLrschedulerMultisteplrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_MultiStepLR_correctness(self):
@@ -30,4 +30,7 @@ class TorchOptimLrschedulerMultisteplrTestCase(TorBencherTestCaseBase):
         # Get last learning rate
         last_lr = scheduler.get_last_lr()[0]
         return last_lr
+    
+    
+    
     

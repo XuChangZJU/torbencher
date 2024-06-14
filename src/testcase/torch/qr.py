@@ -23,3 +23,9 @@ class TorchQrTestCase(TorBencherTestCaseBase):
         q, r = torch.qr(input_tensor)
         return q @ r
     
+    
+    
+    
+    
+    
+    

@@ -25,3 +25,6 @@ class TorchTensorNextafterTestCase(TorBencherTestCaseBase):
         result = tensor1.nextafter(tensor2)
         return result
     
+    
+    
+    

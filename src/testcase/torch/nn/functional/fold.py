@@ -31,3 +31,6 @@ class TorchNnFunctionalFoldTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.fold(input_tensor, (output_height, output_width), kernel_size, stride, padding, dilation)
         return result
     
+    
+    
+    

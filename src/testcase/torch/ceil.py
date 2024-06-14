@@ -18,3 +18,9 @@ class TorchCeilTestCase(TorBencherTestCaseBase):
         result = torch.ceil(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

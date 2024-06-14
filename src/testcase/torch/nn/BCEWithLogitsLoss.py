@@ -26,3 +26,6 @@ class TorchNnBcewithlogitslossTestCase(TorBencherTestCaseBase):
         
         return loss
     
+    
+    
+    

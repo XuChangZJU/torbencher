@@ -24,3 +24,6 @@ class TorchTensorVdotTestCase(TorBencherTestCaseBase):
         result = tensor1_flat.vdot(tensor2_flat)
         return result
     
+    
+    
+    

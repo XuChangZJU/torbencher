@@ -17,3 +17,6 @@ class TorchTensorNdimensionTestCase(TorBencherTestCaseBase):
         result = tensor.ndimension()
         return result
     
+    
+    
+    

@@ -18,3 +18,9 @@ class TorchAminTestCase(TorBencherTestCaseBase):
         result = torch.amin(input_tensor, dim_to_reduce)
         return result
     
+    
+    
+    
+    
+    
+    

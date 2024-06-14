@@ -24,3 +24,5 @@ class TorchTensorNanmedianTestCase(TorBencherTestCaseBase):
         output = input_tensor.nanmedian()
         return output
     
+    
+    

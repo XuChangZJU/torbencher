@@ -21,3 +21,6 @@ class TorchTensorEqualTestCase(TorBencherTestCaseBase):
         result = tensor1.equal(tensor2)
         return result
     
+    
+    
+    

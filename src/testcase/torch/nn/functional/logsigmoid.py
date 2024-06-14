@@ -23,3 +23,6 @@ class TorchNnFunctionalLogsigmoidTestCase(TorBencherTestCaseBase):
         # Return the result tensor
         return result
     
+    
+    
+    

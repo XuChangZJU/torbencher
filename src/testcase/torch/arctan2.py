@@ -20,3 +20,9 @@ class TorchArctan2TestCase(TorBencherTestCaseBase):
         result = torch.arctan2(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

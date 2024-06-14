@@ -19,3 +19,9 @@ class TorchIsrealTestCase(TorBencherTestCaseBase):
         result = torch.isreal(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

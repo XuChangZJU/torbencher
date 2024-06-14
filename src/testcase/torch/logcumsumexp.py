@@ -18,3 +18,9 @@ class TorchLogcumsumexpTestCase(TorBencherTestCaseBase):
         result = torch.logcumsumexp(input_tensor, dim)
         return result
     
+    
+    
+    
+    
+    
+    

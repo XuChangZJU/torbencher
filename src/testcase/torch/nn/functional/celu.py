@@ -24,3 +24,6 @@ class TorchNnFunctionalCeluTestCase(TorBencherTestCaseBase):
         # Return the result tensor
         return result
     
+    
+    
+    

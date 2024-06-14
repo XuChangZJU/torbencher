@@ -20,3 +20,9 @@ class TorchNormTestCase(TorBencherTestCaseBase):
         result = torch.norm(input_tensor, p, dim)
         return result
     
+    
+    
+    
+    
+    
+    

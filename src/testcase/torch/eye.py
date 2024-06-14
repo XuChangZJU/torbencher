@@ -16,3 +16,6 @@ class TorchEyeTestCase(TorBencherTestCaseBase):
         result = torch.eye(n_rows, n_cols)
         return result
     
+    print()
+    
+    

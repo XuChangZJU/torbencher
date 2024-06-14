@@ -20,3 +20,9 @@ class TorchTransposeTestCase(TorBencherTestCaseBase):
         result = torch.transpose(input_tensor, dim0, dim1)
         return result
     
+    
+    
+    
+    
+    
+    

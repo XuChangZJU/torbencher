@@ -26,3 +26,6 @@ class TorchNnFunctionalNormalizeTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.normalize(input_tensor, p, dim)
         return result
     
+    
+    
+    

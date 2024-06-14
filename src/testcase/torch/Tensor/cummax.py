@@ -25,3 +25,6 @@ class TorchTensorCummaxTestCase(TorBencherTestCaseBase):
         # Return result
         return result
     
+    
+    
+    

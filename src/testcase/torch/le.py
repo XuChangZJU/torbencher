@@ -20,3 +20,9 @@ class TorchLeTestCase(TorBencherTestCaseBase):
         result = torch.le(input_tensor, other_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

@@ -21,3 +21,6 @@ class TorchTensorPinverseTestCase(TorBencherTestCaseBase):
         result = matrix.pinverse()
         return result
     
+    
+    
+    

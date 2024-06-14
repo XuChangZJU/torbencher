@@ -24,3 +24,6 @@ class TorchNnFunctionalEmbeddingTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.embedding(input, embedding_matrix)
         return result
     
+    
+    
+    

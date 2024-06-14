@@ -23,3 +23,9 @@ class TorchArangeTestCase(TorBencherTestCaseBase):
         result = torch.arange(start, end, step)
         return result
     
+    
+    
+    
+    
+    
+    

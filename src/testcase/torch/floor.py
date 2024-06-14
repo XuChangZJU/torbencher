@@ -18,3 +18,9 @@ class TorchFloorTestCase(TorBencherTestCaseBase):
         result = torch.floor(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

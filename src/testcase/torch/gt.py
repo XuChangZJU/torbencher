@@ -20,3 +20,9 @@ class TorchGtTestCase(TorBencherTestCaseBase):
         result = torch.gt(input, other)
         return result
     
+    
+    
+    
+    
+    
+    

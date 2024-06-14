@@ -22,3 +22,9 @@ class TorchSigmoidTestCase(TorBencherTestCaseBase):
         result = torch.sigmoid(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

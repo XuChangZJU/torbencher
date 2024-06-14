@@ -18,3 +18,9 @@ class TorchAtanTestCase(TorBencherTestCaseBase):
         result = torch.atan(input_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

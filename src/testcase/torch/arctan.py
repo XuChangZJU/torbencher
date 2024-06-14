@@ -23,3 +23,9 @@ class TorchArctanTestCase(TorBencherTestCaseBase):
         # Return the result tensor
         return result
     
+    
+    
+    
+    
+    
+    

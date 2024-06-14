@@ -115,7 +115,10 @@ from .AvgPool1d import TorchNnAvgpool1dTestCase
 from .GRUCell import TorchNnGrucellTestCase
 from .ModuleDict import TorchNnModuledictTestCase
 from .AdaptiveMaxPool1d import TorchNnAdaptivemaxpool1dTestCase
-from .LPPool3d import TorchNnLppool3dTestCase
+
+import torch
+if torch.__version__ >= "2.3.0":
+    from .LPPool3d import TorchNnLppool3dTestCase
 from .MultiLabelSoftMarginLoss import TorchNnMultilabelsoftmarginlossTestCase
 from .AdaptiveAvgPool1d import TorchNnAdaptiveavgpool1dTestCase
 from .InstanceNorm1d import TorchNnInstancenorm1dTestCase

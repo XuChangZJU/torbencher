@@ -24,3 +24,9 @@ class TorchBmmTestCase(TorBencherTestCaseBase):
         result = torch.bmm(input_tensor, mat2_tensor)
         return result
     
+    
+    
+    
+    
+    
+    

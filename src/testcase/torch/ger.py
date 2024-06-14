@@ -20,3 +20,9 @@ class TorchGerTestCase(TorBencherTestCaseBase):
         result = torch.ger(input, vec2)
         return result
     
+    
+    
+    
+    
+    
+    
