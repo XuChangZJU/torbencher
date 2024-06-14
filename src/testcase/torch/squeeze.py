@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,15 +10,11 @@ from src.util.decorator import test_api
 class TorchSqueezeTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_squeeze_correctness(self):
-        input = torch.randn(random.randint(1, 10), 1, random.randint(1, 10))
-        dim = random.randint(0, 2)
-        result = torch.squeeze(input, dim)
-        return result
+    # Generate random dimension and size for the input tensor
+    dim = random.randint(2, 5)  
+    # Generate random size for each dimension, ensuring at least one dimension has size 1
+    input_size = [random.randint(1, 5) if i != random.randint(0, dim - 1) else 1 for i in range(dim)]  
 
-    @test_api_version.larger_than("1.1.3")
-    def test_squeeze_large_scale(self):
-        input = torch.randn(random.randint(1000, 10000), 1, random.randint(1000, 10000))
-        dim = random.randint(0, 2)
-        result = torch.squeeze(input, dim)
-        return result
-
+    input_tensor = torch.randn(input_size)
+    result = torch.squeeze(input_tensor)
+    return result

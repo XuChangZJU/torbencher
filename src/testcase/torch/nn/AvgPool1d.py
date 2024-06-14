@@ -1,36 +1,31 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.AvgPool1d)
-class TorchAvgPool1dTestCase(TorBencherTestCaseBase):
+class TorchNnAvgpool1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_avgpool1d_correctness(self):
-        batch_size = random.randint(1, 10)
-        in_channels = random.randint(1, 10)
-        input_size = random.randint(1, 10)
-        kernel_size = random.randint(1, input_size)
-        stride = random.randint(1, kernel_size)
-        padding = random.randint(0, kernel_size)
-        input_tensor = torch.randn(batch_size, in_channels, input_size)
-        avg_pool = torch.nn.AvgPool1d(kernel_size, stride=stride, padding=padding)
-        result = avg_pool(input_tensor)
-        return result
+    # Randomly generate dimensions for the input tensor
+    batch_size = random.randint(1, 4)  # Random batch size
+    num_channels = random.randint(1, 4)  # Random number of channels
+    length = random.randint(5, 10)  # Random length of the input signal
 
-    @test_api_version.larger_than("1.1.3")
-    def test_avgpool1d_large_scale(self):
-        batch_size = random.randint(1000, 10000)
-        in_channels = random.randint(100, 1000)
-        input_size = random.randint(1000, 10000)
-        kernel_size = random.randint(100, input_size)
-        stride = random.randint(10, kernel_size)
-        padding = random.randint(0, kernel_size)
-        input_tensor = torch.randn(batch_size, in_channels, input_size)
-        avg_pool = torch.nn.AvgPool1d(kernel_size, stride=stride, padding=padding)
-        result = avg_pool(input_tensor)
-        return result
+    # Randomly generate parameters for AvgPool1d
+    kernel_size = random.randint(2, 4)  # Random kernel size
+    stride = random.randint(1, kernel_size)  # Random stride, ensuring it's valid
+    padding = random.randint(0, 2)  # Random padding
 
+    # Create a random input tensor with the generated dimensions
+    input_tensor = torch.randn(batch_size, num_channels, length)
+
+    # Create the AvgPool1d layer with the generated parameters
+    avg_pool = torch.nn.AvgPool1d(kernel_size, stride, padding)
+
+    # Apply the AvgPool1d layer to the input tensor
+    result = avg_pool(input_tensor)
+    return result

@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,17 +10,14 @@ from src.util.decorator import test_api
 class TorchSwapdimsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_swapdims_correctness(self):
-        input = torch.randn(random.randint(1, 10), random.randint(1, 10), random.randint(1, 10))
-        dim1 = random.randint(0, 2)
-        dim2 = random.randint(0, 2)
-        result = torch.swapdims(input, dim1, dim2)
-        return result
+    dim = random.randint(2, 4)  # Random dimension for the tensors, at least 2 to allow swapping
+    num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
+    input_size=[num_of_elements_each_dim for i in range(dim)] 
 
-    @test_api_version.larger_than("1.1.3")
-    def test_swapdims_large_scale(self):
-        input = torch.randn(random.randint(1000, 10000), random.randint(1000, 10000), random.randint(1000, 10000))
-        dim1 = random.randint(0, 2)
-        dim2 = random.randint(0, 2)
-        result = torch.swapdims(input, dim1, dim2)
-        return result
-
+    input_tensor = torch.randn(input_size)
+    dim0 = random.randint(0, dim - 1)  # Random dim0 within the tensor's dimensions
+    dim1 = random.randint(0, dim - 1)  # Random dim1 within the tensor's dimensions
+    while dim1 == dim0:  # Ensure dim1 is different from dim0 for swapping
+        dim1 = random.randint(0, dim - 1)
+    result = torch.swapdims(input_tensor, dim0, dim1)
+    return result

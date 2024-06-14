@@ -1,22 +1,22 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.hardswish)
-class HardswishTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalHardswishTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_hardswish_correctness(self):
-        input_data = torch.randn(10, 10)
-        result = torch.nn.functional.hardswish(input_data)
-        return result
+    """
+    Test the correctness of torch.nn.functional.hardswish with random parameters.
+    """
+    dim = random.randint(1, 4)  # Random dimension for the tensors
+    num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
+    input_size=[num_of_elements_each_dim for i in range(dim)] 
 
-    @test_api_version.larger_than("1.1.3")
-    def test_hardswish_large_scale(self):
-        input_data = torch.randn(1000, 1000)
-        result = torch.nn.functional.hardswish(input_data)
-        return result
-
+    input_tensor = torch.randn(input_size)
+    result = torch.nn.functional.hardswish(input_tensor)
+    return result

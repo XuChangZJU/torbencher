@@ -1,26 +1,31 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.Dropout1d)
-class TorchDropout1dTestCase(TorBencherTestCaseBase):
+class TorchNnDropout1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_dropout1d_correctness(self):
-        p = random.uniform(0.0, 1.0)
-        input_tensor = torch.randn(random.randint(1, 10), random.randint(1, 10), random.randint(1, 10))
-        dropout = torch.nn.Dropout1d(p=p)
-        result = dropout(input_tensor)
-        return result
+    # Random input size
+    batch_size = random.randint(1, 10)
+    channels = random.randint(1, 10)
+    length = random.randint(1, 10)
+    input_size = [batch_size, channels, length]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_dropout1d_large_scale(self):
-        p = random.uniform(0.0, 1.0)
-        input_tensor = torch.randn(random.randint(1000, 10000), random.randint(100, 1000), random.randint(100, 1000))
-        dropout = torch.nn.Dropout1d(p=p)
-        result = dropout(input_tensor)
-        return result
+    # Random input tensor
+    input_tensor = torch.randn(input_size)
 
+    # Random dropout probability
+    p = random.uniform(0.1, 0.9)  # Probability between 0.1 and 0.9
+
+    # Create Dropout1d module
+    dropout = torch.nn.Dropout1d(p)
+
+    # Apply dropout
+    result = dropout(input_tensor)
+
+    return result

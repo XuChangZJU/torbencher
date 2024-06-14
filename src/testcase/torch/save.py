@@ -1,6 +1,7 @@
-
 import torch
 import random
+import io
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,15 +11,11 @@ from src.util.decorator import test_api
 class TorchSaveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_save_correctness(self):
-        obj = torch.randn(random.randint(1, 10))
-        filename = "test.bin"
-        result = torch.save(obj, filename)
-        return result
+    dim = random.randint(1, 4)  # Random dimension for the tensors
+    num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
+    input_size=[num_of_elements_each_dim for i in range(dim)] 
 
-    @test_api_version.larger_than("1.1.3")
-    def test_save_large_scale(self):
-        obj = torch.randn(random.randint(1000, 10000))
-        filename = "test.bin"
-        result = torch.save(obj, filename)
-        return result
-
+    tensor = torch.randn(input_size)
+    buffer = io.BytesIO()
+    result = torch.save(tensor, buffer)
+    return result

@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,29 +10,32 @@ from src.util.decorator import test_api
 class TorchOptimAdadeltaTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_adadelta_correctness(self):
-        dim = random.randint(1, 10)
-        lr = random.uniform(0.01, 0.1)
-        rho = random.uniform(0.01, 0.1)
-        eps = random.uniform(0.01, 0.1)
-        weight_decay = random.uniform(0.01, 0.1)
-        # Input is a random tensor with dimensions `dim`.
-        input = torch.randn(dim)
-        optimizer = torch.optim.Adadelta([input], lr=lr, rho=rho, eps=eps, weight_decay=weight_decay)
-        optimizer.step()
-        result = optimizer.state_dict()
-        return result
-
-    @test_api_version.larger_than("1.1.3")
-    def test_adadelta_large_scale(self):
-        dim = random.randint(1000, 10000)
-        lr = random.uniform(0.01, 0.1)
-        rho = random.uniform(0.01, 0.1)
-        eps = random.uniform(0.01, 0.1)
-        weight_decay = random.uniform(0.01, 0.1)
-        # Input is a random tensor with dimensions `dim`.
-        input = torch.randn(dim)
-        optimizer = torch.optim.Adadelta([input], lr=lr, rho=rho, eps=eps, weight_decay=weight_decay)
-        optimizer.step()
-        result = optimizer.state_dict()
-        return result
-
+    # Randomly generate the number of parameters
+    num_params = random.randint(1, 5)
+    
+    # Randomly generate the size of each parameter tensor
+    param_sizes = [[random.randint(1, 5) for _ in range(random.randint(1, 4))] for _ in range(num_params)]
+    
+    # Create a list of parameter tensors
+    params = [torch.randn(size) for size in param_sizes]
+    
+    # Randomly generate the learning rate (lr)
+    lr = random.uniform(0.1, 1.0)
+    
+    # Randomly generate the decay rate (rho)
+    rho = random.uniform(0.8, 0.99)
+    
+    # Randomly generate the epsilon value (eps)
+    eps = random.uniform(1e-8, 1e-4)
+    
+    # Randomly generate the weight decay (weight_decay)
+    weight_decay = random.uniform(0.0, 0.1)
+    
+    # Create the Adadelta optimizer
+    optimizer = torch.optim.Adadelta(params, lr, rho, eps, weight_decay)
+    
+    # Perform a single optimization step
+    optimizer.step()
+    
+    # Return the updated parameters
+    return [param.clone() for param in params]

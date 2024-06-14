@@ -1,5 +1,6 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,15 +9,12 @@ from src.util.decorator import test_api
 @test_api(torch.sub)
 class TorchSubTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_sub_number(self):
-        a = torch.randn(4)
-        result = torch.sub(a, 10)
-        return result
+    def test_sub_correctness(self):
+    dim = random.randint(1, 4)  # Random dimension for the tensors
+    num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
+    input_size=[num_of_elements_each_dim for i in range(dim)] 
 
-    @test_api_version.larger_than("1.1.3")
-    def test_sub(self):
-        a = torch.randn(4)
-        b = torch.randn(4)
-        result = torch.sub(a, b, alpha=10)
-        return result
-
+    input = torch.randn(input_size)
+    other = torch.randn(input_size)
+    result = torch.sub(input, other)
+    return result

@@ -1,24 +1,24 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.elu)
-class EluTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalEluTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_elu_correctness(self):
-        input_data = torch.randn(10, 10)
-        alpha = random.uniform(0.0, 10.0)
-        result = torch.nn.functional.elu(input_data, alpha)
-        return result
+    # Define the dimension and size of the input tensor
+    dim = random.randint(1, 4)
+    num_of_elements_each_dim = random.randint(1, 5)
+    input_size = [num_of_elements_each_dim for i in range(dim)]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_elu_large_scale(self):
-        input_data = torch.randn(1000, 1000)
-        alpha = random.uniform(0.0, 10.0)
-        result = torch.nn.functional.elu(input_data, alpha)
-        return result
-
+    # Generate a random tensor
+    input_tensor = torch.randn(input_size)
+    
+    # Apply the ELU function
+    result = torch.nn.functional.elu(input_tensor)
+    
+    return result

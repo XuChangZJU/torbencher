@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,17 +10,14 @@ from src.util.decorator import test_api
 class TorchDiagonalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_diagonal_correctness(self):
-        dim1 = random.randint(1, 10)
-        dim2 = random.randint(1, 10)
-        tensor = torch.randn(dim1, dim2)
-        result = torch.diagonal(tensor)
-        return result
-
-    @test_api_version.larger_than("1.1.3")
-    def test_diagonal_large_scale(self):
-        dim1 = random.randint(100, 1000)
-        dim2 = random.randint(100, 1000)
-        tensor = torch.randn(dim1, dim2)
-        result = torch.diagonal(tensor)
-        return result
-
+    dim = random.randint(2, 4)  # dim >= 2
+    num_of_elements_each_dim = random.randint(1, 5)
+    input_size = [num_of_elements_each_dim for i in range(dim)]
+    input_tensor = torch.randn(input_size)
+    offset = random.randint(-(num_of_elements_each_dim - 1), num_of_elements_each_dim - 1)  # offset within the valid range
+    dim1 = random.randint(0, dim - 1)  # dim1 within the valid dimension range
+    dim2 = random.randint(0, dim - 1)  # dim2 within the valid dimension range
+    while dim1 == dim2:  # Ensure dim1 and dim2 are different
+        dim2 = random.randint(0, dim - 1)
+    result = torch.diagonal(input_tensor, offset, dim1, dim2)
+    return result

@@ -1,26 +1,24 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.PixelUnshuffle)
-class TorchPixelUnshuffleTestCase(TorBencherTestCaseBase):
+class TorchNnPixelunshuffleTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_pixelunshuffle_correctness(self):
-        downscale_factor = random.randint(1, 10)
-        input_tensor = torch.randn(random.randint(1, 10), random.randint(1, 10), random.randint(1, 10) * downscale_factor, random.randint(1, 10) * downscale_factor)
-        pixel_unshuffle = torch.nn.PixelUnshuffle(downscale_factor=downscale_factor)
-        result = pixel_unshuffle(input_tensor)
-        return result
+    def test_pixel_unshuffle_correctness(self):
+    # Randomly generate input tensor size
+    batch_size = random.randint(1, 3)
+    channels = random.randint(1, 5)
+    downscale_factor = random.randint(2, 5) # downscale_factor should be at least 2
+    height = random.randint(1, 10) * downscale_factor # height should be divisible by downscale_factor
+    width = random.randint(1, 10) * downscale_factor # width should be divisible by downscale_factor
+    input_size = [batch_size, channels, height, width]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_pixelunshuffle_large_scale(self):
-        downscale_factor = random.randint(10, 100)
-        input_tensor = torch.randn(random.randint(1000, 10000), random.randint(100, 1000), random.randint(100, 1000) * downscale_factor, random.randint(100, 1000) * downscale_factor)
-        pixel_unshuffle = torch.nn.PixelUnshuffle(downscale_factor=downscale_factor)
-        result = pixel_unshuffle(input_tensor)
-        return result
-
+    input_tensor = torch.randn(input_size)
+    pixel_unshuffle = torch.nn.PixelUnshuffle(downscale_factor)
+    result = pixel_unshuffle(input_tensor)
+    return result

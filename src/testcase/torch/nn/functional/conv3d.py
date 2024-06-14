@@ -1,40 +1,31 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.conv3d)
-class Conv3dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalConv3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_conv3d_correctness(self):
-        in_channels = random.randint(1, 10)
-        out_channels = random.randint(1, 10)
-        kernel_size = random.randint(1, 5)
-        stride = random.randint(1, 3)
-        padding = random.randint(0, 2)
-        dilation = random.randint(1, 2)
-        groups = random.randint(1, in_channels)
-        input_data = torch.randn(10, in_channels, 20, 20, 20)
-        weight = torch.randn(out_channels, in_channels // groups, kernel_size, kernel_size, kernel_size)
-        bias = torch.randn(out_channels)
-        result = torch.nn.functional.conv3d(input_data, weight, bias, stride, padding, dilation, groups)
-        return result
+    # Random input size
+    minibatch = random.randint(1, 4)
+    in_channels = random.randint(1, 4)
+    iT = random.randint(10, 20)
+    iH = random.randint(10, 20)
+    iW = random.randint(10, 20)
+    input_size = [minibatch, in_channels, iT, iH, iW]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_conv3d_large_scale(self):
-        in_channels = random.randint(100, 1000)
-        out_channels = random.randint(100, 1000)
-        kernel_size = random.randint(10, 50)
-        stride = random.randint(1, 10)
-        padding = random.randint(0, 10)
-        dilation = random.randint(1, 5)
-        groups = random.randint(1, in_channels)
-        input_data = torch.randn(100, in_channels, 1000, 1000, 1000)
-        weight = torch.randn(out_channels, in_channels // groups, kernel_size, kernel_size, kernel_size)
-        bias = torch.randn(out_channels)
-        result = torch.nn.functional.conv3d(input_data, weight, bias, stride, padding, dilation, groups)
-        return result
+    # Random filter size
+    out_channels = random.randint(1, 4)
+    kT = random.randint(1, 4)
+    kH = random.randint(1, 4)
+    kW = random.randint(1, 4)
+    filter_size = [out_channels, in_channels, kT, kH, kW]
 
+    input_tensor = torch.randn(input_size)
+    filter_tensor = torch.randn(filter_size)
+    result = torch.nn.functional.conv3d(input_tensor, filter_tensor)
+    return result

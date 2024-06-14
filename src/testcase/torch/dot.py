@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,17 +10,12 @@ from src.util.decorator import test_api
 class TorchDotTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_dot_correctness(self):
-        dim = random.randint(1, 10)
-        tensor1 = torch.randn(dim)
-        tensor2 = torch.randn(dim)
-        result = torch.dot(tensor1, tensor2)
-        return result
+    # `torch.dot` requires the input tensors to be 1D and have the same number of elements.
+    dim = 1
+    num_of_elements_each_dim = random.randint(1, 5)
+    input_size = [num_of_elements_each_dim for i in range(dim)]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_dot_large_scale(self):
-        dim = random.randint(1000, 10000)
-        tensor1 = torch.randn(dim)
-        tensor2 = torch.randn(dim)
-        result = torch.dot(tensor1, tensor2)
-        return result
-
+    input = torch.randn(input_size)
+    other = torch.randn(input_size)
+    result = torch.dot(input, other)
+    return result

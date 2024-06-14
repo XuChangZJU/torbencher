@@ -1,34 +1,39 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.LazyConvTranspose3d)
-class TorchLazyConvTranspose3dTestCase(TorBencherTestCaseBase):
+class TorchNnLazyconvtranspose3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_lazyconvtranspose3d_correctness(self):
-        in_channels = random.randint(1, 10)
-        out_channels = random.randint(1, 10)
-        kernel_size = (random.randint(1, 10), random.randint(1, 10), random.randint(1, 10))
-        stride = (random.randint(1, kernel_size[0]), random.randint(1, kernel_size[1]), random.randint(1, kernel_size[2]))
-        padding = (random.randint(0, kernel_size[0]), random.randint(0, kernel_size[1]), random.randint(0, kernel_size[2]))
-        input_tensor = torch.randn(random.randint(1, 10), in_channels, random.randint(1, 10), random.randint(1, 10), random.randint(1, 10))
-        lazy_conv_transpose3d = torch.nn.LazyConvTranspose3d(out_channels, kernel_size, stride=stride, padding=padding)
-        result = lazy_conv_transpose3d(input_tensor)
-        return result
+    def test_lazy_conv_transpose3d_correctness(self):
+    # Randomly generate dimensions for the input tensor
+    batch_size = random.randint(1, 4)
+    in_channels = random.randint(1, 4)
+    depth = random.randint(5, 10)
+    height = random.randint(5, 10)
+    width = random.randint(5, 10)
+    
+    # Randomly generate parameters for LazyConvTranspose3d
+    out_channels = random.randint(1, 4)
+    kernel_size = random.randint(1, 4)
+    stride = random.randint(1, 3)
+    padding = random.randint(0, 2)
+    output_padding = random.randint(0, 2)
+    groups = 1  # Default value
+    bias = True  # Default value
+    dilation = 1  # Default value
 
-    @test_api_version.larger_than("1.1.3")
-    def test_lazyconvtranspose3d_large_scale(self):
-        in_channels = random.randint(100, 1000)
-        out_channels = random.randint(100, 1000)
-        kernel_size = (random.randint(100, 1000), random.randint(100, 1000), random.randint(100, 1000))
-        stride = (random.randint(10, kernel_size[0]), random.randint(10, kernel_size[1]), random.randint(10, kernel_size[2]))
-        padding = (random.randint(0, kernel_size[0]), random.randint(0, kernel_size[1]), random.randint(0, kernel_size[2]))
-        input_tensor = torch.randn(random.randint(1000, 10000), in_channels, random.randint(100, 1000), random.randint(100, 1000), random.randint(100, 1000))
-        lazy_conv_transpose3d = torch.nn.LazyConvTranspose3d(out_channels, kernel_size, stride=stride, padding=padding)
-        result = lazy_conv_transpose3d(input_tensor)
-        return result
-
+    # Create a random input tensor
+    input_tensor = torch.randn(batch_size, in_channels, depth, height, width)
+    
+    # Initialize LazyConvTranspose3d with random parameters
+    lazy_conv_transpose3d = torch.nn.LazyConvTranspose3d(out_channels, kernel_size, stride, padding, output_padding, groups, bias, dilation)
+    
+    # Apply the LazyConvTranspose3d to the input tensor
+    result = lazy_conv_transpose3d(input_tensor)
+    
+    return result

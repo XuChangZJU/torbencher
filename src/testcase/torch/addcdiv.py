@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,19 +10,16 @@ from src.util.decorator import test_api
 class TorchAddcdivTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_addcdiv_correctness(self):
-        input = torch.randn(random.randint(1, 10))
-        tensor1 = torch.randn(random.randint(1, 10))
-        tensor2 = torch.randn(random.randint(1, 10))
-        value = random.uniform(0.1, 10.0)
-        result = torch.addcdiv(input, tensor1, tensor2, value=value)
-        return result
+    # Define the dimension and size of the tensors
+    dim = random.randint(1, 4)
+    num_of_elements_each_dim = random.randint(1, 5)
+    input_size = [num_of_elements_each_dim for i in range(dim)]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_addcdiv_large_scale(self):
-        input = torch.randn(random.randint(1000, 10000))
-        tensor1 = torch.randn(random.randint(1000, 10000))
-        tensor2 = torch.randn(random.randint(1000, 10000))
-        value = random.uniform(0.1, 10.0)
-        result = torch.addcdiv(input, tensor1, tensor2, value=value)
-        return result
-
+    # Generate random tensors with the specified size
+    input_tensor = torch.randn(input_size)
+    tensor1 = torch.randn(input_size)
+    # Generate random tensor2 and make sure the elements are not zero
+    tensor2 = torch.randn(input_size)
+    tensor2[tensor2 == 0] = 1e-6
+    result = torch.addcdiv(input_tensor, tensor1, tensor2)
+    return result

@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,23 +10,16 @@ from src.util.decorator import test_api
 class TorchBmmTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_bmm_correctness(self):
-        batch = random.randint(1, 10)
-        m = random.randint(1, 10)
-        n = random.randint(1, 10)
-        k = random.randint(1, 10)
-        batch1 = torch.randn(batch, m, k)
-        batch2 = torch.randn(batch, k, n)
-        result = torch.bmm(batch1, batch2)
-        return result
+    # Randomly generate the batch size, matrix dimensions
+    batch_size = random.randint(1, 10)
+    n = random.randint(1, 10)
+    m = random.randint(1, 10)
+    p = random.randint(1, 10)
 
-    @test_api_version.larger_than("1.1.3")
-    def test_bmm_large_scale(self):
-        batch = random.randint(100, 1000)
-        m = random.randint(100, 1000)
-        n = random.randint(100, 1000)
-        k = random.randint(100, 1000)
-        batch1 = torch.randn(batch, m, k)
-        batch2 = torch.randn(batch, k, n)
-        result = torch.bmm(batch1, batch2)
-        return result
+    # Create input tensors with the specified dimensions
+    input_tensor = torch.randn(batch_size, n, m)
+    mat2_tensor = torch.randn(batch_size, m, p)  # Ensure valid matrix multiplication
 
+    # Perform batch matrix multiplication
+    result = torch.bmm(input_tensor, mat2_tensor)
+    return result

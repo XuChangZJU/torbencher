@@ -1,5 +1,6 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,38 +9,14 @@ from src.util.decorator import test_api
 @test_api(torch.igammac)
 class TorchIgammacTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_igammac_0d(self):
-        a = torch.randn(()) + 1
-        b = torch.randn(()) + 1
-        result = torch.igammac(a, b)
-        return result
+    def test_igammac_correctness(self):
+    # Generate random input tensors
+    dim = random.randint(1, 4)
+    num_of_elements_each_dim = random.randint(1, 5)
+    input_size = [num_of_elements_each_dim for i in range(dim)]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_1d(self):
-        a = torch.randn(4) + 1
-        b = torch.randn(4) + 1
-        result = torch.igammac(a, b)
-        return result
+    input_tensor = torch.rand(input_size)  # input should be positive real numbers
+    other_tensor = torch.rand(input_size)  # other should be positive real numbers
 
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_2d(self):
-        a = torch.randn(4, 4) + 1
-        b = torch.randn(4, 4) + 1
-        result = torch.igammac(a, b)
-        return result
-
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_3d(self):
-        a = torch.randn(4, 4, 4) + 1
-        b = torch.randn(4, 4, 4) + 1
-        result = torch.igammac(a, b)
-        return result
-
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_4d(self):
-        a = torch.randn(4, 4, 4, 4) + 1
-        b = torch.randn(4, 4, 4, 4) + 1
-        result = torch.igammac(a, b)
-        return result
-
-
+    result = torch.igammac(input_tensor, other_tensor)
+    return result

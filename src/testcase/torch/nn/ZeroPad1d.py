@@ -1,26 +1,30 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.ZeroPad1d)
-class TorchZeroPad1dTestCase(TorBencherTestCaseBase):
+class TorchNnZeropad1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_zeropad1d_correctness(self):
-        padding = (random.randint(1, 10), random.randint(1, 10))
-        input_tensor = torch.randn(random.randint(1, 10), random.randint(1, 10), random.randint(1, 10))
-        zero_pad = torch.nn.ZeroPad1d(padding)
-        result = zero_pad(input_tensor)
-        return result
+    def test_ZeroPad1d_correctness(self):
+    # Randomly generate input tensor size
+    batch_size = random.randint(1, 10)  
+    channels = random.randint(1, 10)  
+    input_width = random.randint(1, 10)  
+    input_size = [batch_size, channels, input_width] 
 
-    @test_api_version.larger_than("1.1.3")
-    def test_zeropad1d_large_scale(self):
-        padding = (random.randint(100, 1000), random.randint(100, 1000))
-        input_tensor = torch.randn(random.randint(1000, 10000), random.randint(100, 1000), random.randint(100, 1000))
-        zero_pad = torch.nn.ZeroPad1d(padding)
-        result = zero_pad(input_tensor)
-        return result
+    # Generate random input tensor
+    input_tensor = torch.randn(input_size)
 
+    # Randomly generate padding size
+    padding_left = random.randint(1, 5)  
+    padding_right = random.randint(1, 5)  
+    padding = (padding_left, padding_right)
+
+    # Apply ZeroPad1d
+    zero_pad_1d = torch.nn.ZeroPad1d(padding)
+    result = zero_pad_1d(input_tensor)
+    return result

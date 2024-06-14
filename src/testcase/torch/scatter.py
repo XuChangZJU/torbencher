@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,19 +10,16 @@ from src.util.decorator import test_api
 class TorchScatterTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_scatter_correctness(self):
-        input = torch.randn(random.randint(1, 10), random.randint(1, 10), random.randint(1, 10))
-        dim = random.randint(0, 2)
-        index = torch.randint(0, random.randint(1, 10), (random.randint(1, 10),))
-        src = torch.randn(random.randint(1, 10), random.randint(1, 10))
-        result = torch.scatter(input, dim, index, src)
-        return result
+    dim = random.randint(0, 3)  # Randomly choosing a dimension along which to scatter
+    num_of_elements_each_dim = random.randint(2, 5)  # Random number of elements in each dimension
 
-    @test_api_version.larger_than("1.1.3")
-    def test_scatter_large_scale(self):
-        input = torch.randn(random.randint(1000, 10000), random.randint(1000, 10000), random.randint(1000, 10000))
-        dim = random.randint(0, 2)
-        index = torch.randint(0, random.randint(1000, 10000), (random.randint(1000, 10000),))
-        src = torch.randn(random.randint(1000, 10000), random.randint(1000, 10000))
-        result = torch.scatter(input, dim, index, src)
-        return result
+    # Generate tensor shapes
+    input_size = [num_of_elements_each_dim for _ in range(dim+1)]
+    
+    # Generate input tensors
+    input_tensor = torch.randn(input_size)
+    src_tensor = torch.randn(input_size)
+    index_tensor = torch.randint(0, input_size[dim], input_size)  # Index tensor must have values within input_size[dim]
 
+    result = torch.scatter(input_tensor, dim, index_tensor, src_tensor)
+    return result

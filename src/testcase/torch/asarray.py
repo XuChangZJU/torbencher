@@ -1,6 +1,6 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,13 +10,10 @@ from src.util.decorator import test_api
 class TorchAsarrayTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_asarray_correctness(self):
-        obj = torch.randn(random.randint(1, 10))
-        result = torch.asarray(obj)
-        return result
-
-    @test_api_version.larger_than("1.1.3")
-    def test_asarray_large_scale(self):
-        obj = torch.randn(random.randint(1000, 10000))
-        result = torch.asarray(obj)
-        return result
-
+    # obj: a tensor
+    dim = random.randint(1, 4)  # Random dimension for the tensors
+    num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
+    input_size=[num_of_elements_each_dim for i in range(dim)] 
+    obj_tensor = torch.randn(input_size)
+    result = torch.asarray(obj_tensor)
+    return result

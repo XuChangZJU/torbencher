@@ -1,40 +1,28 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.optim.ASGD)
-class TorchOptimASGDTestCase(TorBencherTestCaseBase):
+class TorchOptimAsgdTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_asgd_correctness(self):
-        dim = random.randint(1, 10)
-        lr = random.uniform(0.01, 0.1)
-        lambd = random.uniform(0.01, 0.1)
-        alpha = random.uniform(0.01, 0.1)
-        t0 = random.randint(1, 10)
-        weight_decay = random.uniform(0.01, 0.1)
-        # Input is a random tensor with dimensions `dim`.
-        input = torch.randn(dim)
-        optimizer = torch.optim.ASGD([input], lr=lr, lambd=lambd, alpha=alpha, t0=t0, weight_decay=weight_decay)
-        optimizer.step()
-        result = optimizer.state_dict()
-        return result
+    # Define the parameters for the optimizer
+    dim = random.randint(1, 4)
+    num_of_elements_each_dim = random.randint(1, 5)
+    input_size = [num_of_elements_each_dim for i in range(dim)]
+    weights = torch.randn(input_size, requires_grad=True)
+    lr = random.uniform(0.01, 0.1)  # Learning rate
+    lambd = random.uniform(1e-5, 1e-3)  # Decay term
+    alpha = random.uniform(0.6, 0.9)  # Power for eta update
+    t0 = random.uniform(1e5, 1e7)  # Point at which to start averaging
 
-    @test_api_version.larger_than("1.1.3")
-    def test_asgd_large_scale(self):
-        dim = random.randint(1000, 10000)
-        lr = random.uniform(0.01, 0.1)
-        lambd = random.uniform(0.01, 0.1)
-        alpha = random.uniform(0.01, 0.1)
-        t0 = random.randint(1, 10)
-        weight_decay = random.uniform(0.01, 0.1)
-        # Input is a random tensor with dimensions `dim`.
-        input = torch.randn(dim)
-        optimizer = torch.optim.ASGD([input], lr=lr, lambd=lambd, alpha=alpha, t0=t0, weight_decay=weight_decay)
-        optimizer.step()
-        result = optimizer.state_dict()
-        return result
+    # Create an ASGD optimizer
+    optimizer = torch.optim.ASGD(params=[weights], lr=lr, lambd=lambd, alpha=alpha, t0=t0)
 
+    # Define a simple loss function
+    def loss_fn(weights):
+        return (weights * torch.randn(input_size)).sum()

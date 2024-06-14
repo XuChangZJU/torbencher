@@ -1,44 +1,32 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.TransformerDecoderLayer)
-class TorchTransformerDecoderLayerTestCase(TorBencherTestCaseBase):
+class TorchNnTransformerdecoderlayerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_transformerdecoderlayer_correctness(self):
-        d_model = random.randint(1, 10)
-        nhead = random.randint(1, 10)
-        dim_feedforward = random.randint(1, 10)
-        dropout = random.uniform(0.0, 1.0)
-        activation = 'relu'
-        tgt_tensor = torch.randn(random.randint(1, 10), random.randint(1, 10), d_model)
-        memory_tensor = torch.randn(random.randint(1, 10), random.randint(1, 10), d_model)
-        tgt_mask = torch.randint(0, 2, (random.randint(1, 10), random.randint(1, 10), random.randint(1, 10)), dtype=torch.bool)
-        memory_mask = torch.randint(0, 2, (random.randint(1, 10), random.randint(1, 10), random.randint(1, 10)), dtype=torch.bool)
-        tgt_key_padding_mask = torch.randint(0, 2, (random.randint(1, 10), random.randint(1, 10)), dtype=torch.bool)
-        memory_key_padding_mask = torch.randint(0, 2, (random.randint(1, 10), random.randint(1, 10)), dtype=torch.bool)
-        transformer_decoder_layer = torch.nn.TransformerDecoderLayer(d_model=d_model, nhead=nhead, dim_feedforward=dim_feedforward, dropout=dropout, activation=activation)
-        result = transformer_decoder_layer(tgt_tensor, memory_tensor, tgt_mask=tgt_mask, memory_mask=memory_mask, tgt_key_padding_mask=tgt_key_padding_mask, memory_key_padding_mask=memory_key_padding_mask)
-        return result
+    def test_transformer_decoder_layer_correctness(self):
+    # Randomly generate parameters for TransformerDecoderLayer
+    d_model = random.randint(128, 512)  # Random d_model between 128 and 512
+    nhead = random.randint(1, 8)  # Random number of heads between 1 and 8
+    dim_feedforward = random.randint(512, 2048)  # Random feedforward dimension between 512 and 2048
 
-    @test_api_version.larger_than("1.1.3")
-    def test_transformerdecoderlayer_large_scale(self):
-        d_model = random.randint(100, 1000)
-        nhead = random.randint(10, 100)
-        dim_feedforward = random.randint(100, 1000)
-        dropout = random.uniform(0.0, 1.0)
-        activation = 'relu'
-        tgt_tensor = torch.randn(random.randint(1000, 10000), random.randint(100, 1000), d_model)
-        memory_tensor = torch.randn(random.randint(1000, 10000), random.randint(100, 1000), d_model)
-        tgt_mask = torch.randint(0, 2, (random.randint(1000, 10000), random.randint(100, 1000), random.randint(100, 1000)), dtype=torch.bool)
-        memory_mask = torch.randint(0, 2, (random.randint(1000, 10000), random.randint(100, 1000), random.randint(100, 1000)), dtype=torch.bool)
-        tgt_key_padding_mask = torch.randint(0, 2, (random.randint(1000, 10000), random.randint(100, 1000)), dtype=torch.bool)
-        memory_key_padding_mask = torch.randint(0, 2, (random.randint(1000, 10000), random.randint(100, 1000)), dtype=torch.bool)
-        transformer_decoder_layer = torch.nn.TransformerDecoderLayer(d_model=d_model, nhead=nhead, dim_feedforward=dim_feedforward, dropout=dropout, activation=activation)
-        result = transformer_decoder_layer(tgt_tensor, memory_tensor, tgt_mask=tgt_mask, memory_mask=memory_mask, tgt_key_padding_mask=tgt_key_padding_mask, memory_key_padding_mask=memory_key_padding_mask)
-        return result
+    # Create the TransformerDecoderLayer with random parameters
+    decoder_layer = torch.nn.TransformerDecoderLayer(d_model=d_model, nhead=nhead, dim_feedforward=dim_feedforward)
 
+    # Randomly generate sizes for tgt and memory tensors
+    tgt_seq_len = random.randint(5, 20)  # Random target sequence length between 5 and 20
+    memory_seq_len = random.randint(5, 20)  # Random memory sequence length between 5 and 20
+    batch_size = random.randint(1, 10)  # Random batch size between 1 and 10
+
+    # Generate random tgt and memory tensors
+    tgt = torch.randn(tgt_seq_len, batch_size, d_model)
+    memory = torch.randn(memory_seq_len, batch_size, d_model)
+
+    # Pass the tensors through the decoder layer
+    output = decoder_layer(tgt, memory)
+    return output

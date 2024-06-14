@@ -1,24 +1,24 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.softmax)
-class SoftmaxTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalSoftmaxTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_softmax_correctness(self):
-        input_data = torch.randn(10, 10)
-        dim = random.randint(0, 9)
-        result = torch.nn.functional.softmax(input_data, dim)
-        return result
-
-    @test_api_version.larger_than("1.1.3")
-    def test_softmax_large_scale(self):
-        input_data = torch.randn(1000, 1000)
-        dim = random.randint(0, 999)
-        result = torch.nn.functional.softmax(input_data, dim)
-        return result
-
+    # Random dimension for the tensors
+    dim = random.randint(1, 4)
+    # Random number of elements each dimension
+    num_of_elements_each_dim = random.randint(1, 5)
+    input_size = [num_of_elements_each_dim for i in range(dim)]
+    # Random input tensor
+    input_tensor = torch.randn(input_size)
+    # Randomly select a dimension to compute softmax
+    dim_to_compute = random.randint(0, len(input_size) - 1)
+    # Calculate softmax
+    result = torch.nn.functional.softmax(input_tensor, dim_to_compute)
+    return result

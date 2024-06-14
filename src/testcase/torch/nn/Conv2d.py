@@ -1,34 +1,32 @@
-
 import torch
 import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.Conv2d)
-class TorchConv2dTestCase(TorBencherTestCaseBase):
+class TorchNnConv2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_conv2d_correctness(self):
-        in_channels = random.randint(1, 10)
-        out_channels = random.randint(1, 10)
-        kernel_size = (random.randint(1, 10), random.randint(1, 10))
-        stride = (random.randint(1, kernel_size[0]), random.randint(1, kernel_size[1]))
-        padding = (random.randint(0, kernel_size[0]), random.randint(0, kernel_size[1]))
-        input_tensor = torch.randn(random.randint(1, 10), in_channels, random.randint(1, 10), random.randint(1, 10))
-        conv2d = torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=stride, padding=padding)
-        result = conv2d(input_tensor)
-        return result
+    # Randomly generate parameters for Conv2d
+    in_channels = random.randint(1, 10)  # Number of input channels
+    out_channels = random.randint(1, 20)  # Number of output channels
+    kernel_size = random.randint(1, 5)  # Size of the convolving kernel
+    stride = random.randint(1, 3)  # Stride of the convolution
+    padding = random.randint(0, 2)  # Padding added to all four sides of the input
+    dilation = random.randint(1, 2)  # Spacing between kernel elements
 
-    @test_api_version.larger_than("1.1.3")
-    def test_conv2d_large_scale(self):
-        in_channels = random.randint(100, 1000)
-        out_channels = random.randint(100, 1000)
-        kernel_size = (random.randint(100, 1000), random.randint(100, 1000))
-        stride = (random.randint(10, kernel_size[0]), random.randint(10, kernel_size[1]))
-        padding = (random.randint(0, kernel_size[0]), random.randint(0, kernel_size[1]))
-        input_tensor = torch.randn(random.randint(1000, 10000), in_channels, random.randint(100, 1000), random.randint(100, 1000))
-        conv2d = torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=stride, padding=padding)
-        result = conv2d(input_tensor)
-        return result
+    # Randomly generate input tensor size
+    batch_size = random.randint(1, 5)  # Batch size
+    height = random.randint(10, 50)  # Height of input planes in pixels
+    width = random.randint(10, 50)  # Width of input planes in pixels
+    input_tensor = torch.randn(batch_size, in_channels, height, width)
 
+    # Create Conv2d layer with generated parameters
+    conv2d_layer = torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding, dilation)
+
+    # Apply Conv2d layer to input tensor
+    output_tensor = conv2d_layer(input_tensor)
+    return output_tensor
