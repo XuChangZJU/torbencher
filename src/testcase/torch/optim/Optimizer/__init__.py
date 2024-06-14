@@ -1,0 +1,5 @@
+from .addparamgroup import TorchOptimOptimizerAddparamgroupTestCase
+from .zerograd import TorchOptimOptimizerZerogradTestCase
+from .statedict import TorchOptimOptimizerStatedictTestCase
+from .loadstatedict import TorchOptimOptimizerLoadstatedictTestCase
+from .step import TorchOptimOptimizerStepTestCase
