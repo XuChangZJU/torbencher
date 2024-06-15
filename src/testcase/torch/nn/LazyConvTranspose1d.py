@@ -15,9 +15,9 @@ class TorchNnLazyconvtranspose1dTestCase(TorBencherTestCaseBase):
         kernel_size = random.randint(1, 5)  # Size of the convolving kernel
         stride = random.randint(1, 3)  # Stride of the convolution
         padding = random.randint(0, 2)  # Padding
-        output_padding = random.randint(0, 2)  # Additional size added to one side of the output shape
         dilation = random.randint(1, 2)  # Spacing between kernel elements
-    
+        output_padding = random.randint(0, stride - 1)  # 确保output_padding严格小于stride
+        
         # Randomly generate input tensor
         batch_size = random.randint(1, 4)  # Batch size
         in_channels = random.randint(1, 10)  # Number of input channels

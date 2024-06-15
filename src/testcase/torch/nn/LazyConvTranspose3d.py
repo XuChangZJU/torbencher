@@ -22,11 +22,11 @@ class TorchNnLazyconvtranspose3dTestCase(TorBencherTestCaseBase):
         kernel_size = random.randint(1, 4)
         stride = random.randint(1, 3)
         padding = random.randint(0, 2)
-        output_padding = random.randint(0, 2)
         groups = 1  # Default value
         bias = True  # Default value
         dilation = 1  # Default value
-    
+        output_padding = random.randint(0, stride - 1)  # 确保output_padding严格小于stride
+        
         # Create a random input tensor
         input_tensor = torch.randn(batch_size, in_channels, depth, height, width)
         

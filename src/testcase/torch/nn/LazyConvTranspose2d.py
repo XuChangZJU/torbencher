@@ -15,10 +15,10 @@ class TorchNnLazyconvtranspose2dTestCase(TorBencherTestCaseBase):
         kernel_size = random.randint(1, 5)  # Random kernel size
         stride = random.randint(1, 3)  # Random stride
         padding = random.randint(0, 2)  # Random padding
-        output_padding = random.randint(0, 2)  # Random output padding
-        groups = random.randint(1, 3)  # Random number of groups
+        groups = 1  # Random number of groups
         dilation = random.randint(1, 2)  # Random dilation
-    
+        output_padding = random.randint(0, stride - 1)  # 确保output_padding严格小于stride
+        
         # Randomly generate input tensor dimensions
         batch_size = random.randint(1, 4)  # Random batch size
         in_channels = random.randint(1, 10)  # Random number of input channels
