@@ -16,12 +16,12 @@ class TorchNnConvtranspose3dTestCase(TorBencherTestCaseBase):
         kernel_size = random.randint(1, 5)
         stride = random.randint(1, 3)
         padding = random.randint(0, 2)
-        output_padding = random.randint(0, 2)
+        output_padding = random.randint(0, min(stride-1,2))
         dilation = random.randint(1, 2)
-        
+        groups = 1
         # Create ConvTranspose3d layer with random parameters
         conv_transpose3d = torch.nn.ConvTranspose3d(
-            in_channels, out_channels, kernel_size, stride, padding, output_padding, dilation
+            in_channels, out_channels, kernel_size, stride, padding, output_padding, groups ,dilation
         )
         
         # Randomly generate input tensor size

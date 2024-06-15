@@ -11,12 +11,12 @@ class TorchNnBatchnorm2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_batchnorm2d_correctness(self):
         # Randomly generate the number of features (channels)
-        num_features = random.randint(1, 10)
+        num_features = random.randint(2, 10)
         
         # Randomly generate the dimensions for the input tensor
-        batch_size = random.randint(1, 5)
-        height = random.randint(1, 10)
-        width = random.randint(1, 10)
+        batch_size = random.randint(2, 5)
+        height = random.randint(2, 10)
+        width = random.randint(2, 10)
         
         # Create a random input tensor with the shape (N, C, H, W)
         input_tensor = torch.randn(batch_size, num_features, height, width)

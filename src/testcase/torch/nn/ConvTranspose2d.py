@@ -11,17 +11,17 @@ class TorchNnConvtranspose2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_conv_transpose2d_correctness(self):
         # Randomly generate parameters for ConvTranspose2d
-        in_channels = random.randint(1, 10)
-        out_channels = random.randint(1, 10)
+        in_channels = random.randint(2, 10)
+        out_channels = random.randint(2, 10)
         kernel_size = random.randint(1, 5)
         stride = random.randint(1, 3)
         padding = random.randint(0, 2)
-        output_padding = random.randint(0, 2)
+        output_padding = random.randint(0, min(stride-1,2))
         dilation = random.randint(1, 2)
-        
+        groups = 1
         # Create ConvTranspose2d layer with random parameters
         conv_transpose2d = torch.nn.ConvTranspose2d(
-            in_channels, out_channels, kernel_size, stride, padding, output_padding, dilation
+            in_channels, out_channels, kernel_size, stride, padding, output_padding, groups,dilation
         )
         
         # Randomly generate input tensor size

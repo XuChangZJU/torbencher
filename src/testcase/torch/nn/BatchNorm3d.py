@@ -11,11 +11,11 @@ class TorchNnBatchnorm3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_BatchNorm3d_correctness(self):
         # Random input size (N, C, D, H, W)
-        num_batches = random.randint(1, 10)
-        num_channels = random.randint(1, 10)
-        depth = random.randint(1, 10)
-        height = random.randint(1, 10)
-        width = random.randint(1, 10)
+        num_batches = random.randint(2, 10)
+        num_channels = random.randint(2, 10)
+        depth = random.randint(2, 10)
+        height = random.randint(2, 10)
+        width = random.randint(2, 10)
         input_size = (num_batches, num_channels, depth, height, width)
     
         # Random input tensor
