@@ -14,8 +14,13 @@ class TorchOptimOptimizerStatedictTestCase(TorBencherTestCaseBase):
         num_params = random.randint(1, 5)
         
         # Create a simple model with the generated number of parameters
-        model = torch.nn.Sequential(*[torch.nn.Linear(random.randint(1, 10), random.randint(1, 10)) for _ in range(num_params)])
-        
+        # Generate random sizes for each layer
+        layer_sizes = [random.randint(1, 10) for _ in range(num_params + 1)]
+
+        # Create a simple model with the generated sizes
+        layers = [torch.nn.Linear(layer_sizes[i], layer_sizes[i + 1]) for i in range(num_params)]
+        model = torch.nn.Sequential(*layers)
+
         # Randomly choose an optimizer
         optimizer_class = random.choice([torch.optim.SGD, torch.optim.Adam])
         
@@ -27,7 +32,8 @@ class TorchOptimOptimizerStatedictTestCase(TorBencherTestCaseBase):
         optimizer = optimizer_class(model.parameters(), lr=lr, weight_decay=weight_decay)
         
         # Perform a dummy forward and backward pass to initialize optimizer state
-        input_tensor = torch.randn((random.randint(1, 10), random.randint(1, 10)))
+        # input_tensor = torch.randn((random.randint(1, 10), random.randint(1, 10)))
+        input_tensor = torch.randn((random.randint(1, 10), layer_sizes[0]))  # Ensure input size matches first layer
         output_tensor = model(input_tensor)
         loss = output_tensor.sum()
         loss.backward()
