@@ -15,7 +15,7 @@ class TorchNnCtclossTestCase(TorBencherTestCaseBase):
         C = random.randint(5, 20)   # Number of classes (including blank)
         N = random.randint(1, 16)   # Batch size
         S = random.randint(5, 30)   # Target sequence length of longest target in batch (padding length)
-        S_min = random.randint(1, S)  # Minimum target length
+        S_min = random.randint(1, S-1)  # Minimum target length
     
         # Initialize random batch of input vectors, for size = (T, N, C)
         input_tensor = torch.randn(T, N, C).log_softmax(2).detach().requires_grad_()
