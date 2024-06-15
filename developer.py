@@ -31,4 +31,4 @@ def check_for_issues(test_case_class, iteration_count):
         print("All iterations completed successfully without any failures or errors.")
 
 if __name__ == '__main__':
-    check_for_issues(TorchNnConv1dTestCase, 1000)
+    check_for_issues(TorchNnConv1dTestCase, 10000)
