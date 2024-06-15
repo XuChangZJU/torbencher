@@ -31,4 +31,8 @@ def check_for_issues(test_case_class, iteration_count):
         print("All iterations completed successfully without any failures or errors.")
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     check_for_issues(TorchNnConvtranspose3dTestCase, 1000)
+=======
+    check_for_issues(TorchNnConv1dTestCase, 10000)
+>>>>>>> 300ea5373670c45f7e6b48b25f013377086c08ee
