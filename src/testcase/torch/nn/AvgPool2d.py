@@ -17,7 +17,7 @@ class TorchNnAvgpool2dTestCase(TorBencherTestCaseBase):
         W_in = random.randint(10, 20)  # Width of the input tensor
     
         # Randomly generate kernel size, stride, and padding
-        kernel_size = (random.randint(2, 5), random.randint(2, 5))
+        kernel_size = (random.randint(4, 5), random.randint(4, 5))
         stride = (random.randint(1, 3), random.randint(1, 3))
         padding = (random.randint(0, 2), random.randint(0, 2))
     

@@ -16,7 +16,7 @@ class TorchNnAvgpool1dTestCase(TorBencherTestCaseBase):
         length = random.randint(5, 10)  # Random length of the input signal
     
         # Randomly generate parameters for AvgPool1d
-        kernel_size = random.randint(2, 4)  # Random kernel size
+        kernel_size = random.randint(4, 5)  # Random kernel size
         stride = random.randint(1, kernel_size)  # Random stride, ensuring it's valid
         padding = random.randint(0, 2)  # Random padding
     
