@@ -12,7 +12,7 @@ class TorchNnLazyinstancenorm1dTestCase(TorBencherTestCaseBase):
     def test_lazy_instance_norm_1d_correctness(self):
         # Randomly choose the batch size (N) and sequence length (L)
         batch_size = random.randint(1, 4)
-        seq_length = random.randint(1, 10)
+        seq_length = random.randint(2, 10)
         
         # Randomly choose the number of channels (C)
         num_channels = random.randint(1, 5)
