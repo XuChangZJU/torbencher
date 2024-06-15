@@ -13,12 +13,12 @@ class TorchNnInstancenorm2dTestCase(TorBencherTestCaseBase):
         # Randomly generate the number of features (channels)
         num_features = random.randint(1, 10)
         
-        # Randomly generate the batch size, height, and width
+        # Randomly generate the batch size, ensuring height and width are at least 2
         batch_size = random.randint(1, 5)
-        height = random.randint(1, 10)
-        width = random.randint(1, 10)
+        height = random.randint(2, 10)  # Ensure height is at least 2
+        width = random.randint(2, 10)   # Ensure width is at least 2
         
-        # Create a random input tensor with shape (N, C, H, W)
+        # Create a random input tensor with shape (N, C, H, W), where H and W are both >= 2
         input_tensor = torch.randn(batch_size, num_features, height, width)
         
         # Create an InstanceNorm2d layer with the generated number of features
