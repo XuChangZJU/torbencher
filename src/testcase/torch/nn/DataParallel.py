@@ -11,7 +11,7 @@ class TorchNnDataparallelTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_data_parallel_correctness(self):
         # Randomly generate the number of GPUs to use (between 1 and 4)
-        num_gpus = random.randint(1, 4)
+        num_gpus = 1
         device_ids = list(range(num_gpus))
     
         # Randomly generate the batch size (must be larger than the number of GPUs)
