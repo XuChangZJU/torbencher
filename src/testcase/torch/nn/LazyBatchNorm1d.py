@@ -13,7 +13,8 @@ class TorchNnLazybatchnorm1dTestCase(TorBencherTestCaseBase):
         # Random dimension for the tensor (batch size, num_features, length)
         batch_size = random.randint(1, 4)
         num_features = random.randint(1, 5)
-        length = random.randint(1, 10)
+        # Ensure length is at least 2 to avoid the error
+        length = random.randint(2, 10)  # 修改这里，确保长度至少为2
         
         # Random input tensor
         input_tensor = torch.randn(batch_size, num_features, length)
@@ -25,7 +26,6 @@ class TorchNnLazybatchnorm1dTestCase(TorBencherTestCaseBase):
         result = lazy_batch_norm(input_tensor)
         
         return result
-    
     
     
     

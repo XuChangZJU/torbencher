@@ -13,9 +13,9 @@ class TorchNnLazybatchnorm3dTestCase(TorBencherTestCaseBase):
         # Randomly generate dimensions for the 5D input tensor (N, C, D, H, W)
         N = random.randint(1, 4)  # Batch size
         C = random.randint(1, 4)  # Number of channels
-        D = random.randint(1, 4)  # Depth
-        H = random.randint(1, 4)  # Height
-        W = random.randint(1, 4)  # Width
+        D = random.randint(2, 4)  # Depth
+        H = random.randint(2, 4)  # Height
+        W = random.randint(2, 4)  # Width
     
         # Generate random input tensor with the specified dimensions
         input_tensor = torch.randn(N, C, D, H, W)
