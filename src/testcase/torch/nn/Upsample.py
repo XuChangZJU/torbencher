@@ -22,9 +22,16 @@ class TorchNnUpsampleTestCase(TorBencherTestCaseBase):
         # Randomly choose a scale factor between 1.1 and 3.0
         scale_factor = random.uniform(1.1, 3.0)
         
-        # Randomly choose an upsampling mode
-        mode = random.choice(['nearest', 'linear', 'bilinear', 'bicubic', 'trilinear'])
+        # Choose an upsampling mode based on the dimension of the input tensor
+        if dim == 3:  # For 3D input, only 'nearest' is valid
+            mode_options = ['nearest', 'linear']
+        elif dim == 4:  # For 4D input, can use 'nearest', 'linear', 'bilinear'
+            mode_options = ['nearest', 'bilinear', 'bicubic']
+        else:  # For 5D input, all modes including 'trilinear' are valid
+            mode_options = ['nearest', 'trilinear']
         
+        mode = random.choice(mode_options)
+
         # Create the Upsample module with the chosen parameters
         upsample = torch.nn.Upsample(scale_factor=scale_factor, mode=mode)
         
