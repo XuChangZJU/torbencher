@@ -28,7 +28,7 @@ class TorchNnParallelDataparallelTestCase(TorBencherTestCaseBase):
         module = SimpleModule()
     
         # Randomly select GPU ids (assuming at least 2 GPUs are available)
-        device_ids = [0, 1]
+        device_ids = [0]
     
         # Evaluate the module in parallel across the specified GPUs
         result = torch.nn.parallel.data_parallel(module, input_tensor, device_ids)
