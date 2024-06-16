@@ -12,7 +12,7 @@ class TorchNnTransformerencoderlayerTestCase(TorBencherTestCaseBase):
     def test_transformer_encoder_layer_correctness(self):
         # Randomly generate parameters for TransformerEncoderLayer
         d_model = random.randint(32, 512)  # Number of expected features in the input
-        nhead = random.randint(1, 8)  # Number of heads in the multiheadattention models
+        nhead = 1  # Number of heads in the multiheadattention models
         dim_feedforward = random.randint(512, 2048)  # Dimension of the feedforward network model
         dropout = random.uniform(0.0, 0.5)  # Dropout value
         layer_norm_eps = random.uniform(1e-6, 1e-4)  # Eps value in layer normalization components

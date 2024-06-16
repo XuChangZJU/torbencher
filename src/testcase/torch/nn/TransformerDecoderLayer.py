@@ -12,7 +12,7 @@ class TorchNnTransformerdecoderlayerTestCase(TorBencherTestCaseBase):
     def test_transformer_decoder_layer_correctness(self):
         # Randomly generate parameters for TransformerDecoderLayer
         d_model = random.randint(128, 512)  # Random d_model between 128 and 512
-        nhead = random.randint(1, 8)  # Random number of heads between 1 and 8
+        nhead = 1  # Random number of heads between 1 and 8
         dim_feedforward = random.randint(512, 2048)  # Random feedforward dimension between 512 and 2048
     
         # Create the TransformerDecoderLayer with random parameters

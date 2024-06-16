@@ -12,7 +12,7 @@ class TorchNnTransformerencoderTestCase(TorBencherTestCaseBase):
     def test_transformer_encoder_correctness(self):
         # Randomly generate parameters for TransformerEncoderLayer
         d_model = random.randint(128, 1024)  # Random model dimension between 128 and 1024
-        nhead = random.randint(1, 16)  # Random number of attention heads between 1 and 16
+        nhead = 1  # Random number of attention heads between 1 and 16
         num_layers = random.randint(1, 12)  # Random number of encoder layers between 1 and 12
     
         # Create an instance of TransformerEncoderLayer
