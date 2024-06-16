@@ -13,14 +13,31 @@ class TorchNnMaxunpool3dTestCase(TorBencherTestCaseBase):
         # Randomly generate dimensions for the input tensor
         N = random.randint(1, 4)  # Batch size
         C = random.randint(1, 4)  # Number of channels
-        D_in = random.randint(5, 10)  # Depth of the input tensor
-        H_in = random.randint(5, 10)  # Height of the input tensor
-        W_in = random.randint(5, 10)  # Width of the input tensor
-    
-        # Randomly generate kernel size, stride, and padding
+        # Set minimum dimensions to avoid too small inputs and to simplify calculation
+        min_dim = 5
+        max_dim = 10
+        # Initialize kernel_size and stride
         kernel_size = random.randint(2, 4)
+        min_padding = 0
+        max_padding = kernel_size // 2  # Padding should not exceed half of kernel_size to keep dimensions valid
+        padding = random.randint(min_padding, max_padding)
+        
+        # Adjust min_dim to ensure after pooling we have a valid dimension (at least 1)
+        min_valid_dim = (min_dim + 2*random.randint(0, 1) - kernel_size) // kernel_size + 1
+        min_dim = max(kernel_size, min_valid_dim * kernel_size - 2*random.randint(0, 1))
+        while True:
+            D_in = random.randint(min_dim, max_dim)
+            H_in = random.randint(min_dim, max_dim)
+            W_in = random.randint(min_dim, max_dim)
+            
+            # Check if dimensions with chosen padding can be divided by kernel_size without remainder
+            # This also implicitly checks that padding won't lead to output dimensions of zero
+            if (D_in + 2*padding - kernel_size) % kernel_size == 0 and \
+               (H_in + 2*padding - kernel_size) % kernel_size == 0 and \
+               (W_in + 2*padding - kernel_size) % kernel_size == 0:
+                break
+    
         stride = kernel_size  # To ensure valid unpooling
-        padding = random.randint(0, 1)
     
         # Create random input tensor
         input_tensor = torch.randn(N, C, D_in, H_in, W_in)

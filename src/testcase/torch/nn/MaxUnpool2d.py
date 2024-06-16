@@ -1,7 +1,6 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
@@ -10,14 +9,21 @@ from src.util.decorator import test_api
 class TorchNnMaxunpool2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_maxunpool2d_correctness(self):
-        # Randomly generate dimensions for the input tensor
+        # Randomly generate dimensions for kernel size ensuring compatibility
+        kernel_size = random.choice([2, 3])  # Limited choices to maintain validity
+        # Randomly generate dimensions for the input tensor ensuring valid unpooling
         N = random.randint(1, 4)  # Batch size
         C = random.randint(1, 4)  # Number of channels
-        H_in = random.randint(4, 8)  # Height of the input tensor
-        W_in = random.randint(4, 8)  # Width of the input tensor
-    
-        # Randomly generate kernel size and stride
-        kernel_size = random.randint(2, 4)
+        
+        # Ensure H_in and W_in can be divided by kernel_size to avoid invalid indices after pooling
+        min_dim = 4  # Minimum dimension to avoid too small inputs causing issues
+        while True:
+            H_in = random.randint(min_dim, 8)  
+            W_in = random.randint(min_dim, 8)
+            if H_in % kernel_size == 0 and W_in % kernel_size == 0:
+                break
+        
+        # Kernel size and stride, ensuring they're compatible with the input dimensions
         stride = kernel_size  # To ensure valid pooling and unpooling
     
         # Create random input tensor
@@ -30,7 +36,7 @@ class TorchNnMaxunpool2dTestCase(TorBencherTestCaseBase):
         # Perform max pooling
         pooled_output, indices = pool(input_tensor)
     
-        # Perform max unpooling
+        # Perform max unpooling, now with a guarantee that indices are valid
         unpooled_output = unpool(pooled_output, indices)
     
         return unpooled_output
