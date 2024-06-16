@@ -1,7 +1,6 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
@@ -34,12 +33,16 @@ class TorchNnParameterdictTestCase(TorBencherTestCaseBase):
         
         # Randomly selecting a parameter from the ParameterDict
         choice = random.choice(['param1', 'param2'])
+
+        # Reshape the selected parameter to ensure it's 2D
+        param_reshaped = param_dict[choice].reshape(-1, param_dict[choice].size(-1))
         
-        # Creating a random input tensor for matrix multiplication
-        input_tensor = torch.randn(param_dict[choice].size(-1), random.randint(1, 5))
+       # Correctly define input_tensor to have compatible shape for multiplication
+        # Here, we assume param_reshaped's second dimension (columns) should match input_tensor's first dimension (rows)
+        input_tensor = torch.randn(param_reshaped.size(1), random.randint(1, 5))  # Match columns of param_reshaped
         
-        # Performing matrix multiplication using the selected parameter
-        result = param_dict[choice].mm(input_tensor)
+        # Perform matrix multiplication
+        result = torch.matmul(param_reshaped, input_tensor)
         
         return result
     
