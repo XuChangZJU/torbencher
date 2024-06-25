@@ -15,7 +15,6 @@ class TorchTensorSlicescatterTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for _ in range(dim)]
     
         tensor = torch.randn(input_size)
-        src = torch.randn(input_size)
         
         # Randomly choose a dimension to slice along
         slice_dim = random.randint(0, dim - 1)
@@ -26,6 +25,12 @@ class TorchTensorSlicescatterTestCase(TorBencherTestCaseBase):
         
         # Randomly choose a step for slicing
         step = random.randint(1, num_of_elements_each_dim)
+        
+        # Calculate the size of the src tensor to match the slice size
+        slice_size = list(input_size)
+        slice_size[slice_dim] = (end - start + step - 1) // step
+        
+        src = torch.randn(slice_size)
         
         result = tensor.slice_scatter(src, slice_dim, start, end, step)
         return result

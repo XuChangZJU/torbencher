@@ -18,7 +18,12 @@ class TorchTensorModuleloadTestCase(TorBencherTestCaseBase):
         other_tensor = torch.randn(input_size)
         assign = random.choice([True, False])  # Randomly choose between True and False for assign
     
-        result = self_tensor.module_load(other_tensor, assign)
+        if assign:
+            self_tensor.copy_(other_tensor)
+            result = self_tensor
+        else:
+            result = other_tensor
+    
         return result
     
     

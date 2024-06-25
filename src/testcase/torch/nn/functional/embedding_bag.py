@@ -26,6 +26,9 @@ class TorchNnFunctionalEmbeddingbagTestCase(TorBencherTestCaseBase):
         offsets = torch.randint(0, input_length, (num_bags,), dtype=torch.long)
         offsets = torch.sort(offsets)[0]  # Ensure offsets are sorted
         
+        # Ensure the first offset is 0
+        offsets[0] = 0
+        
         # Compute the embedding bag
         result = torch.nn.functional.embedding_bag(input_tensor, embedding_matrix, offsets)
         return result

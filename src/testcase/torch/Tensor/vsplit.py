@@ -21,11 +21,18 @@ class TorchTensorVsplitTestCase(TorBencherTestCaseBase):
         if random.choice([True, False]):
             # Randomly choose a valid number of splits
             num_splits = random.randint(1, num_rows - 1)  # Ensure at least one split
-            result = tensor.vsplit(num_splits)
+            # Ensure the number of rows is divisible by num_splits
+            if num_rows % num_splits == 0:
+                result = torch.vsplit(tensor, num_splits)
+            else:
+                # Adjust num_splits to be a divisor of num_rows
+                divisors = [i for i in range(1, num_rows) if num_rows % i == 0]
+                num_splits = random.choice(divisors)
+                result = torch.vsplit(tensor, num_splits)
         else:
             # Randomly generate valid sections
             sections = sorted(random.sample(range(1, num_rows), random.randint(1, num_rows - 1)))
-            result = tensor.vsplit(sections)
+            result = torch.vsplit(tensor, sections)
         
         return result
     

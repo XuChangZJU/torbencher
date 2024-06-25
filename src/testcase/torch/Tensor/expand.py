@@ -20,11 +20,11 @@ class TorchTensorExpandTestCase(TorBencherTestCaseBase):
     
         # Generate new sizes for expansion
         expanded_size = []
-        for _ in range(original_dim):
+        for dim in range(original_dim):
             if random.choice([True, False]):
                 expanded_size.append(-1)  # Keep the original size
             else:
-                expanded_size.append(random.randint(1, 10))  # Expand to a larger size
+                expanded_size.append(1)  # Expand to a singleton dimension
     
         # Append new dimensions at the front if necessary
         new_dims = random.randint(0, 2)

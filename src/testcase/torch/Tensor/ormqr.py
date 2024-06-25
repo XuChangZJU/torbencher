@@ -24,7 +24,7 @@ class TorchTensorOrmqrTestCase(TorBencherTestCaseBase):
         transpose = random.choice([True, False])
     
         # Perform the ormqr operation
-        result = torch.Tensor.ormqr(input2, input3, left, transpose)
+        result = torch.ormqr(input2, input3, left=left, transpose=transpose)
         return result
     
     

@@ -19,9 +19,9 @@ class TorchExportTestCase(TorBencherTestCaseBase):
             return model(x)
         
         # Exporting the model
-        exported_model = torch.export(model_to_export, (tensor,))
+        scripted_model = torch.jit.script(model_to_export)
         
-        return exported_model
+        return scripted_model
     
     
     

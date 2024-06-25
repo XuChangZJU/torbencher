@@ -25,7 +25,7 @@ class TorchSparsecsctensorTestCase(TorBencherTestCaseBase):
         ccol_indices = torch.tensor(ccol_indices, dtype=torch.int64)
         
         # Random row_indices and values
-        row_indices = torch.tensor(random.sample(range(num_rows), num_nonzeros), dtype=torch.int64)
+        row_indices = torch.tensor(random.sample(range(num_rows) * (num_nonzeros // num_rows + 1), num_nonzeros), dtype=torch.int64)
         values = torch.randn(num_nonzeros)  # Random values size: [num_nonzeros]
     
         # Random size of the sparse tensor

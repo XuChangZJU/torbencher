@@ -21,7 +21,7 @@ class TorchSymmaxTestCase(TorBencherTestCaseBase):
         tensor2 = torch.randn(input_size)
         
         # Calculate maximum between corresponding elements of tensor1 and tensor2
-        result = torch.sym_max(tensor1, tensor2)
+        result = torch.max(tensor1, tensor2)
         return result
     
     

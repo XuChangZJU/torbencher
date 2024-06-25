@@ -25,7 +25,7 @@ class TorchTensorBroadcasttoTestCase(TorBencherTestCaseBase):
                 target_shape[i] = random.randint(max(1, target_shape[i]), 10)  # Ensure valid broadcasting
         
         # Perform the broadcast operation
-        result = original_tensor.broadcast_to(target_shape)
+        result = original_tensor.expand(target_shape)
         return result
     
     

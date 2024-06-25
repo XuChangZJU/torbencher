@@ -26,7 +26,7 @@ class TorchNnFunctionalTripletmarginwithdistancelossTestCase(TorBencherTestCaseB
             return torch.norm(x - y, p=2, dim=-1)
     
         # Compute the triplet margin loss
-        result = torch.nn.functional.triplet_margin_with_distance_loss(anchor, positive, negative, distance_function)
+        result = torch.nn.functional.triplet_margin_with_distance_loss(anchor, positive, negative, distance_function=distance_function)
         return result
     
     

@@ -20,7 +20,7 @@ class TorchTensorIndexreduceTestCase(TorBencherTestCaseBase):
         index = torch.randint(0, index_size, (index_size,))  # Random indices within the range of the dimension size
         source = torch.randn(input_size)  # Source tensor with the same shape as the input tensor
     
-        result = tensor.index_reduce(index_dim, index, source, reduce='sum')
+        result = tensor.index_reduce(index_dim, index, source, reduce='add')
         return result
     
     

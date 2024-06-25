@@ -15,7 +15,9 @@ class TorchTensorDsplitTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for _ in range(dim)]
     
         tensor = torch.randn(input_size)
-        split_size_or_sections = random.randint(1, num_of_elements_each_dim)  # Random split size or sections
+        
+        # Ensure the split size is a divisor of the size of the dimension to be split
+        split_size_or_sections = random.choice([i for i in range(1, num_of_elements_each_dim + 1) if num_of_elements_each_dim % i == 0])
     
         result = tensor.dsplit(split_size_or_sections)
         return result

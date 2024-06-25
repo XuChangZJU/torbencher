@@ -12,8 +12,8 @@ class TorchGradientTestCase(TorBencherTestCaseBase):
     def test_gradient_correctness(self):
         # Random dimension for the tensor (choose between 1 to 4)
         dim = random.randint(1, 4)
-        # Random number of elements in each dimension (choose between 1 to 5)
-        num_elements = random.randint(1, 5)
+        # Random number of elements in each dimension (choose between 2 to 5)
+        num_elements = random.randint(2, 5)
         # Create input size list based on the number of dimensions
         input_size = [num_elements for _ in range(dim)]
         

@@ -13,19 +13,14 @@ class TorchTensorSspaddmmTestCase(TorBencherTestCaseBase):
         # Random dimensions for the sparse matrix
         sparse_dim = random.randint(1, 4)
         sparse_num_elements_each_dim = random.randint(1, 5)
-        sparse_size = [sparse_num_elements_each_dim for _ in range(sparse_dim)]
+        sparse_size = [sparse_num_elements_each_dim for _ in range(2)]  # Sparse matrix should be 2D
         
         # Random dimensions for the dense matrices
-        dense_dim1 = random.randint(1, 4)
         dense_num_elements_each_dim1 = random.randint(1, 5)
-        dense_size1 = [dense_num_elements_each_dim1 for _ in range(dense_dim1)]
+        dense_size1 = [sparse_size[0], dense_num_elements_each_dim1]  # Ensure compatibility for multiplication
         
-        dense_dim2 = random.randint(1, 4)
         dense_num_elements_each_dim2 = random.randint(1, 5)
-        dense_size2 = [dense_num_elements_each_dim2 for _ in range(dense_dim2)]
-        
-        # Ensure the inner dimensions match for matrix multiplication
-        dense_size2[0] = dense_size1[-1]
+        dense_size2 = [dense_size1[1], dense_num_elements_each_dim2]  # Ensure compatibility for multiplication
         
         # Create random sparse matrix
         sparse_indices = torch.randint(0, sparse_num_elements_each_dim, (2, sparse_num_elements_each_dim))

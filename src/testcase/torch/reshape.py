@@ -31,6 +31,10 @@ class TorchReshapeTestCase(TorBencherTestCaseBase):
             remain_elements //= new_shape[i]
         new_shape[-1] = remain_elements  # Set the last dimension to balance the total number of elements
     
+        # Ensure the new shape is valid
+        if remain_elements != 1:
+            new_shape[-1] = remain_elements
+    
         reshaped_tensor = torch.reshape(original_tensor, tuple(new_shape))  # Perform the reshape operation
         return reshaped_tensor
     

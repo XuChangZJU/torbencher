@@ -21,14 +21,14 @@ class TorchSlicescatterTestCase(TorBencherTestCaseBase):
         # Select a random dimension to apply slice_scatter
         slice_dim = random.randint(0, dim - 1)
         
-        # Create src tensor which has the same shape as input except for slice_dim
-        src_size = input_size[:]
-        src_size[slice_dim] = random.randint(1, num_of_elements_each_dim)
-        src_tensor = torch.randn(src_size)
-        
         # Random start and end indices
         start_idx = random.randint(0, num_of_elements_each_dim - 1)
         end_idx = random.randint(start_idx + 1, num_of_elements_each_dim)
+        
+        # Create src tensor which has the same shape as the slice of input_tensor
+        src_size = input_size[:]
+        src_size[slice_dim] = end_idx - start_idx
+        src_tensor = torch.randn(src_size)
         
         # Perform the slice_scatter operation; step is left as 1 (default)
         result_tensor = torch.slice_scatter(input_tensor, src_tensor, slice_dim, start_idx, end_idx)

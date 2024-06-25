@@ -1,5 +1,6 @@
 import torch
 import random
+    import time
 
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase

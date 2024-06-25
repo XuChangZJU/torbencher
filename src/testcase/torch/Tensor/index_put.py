@@ -15,10 +15,10 @@ class TorchTensorIndexputTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for _ in range(dim)]
     
         tensor = torch.randn(input_size)  # Random tensor
-        indices = [torch.randint(0, num_of_elements_each_dim, (random.randint(1, num_of_elements_each_dim),)) for _ in range(dim)]  # Random indices
-        values = torch.randn(indices[0].size(0))  # Random values to put at indices
+        indices = [torch.randint(0, num_of_elements_each_dim, (num_of_elements_each_dim,)) for _ in range(dim)]  # Random indices
+        values = torch.randn(num_of_elements_each_dim)  # Random values to put at indices
     
-        result = tensor.index_put(indices, values)  # Perform index_put operation
+        result = tensor.index_put_(indices, values)  # Perform index_put operation
         return result
     
     

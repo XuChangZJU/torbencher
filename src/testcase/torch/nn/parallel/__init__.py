@@ -1,2 +1,1 @@
 from .data_parallel import TorchNnParallelDataparallelTestCase
-from .DistributedDataParallel import TorchNnParallelDistributeddataparallelTestCase

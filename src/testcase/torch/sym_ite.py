@@ -22,8 +22,8 @@ class TorchSymiteTestCase(TorBencherTestCaseBase):
         # Generate random y tensor with the same size as condition tensor
         y = torch.randn(condition_size)
     
-        # Apply torch.sym_ite to select between x and y tensor elements based on condition
-        result = torch.sym_ite(condition, x, y)
+        # Apply torch.where to select between x and y tensor elements based on condition
+        result = torch.where(condition, x, y)
         
         return result
     

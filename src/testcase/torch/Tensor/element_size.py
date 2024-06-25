@@ -19,7 +19,12 @@ class TorchTensorElementsizeTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for _ in range(dim)]
         
-        tensor = torch.randn(input_size, dtype=dtype)
+        # Use appropriate tensor creation function based on dtype
+        if dtype in [torch.float32, torch.float64]:
+            tensor = torch.randn(input_size, dtype=dtype)
+        else:
+            tensor = torch.randint(0, 10, input_size, dtype=dtype)
+        
         element_size = tensor.element_size()
         return element_size
     

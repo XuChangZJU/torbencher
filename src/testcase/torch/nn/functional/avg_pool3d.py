@@ -23,8 +23,10 @@ class TorchNnFunctionalAvgpool3dTestCase(TorBencherTestCaseBase):
         # Random stride, default to kernel size if not specified
         stride = (random.randint(1, 3), random.randint(1, 3), random.randint(1, 3))
         
-        # Random padding
-        padding = (random.randint(0, 2), random.randint(0, 2), random.randint(0, 2))
+        # Random padding, ensuring it is at most half of the kernel size
+        padding = (random.randint(0, kernel_size[0] // 2), 
+                   random.randint(0, kernel_size[1] // 2), 
+                   random.randint(0, kernel_size[2] // 2))
         
         # Generate random input tensor
         input_tensor = torch.randn(batch_size, in_channels, depth, height, width)

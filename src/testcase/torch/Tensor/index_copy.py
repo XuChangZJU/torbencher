@@ -15,10 +15,14 @@ class TorchTensorIndexcopyTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for _ in range(4)]  # Generate a 4D tensor
     
         tensor1 = torch.randn(input_size)  # Original tensor
-        tensor2 = torch.randn(input_size)  # Tensor to copy from
     
         index_size = random.randint(1, num_of_elements_each_dim)  # Random size for index tensor
         index = torch.randint(0, num_of_elements_each_dim, (index_size,))  # Random index tensor
+    
+        # Ensure tensor2 has the correct size for the dimension being copied
+        tensor2_size = input_size.copy()
+        tensor2_size[dim] = index_size
+        tensor2 = torch.randn(tensor2_size)  # Tensor to copy from
     
         result = tensor1.index_copy(dim, index, tensor2)
         return result

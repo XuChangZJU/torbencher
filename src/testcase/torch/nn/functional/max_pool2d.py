@@ -30,7 +30,9 @@ class TorchNnFunctionalMaxpool2dTestCase(TorBencherTestCaseBase):
         stride = (stride_height, stride_width)
     
         # Randomly generate padding, ensuring it is valid
-        padding = random.randint(0, min(kernel_height // 2, kernel_width // 2))
+        padding_height = random.randint(0, (kernel_height - 1) // 2)
+        padding_width = random.randint(0, (kernel_width - 1) // 2)
+        padding = (padding_height, padding_width)
     
         # Randomly generate dilation, ensuring it is greater than 0
         dilation = random.randint(1, 3)

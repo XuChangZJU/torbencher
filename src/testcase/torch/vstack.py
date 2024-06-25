@@ -16,8 +16,7 @@ class TorchVstackTestCase(TorBencherTestCaseBase):
         # Random small scale dimensions for each tensor
         tensors = []
         for _ in range(num_tensors):
-            dim = random.randint(1, 3)
-            size = [random.randint(1, 4) for _ in range(dim)]
+            size = [random.randint(1, 4) for _ in range(2)]  # Ensure 2D tensors for vstack
             tensors.append(torch.randn(size))
         
         result = torch.vstack(tensors)

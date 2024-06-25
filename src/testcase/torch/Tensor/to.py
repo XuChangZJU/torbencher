@@ -26,7 +26,7 @@ class TorchTensorToTestCase(TorBencherTestCaseBase):
         device = random.choice(['cpu', 'cuda:0'] if torch.cuda.is_available() else ['cpu'])
     
         # Convert tensor to the chosen dtype and device
-        result = tensor.to(dtype, device)
+        result = tensor.to(device=device, dtype=dtype)
     
         return result
     

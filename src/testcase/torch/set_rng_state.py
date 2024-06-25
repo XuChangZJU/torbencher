@@ -17,8 +17,8 @@ class TorchSetrngstateTestCase(TorBencherTestCaseBase):
         torch.manual_seed(seed)
         
         # Creating a random ByteTensor to represent the desired state
-        dummy_byte_tensor_size = random.randint(100, 200)
-        new_state = torch.ByteTensor(dummy_byte_tensor_size).random_(0, 256)  # Random ByteTensor values between 0 and 255
+        # The size of the state tensor should match the expected size for the current PyTorch version
+        new_state = torch.get_rng_state()
         
         # Setting the RNG state with the created ByteTensor
         torch.set_rng_state(new_state)

@@ -29,10 +29,11 @@ class TorchGetfloat32matmulprecisionTestCase(TorBencherTestCaseBase):
             # Generating two random tensors for matrix multiplication
             dim1 = random.randint(2, 4)
             dim2 = random.randint(2, 4)
-            tensor_size = [random.randint(2, 5) for _ in range(dim1)]
+            tensor_size1 = [random.randint(2, 5) for _ in range(dim1)]
+            tensor_size2 = tensor_size1[:-1] + [random.randint(2, 5)]
     
-            matrix1 = torch.randn(tensor_size)
-            matrix2 = torch.randn(tensor_size)
+            matrix1 = torch.randn(tensor_size1)
+            matrix2 = torch.randn(tensor_size2)
     
             # Perform matrix multiplication to see if the precision setting shows any visible difference
             result = torch.matmul(matrix1, matrix2)

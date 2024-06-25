@@ -21,10 +21,12 @@ class TorchNnFunctionalCosineembeddinglossTestCase(TorBencherTestCaseBase):
         input2 = torch.randn(input_size)
         
         # Generate random target tensor with values -1 or 1
-        target = torch.randint(0, 2, input_size).float() * 2 - 1
+        target = torch.randint(0, 2, (num_of_elements_each_dim,)).float() * 2 - 1
         
         # Calculate cosine embedding loss
-        result = torch.nn.functional.cosine_embedding_loss(input1, input2, target)
+        result = torch.nn.functional.cosine_embedding_loss(input1.view(num_of_elements_each_dim, -1), 
+                                                           input2.view(num_of_elements_each_dim, -1), 
+                                                           target)
         return result
     
     

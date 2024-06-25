@@ -22,16 +22,16 @@ class TorchNnFunctionalMaxpool3dTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)
     
         # Random kernel size, ensuring it's smaller than the input dimensions
-        kernel_size = (random.randint(2, 4), random.randint(2, 4), random.randint(2, 4))
+        kernel_size = (random.randint(2, min(4, depth)), random.randint(2, min(4, height)), random.randint(2, min(4, width)))
     
-        # Random stride, ensuring it's smaller than the kernel size
+        # Random stride, ensuring it's smaller than or equal to the kernel size
         stride = (random.randint(1, kernel_size[0]), random.randint(1, kernel_size[1]), random.randint(1, kernel_size[2]))
     
         # Random padding, ensuring it's valid
-        padding = random.randint(0, min(kernel_size) // 2)
+        padding = (random.randint(0, kernel_size[0] // 2), random.randint(0, kernel_size[1] // 2), random.randint(0, kernel_size[2] // 2))
     
         # Random dilation, ensuring it's greater than 0
-        dilation = random.randint(1, 2)
+        dilation = (random.randint(1, 2), random.randint(1, 2), random.randint(1, 2))
     
         # Random ceil_mode and return_indices
         ceil_mode = random.choice([True, False])

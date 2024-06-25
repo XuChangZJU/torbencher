@@ -10,6 +10,9 @@ from src.util.decorator import test_api
 class TorchTensorIscudaTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_cuda_correctness(self):
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA is not available. Please ensure that PyTorch is compiled with CUDA support.")
+    
         dim = random.randint(1, 4)  # Random dimension for the tensor
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for _ in range(dim)]  # Generate input size list

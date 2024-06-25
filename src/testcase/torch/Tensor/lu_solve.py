@@ -20,7 +20,7 @@ class TorchTensorLusolveTestCase(TorBencherTestCaseBase):
     
         # Generate a random tensor for LU_pivots
         LU_pivots_size = [LU_data_size[0]]  # LU_pivots should match the first dimension of LU_data
-        LU_pivots = torch.randint(1, LU_data_size[0] + 1, LU_pivots_size)
+        LU_pivots = torch.randint(1, LU_data_size[0] + 1, LU_pivots_size, dtype=torch.int32)
     
         # Generate a random tensor for B (right-hand side matrix)
         B_size = LU_data_size[:-1] + [random.randint(1, 5)]  # B should match the dimensions of LU_data except the last one

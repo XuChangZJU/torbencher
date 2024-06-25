@@ -13,6 +13,7 @@ class TorchSetnuminteropthreadsTestCase(TorBencherTestCaseBase):
         # Randomly selected number of interop threads
         num_threads = random.randint(1, 16)  # Range chosen based on typical thread counts for small and medium systems
         
+        # Ensure no parallel work has started before setting interop threads
         torch.set_num_interop_threads(num_threads)
         
         # Create a tensor operation to observe interop thread effect

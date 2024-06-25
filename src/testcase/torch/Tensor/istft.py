@@ -19,7 +19,9 @@ class TorchTensorIstftTestCase(TorBencherTestCaseBase):
         # Randomly generate a complex tensor for the input
         num_frames = random.randint(1, 10)
         num_freq_bins = n_fft // 2 + 1
-        complex_tensor = torch.randn(num_frames, num_freq_bins, 2)  # Last dimension for real and imaginary parts
+        real_part = torch.randn(num_frames, num_freq_bins)
+        imag_part = torch.randn(num_frames, num_freq_bins)
+        complex_tensor = torch.complex(real_part, imag_part)  # Create a complex tensor
     
         # Perform the inverse short-time Fourier transform
         result = torch.istft(complex_tensor, n_fft, hop_length, win_length, window)

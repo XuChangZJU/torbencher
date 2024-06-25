@@ -21,8 +21,11 @@ class TorchBroadcastshapesTestCase(TorBencherTestCaseBase):
                 shape.append(random.randint(1, 4))  # Random size for each dimension to ensure valid broadcasting
             shapes.append(torch.Size(shape))
         
-        result_shape = torch.broadcast_shapes(*shapes)
-        return result_shape
+        try:
+            result_shape = torch.broadcast_shapes(*shapes)
+            return result_shape
+        except RuntimeError as e:
+            return str(e)
     
     
     

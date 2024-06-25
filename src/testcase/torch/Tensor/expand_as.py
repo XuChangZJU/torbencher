@@ -16,7 +16,7 @@ class TorchTensorExpandasTestCase(TorBencherTestCaseBase):
         
         # Generate random dimensions for the target tensor
         target_dim = random.randint(base_dim, base_dim + 2)  # Ensure target_dim >= base_dim
-        target_size = base_size + [random.randint(1, 5) for _ in range(target_dim - base_dim)]
+        target_size = [1] * (target_dim - base_dim) + base_size  # Ensure broadcast compatibility
         
         # Create base and target tensors
         base_tensor = torch.randn(base_size)

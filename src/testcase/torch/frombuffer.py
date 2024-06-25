@@ -26,9 +26,13 @@ class TorchFrombufferTestCase(TorBencherTestCaseBase):
             # Buffer of random ints
             buffer = array.array('i', [random.randint(-10, 10) for _ in range(num_elements)])
     
+        # Ensure the buffer is not empty
+        if len(buffer) == 0:
+            raise ValueError("Buffer length must not be 0")
+    
         # Randomly decide count and offset
-        count = random.randint(-1, num_elements)  # count can be any number between -1 and num_elements
-        offset = random.randint(0, dtype_size * (num_elements - (count if count > 0 else 1)))
+        count = random.randint(1, num_elements)  # count must be at least 1 and at most num_elements
+        offset = random.randint(0, dtype_size * (num_elements - count))
     
         # Invoke torch.frombuffer and return the tensor
         result = torch.frombuffer(buffer, dtype=dtype, count=count, offset=offset)

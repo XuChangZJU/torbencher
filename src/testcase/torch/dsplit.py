@@ -13,7 +13,7 @@ class TorchDsplitTestCase(TorBencherTestCaseBase):
         # Random dimensions for the tensor to ensure it has three or more dimensions
         dim1 = random.randint(1, 4)
         dim2 = random.randint(1, 4)
-        dim3 = random.randint(1, 4)
+        dim3 = random.randint(2, 4)  # Ensure dim3 is at least 2 to avoid empty range error
         input_shape = [dim1, dim2, dim3]
     
         # Generate a random tensor with the specified dimensions
@@ -29,7 +29,10 @@ class TorchDsplitTestCase(TorBencherTestCaseBase):
             result = torch.dsplit(tensor, sections)
         else:
             # If list, create a list of valid split indices in the range of the third dimension
-            indices = sorted(random.sample(range(1, dim3), random.randint(1, dim3 - 1)))
+            if dim3 > 1:
+                indices = sorted(random.sample(range(1, dim3), random.randint(1, dim3 - 1)))
+            else:
+                indices = []
             result = torch.dsplit(tensor, indices)
         
         return result

@@ -15,6 +15,11 @@ class TorchTensorPinmemoryTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for _ in range(dim)]  # Generate input size list
     
         tensor = torch.randn(input_size)  # Create a random tensor
+    
+        # Ensure the tensor is on the CPU before pinning it to memory
+        if tensor.device.type == 'cuda':
+            tensor = tensor.cpu()
+    
         pinned_tensor = tensor.pin_memory()  # Pin the tensor to memory
     
         return pinned_tensor.is_pinned()  # Check if the tensor is pinned

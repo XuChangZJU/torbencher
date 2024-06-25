@@ -29,7 +29,10 @@ class TorchTensorsplitTestCase(TorBencherTestCaseBase):
             result = torch.tensor_split(tensor, num_sections, split_dim)
         else:
             # Using list of indices: generate a random list of split points
-            split_points = sorted(random.sample(range(1, input_size[split_dim]), random.randint(1, input_size[split_dim] - 1)))
+            if input_size[split_dim] > 1:
+                split_points = sorted(random.sample(range(1, input_size[split_dim]), random.randint(1, input_size[split_dim] - 1)))
+            else:
+                split_points = []
             result = torch.tensor_split(tensor, split_points, split_dim)
         
         return result

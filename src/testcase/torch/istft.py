@@ -13,8 +13,8 @@ class TorchIstftTestCase(TorBencherTestCaseBase):
         # Random tensor dimensions
         batch_dim = random.randint(1, 3)  # Random batch dimension (optional)
         n_fft = random.randint(2, 10) * 2  # Ensure n_fft is even as FFT size
-        hop_length = random.randint(1, n_fft)  # Random hop length within the range of n_fft
         win_length = random.randint(1, n_fft)  # Random window length within the range of n_fft
+        hop_length = random.randint(1, win_length)  # Ensure hop_length is within the range of win_length
     
         # Generating the window tensor
         window = torch.randn(win_length)  # Random window function of window length

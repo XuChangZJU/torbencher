@@ -23,6 +23,9 @@ class TorchNnFunctionalFractionalmaxpool3dTestCase(TorBencherTestCaseBase):
         # Randomly generate kernel size for the pooling operation
         kernel_size = random.randint(2, 5)
     
+        # Ensure the kernel size is not larger than the input dimensions
+        kernel_size = min(kernel_size, T_in, H_in, W_in)
+    
         # Randomly generate output size for the pooling operation
         T_out = random.randint(5, T_in - 1)
         H_out = random.randint(5, H_in - 1)

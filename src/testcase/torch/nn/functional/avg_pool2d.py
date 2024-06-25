@@ -29,9 +29,9 @@ class TorchNnFunctionalAvgpool2dTestCase(TorBencherTestCaseBase):
         stride_width = random.randint(1, kernel_width)
         stride = (stride_height, stride_width)
     
-        # Randomly generate padding
-        padding_height = random.randint(0, 2)
-        padding_width = random.randint(0, 2)
+        # Randomly generate padding, ensuring it is at most half of the kernel size
+        padding_height = random.randint(0, kernel_height // 2)
+        padding_width = random.randint(0, kernel_width // 2)
         padding = (padding_height, padding_width)
     
         # Apply avg_pool2d with the generated parameters

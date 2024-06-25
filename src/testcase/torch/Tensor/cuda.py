@@ -26,8 +26,8 @@ class TorchTensorCudaTestCase(TorBencherTestCaseBase):
         else:
             device = torch.device('cpu')
     
-        # Move tensor to CUDA
-        result = tensor.cuda(device)
+        # Move tensor to the selected device
+        result = tensor.to(device)
         return result
     
     

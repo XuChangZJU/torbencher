@@ -24,7 +24,7 @@ class TorchNnFunctionalAvgpool1dTestCase(TorBencherTestCaseBase):
         stride = random.randint(1, kernel_size)
         
         # Randomly generate padding and ensure it's valid
-        padding = random.randint(0, kernel_size - 1)
+        padding = random.randint(0, kernel_size // 2)
         
         # Generate random input tensor
         input_tensor = torch.randn(minibatch_size, in_channels, input_width)

@@ -23,7 +23,7 @@ class TorchSetflushdenormalTestCase(TorBencherTestCaseBase):
                 assert torch.all(denormal_tensor == 0), "Expected denormal tensor to be flushed to zero"
             else:
                 # When not flushing denormals, tensor should retain its denormal value
-                assert torch.any(denormal_tensor != 0), "Expected denormal tensor to retain its value"
+                assert torch.all(denormal_tensor != 0), "Expected denormal tensor to retain its value"
     
         return result
     

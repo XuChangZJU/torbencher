@@ -26,8 +26,14 @@ class TorchTensorAsstridedTestCase(TorBencherTestCaseBase):
         # Randomly generate the stride for the new tensor
         stride = [random.randint(1, 3) for _ in range(new_dim)]
         
-        # Randomly generate the storage offset
-        storage_offset = random.randint(0, original_tensor.numel() - 1)
+        # Calculate the required storage size for the new tensor
+        required_storage_size = 0
+        for i in range(new_dim):
+            required_storage_size += (new_size[i] - 1) * stride[i]
+        required_storage_size += 1  # Add 1 to include the first element
+        
+        # Ensure the storage offset is within bounds
+        storage_offset = random.randint(0, max(0, original_tensor.numel() - required_storage_size))
         
         # Apply as_strided to the original tensor
         result = original_tensor.as_strided(new_size, stride, storage_offset)

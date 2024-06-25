@@ -20,12 +20,11 @@ class TorchNnFunctionalMaxunpool1dTestCase(TorBencherTestCaseBase):
         stride = random.randint(1, kernel_size)
         padding = random.randint(0, kernel_size - 1)
     
-        # Generate random input tensor and indices tensor
+        # Generate random input tensor
         input_tensor = torch.randn(batch_size, channels, length)
-        indices = torch.randint(0, kernel_size, (batch_size, channels, length))
     
         # Perform max pooling
-        pooled_tensor = torch.nn.functional.max_pool1d(input_tensor, kernel_size, stride, padding, return_indices=True)[0]
+        pooled_tensor, indices = torch.nn.functional.max_pool1d(input_tensor, kernel_size, stride, padding, return_indices=True)
     
         # Calculate the output size for unpooling
         output_size = (length - 1) * stride - 2 * padding + kernel_size

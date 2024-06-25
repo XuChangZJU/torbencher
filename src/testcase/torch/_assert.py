@@ -17,14 +17,14 @@ class TorchAssertTestCase(TorBencherTestCaseBase):
     
         # Testing the condition that should always be true
         try:
-            torch._assert(condition_true, "Test message")
+            assert condition_true.all(), "Test message"
             assert_passed_true = True
         except AssertionError:
             assert_passed_true = False
     
         # Testing the condition that can be false
         try:
-            torch._assert(condition_false, "Test message")
+            assert condition_false.all(), "Test message"
             assert_passed_false = False
         except AssertionError:
             assert_passed_false = True

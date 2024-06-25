@@ -10,6 +10,10 @@ from src.util.decorator import test_api
 class TorchTensorIsleafTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_leaf_correctness(self):
+        # Check if CUDA is available
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA is not available. Please ensure that your PyTorch installation is compiled with CUDA support.")
+    
         # Random dimension for the tensors
         dim = random.randint(1, 4)
         # Random number of elements each dimension

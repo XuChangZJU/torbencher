@@ -21,11 +21,15 @@ class TorchTensorHsplitTestCase(TorBencherTestCaseBase):
         if random.choice([True, False]):
             # Split by number of sections
             num_sections = random.randint(2, num_cols)  # Ensure at least 2 sections
-            result = tensor.hsplit(num_sections)
+            while num_cols % num_sections != 0:
+                num_sections = random.randint(2, num_cols)  # Ensure divisible sections
+            result = torch.hsplit(tensor, num_sections)
         else:
             # Split by size of each section
             split_size = random.randint(1, num_cols - 1)  # Ensure valid split size
-            result = tensor.hsplit(split_size)
+            while num_cols % split_size != 0:
+                split_size = random.randint(1, num_cols - 1)  # Ensure divisible split size
+            result = torch.hsplit(tensor, split_size)
     
         return result
     

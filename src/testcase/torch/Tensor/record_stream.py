@@ -10,6 +10,10 @@ from src.util.decorator import test_api
 class TorchTensorRecordstreamTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_record_stream_correctness(self):
+        # Check if CUDA is available
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA is not available. Please ensure that PyTorch is installed with CUDA support.")
+    
         # Randomly select dimensions for the tensor
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)

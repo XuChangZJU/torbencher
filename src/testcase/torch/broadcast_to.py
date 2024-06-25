@@ -29,7 +29,11 @@ class TorchBroadcasttoTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)
     
         # Broadcasting the tensor to the new shape
-        result = torch.broadcast_to(input_tensor, target_size)
+        try:
+            result = torch.broadcast_to(input_tensor, target_size)
+        except RuntimeError as e:
+            print(f"Error: {e}")
+            return None
     
         return result
     

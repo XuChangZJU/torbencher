@@ -13,7 +13,7 @@ class TorchTensorTensorsplitTestCase(TorBencherTestCaseBase):
         # Random dimension for the tensor
         dim = random.randint(1, 4)
         # Random number of elements each dimension
-        num_of_elements_each_dim = random.randint(1, 5)
+        num_of_elements_each_dim = random.randint(2, 5)  # Ensure at least 2 elements to avoid empty range error
         input_size = [num_of_elements_each_dim for _ in range(dim)]
         
         # Generate a random tensor
@@ -22,12 +22,15 @@ class TorchTensorTensorsplitTestCase(TorBencherTestCaseBase):
         # Randomly choose between indices or sections
         if random.choice([True, False]):
             # Randomly generate indices for splitting
-            indices = sorted(random.sample(range(1, num_of_elements_each_dim), random.randint(1, num_of_elements_each_dim - 1)))
-            result = tensor.tensor_split(indices, dim=0)
+            if num_of_elements_each_dim > 1:
+                indices = sorted(random.sample(range(1, num_of_elements_each_dim), random.randint(1, num_of_elements_each_dim - 1)))
+                result = torch.tensor_split(tensor, indices, dim=0)
+            else:
+                result = [tensor]  # If there's only one element, no split is possible
         else:
             # Randomly generate number of sections for splitting
             sections = random.randint(1, num_of_elements_each_dim)
-            result = tensor.tensor_split(sections, dim=0)
+            result = torch.tensor_split(tensor, sections, dim=0)
         
         return result
     

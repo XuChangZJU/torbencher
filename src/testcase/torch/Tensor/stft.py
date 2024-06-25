@@ -26,8 +26,12 @@ class TorchTensorStftTestCase(TorBencherTestCaseBase):
         # Generate a random window tensor if win_length is specified
         window = torch.randn(win_length) if win_length else None
         
+        # Ensure the input tensor has at least 2 dimensions for STFT
+        if input_tensor.dim() < 2:
+            input_tensor = input_tensor.unsqueeze(0)
+        
         # Perform Short-time Fourier Transform (STFT)
-        result = input_tensor.stft(n_fft, hop_length, win_length, window)
+        result = torch.stft(input_tensor, n_fft, hop_length, win_length, window)
         
         return result
     

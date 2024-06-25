@@ -10,19 +10,14 @@ from src.util.decorator import test_api
 class TorchTensorAddrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_addr_inplace_correctness(self):
-        # Randomly generate dimensions for the matrix and vectors
-        matrix_dim = random.randint(1, 4)
-        vec_dim = random.randint(1, 4)
-        
-        # Randomly generate the size of each dimension
-        matrix_size = [random.randint(1, 5) for _ in range(matrix_dim)]
-        vec1_size = [random.randint(1, 5) for _ in range(vec_dim)]
-        vec2_size = [random.randint(1, 5) for _ in range(vec_dim)]
+        # Randomly generate dimensions for the matrix
+        matrix_rows = random.randint(1, 5)
+        matrix_cols = random.randint(1, 5)
         
         # Generate random tensors for the matrix and vectors
-        matrix = torch.randn(matrix_size)
-        vec1 = torch.randn(vec1_size)
-        vec2 = torch.randn(vec2_size)
+        matrix = torch.randn(matrix_rows, matrix_cols)
+        vec1 = torch.randn(matrix_rows)
+        vec2 = torch.randn(matrix_cols)
         
         # Perform the in-place addr operation
         result = matrix.addr_(vec1, vec2)

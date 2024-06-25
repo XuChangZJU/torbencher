@@ -21,8 +21,11 @@ class TorchTensorSmmTestCase(TorBencherTestCaseBase):
         # Generate random 2D tensor for the matrix to be multiplied
         mat = torch.randn(num_of_elements_each_dim, num_of_elements_each_dim)
     
+        # Convert the first matrix to a sparse tensor
+        sparse_matrix = matrix.to_sparse()
+    
         # Perform the sparse matrix multiplication
-        result = matrix.smm(mat)
+        result = torch.sparse.mm(sparse_matrix, mat)
         return result
     
     

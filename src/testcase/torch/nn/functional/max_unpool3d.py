@@ -26,8 +26,13 @@ class TorchNnFunctionalMaxunpool3dTestCase(TorBencherTestCaseBase):
         stride = kernel_size  # To ensure valid unpooling, stride should be equal to kernel size
         padding = 0  # No padding for simplicity
         
+        # Calculate the output size after unpooling
+        output_depth = (depth - 1) * stride - 2 * padding + kernel_size
+        output_height = (height - 1) * stride - 2 * padding + kernel_size
+        output_width = (width - 1) * stride - 2 * padding + kernel_size
+        output_size = (output_depth, output_height, output_width)
+        
         # Perform max unpooling
-        output_size = (depth, height, width)  # Output size should match the original input size before pooling
         result = torch.nn.functional.max_unpool3d(input_tensor, indices_tensor, kernel_size, stride, padding, output_size)
         
         return result

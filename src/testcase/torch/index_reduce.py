@@ -16,12 +16,13 @@ class TorchIndexreduceTestCase(TorBencherTestCaseBase):
     
         input_tensor = torch.randn(input_size)  # Random input tensor
         index_size = input_size[dim]  # Ensure index tensor size matches the dimension being reduced
-        index = torch.randint(0, index_size, (index_size,))  # Random index tensor within bounds of input tensor along dimension 'dim'
+        index = torch.randint(0, input_size[dim], (input_size[1 - dim],))  # Random index tensor within bounds of input tensor along dimension 'dim'
         source = torch.randn(index.size())  # Random source tensor matching the size of index tensor
         reduce = random.choice(['prod', 'mean', 'amax', 'amin'])  # Random reduction operation
     
         result = torch.index_reduce(input_tensor, dim, index, source, reduce)
         return result
+    
     
     
     
