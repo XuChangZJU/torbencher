@@ -21,7 +21,7 @@ from .repeat_interleave import TorchRepeatinterleaveTestCase
 from .sym_min import TorchSymminTestCase
 from .set_rng_state import TorchSetrngstateTestCase
 from .frombuffer import TorchFrombufferTestCase
-from .gradient import TorchGradientTestCase
+from .Gradient import (TorchGradientTestCase)
 from .get_float32_matmul_precision import TorchGetfloat32matmulprecisionTestCase
 from .dsplit import TorchDsplitTestCase
 from .index_reduce import TorchIndexreduceTestCase

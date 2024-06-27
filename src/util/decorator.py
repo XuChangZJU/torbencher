@@ -29,7 +29,7 @@ def is_static_method_of_class(func, cls=None):
         if result is None:
             return False
         cls = result
-    
+
     assert inspect.isclass(cls)
 
     func_name = func.__name__
@@ -39,7 +39,7 @@ def is_static_method_of_class(func, cls=None):
     # debug
     # with open("test.log" , "a") as f:
     #     f.write(f"{cls}\t{func.__qualname__}\t\n")
-    
+
     # def class_has_method(cls, func_name):
     #     for name in dir(cls):
     #         if name.endswith(func_name): # _Cls__method
@@ -83,7 +83,7 @@ def test_api(api):
             result = method(*args, **kwargs)
             assert hasattr(cls, "final_stats")
             stat_obj = {
-                "operator_name": f"{operator.__module__}.{operator.__name__}",
+                "operator_name": f"{operator.__qualname__}",
                 "operator_result": result,
                 "specs": None,
             }
