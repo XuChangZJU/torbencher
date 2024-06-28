@@ -26,7 +26,7 @@ class TorchTensorIstftTestCase(TorBencherTestCaseBase):
         # Creating the input tensor with random complex values
         input_tensor = torch.randn([batch_dim, num_frequency_bins, num_frames], dtype=torch.complex64)
 
-        result = torch.istft(input_tensor, n_fft, hop_length, win_length, window)
+        result = input_tensor.istft(n_fft, hop_length, win_length, window)
         return result
     
     
