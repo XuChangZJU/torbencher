@@ -1,5 +1,7 @@
 import unittest
 
+from src.testcase.torch.Tensor import TorchTensorAsstridedTestCase, TorchTensorBroadcasttoTestCase, \
+    TorchTensorCrossTestCase, TorchTensorDiagonalscatterTestCase, TorchTensorExpandTestCase
 # Import the test case
 from src.testcase.torch.nn.ConvTranspose3d import TorchNnConvtranspose3dTestCase
 
@@ -31,4 +33,4 @@ def check_for_issues(test_case_class, iteration_count):
         print("All iterations completed successfully without any failures or errors.")
 
 if __name__ == '__main__':
-    check_for_issues(TorchNnConvtranspose3dTestCase, 1000)
+    check_for_issues(TorchTensorExpandTestCase, 100)
