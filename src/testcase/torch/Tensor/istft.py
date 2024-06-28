@@ -10,21 +10,23 @@ from src.util.decorator import test_api
 class TorchTensorIstftTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_istft_correctness(self):
-        # Randomly generate parameters for the test
-        n_fft = random.randint(2, 10) * 2  # n_fft must be even
-        hop_length = random.randint(1, n_fft // 2)  # hop_length must be <= n_fft // 2
-        win_length = random.randint(1, n_fft)  # win_length must be <= n_fft
-        window = torch.randn(win_length)  # Random window tensor of size win_length
-    
-        # Randomly generate a complex tensor for the input
-        num_frames = random.randint(1, 10)
-        num_freq_bins = n_fft // 2 + 1
-        real_part = torch.randn(num_frames, num_freq_bins)
-        imag_part = torch.randn(num_frames, num_freq_bins)
-        complex_tensor = torch.complex(real_part, imag_part)  # Create a complex tensor
-    
-        # Perform the inverse short-time Fourier transform
-        result = torch.istft(complex_tensor, n_fft, hop_length, win_length, window)
+        # Random tensor dimensions
+        batch_dim = random.randint(1, 3)  # Random batch dimension (optional)
+        n_fft = random.randint(2, 10) * 2  # Ensure n_fft is even as FFT size
+        win_length = random.randint(1, n_fft)  # Random window length within the range of n_fft
+        hop_length = random.randint(1, win_length)  # Ensure hop_length is within the range of win_length
+
+        # Generating the window tensor
+        window = torch.randn(win_length)  # Random window function of window length
+
+        # Number of frequency bins and frames
+        num_frequency_bins = (n_fft // 2) + 1
+        num_frames = random.randint(10, 20)  # Random number of frames
+
+        # Creating the input tensor with random complex values
+        input_tensor = torch.randn([batch_dim, num_frequency_bins, num_frames], dtype=torch.complex64)
+
+        result = input_tensor.istft(n_fft, hop_length, win_length, window)
         return result
     
     

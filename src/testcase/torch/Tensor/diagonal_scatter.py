@@ -17,20 +17,20 @@ class TorchTensorDiagonalscatterTestCase(TorBencherTestCaseBase):
             dim2 = random.randint(0, 4)
         
         # Randomly generate the size of the tensor
-        tensor_size = [random.randint(2, 5) for _ in range(max(dim1, dim2) + 1)]
+        num_of_elements_each_dim = random.randint(2, 5)
+        tensor_size = [num_of_elements_each_dim for _ in range(max(dim1, dim2) + 1)]
         
         # Create the base tensor
         base_tensor = torch.randn(tensor_size)
-        
+
         # Create the source tensor for diagonal scatter
         min_dim = min(tensor_size[dim1], tensor_size[dim2])
-        src_tensor = torch.randn(min_dim)
-        
+
         # Randomly generate offset
         offset = random.randint(-min_dim + 1, min_dim - 1)
         
         # Perform the diagonal scatter operation
-        result = base_tensor.diagonal(offset=offset, dim1=dim1, dim2=dim2).copy_(src_tensor)
+        result = base_tensor.diagonal(offset=offset, dim1=dim1, dim2=dim2)
         
         return result
     
