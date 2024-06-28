@@ -1,7 +1,7 @@
 import unittest
 
 # Import the test case
-from src.testcase.torch.nn.ConvTranspose3d import TorchNnConvtranspose3dTestCase
+from src.testcase.torch.reshape import TorchReshapeTestCase
 
 def collect_test_results(test_case_class):
     """
@@ -31,4 +31,4 @@ def check_for_issues(test_case_class, iteration_count):
         print("All iterations completed successfully without any failures or errors.")
 
 if __name__ == '__main__':
-    check_for_issues(TorchNnConvtranspose3dTestCase, 1000)
+    check_for_issues(TorchReshapeTestCase, 1000)

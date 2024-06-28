@@ -12,7 +12,7 @@ class TorchGeneratorTestCase(TorBencherTestCaseBase):
     def test_generator_correctness(self):
         # Randomly choose between 'cpu' and 'cuda' device
         device_type = 'cpu' if random.random() < 0.5 else 'cuda'
-        
+        #device_type = 'cpu'
         # Create generator (Note: torch.Generator() does not support device argument)
         generator = torch.Generator()
         
