@@ -15,7 +15,7 @@ class TorchRepeatinterleaveTestCase(TorBencherTestCaseBase):
         # Random number of elements each dimension
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for _ in range(dim)]
-        
+
         # Generating random tensor
         input_tensor = torch.randn(input_size)
         # Generating random repeats tensor or integer
@@ -26,9 +26,10 @@ class TorchRepeatinterleaveTestCase(TorBencherTestCaseBase):
     
         # Randomly select a dimension
         dim_option = random.choice([None, random.randint(0, dim - 1)])
-        
         # Applying repeat_interleave
         if dim_option is None:
+            #会将整个输入张量视为一维
+            repeats = torch.randint(1, 4, (input_tensor.numel(),))
             result = torch.repeat_interleave(input_tensor, repeats)
         else:
             if isinstance(repeats, torch.Tensor) and repeats.size(0) != input_tensor.size(dim_option):
