@@ -20,21 +20,23 @@ class TorchReshapeTestCase(TorBencherTestCaseBase):
         total_elements = 1
         for dim_size in input_size:
             total_elements *= dim_size
-    
+
         # Generate a valid new shape by ensuring the total number of elements remains consistent
-        new_num_dims = random.randint(1, 4)
+        new_num_dims = random.randint(1, 3)
         new_shape = [random.randint(1, 5) for _ in range(new_num_dims)]
         # Ensure the new shape is compatible
         remain_elements = total_elements
         for i in range(len(new_shape) - 1):
-            new_shape[i] = random.randint(1, remain_elements)
+            candidate_size = random.randint(1, remain_elements)
+            while remain_elements % candidate_size != 0:
+                candidate_size -= 1
+            new_shape[i] = candidate_size
             remain_elements //= new_shape[i]
         new_shape[-1] = remain_elements  # Set the last dimension to balance the total number of elements
     
         # Ensure the new shape is valid
         if remain_elements != 1:
             new_shape[-1] = remain_elements
-    
         reshaped_tensor = torch.reshape(original_tensor, tuple(new_shape))  # Perform the reshape operation
         return reshaped_tensor
     
