@@ -1,32 +1,31 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.ormqr)
 class TorchTensorOrmqrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_ormqr_correctness(self):
-        # Randomly generate dimensions for the input tensors
-        dim = random.randint(2, 4)  # Random dimension for the tensors (at least 2D for valid ormqr operation)
-        num_of_elements_each_dim = random.randint(2, 5)  # Random number of elements each dimension
-    
-        # Generate random input tensors with appropriate sizes
-        input_size = [num_of_elements_each_dim for _ in range(dim)]
-        input2 = torch.randn(input_size)
-        input3 = torch.randn(input_size)
-    
-        # Randomly choose left and transpose parameters
+        # Randomly generate input parameters
+        batch_size = random.randint(1, 3)
+        m = random.randint(1, 5)
+        n = random.randint(1, 5)
+        k = random.randint(1, min(m, n))
         left = random.choice([True, False])
         transpose = random.choice([True, False])
-    
-        # Perform the ormqr operation
-        result = torch.ormqr(input2, input3, left=left, transpose=transpose)
+
+        # Generate input tensors with random data
+        input_size = [m if left else n, k]
+        input_tensor = torch.randn([batch_size] + input_size)
+        tau_size = [batch_size, min(input_size)]
+        tau_tensor = torch.randn(tau_size)
+        other_size = [batch_size, m, n]
+        other_tensor = torch.randn(other_size)
+
+        # Calculate the result
+        result = input_tensor.ormqr(tau_tensor, other_tensor, left, transpose)
         return result
-    
-    
-    
-    
