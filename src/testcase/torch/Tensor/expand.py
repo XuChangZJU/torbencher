@@ -10,29 +10,22 @@ from src.util.decorator import test_api
 class TorchTensorExpandTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_expand_correctness(self):
-        # Randomly generate dimensions for the original tensor
+        # Randomly generate the dimensions for the original tensor
         original_dim = random.randint(1, 4)
-        num_of_elements_each_dim = random.randint(1, 5)
-        original_size = [num_of_elements_each_dim for _ in range(original_dim)]
-    
-        # Create a random tensor with the generated size
+        original_size = [random.randint(1, 5) for _ in range(original_dim)]
+
+        # Create the original tensor with random values
         original_tensor = torch.randn(original_size)
-    
-        # Generate new sizes for expansion
-        expanded_size = []
-        for dim in range(original_dim):
-            if random.choice([True, False]):
-                expanded_size.append(-1)  # Keep the original size
-            else:
-                expanded_size.append(1)  # Expand to a singleton dimension
-    
-        # Append new dimensions at the front if necessary
-        new_dims = random.randint(0, 2)
-        for _ in range(new_dims):
-            expanded_size.insert(0, random.randint(1, 10))
-    
-        # Perform the expand operation
-        result = original_tensor.expand(*expanded_size)
+
+        # Generate a valid target shape for broadcasting
+        target_dim = random.randint(original_dim + 1, original_dim + 5)  # Ensure target_dim >= original_dim
+        target_shape = [1] * (target_dim - original_dim) + original_size  # Start with original size
+        for i in range(target_dim):
+            if target_shape[i] == 1:  # 该维度的大小为1才可以被expand
+                target_shape[i] = random.randint(1, 10)  # 随机expand到一个大小
+
+        # Perform the broadcast operation
+        result = original_tensor.expand(target_shape)
         return result
     
     
