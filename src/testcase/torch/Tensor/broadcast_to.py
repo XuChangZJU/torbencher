@@ -25,5 +25,5 @@ class TorchTensorBroadcasttoTestCase(TorBencherTestCaseBase):
                 target_shape[i] = random.randint(1, 10)  # 随机expand到一个大小
 
         # Perform the broadcast operation
-        result = original_tensor.expand(target_shape)
+        result = original_tensor.broadcast_to(target_shape)
         return result
