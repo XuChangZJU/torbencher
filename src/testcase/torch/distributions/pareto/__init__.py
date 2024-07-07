@@ -1,0 +1,1 @@
+from .Pareto import TorchDistributionsParetoParetoTestCase

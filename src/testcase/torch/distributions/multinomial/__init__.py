@@ -1,0 +1,1 @@
+from .Multinomial import TorchDistributionsMultinomialMultinomialTestCase
