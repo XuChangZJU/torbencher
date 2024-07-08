@@ -13,7 +13,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix
@@ -24,7 +24,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using Frobenius norm
@@ -35,7 +35,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using nuclear norm
@@ -46,7 +46,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using inf norm
@@ -57,7 +57,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using -inf norm
@@ -68,7 +68,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using 1-norm
@@ -79,7 +79,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using -1-norm
@@ -90,7 +90,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using 2-norm
@@ -101,7 +101,7 @@ class TorchLinalgCondTestCase(TorBencherTestCaseBase):
         # Define the dimension of the matrix
         dim = random.randint(1, 4)
         # Define the size of the matrix
-        input_size = [random.randint(1, 5) for _ in range(dim)] * 2
+        input_size = [dim for _ in range(dim)] * 2
         # Generate a random matrix
         A = torch.randn(input_size)
         # Calculate the condition number of the matrix using -2-norm
