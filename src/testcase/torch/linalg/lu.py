@@ -11,7 +11,7 @@ class TorchLinalgLuTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_torch_linalg_lu_correctness(self):
         # Random dimension for the input matrix
-        dim = random.randint(1, 4)
+        dim = random.randint(2, 4)
         # Random number of elements each dimension
         num_of_elements_each_dim = random.randint(1, 5)
         # Generate random input size
