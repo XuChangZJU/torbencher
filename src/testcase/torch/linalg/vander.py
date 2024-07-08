@@ -16,7 +16,7 @@ class TorchLinalgVanderTestCase(TorBencherTestCaseBase):
         
         # Randomly decide whether to specify N or not
         if random.choice([True, False]):
-            N = random.randint(1, 10)  # Random number of columns in the output
+            N = random.randint(2, 10)  # Random number of columns in the output
             result = torch.linalg.vander(input_tensor, N=N)
         else:
             result = torch.linalg.vander(input_tensor)
