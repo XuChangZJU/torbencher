@@ -2,10 +2,11 @@ import torch
 import random
 from torch.cuda.amp import GradScaler
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.cuda.amp.GradScaler)
 class TorchCudaAmpGradscalerTestCase(TorBencherTestCaseBase):
@@ -47,7 +48,4 @@ class TorchCudaAmpGradscalerTestCase(TorBencherTestCaseBase):
         scaler.update()
     
         return scaled_loss
-    
-    
-    
     

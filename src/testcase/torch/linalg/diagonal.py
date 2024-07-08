@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.diagonal)
 class TorchLinalgDiagonalTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,4 @@ class TorchLinalgDiagonalTestCase(TorBencherTestCaseBase):
         # Calculate result of torch.linalg.diagonal
         result = torch.linalg.diagonal(input_tensor, offset=offset)
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.function.once_differentiable)
 class TorchAutogradFunctionOncedifferentiableTestCase(TorBencherTestCaseBase):
@@ -31,8 +32,4 @@ class TorchAutogradFunctionOncedifferentiableTestCase(TorBencherTestCaseBase):
     
         # Return the result and the gradients
         return result, x.grad
-    
-    # Automatically added function calls
-    
-    
     

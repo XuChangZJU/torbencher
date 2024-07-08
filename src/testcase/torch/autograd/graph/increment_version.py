@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.graph.increment_version)
 class TorchAutogradGraphIncrementversionTestCase(TorBencherTestCaseBase):
@@ -21,8 +22,4 @@ class TorchAutogradGraphIncrementversionTestCase(TorBencherTestCaseBase):
         updated_version = tensor._version # Get the updated version of the tensor
     
         return updated_version != original_version # Check if the version has been incremented
-     
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.backends.nnpack.is_available)
 class TorchBackendsNnpackIsavailableTestCase(TorBencherTestCaseBase):
@@ -25,7 +26,4 @@ class TorchBackendsNnpackIsavailableTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.relu(tensor)
         
         return nnpack_available, result
-    
-    
-    
     

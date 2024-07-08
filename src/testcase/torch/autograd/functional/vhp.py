@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.functional.vhp)
 class TorchAutogradFunctionalVhpTestCase(TorBencherTestCaseBase):
@@ -29,7 +30,4 @@ class TorchAutogradFunctionalVhpTestCase(TorBencherTestCaseBase):
         func_output, vhp_result = torch.autograd.functional.vhp(scalar_function, inputs, v)
     
         return func_output, vhp_result
-    
-    
-    
     

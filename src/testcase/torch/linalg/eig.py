@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.eig)
 class TorchLinalgEigTestCase(TorBencherTestCaseBase):
@@ -22,7 +23,4 @@ class TorchLinalgEigTestCase(TorBencherTestCaseBase):
         # Verify the decomposition: A should be approximately equal to V @ diag(L) @ V^-1
         reconstructed_A = eigenvectors @ torch.diag(eigenvalues) @ torch.linalg.inv(eigenvectors)
         return torch.dist(reconstructed_A, A)
-    
-    
-    
     

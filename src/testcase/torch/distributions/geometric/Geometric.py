@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.geometric.Geometric)
 class TorchDistributionsGeometricGeometricTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,4 @@ class TorchDistributionsGeometricGeometricTestCase(TorBencherTestCaseBase):
         # Sample from the distribution
         result = m.sample()
         return result
-    
-    
-    
     

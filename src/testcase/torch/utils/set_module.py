@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.set_module)
 class TorchUtilsSetmoduleTestCase(TorBencherTestCaseBase):
@@ -25,7 +26,4 @@ class TorchUtilsSetmoduleTestCase(TorBencherTestCaseBase):
         # Check if the module attribute is set correctly
         result = dummy_instance.__module__
         return result
-    
-    
-    
     

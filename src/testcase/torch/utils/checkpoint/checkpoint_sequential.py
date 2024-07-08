@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.checkpoint import checkpoint_sequential
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.checkpoint.checkpoint_sequential)
 class TorchUtilsCheckpointCheckpointsequentialTestCase(TorBencherTestCaseBase):
@@ -26,7 +27,4 @@ class TorchUtilsCheckpointCheckpointsequentialTestCase(TorBencherTestCaseBase):
         # Apply checkpoint_sequential
         result = checkpoint_sequential(layers, num_segments, input_tensor)
         return result
-    
-    
-    
     

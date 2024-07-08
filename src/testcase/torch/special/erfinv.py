@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.erfinv)
 class TorchSpecialErfinvTestCase(TorBencherTestCaseBase):
@@ -21,7 +22,4 @@ class TorchSpecialErfinvTestCase(TorBencherTestCaseBase):
         input_tensor = torch.rand(input_size) * 2 - 1 
         result = torch.special.erfinv(input_tensor)
         return result
-    
-    
-    
     

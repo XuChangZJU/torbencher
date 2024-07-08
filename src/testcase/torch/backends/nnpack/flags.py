@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.backends.nnpack.flags)
 class TorchBackendsNnpackFlagsTestCase(TorBencherTestCaseBase):
@@ -33,7 +34,4 @@ class TorchBackendsNnpackFlagsTestCase(TorBencherTestCaseBase):
         result = torch.nn.functional.relu(tensor)
     
         return result
-    
-    
-    
     

@@ -2,33 +2,29 @@ import torch
 import random
 from typing import List
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
+class InterfaceType(torch.nn.Module):
+    def run(self, x: torch.Tensor) -> torch.Tensor:
+        pass
+class Impl1(InterfaceType):
+    def run(self, x: torch.Tensor) -> torch.Tensor:
+        return x.relu()
+class Impl2(InterfaceType):
+    def __init__(self):
+        super().__init__()
+        self.val = torch.rand(())
+
+    def run(self, x: torch.Tensor) -> torch.Tensor:
+        return x + self.val
+
 @test_api(torch.jit.interface)
 class TorchJitInterfaceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-        def run(self, x: torch.Tensor) -> torch.Tensor:
-            pass
-    
-    class Impl1(InterfaceType):
-        def run(self, x: torch.Tensor) -> torch.Tensor:
-            return x.relu()
-    
-    class Impl2(InterfaceType):
-        def __init__(self):
-            super().
-            self.val = torch.rand(())
-    
-        def run(self, x: torch.Tensor) -> torch.Tensor:
-            return x + self.val
-    
-    @torch.jit.script
     def user_fn(impls: List[InterfaceType], idx: int, val: torch.Tensor) -> torch.Tensor:
         return impls[idx].run(val)
-    
     def test_interface_correctness(self):
         # Randomly generate tensor dimensions and size
         dim = random.randint(1, 4)
@@ -47,7 +43,4 @@ class TorchJitInterfaceTestCase(TorBencherTestCaseBase):
         # Call the JIT compiled function
         result = user_fn(impls, idx, val)
         return result
-    
-    
-    
     

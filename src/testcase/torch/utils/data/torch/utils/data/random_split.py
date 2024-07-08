@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.data.torch.utils.data.random_split)
 class TorchUtilsDataTorchUtilsDataRandomsplitTestCase(TorBencherTestCaseBase):
@@ -21,7 +22,4 @@ class TorchUtilsDataTorchUtilsDataRandomsplitTestCase(TorBencherTestCaseBase):
         # Apply random_split
         result = torch.utils.data.random_split(dataset, split_lengths)
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.export.ExportedProgram)
 class TorchExportExportedprogramTestCase(TorBencherTestCaseBase):
@@ -43,7 +44,4 @@ class TorchExportExportedprogramTestCase(TorBencherTestCaseBase):
         # Call the transformed exported program
         result = scripted_model(tensor_data)
         return result
-    
-    
-    
     

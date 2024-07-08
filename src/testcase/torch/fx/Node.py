@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fx.Node)
 class TorchFxNodeTestCase(TorBencherTestCaseBase):
@@ -28,8 +29,6 @@ class TorchFxNodeTestCase(TorBencherTestCaseBase):
     
         # Return the tensor data as a side effect to show the effect of the placeholder
         return tensor_data
-    
-    
     def test_node_get_attr(self):
         # Create a tensor and register it as a buffer
         buffer_data = torch.randn(3, 4)
@@ -47,8 +46,6 @@ class TorchFxNodeTestCase(TorBencherTestCaseBase):
     
         # Return the buffer data as a side effect to show the effect of get_attr
         return buffer_data
-    
-    
     def test_node_call_function(self):
         # Generate random data for the function call
         dim = random.randint(1, 4)
@@ -69,8 +66,6 @@ class TorchFxNodeTestCase(TorBencherTestCaseBase):
     
         # Return the result of torch.add as a side effect
         return torch.add(tensor1, tensor2)
-    
-    
     def test_node_call_module(self):
         # Create a simple module
         class MyModule(torch.nn.Module):
@@ -98,8 +93,6 @@ class TorchFxNodeTestCase(TorBencherTestCaseBase):
     
         # Return the result of running the module as a side effect
         return module_instance(input_tensor)
-    
-    
     def test_node_call_method(self):
         # Generate random data for the method call
         dim = random.randint(1, 4)
@@ -119,8 +112,6 @@ class TorchFxNodeTestCase(TorBencherTestCaseBase):
     
         # Return the result of tensor.add_ as a side effect
         return tensor.add_(tensor)
-    
-    
     def test_node_output(self):
         # Generate random data for the output node
         dim = random.randint(1, 4)
@@ -140,14 +131,4 @@ class TorchFxNodeTestCase(TorBencherTestCaseBase):
     
         # Return the output tensor as a side effect
         return output_tensor
-    
-    
-    # Automatically added function calls
-    
-    
-    
-    
-    
-    
-    
     

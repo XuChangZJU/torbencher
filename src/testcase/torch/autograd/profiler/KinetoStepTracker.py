@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.KinetoStepTracker)
 class TorchAutogradProfilerKinetosteptrackerTestCase(TorBencherTestCaseBase):
@@ -42,7 +43,4 @@ class TorchAutogradProfilerKinetosteptrackerTestCase(TorBencherTestCaseBase):
     
         # Return the new global step count
         return new_expected_global_step_count
-    
-    
-    
     

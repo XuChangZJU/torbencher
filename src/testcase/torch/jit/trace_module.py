@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.trace_module)
 class TorchJitTracemoduleTestCase(TorBencherTestCaseBase):
@@ -37,7 +38,4 @@ class TorchJitTracemoduleTestCase(TorBencherTestCaseBase):
     
         # Return the traced module
         return traced_module
-    
-    
-    
     

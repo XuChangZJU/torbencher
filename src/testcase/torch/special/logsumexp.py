@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.logsumexp)
 class TorchSpecialLogsumexpTestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchSpecialLogsumexpTestCase(TorBencherTestCaseBase):
         # Perform logsumexp operation
         result = torch.special.logsumexp(input_tensor, dim_to_reduce)
         return result
-    
-    
-    
     

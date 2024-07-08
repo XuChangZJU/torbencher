@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.multinomial.Multinomial)
 class TorchDistributionsMultinomialMultinomialTestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchDistributionsMultinomialMultinomialTestCase(TorBencherTestCaseBase):
         # Sample from the distribution
         sample = multinomial_distribution.sample()
         return sample
-    
-    
-    
     

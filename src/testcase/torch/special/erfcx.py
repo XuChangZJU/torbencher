@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.erfcx)
 class TorchSpecialErfcxTestCase(TorBencherTestCaseBase):
@@ -22,7 +23,4 @@ class TorchSpecialErfcxTestCase(TorBencherTestCaseBase):
         # Calculate the scaled complementary error function
         result = torch.special.erfcx(input_tensor)
         return result
-    
-    
-    
     

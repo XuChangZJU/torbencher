@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.export.Constraint)
 class TorchExportConstraintTestCase(TorBencherTestCaseBase):
@@ -17,7 +18,4 @@ class TorchExportConstraintTestCase(TorBencherTestCaseBase):
         a = torch.randn(input_size) # randomly generated tensor a
         b = torch.export.dynamic_dim(a, random.randint(0, len(input_size) - 1)) # Call dynamic_dim to generate Constraint
         return b
-    
-    
-    
     

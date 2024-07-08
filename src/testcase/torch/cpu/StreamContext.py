@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.cpu.StreamContext)
 class TorchCpuStreamcontextTestCase(TorBencherTestCaseBase):
@@ -22,7 +23,4 @@ class TorchCpuStreamcontextTestCase(TorBencherTestCaseBase):
             result = tensor * 2  # Example operation within the stream context
         
         return result
-    
-    
-    
     

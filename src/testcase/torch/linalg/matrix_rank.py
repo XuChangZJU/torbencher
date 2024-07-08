@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.matrix_rank)
 class TorchLinalgMatrixrankTestCase(TorBencherTestCaseBase):
@@ -26,7 +27,4 @@ class TorchLinalgMatrixrankTestCase(TorBencherTestCaseBase):
         # Calculate the matrix rank
         result = torch.linalg.matrix_rank(A)
         return result
-    
-    
-    
     

@@ -3,10 +3,11 @@ import io
 import random
 import pathlib
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.export.save)
 class TorchExportSaveTestCase(TorBencherTestCaseBase):
@@ -29,8 +30,4 @@ class TorchExportSaveTestCase(TorBencherTestCaseBase):
         torch.export.save(ep, f)
         loaded_ep = torch.export.load(f)
         return loaded_ep
-    
-    # Automatically added function calls
-    
-    
     

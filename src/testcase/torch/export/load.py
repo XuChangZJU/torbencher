@@ -3,10 +3,11 @@ import random
 import io
 import pathlib
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.export.load)
 class TorchExportLoadTestCase(TorBencherTestCaseBase):
@@ -27,7 +28,4 @@ class TorchExportLoadTestCase(TorBencherTestCaseBase):
         loaded_tensor_data = torch.load(buffer)
     
         return loaded_tensor_data
-    
-    
-    
     

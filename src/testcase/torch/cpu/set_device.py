@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.cpu.set_device)
 class TorchCpuSetdeviceTestCase(TorBencherTestCaseBase):
@@ -14,7 +15,4 @@ class TorchCpuSetdeviceTestCase(TorBencherTestCaseBase):
         device_index = random.randint(0, torch.cuda.device_count() - 1) if torch.cuda.is_available() else 0  # Random valid device index
         result = torch.cpu.set_device(device_index)
         return result
-    
-    
-    
     

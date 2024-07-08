@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.add_video)
 class TorchUtilsTensorboardWriterAddvideoTestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchUtilsTensorboardWriterAddvideoTestCase(TorBencherTestCaseBase):
     
         writer.add_video('random_video', video_tensor, global_step)
         writer.close()
-    
-    
-    
     

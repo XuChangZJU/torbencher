@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.SummaryWriter)
 class TorchUtilsTensorboardWriterSummarywriterTestCase(TorBencherTestCaseBase):
@@ -22,8 +23,4 @@ class TorchUtilsTensorboardWriterSummarywriterTestCase(TorBencherTestCaseBase):
         writer.close()
         
         return log_dir
-    
-    if __name__ == "__main__":
-        
-    
     

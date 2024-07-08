@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.parse_nvprof_trace)
 class TorchAutogradProfilerParsenvproftraceTestCase(TorBencherTestCaseBase):
@@ -20,7 +21,4 @@ class TorchAutogradProfilerParsenvproftraceTestCase(TorBencherTestCaseBase):
         result = torch.autograd.profiler.parse_nvprof_trace(trace_str.decode('latin1'))
         
         return result
-    
-    
-    
     

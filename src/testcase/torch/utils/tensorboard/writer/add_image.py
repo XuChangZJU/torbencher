@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.add_image)
 class TorchUtilsTensorboardWriterAddimageTestCase(TorBencherTestCaseBase):
@@ -29,8 +30,4 @@ class TorchUtilsTensorboardWriterAddimageTestCase(TorBencherTestCaseBase):
     
         # Close the writer
         writer.close()
-    
-    if __name__ == "__main__":
-        
-    
     

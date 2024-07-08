@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.flush)
 class TorchUtilsTensorboardWriterFlushTestCase(TorBencherTestCaseBase):
@@ -27,7 +28,4 @@ class TorchUtilsTensorboardWriterFlushTestCase(TorBencherTestCaseBase):
         
         # Return the log directory to verify the flush effect
         return log_dir
-    
-    
-    
     

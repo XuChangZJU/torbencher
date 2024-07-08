@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.Function.vmap)
 class TorchAutogradFunctionVmapTestCase(TorBencherTestCaseBase):
@@ -41,7 +42,4 @@ class TorchAutogradFunctionVmapTestCase(TorBencherTestCaseBase):
         # Apply vmap to the custom function
         result = torch.vmap(MyFunction.apply, in_dims=(0, 0))(tensor1, tensor2)
         return result
-    
-    
-    
     

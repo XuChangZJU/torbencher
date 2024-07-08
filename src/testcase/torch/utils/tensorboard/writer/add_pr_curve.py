@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.add_pr_curve)
 class TorchUtilsTensorboardWriterAddprcurveTestCase(TorBencherTestCaseBase):
@@ -21,8 +22,4 @@ class TorchUtilsTensorboardWriterAddprcurveTestCase(TorBencherTestCaseBase):
     
         writer.add_pr_curve('pr_curve', labels, predictions, num_thresholds)
         writer.close()
-    
-    if __name__ == "__main__":
-        
-    
     

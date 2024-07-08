@@ -2,10 +2,11 @@ import torch
 import random
 from typing import Dict
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.annotate)
 class TorchJitAnnotateTestCase(TorBencherTestCaseBase):
@@ -34,7 +35,4 @@ class TorchJitAnnotateTestCase(TorBencherTestCaseBase):
                 "annotated_tensor": annotated_tensor,
                 "annotated_list": annotated_list,
                 "annotated_dict": annotated_dict}
-    
-    
-    
     

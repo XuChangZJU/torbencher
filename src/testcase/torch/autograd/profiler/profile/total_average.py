@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.profile.total_average)
 class TorchAutogradProfilerProfileTotalaverageTestCase(TorBencherTestCaseBase):
@@ -31,8 +32,4 @@ class TorchAutogradProfilerProfileTotalaverageTestCase(TorBencherTestCaseBase):
         total_average_event = prof.total_average()
     
         return total_average_event
-    
-    # Automatically added function calls
-    
-    
     

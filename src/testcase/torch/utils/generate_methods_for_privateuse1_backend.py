@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.generate_methods_for_privateuse1_backend)
 class TorchUtilsGeneratemethodsforprivateuse1backendTestCase(TorBencherTestCaseBase):
@@ -49,7 +50,4 @@ class TorchUtilsGeneratemethodsforprivateuse1backendTestCase(TorBencherTestCaseB
             result_storage_attr = getattr(storage, f"is_{backend_name}")
         
         return (for_tensor, for_module, for_storage, unsupported_dtype)
-    
-    
-    
     

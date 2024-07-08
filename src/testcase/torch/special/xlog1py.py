@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.xlog1py)
 class TorchSpecialXlog1pyTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,6 @@ class TorchSpecialXlog1pyTestCase(TorBencherTestCaseBase):
         # Compute the result using torch.special.xlog1py
         result = torch.special.xlog1py(input_tensor, other_tensor)
         return result
-    
     def test_xlog1py_edge_cases(self):
         # Test case with zeros in input tensor
         input_tensor = torch.zeros(5)
@@ -46,8 +46,4 @@ class TorchSpecialXlog1pyTestCase(TorBencherTestCaseBase):
         result_scalar_input = torch.special.xlog1py(input_scalar, other_tensor)
     
         return result_zeros, result_positive_integers, result_scalar_other, result_scalar_input
-    
-    
-    
-    
     

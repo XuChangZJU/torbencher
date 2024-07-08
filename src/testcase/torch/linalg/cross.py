@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.cross)
 class TorchLinalgCrossTestCase(TorBencherTestCaseBase):
@@ -20,7 +21,4 @@ class TorchLinalgCrossTestCase(TorBencherTestCaseBase):
         # Compute the cross product
         result = torch.linalg.cross(input_tensor, other_tensor)
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.graph.GradientEdge)
 class TorchAutogradGraphGradientedgeTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,4 @@ class TorchAutogradGraphGradientedgeTestCase(TorBencherTestCaseBase):
         d.backward() # Calculate gradients
         gradient_edge = torch.autograd.grad(d, c)[0] # Get gradient edge for tensor c
         return gradient_edge
-    
-    
-    
     

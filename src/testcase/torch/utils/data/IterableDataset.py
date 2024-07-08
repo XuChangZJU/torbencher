@@ -2,10 +2,11 @@ import torch
 import random
 import math
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.data.IterableDataset)
 class TorchUtilsDataIterabledatasetTestCase(TorBencherTestCaseBase):
@@ -37,8 +38,4 @@ class TorchUtilsDataIterabledatasetTestCase(TorBencherTestCaseBase):
         dataloader = torch.utils.data.DataLoader(dataset, num_workers=random.randint(0, 4))
         result = list(dataloader)
         return result
-    
-    if __name__ == '__main__':
-        
-    
     

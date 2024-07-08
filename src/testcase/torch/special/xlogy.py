@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.xlogy)
 class TorchSpecialXlogyTestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchSpecialXlogyTestCase(TorBencherTestCaseBase):
         # Calculate the result using torch.special.xlogy
         result = torch.special.xlogy(input_tensor, other_tensor)
         return result
-    
-    
-    
     

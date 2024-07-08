@@ -2,10 +2,11 @@ import torch
 import random
 import math
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.exp2)
 class TorchSpecialExp2TestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchSpecialExp2TestCase(TorBencherTestCaseBase):
         # Calculate exp2
         result = torch.special.exp2(input_tensor)
         return result
-    
-    
-    
     

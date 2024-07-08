@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.script_if_tracing)
 class TorchJitScriptiftracingTestCase(TorBencherTestCaseBase):
@@ -34,7 +35,4 @@ class TorchJitScriptiftracingTestCase(TorBencherTestCaseBase):
         assert torch.allclose(result_tracing, result_no_tracing)
     
         return result_tracing
-        
-    
-    
     

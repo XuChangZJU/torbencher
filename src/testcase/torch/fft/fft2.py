@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fft.fft2)
 class TorchFftFft2TestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchFftFft2TestCase(TorBencherTestCaseBase):
         # Perform 2D FFT
         result = torch.fft.fft2(input_tensor)
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.matmul)
 class TorchLinalgMatmulTestCase(TorBencherTestCaseBase):
@@ -41,7 +42,4 @@ class TorchLinalgMatmulTestCase(TorBencherTestCaseBase):
         # Perform matrix multiplication
         result = torch.matmul(tensor1, tensor2)
         return result
-    
-    
-    
     

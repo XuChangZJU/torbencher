@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.emit_nvtx)
 class TorchAutogradProfilerEmitnvtxTestCase(TorBencherTestCaseBase):
@@ -37,7 +38,4 @@ class TorchAutogradProfilerEmitnvtxTestCase(TorBencherTestCaseBase):
             result = tensor * 2  # Simple operation to show profiling effect
         
         return result
-    
-    
-    
     

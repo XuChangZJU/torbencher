@@ -2,10 +2,11 @@ import torch
 import torch.fx
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fx.Graph)
 class TorchFxGraphTestCase(TorBencherTestCaseBase):
@@ -37,7 +38,4 @@ class TorchFxGraphTestCase(TorBencherTestCaseBase):
         graph
         
         return graph
-    
-    
-    
     

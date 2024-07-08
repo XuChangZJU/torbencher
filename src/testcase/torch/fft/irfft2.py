@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fft.irfft2)
 class TorchFftIrfft2TestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchFftIrfft2TestCase(TorBencherTestCaseBase):
         result = torch.fft.irfft2(hermitian_signal, s=(size1, size2))
         
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.eigh)
 class TorchLinalgEighTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchLinalgEighTestCase(TorBencherTestCaseBase):
         A = A + A.mT  # Make the matrix symmetric
         result = torch.linalg.eigh(A)
         return result
-    
-    
-    
     

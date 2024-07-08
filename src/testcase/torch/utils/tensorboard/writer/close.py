@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.close)
 class TorchUtilsTensorboardWriterCloseTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,4 @@ class TorchUtilsTensorboardWriterCloseTestCase(TorBencherTestCaseBase):
         
         # Check if the writer is closed
         return writer._get_file_writer() is None
-    
-    
-    
     

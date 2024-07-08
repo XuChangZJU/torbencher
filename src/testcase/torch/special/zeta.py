@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.zeta)
 class TorchSpecialZetaTestCase(TorBencherTestCaseBase):
@@ -22,7 +23,4 @@ class TorchSpecialZetaTestCase(TorBencherTestCaseBase):
         # Calculate the Hurwitz zeta function
         result = torch.special.zeta(x, q)
         return result
-    
-    
-    
     

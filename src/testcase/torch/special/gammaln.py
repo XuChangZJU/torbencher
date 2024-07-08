@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.gammaln)
 class TorchSpecialGammalnTestCase(TorBencherTestCaseBase):
@@ -20,7 +21,4 @@ class TorchSpecialGammalnTestCase(TorBencherTestCaseBase):
         result = torch.special.gammaln(input_tensor)
         
         return result
-    
-    
-    
     

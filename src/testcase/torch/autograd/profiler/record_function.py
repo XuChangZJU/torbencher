@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.record_function)
 class TorchAutogradProfilerRecordfunctionTestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchAutogradProfilerRecordfunctionTestCase(TorBencherTestCaseBase):
             z.sum().backward()  # Ensure the output is a scalar
     
         return prof.key_averages().table(sort_by="self_cpu_time_total")
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.profiler.profile)
 class TorchProfilerProfileTestCase(TorBencherTestCaseBase):
@@ -26,9 +27,9 @@ class TorchProfilerProfileTestCase(TorBencherTestCaseBase):
         
         # Define a simple trace handler
         def trace_handler(prof):
-            prof.key_averages(.table(
-                sort_by="self_cuda_time_total", row_limit=-1))
-        
+            prof.key_averages().table(
+                sort_by="self_cuda_time_total", row_limit=-1)
+            
         # Randomly generate tensor size
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)
@@ -48,7 +49,4 @@ class TorchProfilerProfileTestCase(TorBencherTestCaseBase):
             p.step()
         
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.enable_onednn_fusion)
 class TorchJitEnableonednnfusionTestCase(TorBencherTestCaseBase):
@@ -14,7 +15,4 @@ class TorchJitEnableonednnfusionTestCase(TorBencherTestCaseBase):
         enabled_status = random.choice([True, False]) 
         result = torch.jit.enable_onednn_fusion(enabled_status)
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.unused)
 class TorchJitUnusedTestCase(TorBencherTestCaseBase):
@@ -41,7 +42,4 @@ class TorchJitUnusedTestCase(TorBencherTestCaseBase):
     
         # Return the result of the forward pass
         return scripted_module(input_tensor)
-    
-    
-    
     

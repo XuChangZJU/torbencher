@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.profile)
 class TorchAutogradProfilerProfileTestCase(TorBencherTestCaseBase):
@@ -67,7 +68,4 @@ class TorchAutogradProfilerProfileTestCase(TorBencherTestCaseBase):
         
         # Return the profiler key averages table
         return prof.key_averages().table(sort_by="self_cpu_time_total")
-    
-    
-    
     

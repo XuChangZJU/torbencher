@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.binomial.Binomial)
 class TorchDistributionsBinomialBinomialTestCase(TorBencherTestCaseBase):
@@ -25,7 +26,4 @@ class TorchDistributionsBinomialBinomialTestCase(TorBencherTestCaseBase):
         # Sample from the distribution
         sample = binomial_distribution.sample()
         return sample
-    
-    
-    
     

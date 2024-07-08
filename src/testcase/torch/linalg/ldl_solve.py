@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.ldl_solve)
 class TorchLinalgLdlsolveTestCase(TorBencherTestCaseBase):
@@ -26,8 +27,4 @@ class TorchLinalgLdlsolveTestCase(TorBencherTestCaseBase):
         X = torch.linalg.ldl_solve(LD, pivots, B)
         # Return the solution
         return X 
-    
-    # Automatically added function calls
-    
-    
     

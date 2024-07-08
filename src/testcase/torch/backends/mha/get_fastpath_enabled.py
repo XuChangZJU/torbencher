@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.backends.mha.get_fastpath_enabled)
 class TorchBackendsMhaGetfastpathenabledTestCase(TorBencherTestCaseBase):
@@ -17,7 +18,4 @@ class TorchBackendsMhaGetfastpathenabledTestCase(TorBencherTestCaseBase):
         assert isinstance(fastpath_enabled, bool), "The returned value should be a boolean"
         
         return fastpath_enabled
-    
-    
-    
     

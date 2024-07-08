@@ -1,12 +1,11 @@
 import torch
 import random
-            import pdb
-            import pdb
-
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.ignore)
 class TorchJitIgnoreTestCase(TorBencherTestCaseBase):
@@ -35,9 +34,6 @@ class TorchJitIgnoreTestCase(TorBencherTestCaseBase):
         scripted_model = torch.jit.script(model)  # Script the model
         result = scripted_model(tensor_input)  # Run the model with the tensor input
         return result
-    
-    
-    
     def test_jit_ignore_drop_correctness(self):
         class MyModule(torch.nn.Module):
             def __init__(self):
@@ -62,7 +58,4 @@ class TorchJitIgnoreTestCase(TorBencherTestCaseBase):
         scripted_model = torch.jit.script(model)  # Script the model
         result = scripted_model(tensor_input)  # Run the model with the tensor input
         return result
-    
-    
-    
     

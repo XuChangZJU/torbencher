@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fft.fft)
 class TorchFftFftTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchFftFftTestCase(TorBencherTestCaseBase):
         # Call torch.fft.fft with the generated parameters
         result = torch.fft.fft(input_tensor)
         return result
-    
-    
-    
     

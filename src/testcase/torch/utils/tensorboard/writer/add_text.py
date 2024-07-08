@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.add_text)
 class TorchUtilsTensorboardWriterAddtextTestCase(TorBencherTestCaseBase):
@@ -29,8 +30,4 @@ class TorchUtilsTensorboardWriterAddtextTestCase(TorBencherTestCaseBase):
         writer.close()
         
         return f"Text added with tag: {tag}, content: {text_string}, at step: {global_step}"
-    
-    if __name__ == "__main__":
-        
-    
     

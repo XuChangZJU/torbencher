@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.data.TensorDataset)
 class TorchUtilsDataTensordatasetTestCase(TorBencherTestCaseBase):
@@ -22,8 +23,4 @@ class TorchUtilsDataTensordatasetTestCase(TorBencherTestCaseBase):
         index = random.randint(0, len(dataset) - 1) # Randomly select an index within the dataset
         sample = dataset[index]
         return sample
-        
-    
-    
-    
     

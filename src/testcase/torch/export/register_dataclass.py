@@ -2,10 +2,11 @@ import torch
 import random
 from dataclasses import dataclass
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.export.register_dataclass)
 class TorchExportRegisterdataclassTestCase(TorBencherTestCaseBase):
@@ -36,7 +37,4 @@ class TorchExportRegisterdataclassTestCase(TorBencherTestCaseBase):
         input_data = InputDataClass(feature=feature_tensor, bias=bias_int)
         result = torch.export.export(fn, (input_data,))
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.export.named_parameters)
 class TorchExportNamedparametersTestCase(TorBencherTestCaseBase):
@@ -17,7 +18,4 @@ class TorchExportNamedparametersTestCase(TorBencherTestCaseBase):
         model = torch.nn.Linear(in_features=input_size[0], out_features=random.randint(1, 10)) # Create a Linear layer with random in_features and out_features
         named_parameters = model.named_parameters()
         return named_parameters
-    
-    
-    
     

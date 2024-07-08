@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.cholesky_ex)
 class TorchLinalgCholeskyexTestCase(TorBencherTestCaseBase):
@@ -17,9 +18,4 @@ class TorchLinalgCholeskyexTestCase(TorBencherTestCaseBase):
         a = a @ a.t() + torch.eye(dim) * 1e-6  # Ensure positive-definiteness
         result = torch.linalg.cholesky_ex(a)
         return result
-    
-    
-    # Automatically added function calls
-    
-    
     

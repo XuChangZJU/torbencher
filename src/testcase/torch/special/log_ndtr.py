@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.log_ndtr)
 class TorchSpecialLogndtrTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchSpecialLogndtrTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)  # Generate random input tensor
         result = torch.special.log_ndtr(input_tensor)
         return result
-    
-    
-    
     

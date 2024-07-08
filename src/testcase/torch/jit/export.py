@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.export)
 class TorchJitExportTestCase(TorBencherTestCaseBase):
@@ -44,7 +45,4 @@ class TorchJitExportTestCase(TorBencherTestCaseBase):
         result_another_forward = scripted_module.another_forward(input_tensor)
     
         return result_forward, result_another_forward
-    
-    
-    
     

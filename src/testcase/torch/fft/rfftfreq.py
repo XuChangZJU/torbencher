@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fft.rfftfreq)
 class TorchFftRfftfreqTestCase(TorBencherTestCaseBase):
@@ -22,8 +23,4 @@ class TorchFftRfftfreqTestCase(TorBencherTestCaseBase):
     
         # Return the output
         return output
-    
-    # Automatically added function calls
-    
-    
     

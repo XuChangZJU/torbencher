@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.data.Sampler)
 class TorchUtilsDataSamplerTestCase(TorBencherTestCaseBase):
@@ -36,7 +37,4 @@ class TorchUtilsDataSamplerTestCase(TorBencherTestCaseBase):
         assert all(len(data[sampled_indices[i]]) <= len(data[sampled_indices[i+1]]) for i in range(len(sampled_indices)-1))
     
         return sampled_indices
-    
-    
-    
     

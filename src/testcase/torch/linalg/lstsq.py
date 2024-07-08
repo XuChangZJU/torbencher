@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.lstsq)
 class TorchLinalgLstsqTestCase(TorBencherTestCaseBase):
@@ -26,7 +27,4 @@ class TorchLinalgLstsqTestCase(TorBencherTestCaseBase):
         solution, residuals, rank, singular_values = torch.linalg.lstsq(A, B)
     
         return solution
-    
-    
-    
     

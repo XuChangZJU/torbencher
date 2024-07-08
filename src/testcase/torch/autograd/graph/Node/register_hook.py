@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.graph.Node.register_hook)
 class TorchAutogradGraphNodeRegisterhookTestCase(TorBencherTestCaseBase):
@@ -21,7 +22,4 @@ class TorchAutogradGraphNodeRegisterhookTestCase(TorBencherTestCaseBase):
         result = a.grad
         handle.remove()
         return result
-    
-    
-    
     

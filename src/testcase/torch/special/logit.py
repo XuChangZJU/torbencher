@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.logit)
 class TorchSpecialLogitTestCase(TorBencherTestCaseBase):
@@ -18,7 +19,4 @@ class TorchSpecialLogitTestCase(TorBencherTestCaseBase):
         eps = random.uniform(1e-7, 1e-5) # generate random eps
         result = torch.special.logit(input_tensor, eps)
         return result
-    
-    
-    
     

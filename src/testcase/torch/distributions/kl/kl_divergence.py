@@ -2,10 +2,11 @@ import torch
 import random
 from torch.distributions import Bernoulli, Poisson, Beta, ContinuousBernoulli, Exponential, Gamma, Normal, Pareto, Uniform, Binomial, Categorical, Cauchy, Dirichlet, Geometric, Gumbel, HalfNormal, Independent, Laplace, LowRankMultivariateNormal, MultivariateNormal, OneHotCategorical, TransformedDistribution
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.kl.kl_divergence)
 class TorchDistributionsKlKldivergenceTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchDistributionsKlKldivergenceTestCase(TorBencherTestCaseBase):
         bernoulli_q = Bernoulli(probs=torch.tensor([probs_q] * batch_size))
         result = torch.distributions.kl.kl_divergence(bernoulli_p, bernoulli_q)
         return result
-    
-    
-    
     

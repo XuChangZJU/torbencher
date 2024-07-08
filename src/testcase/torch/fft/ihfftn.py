@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fft.ihfftn)
 class TorchFftIhfftnTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,4 @@ class TorchFftIhfftnTestCase(TorBencherTestCaseBase):
         # Perform ihfftn operation
         result = torch.fft.ihfftn(input_tensor, s)
         return result
-    
-    
-    
     

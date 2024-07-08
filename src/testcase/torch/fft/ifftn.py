@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fft.ifftn)
 class TorchFftIfftnTestCase(TorBencherTestCaseBase):
@@ -21,7 +22,4 @@ class TorchFftIfftnTestCase(TorBencherTestCaseBase):
         # Calculate ifftn
         result = torch.fft.ifftn(input_tensor)
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.fork)
 class TorchJitForkTestCase(TorBencherTestCaseBase):
@@ -27,7 +28,4 @@ class TorchJitForkTestCase(TorBencherTestCaseBase):
         # Wait for the Future to complete and get the result
         result = torch.jit.wait(fut)
         return result
-    
-    
-    
     

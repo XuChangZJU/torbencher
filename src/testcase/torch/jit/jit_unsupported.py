@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.jit_unsupported)
 class TorchJitJitunsupportedTestCase(TorBencherTestCaseBase):
@@ -27,7 +28,4 @@ class TorchJitJitunsupportedTestCase(TorBencherTestCaseBase):
         # Apply the placeholder function
         result = jit_unsupported(tensor)
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.cuda.amp.custom_fwd)
 class TorchCudaAmpCustomfwdTestCase(TorBencherTestCaseBase):
@@ -25,7 +26,4 @@ class TorchCudaAmpCustomfwdTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size, device='cuda', dtype=torch.float32)
         result = MyFunction.apply(input_tensor)
         return result
-    
-    
-    
     

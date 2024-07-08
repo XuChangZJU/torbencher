@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.norm)
 class TorchLinalgNormTestCase(TorBencherTestCaseBase):
@@ -33,7 +34,4 @@ class TorchLinalgNormTestCase(TorBencherTestCaseBase):
         
         result = torch.linalg.norm(tensor, ord, dim)
         return result
-    
-    
-    
     

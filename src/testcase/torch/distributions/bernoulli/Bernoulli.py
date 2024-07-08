@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.bernoulli.Bernoulli)
 class TorchDistributionsBernoulliBernoulliTestCase(TorBencherTestCaseBase):
@@ -26,7 +27,4 @@ class TorchDistributionsBernoulliBernoulliTestCase(TorBencherTestCaseBase):
         # Sample from the distribution
         samples = bernoulli_distribution.sample()
         return samples
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.backends.nnpack.set_flags)
 class TorchBackendsNnpackSetflagsTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchBackendsNnpackSetflagsTestCase(TorBencherTestCaseBase):
         
         # Return the current state of the flags to verify correctness
         return torch.backends.quantized.engine
-    
-    
-    
     

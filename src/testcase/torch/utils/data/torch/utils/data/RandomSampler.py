@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.data.torch.utils.data.RandomSampler)
 class TorchUtilsDataTorchUtilsDataRandomsamplerTestCase(TorBencherTestCaseBase):
@@ -21,7 +22,4 @@ class TorchUtilsDataTorchUtilsDataRandomsamplerTestCase(TorBencherTestCaseBase):
         sampled_indices = list(random_sampler)
     
         return sampled_indices
-    
-    
-    
     

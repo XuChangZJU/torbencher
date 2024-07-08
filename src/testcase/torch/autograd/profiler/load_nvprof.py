@@ -2,10 +2,11 @@ import torch
 import random
 import os
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.load_nvprof)
 class TorchAutogradProfilerLoadnvprofTestCase(TorBencherTestCaseBase):
@@ -24,7 +25,4 @@ class TorchAutogradProfilerLoadnvprofTestCase(TorBencherTestCaseBase):
         
         result = torch.autograd.profiler.load_nvprof(file_path)
         return result
-    
-    
-    
     

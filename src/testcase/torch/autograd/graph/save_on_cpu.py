@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.graph.save_on_cpu)
 class TorchAutogradGraphSaveoncpuTestCase(TorBencherTestCaseBase):
@@ -34,7 +35,4 @@ class TorchAutogradGraphSaveoncpuTestCase(TorBencherTestCaseBase):
         y = f(tensor_a, tensor_b, tensor_c)
         del tensor_a, tensor_b, tensor_c  # for illustration only
         y.sum().backward()  # all CPU tensors are moved back to GPU, for backward
-    
-    
-    
     

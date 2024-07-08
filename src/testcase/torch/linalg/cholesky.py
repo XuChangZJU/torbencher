@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.cholesky)
 class TorchLinalgCholeskyTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchLinalgCholeskyTestCase(TorBencherTestCaseBase):
         L = torch.linalg.cholesky(A)
         # Return the result
         return L
-    
-    
-    
     

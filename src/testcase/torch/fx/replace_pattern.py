@@ -2,10 +2,11 @@ import torch
 import random
 from torch.fx import symbolic_trace, subgraph_rewriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fx.replace_pattern)
 class TorchFxReplacepatternTestCase(TorBencherTestCaseBase):
@@ -37,7 +38,4 @@ class TorchFxReplacepatternTestCase(TorBencherTestCaseBase):
         traced_module = symbolic_trace(M())
         result = subgraph_rewriter.replace_pattern(traced_module, pattern, replacement)
         return result
-    
-    
-    
     

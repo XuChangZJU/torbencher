@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.nn.init.normal_)
 class TorchNnInitNormalTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchNnInitNormalTestCase(TorBencherTestCaseBase):
         std = random.uniform(0.1, 10.0)  # Random std value between 0.1 and 10.0
         result = torch.nn.init.normal_(input_tensor, mean, std)
         return result
-    
-    
-    
     

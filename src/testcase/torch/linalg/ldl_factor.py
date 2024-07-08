@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.ldl_factor)
 class TorchLinalgLdlfactorTestCase(TorBencherTestCaseBase):
@@ -20,7 +21,4 @@ class TorchLinalgLdlfactorTestCase(TorBencherTestCaseBase):
         LD, pivots = torch.linalg.ldl_factor(A)
         # Return the results
         return LD, pivots
-    
-    
-    
     

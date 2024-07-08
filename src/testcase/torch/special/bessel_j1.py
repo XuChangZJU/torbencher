@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.bessel_j1)
 class TorchSpecialBesselj1TestCase(TorBencherTestCaseBase):
@@ -17,7 +18,4 @@ class TorchSpecialBesselj1TestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)  # input tensor
         result = torch.special.bessel_j1(input_tensor)
         return result
-    
-    
-    
     

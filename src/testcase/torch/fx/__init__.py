@@ -2,10 +2,11 @@ import torch
 import random
 import torch.fx
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fx.__init__)
 class TorchFxInitTestCase(TorBencherTestCaseBase):
@@ -32,9 +33,6 @@ class TorchFxInitTestCase(TorBencherTestCaseBase):
         
         # Return the graph module and example input for inspection
         return graph_module, example_input
-    
-    
-    
     from .Interpreter import TorchFxInterpreterTestCase
 from .Transformer import TorchFxTransformerTestCase
 from .GraphModule import TorchFxGraphmoduleTestCase

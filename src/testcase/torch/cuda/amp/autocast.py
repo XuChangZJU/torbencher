@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.cuda.amp.autocast)
 class TorchCudaAmpAutocastTestCase(TorBencherTestCaseBase):
@@ -28,7 +29,4 @@ class TorchCudaAmpAutocastTestCase(TorBencherTestCaseBase):
             result = torch.add(tensor1, tensor2)
         
         return result
-    
-    
-    
     

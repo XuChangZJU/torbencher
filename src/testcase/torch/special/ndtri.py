@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.special.ndtri)
 class TorchSpecialNdtriTestCase(TorBencherTestCaseBase):
@@ -19,7 +20,4 @@ class TorchSpecialNdtriTestCase(TorBencherTestCaseBase):
         # Calculate ndtri
         result = torch.special.ndtri(input_tensor)
         return result
-    
-    
-    
     

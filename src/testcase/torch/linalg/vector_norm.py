@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.vector_norm)
 class TorchLinalgVectornormTestCase(TorBencherTestCaseBase):
@@ -28,7 +29,4 @@ class TorchLinalgVectornormTestCase(TorBencherTestCaseBase):
         # Calculate the vector norm
         result = torch.linalg.vector_norm(x, ord, dim, keepdim)
         return result
-    
-    
-    
     

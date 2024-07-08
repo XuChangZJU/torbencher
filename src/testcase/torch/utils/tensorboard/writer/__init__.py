@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.__init__)
 class TorchUtilsTensorboardWriterInitTestCase(TorBencherTestCaseBase):
@@ -22,9 +23,6 @@ class TorchUtilsTensorboardWriterInitTestCase(TorBencherTestCaseBase):
                                max_queue=max_queue, flush_secs=flush_secs, 
                                filename_suffix=filename_suffix)
         return writer
-    
-    
-    
     from .SummaryWriter import TorchUtilsTensorboardWriterSummarywriterTestCase
 from .add_video import TorchUtilsTensorboardWriterAddvideoTestCase
 from .add_hparams import TorchUtilsTensorboardWriterAddhparamsTestCase

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.data.torch.utils.data.BatchSampler)
 class TorchUtilsDataTorchUtilsDataBatchsamplerTestCase(TorBencherTestCaseBase):
@@ -26,7 +27,4 @@ class TorchUtilsDataTorchUtilsDataBatchsamplerTestCase(TorBencherTestCaseBase):
         for batch in batch_sampler:
             result = batch
         return result
-    
-    
-    
     

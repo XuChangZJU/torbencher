@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.gumbel.Gumbel)
 class TorchDistributionsGumbelGumbelTestCase(TorBencherTestCaseBase):
@@ -25,7 +26,4 @@ class TorchDistributionsGumbelGumbelTestCase(TorBencherTestCaseBase):
         # Sample from the Gumbel distribution
         result = gumbel_distribution.sample()
         return result
-    
-    
-    
     

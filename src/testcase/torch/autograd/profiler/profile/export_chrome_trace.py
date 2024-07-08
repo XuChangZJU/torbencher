@@ -2,10 +2,11 @@ import torch
 import random
 import tempfile
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.profile.export_chrome_trace)
 class TorchAutogradProfilerProfileExportchrometraceTestCase(TorBencherTestCaseBase):
@@ -27,8 +28,4 @@ class TorchAutogradProfilerProfileExportchrometraceTestCase(TorBencherTestCaseBa
         result = prof.export_chrome_trace(path)
     
         return result
-    
-    # Automatically added function calls
-    
-    
     

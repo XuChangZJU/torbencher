@@ -2,10 +2,11 @@ import torch
 import random
 from typing import Dict
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.Attribute)
 class TorchJitAttributeTestCase(TorBencherTestCaseBase):
@@ -27,10 +28,4 @@ class TorchJitAttributeTestCase(TorBencherTestCaseBase):
     
         test_module = TestModule()
         return test_module.foo, test_module.names_ages
-    
-    if __name__ == "__main__":
-        foo, names_ages = 
-        f"foo: {foo}"
-        f"names_ages: {names_ages}"
-    
     

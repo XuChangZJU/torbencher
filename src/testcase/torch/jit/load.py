@@ -2,10 +2,11 @@ import torch
 import random
 import io
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.load)
 class TorchJitLoadTestCase(TorBencherTestCaseBase):
@@ -47,8 +48,4 @@ class TorchJitLoadTestCase(TorBencherTestCaseBase):
         original_output = model(input_tensor)
         loaded_output = loaded_model(input_tensor)
         return original_output, loaded_output
-    
-    # Automatically added function calls
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.EnforceUnique)
 class TorchAutogradProfilerEnforceuniqueTestCase(TorBencherTestCaseBase):
@@ -28,7 +29,4 @@ class TorchAutogradProfilerEnforceuniqueTestCase(TorBencherTestCaseBase):
             torch.autograd.profiler.EnforceUnique().check(duplicate_keys)
         except RuntimeError as e:
             f"Expected error for duplicate keys: {e}"
-    
-    
-    
     

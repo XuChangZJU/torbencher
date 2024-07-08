@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.fft.rfftn)
 class TorchFftRfftnTestCase(TorBencherTestCaseBase):
@@ -21,7 +22,4 @@ class TorchFftRfftnTestCase(TorBencherTestCaseBase):
         # Calculate rfftn
         result = torch.fft.rfftn(input_tensor)
         return result
-    
-    
-    
     

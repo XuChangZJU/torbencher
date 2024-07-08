@@ -2,10 +2,11 @@ import torch
 import random
 from torch.utils.tensorboard import SummaryWriter
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.utils.tensorboard.writer.add_histogram)
 class TorchUtilsTensorboardWriterAddhistogramTestCase(TorBencherTestCaseBase):
@@ -36,7 +37,4 @@ class TorchUtilsTensorboardWriterAddhistogramTestCase(TorBencherTestCaseBase):
         
         # Close the writer
         writer.close()
-    
-    
-    
     

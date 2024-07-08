@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.kumaraswamy.Kumaraswamy)
 class TorchDistributionsKumaraswamyKumaraswamyTestCase(TorBencherTestCaseBase):
@@ -20,7 +21,4 @@ class TorchDistributionsKumaraswamyKumaraswamyTestCase(TorBencherTestCaseBase):
         kumaraswamy_distribution = torch.distributions.kumaraswamy.Kumaraswamy(concentration1, concentration0)
         samples = kumaraswamy_distribution.sample()
         return samples
-    
-    
-    
     

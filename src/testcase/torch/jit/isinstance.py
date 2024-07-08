@@ -2,10 +2,11 @@ import torch
 import random
 from typing import List, Dict, Tuple, Optional, Any
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.isinstance)
 class TorchJitIsinstanceTestCase(TorBencherTestCaseBase):
@@ -47,7 +48,4 @@ class TorchJitIsinstanceTestCase(TorBencherTestCaseBase):
         
         result = torch.jit.isinstance(input_data, target_type)
         return result
-    
-    
-    
     

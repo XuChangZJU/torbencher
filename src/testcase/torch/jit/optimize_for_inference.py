@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.optimize_for_inference)
 class TorchJitOptimizeforinferenceTestCase(TorBencherTestCaseBase):
@@ -29,8 +30,4 @@ class TorchJitOptimizeforinferenceTestCase(TorBencherTestCaseBase):
     
         # Return the optimized model
         return optimized_mod
-    
-    # Automatically added function calls
-    
-    
     

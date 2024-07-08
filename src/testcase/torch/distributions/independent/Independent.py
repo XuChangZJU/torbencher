@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.distributions.independent.Independent)
 class TorchDistributionsIndependentIndependentTestCase(TorBencherTestCaseBase):
@@ -35,7 +36,4 @@ class TorchDistributionsIndependentIndependentTestCase(TorBencherTestCaseBase):
         log_prob = independent_distribution.log_prob(sample)
     
         return log_prob
-    
-    
-    
     

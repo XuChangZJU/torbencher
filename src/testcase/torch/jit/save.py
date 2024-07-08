@@ -2,10 +2,11 @@ import torch
 import random
 import io
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.save)
 class TorchJitSaveTestCase(TorBencherTestCaseBase):
@@ -36,7 +37,4 @@ class TorchJitSaveTestCase(TorBencherTestCaseBase):
         torch.jit.save(script_module, file_name, _extra_files=extra_files)
     
         return file_name, buffer, extra_files
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.autograd.profiler.emit_itt)
 class TorchAutogradProfilerEmitittTestCase(TorBencherTestCaseBase):
@@ -20,7 +21,4 @@ class TorchAutogradProfilerEmitittTestCase(TorBencherTestCaseBase):
             result = torch.add(tensor1, tensor2).sum()
         result.backward()
         return result
-    
-    
-    
     

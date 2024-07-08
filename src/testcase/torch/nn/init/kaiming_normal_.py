@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.nn.init.kaiming_normal_)
 class TorchNnInitKaimingnormalTestCase(TorBencherTestCaseBase):
@@ -31,7 +32,4 @@ class TorchNnInitKaimingnormalTestCase(TorBencherTestCaseBase):
         # Apply kaiming_normal_ initialization
         result = torch.nn.init.kaiming_normal_(tensor, a, mode, nonlinearity)
         return result
-    
-    
-    
     

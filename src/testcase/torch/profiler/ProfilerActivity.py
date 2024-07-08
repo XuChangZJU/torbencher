@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.profiler.ProfilerActivity)
 class TorchProfilerProfileractivityTestCase(TorBencherTestCaseBase):
@@ -16,7 +17,6 @@ class TorchProfilerProfileractivityTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(tensor_size)
         result = tensor * 2  # Simple operation to show CPU activity
         return result
-    
     def test_profiler_activity_cuda(self):
         # Test case for CUDA activity
         if torch.cuda.is_available():
@@ -25,7 +25,6 @@ class TorchProfilerProfileractivityTestCase(TorBencherTestCaseBase):
             tensor = torch.randn(tensor_size, device='cuda')
             result = tensor * 2  # Simple operation to show CUDA activity
             return result
-    
     def test_profiler_activity_xpu(self):
         # Test case for XPU activity (assuming XPU is available and supported)
         # Note: PyTorch does not currently support XPU, this is a hypothetical example
@@ -34,7 +33,6 @@ class TorchProfilerProfileractivityTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(tensor_size)
         result = tensor * 2  # Simple operation to show XPU activity
         return result
-    
     def test_profiler_activity_mtia(self):
         # Test case for MTIA activity (assuming MTIA is available and supported)
         # Note: PyTorch does not currently support MTIA, this is a hypothetical example
@@ -43,10 +41,4 @@ class TorchProfilerProfileractivityTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(tensor_size)
         result = tensor * 2  # Simple operation to show MTIA activity
         return result
-    
-    
-    
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.jit.freeze)
 class TorchJitFreezeTestCase(TorBencherTestCaseBase):
@@ -35,7 +36,6 @@ class TorchJitFreezeTestCase(TorBencherTestCaseBase):
         
         # Return the frozen module's code to show the effect of freezing
         return frozen_module.code
-    
     def test_freeze_with_preserved_attrs(self):
         # Define a module with attributes to preserve
         class MyModule2(torch.nn.Module):
@@ -62,8 +62,4 @@ class TorchJitFreezeTestCase(TorBencherTestCaseBase):
         
         # Return the frozen module's code to show the effect of freezing
         return frozen_module.code
-    
-    
-    
-    
     

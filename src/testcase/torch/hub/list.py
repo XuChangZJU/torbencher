@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.hub.list)
 class TorchHubListTestCase(TorBencherTestCaseBase):
@@ -38,7 +39,4 @@ class TorchHubListTestCase(TorBencherTestCaseBase):
         # Call torch.hub.list with the generated parameters
         result = torch.hub.list(github, force_reload, skip_validation, trust_repo)
         return result
-    
-    
-    
     

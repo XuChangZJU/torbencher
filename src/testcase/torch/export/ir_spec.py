@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.export.ir_spec)
 class TorchExportIrspecTestCase(TorBencherTestCaseBase):
@@ -25,7 +26,4 @@ class TorchExportIrspecTestCase(TorBencherTestCaseBase):
         torch.save(tensor, file_path)
         
         return file_path
-    
-    
-    
     

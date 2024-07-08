@@ -3,10 +3,11 @@ import random
 import tempfile
 import os
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.profiler.tensorboard_trace_handler)
 class TorchProfilerTensorboardtracehandlerTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,4 @@ class TorchProfilerTensorboardtracehandlerTestCase(TorBencherTestCaseBase):
         assert os.path.exists(dir_name), f"Directory {dir_name} was not created."
     
         return result
-    
-    
-    
     

@@ -1,10 +1,11 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
+
 
 @test_api(torch.linalg.svd)
 class TorchLinalgSvdTestCase(TorBencherTestCaseBase):
@@ -23,7 +24,4 @@ class TorchLinalgSvdTestCase(TorBencherTestCaseBase):
         # Verify the decomposition
         reconstructed_A = U[:, :min(m, n)] @ torch.diag(S) @ Vh[:min(m, n), :]
         return torch.dist(A, reconstructed_A)
-    
-    
-    
     
