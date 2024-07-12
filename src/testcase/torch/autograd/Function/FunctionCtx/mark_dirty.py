@@ -9,10 +9,7 @@ from src.util.decorator import test_api
 class Inplace(Function):
     @staticmethod
     def forward(ctx, x):
-        x_npy = x.detach().numpy()  # Detach to avoid in-place operation on leaf variable
-        x_npy += 1
-        ctx.mark_dirty(x)
-        return x
+        return x + 1
 
     @staticmethod
     @torch.autograd.function.once_differentiable
