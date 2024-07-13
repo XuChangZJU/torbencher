@@ -26,6 +26,13 @@ class TorchAutogradFunctionJvpTestCase(TorBencherTestCaseBase):
             def forward(ctx, input_tensor):
                 ctx.save_for_backward(input_tensor)
                 return input_tensor * 2
+
+            @staticmethod
+            def backward(ctx, grad_output):
+                input_tensor, = ctx.saved_tensors
+                # Compute the gradient of the output with respect to the input
+                grad_input = grad_output * 2
+                return grad_input
     
             @staticmethod
             def jvp(ctx, input_jvp):
