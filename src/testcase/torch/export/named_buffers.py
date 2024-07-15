@@ -13,7 +13,7 @@ class TorchExportNamedbuffersTestCase(TorBencherTestCaseBase):
     def test_named_buffers_correctness(self):
         class RandomModel(torch.nn.Module):
             def __init__(self):
-                super(RandomModel, self).
+                super(RandomModel, self).__init__()
                 self.buffer1 = torch.randn(random.randint(1, 4), random.randint(1, 5))
                 self.buffer2 = torch.randn(random.randint(1, 4), random.randint(1, 5))
             

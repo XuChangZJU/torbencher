@@ -14,7 +14,7 @@ class TorchFxGraphTestCase(TorBencherTestCaseBase):
     def test_fx_graph_correctness(self):
         class RandomModule(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 input_dim = random.randint(1, 5)
                 output_dim = random.randint(1, 5)
                 self.linear = torch.nn.Linear(input_dim, output_dim)

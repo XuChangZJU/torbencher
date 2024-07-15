@@ -15,7 +15,7 @@ class TorchJitSaveTestCase(TorBencherTestCaseBase):
         # Define a simple module
         class MyModule(torch.nn.Module):
             def __init__(self):
-                super(MyModule, self).
+                super(MyModule, self).__init__()
     
             def forward(self, x):
                 return x + random.randint(1, 10)  # Random addition to ensure variability

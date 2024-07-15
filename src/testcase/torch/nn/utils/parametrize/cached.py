@@ -14,7 +14,7 @@ class TorchNnUtilsParametrizeCachedTestCase(TorBencherTestCaseBase):
     def test_cached_correctness(self):
         class SimpleModel(nn.Module):
             def __init__(self):
-                super(SimpleModel, self).
+                super(SimpleModel, self).__init__()
                 self.linear = nn.Linear(random.randint(1, 10), random.randint(1, 10))
                 P.register_parametrization(self.linear, 'weight', nn.Identity())
     

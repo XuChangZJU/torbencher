@@ -14,7 +14,7 @@ class TorchFxReplacepatternTestCase(TorBencherTestCaseBase):
     def test_replace_pattern_correctness(self):
         class M(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
     
             def forward(self, x, w1, w2):
                 m1 = torch.cat([w1, w2]).sum()

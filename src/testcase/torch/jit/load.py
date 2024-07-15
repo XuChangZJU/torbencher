@@ -18,7 +18,7 @@ class TorchJitLoadTestCase(TorBencherTestCaseBase):
         """
         class SimpleModel(torch.nn.Module):
             def __init__(self, in_features, out_features):
-                super(SimpleModel, self).
+                super(SimpleModel, self).__init__()
                 self.linear = torch.nn.Linear(in_features, out_features)
     
             def forward(self, x):

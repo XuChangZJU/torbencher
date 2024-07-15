@@ -13,7 +13,7 @@ class TorchJitIgnoreTestCase(TorBencherTestCaseBase):
     def test_jit_ignore_correctness(self):
         class MyModule(torch.nn.Module):
             def __init__(self):
-                super(MyModule, self).
+                super(MyModule, self).__init__()
     
             @torch.jit.ignore
             def debugger(self, x):
@@ -34,10 +34,11 @@ class TorchJitIgnoreTestCase(TorBencherTestCaseBase):
         scripted_model = torch.jit.script(model)  # Script the model
         result = scripted_model(tensor_input)  # Run the model with the tensor input
         return result
+    
     def test_jit_ignore_drop_correctness(self):
         class MyModule(torch.nn.Module):
             def __init__(self):
-                super(MyModule, self).
+                super(MyModule, self).__init__()
     
             @torch.jit.ignore(drop=True)
             def training_method(self, x):

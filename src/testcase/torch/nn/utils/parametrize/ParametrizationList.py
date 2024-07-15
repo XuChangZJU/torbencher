@@ -18,7 +18,7 @@ class TorchNnUtilsParametrizeParametrizationlistTestCase(TorBencherTestCaseBase)
     
         class MyModule(nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 self.weight = nn.Parameter(torch.randn(3, 3))
     
             def forward(self, X):

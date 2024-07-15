@@ -15,7 +15,7 @@ class TorchUtilsTensorboardWriterAddgraphTestCase(TorBencherTestCaseBase):
         # Create a random neural network model
         class SimpleModel(torch.nn.Module):
             def __init__(self):
-                super(SimpleModel, self).
+                super(SimpleModel, self).__init__()
                 input_size = random.randint(1, 10)
                 hidden_size = random.randint(1, 10)
                 output_size = random.randint(1, 10)

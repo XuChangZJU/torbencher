@@ -13,7 +13,7 @@ class TorchNnModulesModuleRegistermodulefullbackwardhookTestCase(TorBencherTestC
         # Define a simple neural network module
         class SimpleNet(torch.nn.Module):
             def __init__(self):
-                super(SimpleNet, self).
+                super(SimpleNet, self).__init__()
                 self.fc1 = torch.nn.Linear(10, 5)
                 self.fc2 = torch.nn.Linear(5, 2)
     

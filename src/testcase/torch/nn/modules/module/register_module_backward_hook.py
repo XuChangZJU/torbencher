@@ -12,7 +12,7 @@ class TorchNnModulesModuleRegistermodulebackwardhookTestCase(TorBencherTestCaseB
     def test_register_module_backward_hook_correctness(self):
         class SimpleModule(torch.nn.Module):
             def __init__(self):
-                super(SimpleModule, self).
+                super(SimpleModule, self).__init__()
                 self.linear = torch.nn.Linear(random.randint(1, 10), random.randint(1, 10))
     
             def forward(self, x):

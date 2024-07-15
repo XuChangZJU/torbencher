@@ -16,7 +16,7 @@ class TorchNnUtilsParametrizeIsparametrizedTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
         class Model(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 self.linear = torch.nn.Linear(input_size[0], input_size[0])
         module = Model()
         tensor_name = 'linear.weight'
@@ -29,7 +29,7 @@ class TorchNnUtilsParametrizeIsparametrizedTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
         class Model(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 self.linear = torch.nn.Linear(input_size[0], input_size[0])
         module = Model()
         tensor_name = 'linear.bias' 

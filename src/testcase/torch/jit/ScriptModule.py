@@ -14,7 +14,7 @@ class TorchJitScriptmoduleTestCase(TorBencherTestCaseBase):
         # Define a simple ScriptModule with a forward method
         class MyScriptModule(torch.nn.Module):
             def __init__(self):
-                super(MyScriptModule, self).
+                super(MyScriptModule, self).__init__()
                 self.linear = torch.nn.Linear(10, 5)
     
             def forward(self, x):

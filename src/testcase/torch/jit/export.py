@@ -13,7 +13,7 @@ class TorchJitExportTestCase(TorBencherTestCaseBase):
     def test_jit_export_correctness(self):
         class MyModule(torch.nn.Module):
             def __init__(self):
-                super(MyModule, self).
+                super(MyModule, self).__init__()
     
             def implicitly_compiled_method(self, x):
                 return x + 99

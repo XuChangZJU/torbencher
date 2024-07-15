@@ -35,7 +35,7 @@ class TorchAutogradFunctionInplacefunctionTestCase(TorBencherTestCaseBase):
         output_tensor = MyInplaceFunction.apply(input_tensor)
     
         # Compute gradients
-        output_tensor.sum().
+        output_tensor.sum().backward()
     
         # Return the output tensor and the gradient of the input tensor
         return output_tensor, input_tensor.grad

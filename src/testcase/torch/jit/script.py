@@ -13,7 +13,7 @@ class TorchJitScriptTestCase(TorBencherTestCaseBase):
     def test_torch_jit_script_nn_Module(self):
         class MyModule(torch.nn.Module):
             def __init__(self, N, M):
-                super().
+                super().__init__()
                 self.weight = torch.nn.Parameter(torch.rand(N, M))
                 self.linear = torch.nn.Linear(N, M)
             def forward(self, input):

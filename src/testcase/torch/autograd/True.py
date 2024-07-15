@@ -4,10 +4,11 @@ import random
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+# import torch.autograd.True
 
 
 
-@test_api(torch.autograd.True)
+# @test_api(torch.autograd) 这里怎么写
 class TorchAutogradTrueTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_autograd_true_correctness(self):

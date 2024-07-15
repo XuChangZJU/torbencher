@@ -14,7 +14,7 @@ class TorchJitAttributeTestCase(TorBencherTestCaseBase):
     def test_jit_attribute_correctness(self):
         class TestModule(torch.jit.ScriptModule):
             def __init__(self):
-                super().
+                super().__init__()
                 # Random float value for foo
                 foo_value = random.uniform(0.1, 10.0)
                 self.foo = torch.jit.Attribute(foo_value, float)

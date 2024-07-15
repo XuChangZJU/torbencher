@@ -15,7 +15,7 @@ class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
         # Define a simple model to use with checkpointing
         class SimpleModel(torch.nn.Module):
             def __init__(self):
-                super(SimpleModel, self).
+                super(SimpleModel, self).__init__()
                 self.linear1 = torch.nn.Linear(10, 10)
                 self.relu = torch.nn.ReLU()
                 self.linear2 = torch.nn.Linear(10, 10)

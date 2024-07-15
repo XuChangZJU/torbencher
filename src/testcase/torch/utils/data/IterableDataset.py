@@ -18,7 +18,7 @@ class TorchUtilsDataIterabledatasetTestCase(TorBencherTestCaseBase):
     
         class MyIterableDataset(torch.utils.data.IterableDataset):
             def __init__(self, start, end):
-                super(MyIterableDataset, self).
+                super(MyIterableDataset, self).__init__()
                 self.start = start
                 self.end = end
     

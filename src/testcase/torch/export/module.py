@@ -22,7 +22,7 @@ class TorchExportModuleTestCase(TorBencherTestCaseBase):
         # Define a simple model for testing
         class SimpleModel(torch.nn.Module):
             def __init__(self):
-                super(SimpleModel, self).
+                super(SimpleModel, self).__init__()
                 self.linear = torch.nn.Linear(num_of_elements_each_dim, num_of_elements_each_dim)
     
             def forward(self, x):

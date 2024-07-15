@@ -35,7 +35,7 @@ class TorchAutogradDetectanomalyTestCase(TorBencherTestCaseBase):
         try:
             with torch.autograd.detect_anomaly():
                 output = run_fn(input_tensor)
-                output.
+                output.__init__()
         except RuntimeError as e:
             f"Caught an error during backward pass: {e}"
     

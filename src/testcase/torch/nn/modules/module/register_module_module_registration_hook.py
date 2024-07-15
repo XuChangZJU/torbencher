@@ -23,7 +23,7 @@ class TorchNnModulesModuleRegistermodulemoduleregistrationhookTestCase(TorBenche
         # Create a module with a submodule
         class MyModule(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 self.linear = torch.nn.Linear(10, 10)
     
         module = MyModule()

@@ -14,7 +14,7 @@ class TorchJitTracemoduleTestCase(TorBencherTestCaseBase):
         # Define the module with multiple methods
         class Net(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 self.conv = torch.nn.Conv2d(1, 1, 3)
     
             def forward(self, x):

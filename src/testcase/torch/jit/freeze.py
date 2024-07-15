@@ -18,7 +18,7 @@ class TorchJitFreezeTestCase(TorBencherTestCaseBase):
         # Define a simple module with a parameter
         class MyModule(torch.nn.Module):
             def __init__(self, N, M):
-                super().
+                super().__init__()
                 self.weight = torch.nn.Parameter(torch.rand(N, M))
                 self.linear = torch.nn.Linear(M, M)  # Fix: Linear layer should have input size M
     
@@ -40,7 +40,7 @@ class TorchJitFreezeTestCase(TorBencherTestCaseBase):
         # Define a module with attributes to preserve
         class MyModule2(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 self.modified_tensor = torch.tensor(10.)
                 self.version = 1
     

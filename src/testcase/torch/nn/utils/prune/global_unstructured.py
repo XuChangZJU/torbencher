@@ -19,7 +19,7 @@ class TorchNnUtilsPruneGlobalunstructuredTestCase(TorBencherTestCaseBase):
         # Create a simple neural network
         class SimpleNet(torch.nn.Module):
             def __init__(self):
-                super(SimpleNet, self).
+                super(SimpleNet, self).__init__()
                 self.fc1 = torch.nn.Linear(input_size, hidden_size)
                 self.fc2 = torch.nn.Linear(hidden_size, output_size)
     

@@ -18,7 +18,7 @@ class TorchNnUtilsStatelessFunctionalcallTestCase(TorBencherTestCaseBase):
         # Define a simple module
         class MyModule(torch.nn.Module):
             def __init__(self):
-                super().
+                super().__init__()
                 self.weight = torch.nn.Parameter(torch.randn(input_size))
                 self.bias = torch.nn.Parameter(torch.randn(input_size))
     

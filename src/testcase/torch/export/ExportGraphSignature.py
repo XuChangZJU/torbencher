@@ -15,7 +15,7 @@ class TorchExportExportgraphsignatureTestCase(TorBencherTestCaseBase):
     def test_export_graph_signature_correctness(self):
         class CustomModule(torch.nn.Module):
             def __init__(self):
-                super(CustomModule, self).
+                super(CustomModule, self).__init__()
                 self.my_parameter = torch.nn.Parameter(torch.tensor(random.uniform(1.0, 10.0)))
                 self.register_buffer('my_buffer1', torch.tensor(random.uniform(1.0, 10.0)))
                 self.register_buffer('my_buffer2', torch.tensor(random.uniform(1.0, 10.0)))

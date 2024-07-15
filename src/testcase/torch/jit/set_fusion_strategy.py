@@ -22,7 +22,7 @@ class TorchJitSetfusionstrategyTestCase(TorBencherTestCaseBase):
         # Define a simple model
         class MyModel(torch.nn.Module):
             def __init__(self):
-                super(MyModel, self).
+                super(MyModel, self).__init__()
                 self.linear = torch.nn.Linear(10, 10)
     
             def forward(self, x):

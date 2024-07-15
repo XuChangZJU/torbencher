@@ -20,7 +20,7 @@ class TorchExportBuffersTestCase(TorBencherTestCaseBase):
         # Create a dummy module to hold the buffers
         class DummyModule(torch.nn.Module):
             def __init__(self, buffers):
-                super(DummyModule, self).
+                super(DummyModule, self).__init__()
                 for i, buffer in enumerate(buffers):
                     self.register_buffer(f'buffer_{i}', buffer)
         

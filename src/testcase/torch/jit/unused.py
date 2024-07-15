@@ -13,7 +13,7 @@ class TorchJitUnusedTestCase(TorBencherTestCaseBase):
     def test_jit_unused_correctness(self):
         class MyModule(torch.nn.Module):
             def __init__(self, use_memory_efficient):
-                super().
+                super().__init__()
                 self.use_memory_efficient = use_memory_efficient
     
             @torch.jit.unused

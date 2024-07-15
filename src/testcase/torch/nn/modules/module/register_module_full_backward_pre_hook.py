@@ -13,7 +13,7 @@ class TorchNnModulesModuleRegistermodulefullbackwardprehookTestCase(TorBencherTe
         # Define a simple module
         class SimpleModule(torch.nn.Module):
             def __init__(self):
-                super(SimpleModule, self).
+                super(SimpleModule, self).__init__()
                 self.linear = torch.nn.Linear(10, 5)
     
             def forward(self, x):
