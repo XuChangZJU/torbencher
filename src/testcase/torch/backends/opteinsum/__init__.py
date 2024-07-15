@@ -1,2 +1,0 @@
-from .get_opt_einsum import TorchBackendsOpteinsumGetopteinsumTestCase
-from .is_available import TorchBackendsOpteinsumIsavailableTestCase

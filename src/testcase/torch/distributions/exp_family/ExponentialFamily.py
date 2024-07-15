@@ -46,6 +46,6 @@ class TorchDistributionsExpfamilyExponentialfamilyTestCase(TorBencherTestCaseBas
         dist = DummyExponentialFamily(natural_params, sufficient_stat, log_normalizer, carrier_measure)
     
         # Calculate entropy
-        entropy_result = dist.
+        entropy_result = dist.entropy()
         return entropy_result
     
