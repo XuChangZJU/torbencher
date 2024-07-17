@@ -98,11 +98,10 @@ debugger.run()
 2. `devices`：指定需要进行测试的设备（由于TorbencherTestCaseBase暂未适配device指定，故未实装）
 3. `test_modules`：指定需要进行测试的torch模块
 4. `format`：指定测试结果的输出格式（暂时只支持csv，未实装其它格式）
-5. `num_epoches`：指定所有算子测试的轮数（仅全部通过的算字标注为Success，且有必要避免`torch.hub`等需要进行人工选择的测试用例，否则需要）
+5. `num_epoches`：指定所有算子测试的轮数（仅全部通过的算字标注为Success，且有必要避免`torch.hub`等需要进行人工选择的测试用例，否则需要每一轮都进行输入）
 6. `including_success`：指定结果是否包含通过测试的算子用例
 
 ## 输出内容
-|
 |-------------------|-----------------------------------------------------------|
 | errors            | assert失败的个数                                           |
 | error_details     | 报错的具体信息                                             |
