@@ -40,6 +40,7 @@ def test_api(api):
                 "specs": specs,
             }
             cls.final_stats.append(stat_obj)
+            return result;
 
         return wrapper
 
