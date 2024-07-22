@@ -1,4 +1,4 @@
-from torbencher import torbencher
+from src import torbencher
 
 bencher = torbencher(
     {

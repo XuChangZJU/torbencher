@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 
-from torbencher import TorchWrapper
+from src import TorchWrapper
 
 wrapper = TorchWrapper(
     {
