@@ -145,7 +145,7 @@ def main():
 
 wrapper = TorchWrapper(
     {
-        "out_dir": "./result",
+        "out_dir": "result",
         "format": "csv",
         "file_max_size": "100MB",
         "file_name_spec": "datetime",
