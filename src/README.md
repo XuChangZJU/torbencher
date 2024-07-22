@@ -50,14 +50,15 @@ csv文件的每行代表一次调用，格式为：
 
 
 
-# bencherdebugger（Torbencher“青春版”，内部使用）
+# bencherDebugger（Torbencher“青春版”，内部使用）
 
 一个供算子测试用例开发过程进行全面Debug的内部工具
 
 ## 使用
-### 倒入bencherdebugger工具
+### 倒入bencherDebugger工具
+
 ```python
-from torbencher import benchdebugger
+from torbencher import benchDebugger
 ```
 ###定义一个需要进行测试的模块列表
 ```python
@@ -72,7 +73,7 @@ modules = [
 # "torch.hub",
 "torch.testing", "torch.masked","torch.utils.tensorboard","torch.nn.init","torch.fft","torch.autograd"]
 ```
-### 配置bencherdebugger
+### 配置bencherDebugger
 参数会在后续进行介绍
 ```python
 config = {
@@ -84,11 +85,11 @@ config = {
         "including_success": False
     }
 ```
-### 实例化bencherdebugger工具
+### 实例化bencherDebugger工具
 ```python
-debugger = benchdebugger(config)
+debugger = bencherDebugger(config)
 ```
-### 运行bencherdebugger工具
+### 运行bencherDebugger工具
 ```python
 debugger.run()
 ```
@@ -114,30 +115,30 @@ debugger.run()
 # 一个通用`__init__.py`脚本：
 该脚本可以放在本工具的任意`__init__.py`中使用，同时增加import时的debug信息以辅助开发过程
 ```python
-import os;
-import importlib;
-import logging;
+import os
+import importlib
+import logging
 
-from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
+from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 # 设置日志配置
-logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s');
-logger = logging.getLogger(__name__);
+logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-current_directory: str = os.path.dirname(os.path.abspath(__file__));
-script_files: list = [f for f in os.listdir(current_directory) if f.endswith('.py') and f != '__init__.py'];
+current_directory: str = os.path.dirname(os.path.abspath(__file__))
+script_files: list = [f for f in os.listdir(current_directory) if f.endswith('.py') and f != '__init__.py']
 
 for script_file in script_files:
-    module_name: str = script_file[:-3];  # Remove the .py extension
+    module_name: str = script_file[:-3]  # Remove the .py extension
     try:
-        module = importlib.import_module(f'.{module_name}', package=__package__);
-        # logger.debug(f"Successfully imported module {module_name}");
+        module = importlib.import_module(f'.{module_name}', package=__package__)
+        # logger.debug(f"Successfully imported module {module_name}")
     except Exception as e:
-        logger.debug(f"Failed to import module {module_name}: {e}");
-        continue;
+        logger.debug(f"Failed to import module {module_name}: {e}")
+        continue
 
     for attribute_name in dir(module):
-        attribute = getattr(module, attribute_name);
+        attribute = getattr(module, attribute_name)
         if isinstance(attribute, type) and issubclass(attribute, TorBencherTestCaseBase):
-            globals()[attribute_name] = attribute;
+            globals()[attribute_name] = attribute
 ```

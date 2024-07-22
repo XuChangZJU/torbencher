@@ -1,4 +1,4 @@
-from torbencher import benchdebugger
+from torbencher import benchDebugger
 
 modules = [
 "torch.nn.functional",
@@ -37,7 +37,7 @@ modules = [
 "torch.autograd"
 ]
 
-debugger = benchdebugger(
+debugger = benchDebugger(
     {
         "seed": 1234567890,
         "devices": ["cpu"],
