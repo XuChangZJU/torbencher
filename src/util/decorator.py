@@ -88,6 +88,7 @@ def test_api(api):
                 "specs": None,
             }
             cls.final_stats.append(stat_obj)
+            return result;
 
         return wrapper
 
