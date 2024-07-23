@@ -2,7 +2,8 @@
 import importlib
 import inspect
 import platform
-	@@ -6,10 +7,8 @@
+import time
+import unittest
 import psutil
 import torch
 import torch.version
@@ -11,7 +12,46 @@ from .util.unitest import MyTestRunner, MyTestLoader;
 
 class torbencher:
     SUPPORTED_FORMATS = ["json"]
-	@@ -56,17 +55,13 @@ def _parse_config(self, config: dict):
+    AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+
+    class ConfigKey:
+        SEED = "seed"
+        DEVICES = "devices"
+        TEST_MODULES = "test_modules"
+        FORMAT = "format"
+
+    class ResultKey:
+        CPU = "cpu"
+        MEMORY = "memory"
+        OS = "os"
+        OS_RELEASE = "os_release"
+        OS_VERSION = "os_version"
+        NODE = "node"
+        MACHINE = "machine"
+        PYTHON_VERSION = "python_version"
+        TORCH_VERSION = "torch_version"
+        RESULTS = "results"
+        START_TIME = "start_time"
+
+    def __init__(self, config: dict):
+        self.config = self._parse_config(config)
+
+    def _parse_config(self, config: dict):
+        if torbencher.ConfigKey.SEED in config:
+            seed = config[torbencher.ConfigKey.SEED]
+            assert isinstance(seed, int)
+        else:
+            config[torbencher.ConfigKey.SEED] = time.time_ns()
+
+        if torbencher.ConfigKey.DEVICES in config:
+            devices = config[torbencher.ConfigKey.DEVICES]
+            assert isinstance(devices, list)
+            if "cpu" not in devices:
+                config[torbencher.ConfigKey.DEVICES].insert(0, "cpu")
+        else:
+            config[torbencher.ConfigKey.DEVICES] = ["cpu"]
+
+        if torbencher.ConfigKey.TEST_MODULES in config:
             test_modules = config[torbencher.ConfigKey.TEST_MODULES]
             assert isinstance(test_modules, list)
         else:
@@ -25,7 +65,16 @@ class torbencher:
 
         return config
 
-	@@ -83,15 +78,11 @@ def _get_json_test_result(self):
+    def run(self):
+        return self._get_test_result(self.config[torbencher.ConfigKey.FORMAT])
+
+    def _get_test_result(self, format: str):
+        if format == "json":
+            return self._get_json_test_result()
+        else:
+            raise NotImplementedError
+
+    def _get_json_test_result(self):
         result = {}
 
         # start time
@@ -37,7 +86,16 @@ class torbencher:
 
         # os info
         result[torbencher.ResultKey.OS] = platform.system()
-	@@ -108,17 +99,15 @@ def _get_json_test_result(self):
+        result[torbencher.ResultKey.OS_RELEASE] = platform.release()
+        result[torbencher.ResultKey.OS_VERSION] = platform.version()
+        result[torbencher.ResultKey.NODE] = platform.node()
+        result[torbencher.ResultKey.MACHINE] = platform.machine()
+
+        # software info
+        result[torbencher.ResultKey.PYTHON_VERSION] = platform.python_version()
+        result[torbencher.ResultKey.TORCH_VERSION] = torch.__version__
+
+        # test results
         seed = self.config[torbencher.ConfigKey.SEED]
         devices = self.config[torbencher.ConfigKey.DEVICES]
         test_modules = self.config[torbencher.ConfigKey.TEST_MODULES]
@@ -53,7 +111,20 @@ class torbencher:
 
         names = [f"src.testcase.{test_module}" for test_module in test_modules]
         modules = [importlib.import_module(name) for name in names]
-	@@ -139,18 +128,19 @@ def discover_testcases(module):
+
+        def discover_testcases(module):
+            assert inspect.ismodule(module)
+            testcases = []
+            for name in dir(module):
+                attr = getattr(module, name)
+                if inspect.isclass(attr) and issubclass(attr, TorBencherTestCaseBase):
+                    testcases.append(attr)
+            return testcases
+
+        testcases_info = []
+        for module in modules:
+            module_info = {
+                "module": module,
                 "testcases": discover_testcases(module),
             }
             testcases_info.append(module_info)
