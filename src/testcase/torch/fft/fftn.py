@@ -1,21 +1,26 @@
-
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.fft.fftn)
-class TorchFftnTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.7.0")
-    def test_fftn_5d(self, input=None):
-        if input is not None:
-            result = torch.fft.fftn(input[0], input[1], input[2], input[3], input[4])
-            return [result, input]
-        a = torch.randn(4, 3, 4, 5, 6)
-        b = [2, 3, 5]
-        c = [-3, -2, -1]
-        e = "ortho"
-        result = torch.fft.fftn(a, b, c, e)
-        return [result, [a, b, c, e]]
 
+
+@test_api(torch.fft.fftn)
+class TorchFftFftnTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("1.1.3")
+    def test_fftn_correctness(self):
+        # Define the dimension of the input tensor
+        dim = random.randint(1, 4)
+        # Define the size of each dimension, ensuring each dimension has at least one element
+        num_of_elements_each_dim = random.randint(1, 5)
+        # Create the input size list for the tensor
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+        # Generate a random tensor with complex data type
+        input_tensor = torch.randn(input_size, dtype=torch.complex64)
+        # Calculate the FFT of the input tensor
+        result = torch.fft.fftn(input_tensor)
+        # Return the result for testing
+        return result
+    

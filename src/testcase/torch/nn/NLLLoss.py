@@ -1,20 +1,39 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.NLLLoss)
-class TorchNNNLLLossTestCase(TorBencherTestCaseBase):
+class TorchNnNlllossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_nll_loss(self, input=None):
-        if input is not None:
-            result = torch.nn.NLLLoss()(input[0], input[1])
-            return [result, input]
-        a = torch.randn(3, 5, requires_grad=True)
-        target = torch.empty(3, dtype=torch.long).random_(5)
-        loss = torch.nn.NLLLoss()
-        result = loss(a, target)
-        return [result, [a, target]]
-
+    def test_nllloss_correctness(self):
+        # Randomly generate dimensions for the input tensor
+        batch_size = random.randint(1, 5)  # Random batch size
+        num_classes = random.randint(2, 10)  # Random number of classes
+        height = random.randint(1, 10)  # Random height for 2D case
+        width = random.randint(1, 10)  # Random width for 2D case
+    
+        # Generate random input tensor with log-probabilities
+        input_tensor = torch.randn(batch_size, num_classes, height, width, requires_grad=True)
+        
+        # Generate random target tensor with class indices
+        target_tensor = torch.empty(batch_size, height, width, dtype=torch.long).random_(0, num_classes)
+        
+        # Initialize LogSoftmax and NLLLoss modules
+        log_softmax = torch.nn.LogSoftmax(dim=1)
+        nll_loss = torch.nn.NLLLoss()
+        
+        # Apply LogSoftmax to input tensor
+        log_probs = log_softmax(input_tensor)
+        
+        # Compute NLLLoss
+        loss = nll_loss(log_probs, target_tensor)
+        
+        return loss
+    
+    
+    
+    

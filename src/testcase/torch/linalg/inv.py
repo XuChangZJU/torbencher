@@ -1,18 +1,21 @@
-
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
+
+
 @test_api(torch.linalg.inv)
 class TorchLinalgInvTestCase(TorBencherTestCaseBase):
-    def test_inv_4d(self, input=None):
-        if input is not None:
-            result = torch.linalg.inv(input[0])
-            return [result, input]
-        a = torch.randn(2, 2, 3, 3)
-        a = torch.matmul(a, a.transpose(-1, -2)) + 1e-05 * torch.eye(3, 3)
-        result = torch.linalg.inv(a)
-        return [result, [a]]
-
+    @test_api_version.larger_than("1.1.3")
+    def test_linalg_inv_correctness(self):
+        # Generate a random square matrix that is invertible
+        n = random.randint(1, 5)
+        A = torch.randn(n, n)
+        while torch.linalg.det(A) == 0:  # Ensure the matrix is invertible
+            A = torch.randn(n, n)
+        Ainv = torch.linalg.inv(A)
+        return Ainv
+    

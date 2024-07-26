@@ -1,0 +1,2 @@
+from .register_kl import TorchDistributionsKlRegisterklTestCase
+from .kl_divergence import TorchDistributionsKlKldivergenceTestCase

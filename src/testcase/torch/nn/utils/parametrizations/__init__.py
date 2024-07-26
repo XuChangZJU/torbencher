@@ -1,0 +1,3 @@
+from .spectral_norm import TorchNnUtilsParametrizationsSpectralnormTestCase
+from .orthogonal import TorchNnUtilsParametrizationsOrthogonalTestCase
+from .weight_norm import TorchNnUtilsParametrizationsWeightnormTestCase

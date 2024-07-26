@@ -1,5 +1,6 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,14 +8,31 @@ from src.util.decorator import test_api
 
 @test_api(torch.optim.Rprop)
 class TorchOptimRpropTestCase(TorBencherTestCaseBase):
-    def test_rprop(self, input=None):
-        if input is not None:
-            result = torch.optim.Rprop(input[0], lr=input[1], etas=input[2], step_sizes=input[3])
-            return [result, input]
-        params = [torch.randn(10, requires_grad=True), torch.randn(20, requires_grad=True)]
-        lr = 1e-3
-        etas = (0.5, 1.2)
-        step_sizes = (1e-6, 50)
-        result = torch.optim.Rprop(params, lr=lr, etas=etas, step_sizes=step_sizes)
-        return [result, [params, lr, etas, step_sizes]]
-
+    @test_api_version.larger_than("1.1.3")
+    def test_rprop_correctness(self):
+        # Define the parameters to be optimized
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+        weights = torch.randn(input_size, requires_grad=True)
+    
+        # Define a simple objective function
+        def objective_function(weights):
+            return (weights ** 2).sum()
+    
+        # Create an instance of the Rprop optimizer
+        optimizer = torch.optim.Rprop([weights])
+    
+        # Perform a few optimization steps
+        num_steps = random.randint(1, 10)
+        for _ in range(num_steps):
+            optimizer.zero_grad()
+            loss = objective_function(weights)
+            loss.backward()
+            optimizer.step()
+    
+        return weights
+    
+    
+    
+    

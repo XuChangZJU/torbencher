@@ -1,5 +1,6 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,13 +9,19 @@ from src.util.decorator import test_api
 @test_api(torch.pow)
 class TorchPowTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_pow(self, input=None):
-        if input is not None:
-            result = torch.pow(input[0], input[1])
-            return [result, input]
-        a = torch.randn(4).uniform_(0, 10)
-        b = torch.randn(4).uniform_(0, 2)
-        result = torch.pow(a, b)
-        return [result, [a, b]]
-
-
+    def test_pow_tensor_tensor(self):
+        dim = random.randint(1, 4)  # Random dimension for the tensors
+        num_of_elements_each_dim = random.randint(1,5) # Random number of elements each dimension
+        input_size=[num_of_elements_each_dim for i in range(dim)] 
+    
+        input = torch.randn(input_size)
+        exponent = torch.randn(input_size)
+        result = torch.pow(input, exponent)
+        return result
+    
+    
+    
+    
+    
+    
+    

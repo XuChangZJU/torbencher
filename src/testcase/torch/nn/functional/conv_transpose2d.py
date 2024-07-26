@@ -1,26 +1,38 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.conv_transpose2d)
-class TorchNNFunctionalConvTranspose2dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalConvtranspose2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_conv_transpose2d_common(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.conv_transpose2d(input[0], input[1], bias=input[2], stride=input[3], padding=input[4], output_padding=input[5], groups=input[6], dilation=input[7])
-            return [result, input]
-        a = torch.randn(1, 3, 8, 8)
-        b = torch.randn(3, 3, 2, 2)
-        c = None
-        d = 1
-        e = 0
-        f = 0
-        g = 1
-        h = 1
-        result = torch.nn.functional.conv_transpose2d(a, b, bias=c, stride=d, padding=e, output_padding=f, groups=g, dilation=h)
-        return [result, [a, b, c, d, e, f, g, h]]
-
-
+    def test_conv_transpose2d_correctness(self):
+        # Random input size
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+    
+        # Generate random parameters for conv_transpose2d
+        minibatch = random.randint(1, 10)  
+        in_channels = random.randint(1, 10)  
+        iH = random.randint(1, 10)  
+        iW = random.randint(1, 10)  
+        out_channels = random.randint(1, 10)  # out_channels should be divisible by groups
+        kH = random.randint(1, iH)  
+        kW = random.randint(1, iW)  
+    
+        # Create random input tensor
+        input_tensor = torch.randn([minibatch, in_channels, iH, iW])
+    
+        # Create random weight tensor
+        weight_tensor = torch.randn([in_channels, out_channels, kH, kW])
+    
+        result = torch.nn.functional.conv_transpose2d(input_tensor, weight_tensor)
+        return result
+    
+    
+    
+    

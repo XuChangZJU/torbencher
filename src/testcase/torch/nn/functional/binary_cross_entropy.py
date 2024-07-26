@@ -1,24 +1,30 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.binary_cross_entropy)
-class TorchNNFunctionalBinaryCrossEntropyTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalBinarycrossentropyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_binary_cross_entropy_common(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.binary_cross_entropy(input[0], input[1], weight=input[2], size_average=input[3], reduce=input[4], reduction=input[5])
-            return [result, input]
-        a = torch.randn(3, 2)
-        b = torch.randn(3, 2)
-        c = None
-        d = True
-        e = True
-        f = 'mean'
-        result = torch.nn.functional.binary_cross_entropy(a, b, weight=c, size_average=d, reduce=e, reduction=f)
-        return [result, [a, b, c, d, e, f]]
-
-
+    def test_binary_cross_entropy_correctness(self):
+        """
+        Test the correctness of binary_cross_entropy with random parameters.
+        """
+        dim = random.randint(1, 4)  # Random dimension for the tensors
+        num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+    
+        # Generate random input tensor with values between 0 and 1
+        input_tensor = torch.rand(input_size) 
+        # Generate random target tensor with values between 0 and 1
+        target_tensor = torch.rand(input_size) 
+        
+        # Calculate binary cross entropy loss
+        loss = torch.nn.functional.binary_cross_entropy(input_tensor, target_tensor)
+        return loss
+    
+    
+    

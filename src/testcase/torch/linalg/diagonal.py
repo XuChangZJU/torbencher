@@ -1,20 +1,27 @@
-
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
+
+
 @test_api(torch.linalg.diagonal)
 class TorchLinalgDiagonalTestCase(TorBencherTestCaseBase):
-    def test_diagonal_4d(self, input=None):
-        if input is not None:
-            result = torch.linalg.diagonal(input[0], offset=input[1], dim1=input[2], dim2=input[3])
-            return [result, input]
-        a = torch.randn(2, 2, 3, 3)
-        offset = 1
-        dim1 = 2
-        dim2 = 3
-        result = torch.linalg.diagonal(a, offset=offset, dim1=dim1, dim2=dim2)
-        return [result, [a, offset, dim1, dim2]]
-
+    @test_api_version.larger_than("1.1.3")
+    def test_linalg_diagonal_correctness(self):
+        # Random dimension for the tensors
+        dim = random.randint(2, 4)
+        # Random number of elements each dimension
+        num_of_elements_each_dim = random.randint(1, 5)
+        # Generate random input size
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+        # Generate random tensor
+        input_tensor = torch.randn(input_size)
+        # Random offset
+        offset = random.randint(-min(input_size)+1, max(input_size)-1)
+        # Calculate result of torch.linalg.diagonal
+        result = torch.linalg.diagonal(input_tensor, offset=offset)
+        return result
+    

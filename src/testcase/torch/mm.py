@@ -1,5 +1,6 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,12 +9,23 @@ from src.util.decorator import test_api
 @test_api(torch.mm)
 class TorchMmTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_mm(self, input=None):
-        if input is not None:
-            result = torch.mm(input[0], input[1])
-            return [result, input]
-        a = torch.randn(2, 3)
-        b = torch.randn(3, 5)
-        result = torch.mm(a, b)
-        return [result, [a, b]]
-
+    def test_mm_correctness(self):
+        # Randomly generate matrix dimensions, ensuring matrix multiplication is valid
+        n = random.randint(1, 10)
+        m = random.randint(1, 10)
+        p = random.randint(1, 10)
+    
+        # Generate random input matrices
+        input_matrix = torch.randn(n, m)
+        mat2_matrix = torch.randn(m, p)
+    
+        # Perform matrix multiplication
+        result = torch.mm(input_matrix, mat2_matrix)
+        return result
+    
+    
+    
+    
+    
+    
+    

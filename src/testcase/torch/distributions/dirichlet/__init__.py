@@ -1,0 +1,1 @@
+from .Dirichlet import TorchDistributionsDirichletDirichletTestCase

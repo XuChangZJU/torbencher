@@ -1,21 +1,27 @@
-
 import torch
+import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-@test_api(torch.fft.ihfft2)
-class TorchIhfft2TestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.7.0")
-    def test_ihfft2_4d(self, input=None):
-        if input is not None:
-            result = torch.fft.ihfft2(input[0], input[1], input[2], input[3], input[4])
-            return [result, input]
-        a = torch.randn(4, 3, 8, 8)
-        b = [2, 3]
-        c = [-2, -1]
-        d = "ortho"
-        result = torch.fft.ihfft2(a, b, c, d)
-        return [result, [a, b, c, d]]
 
+
+@test_api(torch.fft.ihfft2)
+class TorchFftIhfft2TestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("1.1.3")
+    def test_ihfft2_correctness(self):
+        # Generate random dimension for the input tensor
+        dim = random.randint(2, 4)
+        # Generate random number of elements for each dimension
+        num_of_elements_each_dim = random.randint(1, 5)
+        # Create input_size list for the input tensor
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+        # Update the last dimension to be even
+        input_size[-1] = 2 * random.randint(1, 5)
+        # Generate random input tensor
+        input_tensor = torch.randn(input_size)
+        # Calculate ihfft2
+        result = torch.fft.ihfft2(input_tensor)
+        return result
+    

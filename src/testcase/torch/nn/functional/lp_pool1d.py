@@ -1,23 +1,38 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.lp_pool1d)
-class TorchNNFunctionalLPPool1DTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalLppool1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_lp_pool1d(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.lp_pool1d(
-                input[0], norm_type=input[1], kernel_size=input[2]
-            )
-            return [result, input]
-        a = torch.randn(1, 3, 8)
-        b = 2
-        c = 2
-        result = torch.nn.functional.lp_pool1d(a, norm_type=b, kernel_size=c)
-        return [result, [a, b, c]]
-
-
+    def test_lp_pool1d_correctness(self):
+        # Randomly generate the number of input planes
+        num_input_planes = random.randint(1, 4)
+        
+        # Randomly generate the length of the input signal
+        signal_length = random.randint(5, 10)
+        
+        # Randomly generate the power parameter p
+        p = random.uniform(1.0, 3.0)
+        
+        # Randomly generate the kernel size
+        kernel_size = random.randint(2, 4)
+        
+        # Randomly generate the stride
+        stride = random.randint(1, kernel_size)
+        
+        # Generate random input tensor with the shape (batch_size, num_input_planes, signal_length)
+        batch_size = random.randint(1, 3)
+        input_tensor = torch.randn(batch_size, num_input_planes, signal_length)
+        
+        # Apply lp_pool1d
+        result = torch.nn.functional.lp_pool1d(input_tensor, p, kernel_size, stride)
+        return result
+    
+    
+    
+    

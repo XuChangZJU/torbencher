@@ -1,28 +1,43 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.repeat_interleave)
-class TorchRepeatInterleaveTestCase(TorBencherTestCaseBase):
+class TorchRepeatinterleaveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_repeat_interleave_tensor(self, input=None):
-        if input is not None:
-            result = torch.repeat_interleave(input[0], repeats=input[1], dim=input[2])
-            return [result, input]
-        a = torch.tensor([1, 2, 3])
-        b = torch.tensor([4, 5, 6])
-        result = torch.repeat_interleave(a, b)
-        return [result, [a, b]]
+    def test_repeat_interleave_correctness(self):
+        # Random dimension for the tensor
+        dim = random.randint(1, 4)
+        # Random number of elements each dimension
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
 
-    @test_api_version.larger_than("1.1.3")
-    def test_repeat_interleave(self, input=None):
-        if input is not None:
-            result = torch.repeat_interleave(input[0], repeats=input[1], dim=input[2])
-            return [result, input]
-        a = torch.tensor([[1, 2], [3, 4]])
-        result = torch.repeat_interleave(a, repeats=3, dim=1)
-        return [result, [a, 3, 1]]
-
+        # Generating random tensor
+        input_tensor = torch.randn(input_size)
+        # Generating random repeats tensor or integer
+        if random.choice([True, False]):
+            repeats = random.randint(1, 3)
+        else:
+            repeats = torch.randint(1, 4, (input_size[0],))
+    
+        # Randomly select a dimension
+        dim_option = random.choice([None, random.randint(0, dim - 1)])
+        # Applying repeat_interleave
+        if dim_option is None:
+            #会将整个输入张量视为一维
+            repeats = torch.randint(1, 4, (input_tensor.numel(),))
+            result = torch.repeat_interleave(input_tensor, repeats)
+        else:
+            if isinstance(repeats, torch.Tensor) and repeats.size(0) != input_tensor.size(dim_option):
+                repeats = torch.randint(1, 4, (input_tensor.size(dim_option),))
+            result = torch.repeat_interleave(input_tensor, repeats, dim=dim_option)
+        
+        return result
+    
+    
+    
+    

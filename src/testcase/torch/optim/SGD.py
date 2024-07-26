@@ -1,22 +1,52 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.optim.SGD)
-class TorchOptimSGDTestCase(TorBencherTestCaseBase):
-    def test_sgd(self, input=None):
-        if input is not None:
-            result = torch.optim.SGD(input[0], lr=input[1], momentum=input[2], dampening=input[3], weight_decay=input[4], nesterov=input[5])
-            return [result, input]
-        params = [torch.randn(10, requires_grad=True), torch.randn(20, requires_grad=True)]
-        lr = 1e-3
-        momentum = 0
-        dampening = 0
-        weight_decay = 0
-        nesterov = False
-        result = torch.optim.SGD(params, lr=lr, momentum=momentum, dampening=dampening, weight_decay=weight_decay, nesterov=nesterov)
-        return [result, [params, lr, momentum, dampening, weight_decay, nesterov]]
-
+class TorchOptimSgdTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("1.1.3")
+    def test_sgd_correctness(self):
+        # Randomly generate model parameters
+        dim = random.randint(1, 4)  # Random dimension for the tensors
+        num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
+        
+        # Create a simple model with random parameters
+        model = torch.nn.Linear(num_of_elements_each_dim, num_of_elements_each_dim)
+        
+        # Randomly generate learning rate
+        lr = random.uniform(0.001, 0.1)
+        
+        # Randomly generate momentum
+        momentum = random.uniform(0.0, 0.9)
+        
+        # Create SGD optimizer
+        optimizer = torch.optim.SGD(model.parameters(), lr, momentum)
+        
+        # Generate random input and target tensors
+        input_tensor = torch.randn(input_size)
+        target_tensor = torch.randn(input_size)
+        
+        # Define a simple loss function
+        loss_fn = torch.nn.MSELoss()
+        
+        # Forward pass
+        output = model(input_tensor)
+        loss = loss_fn(output, target_tensor)
+        
+        # Backward pass
+        optimizer.zero_grad()
+        loss.backward()
+        
+        # Perform optimization step
+        optimizer.step()
+        
+        return model.parameters()
+    
+    
+    
+    

@@ -1,19 +1,33 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.BatchNorm1d)
-class TorchNNBatchNorm1dTestCase(TorBencherTestCaseBase):
+class TorchNnBatchnorm1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_batch_norm1d(self, input=None):
-        if input is not None:
-            result = torch.nn.BatchNorm1d(input[0])(input[1])
-            return [result, input]
-        a = torch.randn(10, 100)
-        bn = torch.nn.BatchNorm1d(100)
-        result = bn(a)
-        return [result, [100, a]]
-
+    def test_batchnorm1d_correctness(self):
+        # Randomly generate the number of features (channels)
+        num_features = random.randint(2, 10)
+        
+        # Randomly generate the batch size and sequence length
+        batch_size = random.randint(2, 5)
+        seq_length = random.randint(2, 5)
+        
+        # Create a random input tensor of shape (batch_size, num_features, seq_length)
+        input_tensor = torch.randn(batch_size, num_features, seq_length)
+        
+        # Initialize BatchNorm1d with the randomly generated number of features
+        batch_norm = torch.nn.BatchNorm1d(num_features)
+        
+        # Apply BatchNorm1d to the input tensor
+        output_tensor = batch_norm(input_tensor)
+        
+        return output_tensor
+    
+    
+    
+    

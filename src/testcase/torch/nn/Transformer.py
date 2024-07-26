@@ -1,20 +1,45 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.Transformer)
-class TorchNNTransformerTestCase(TorBencherTestCaseBase):
+class TorchNnTransformerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_transformer(self, input=None):
-        if input is not None:
-            result = torch.nn.Transformer(input[0], input[1], input[2], input[3], input[4], input[5], input[6], input[7], input[8], input[9], input[10], input[11])(input[12], input[13])
-            return [result, input]
-        src = torch.randn(10, 32, 512)
-        tgt = torch.randn(20, 32, 512)
-        transformer = torch.nn.Transformer(d_model=512, nhead=8, num_encoder_layers=6, num_decoder_layers=6, dim_feedforward=2048)
-        result = transformer(src, tgt)
-        return [result, [10, 32, 512, 20, 32, 512, 512, 8, 6, 6, 2048, 0.1, src, tgt]]
-
+    def test_transformer_correctness(self):
+        # Randomly generate parameters for the Transformer model
+        d_model = random.randint(128, 512)  # Number of expected features in the encoder/decoder inputs
+        nhead = 1  # Number of heads in the multiheadattention models
+        num_encoder_layers = random.randint(1, 6)  # Number of sub-encoder-layers in the encoder
+        num_decoder_layers = random.randint(1, 6)  # Number of sub-decoder-layers in the decoder
+        dim_feedforward = random.randint(512, 2048)  # Dimension of the feedforward network model
+        dropout = random.uniform(0.0, 0.3)  # Dropout value
+    
+        # Create the Transformer model with the generated parameters
+        transformer_model = torch.nn.Transformer(
+            d_model=d_model,
+            nhead=nhead,
+            num_encoder_layers=num_encoder_layers,
+            num_decoder_layers=num_decoder_layers,
+            dim_feedforward=dim_feedforward,
+            dropout=dropout
+        )
+    
+        # Randomly generate input tensors for the source and target sequences
+        src_seq_len = random.randint(5, 10)  # Length of the source sequence
+        tgt_seq_len = random.randint(5, 10)  # Length of the target sequence
+        batch_size = random.randint(1, 4)  # Batch size
+    
+        src = torch.randn((src_seq_len, batch_size, d_model))  # Source tensor
+        tgt = torch.randn((tgt_seq_len, batch_size, d_model))  # Target tensor
+    
+        # Pass the source and target tensors through the Transformer model
+        output = transformer_model(src, tgt)
+        return output
+    
+    
+    
+    

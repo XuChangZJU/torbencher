@@ -1,0 +1,1 @@
+from .ContinuousBernoulli import TorchDistributionsContinuousbernoulliContinuousbernoulliTestCase

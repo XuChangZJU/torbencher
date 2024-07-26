@@ -1,23 +1,29 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.pairwise_distance)
-class TorchNNFunctionalPairwiseDistanceTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalPairwisedistanceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_pairwise_distance_common(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.pairwise_distance(input[0], input[1], p=input[2], eps=input[3], keepdim=input[4])
-            return [result, input]
-        a = torch.randn(100, 128)
-        b = torch.randn(100, 128)
-        c = 2.0
-        d = 1e-06
-        e = False
-        result = torch.nn.functional.pairwise_distance(a, b, p=c, eps=d, keepdim=e)
-        return [result, [a, b, c, d, e]]
-
-
+    def test_pairwise_distance_correctness(self):
+        # Random dimension for the tensors
+        dim = random.randint(1, 4)
+        # Random number of elements each dimension
+        num_of_elements_each_dim = random.randint(1, 5)
+        # Random input size
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+        # Random tensor 1
+        x1 = torch.randn(input_size)
+        # Random tensor 2 with the same size as tensor 1
+        x2 = torch.randn(input_size)
+        # Calculate pairwise distance
+        result = torch.nn.functional.pairwise_distance(x1, x2)
+        return result
+    
+    
+    
+    

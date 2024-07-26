@@ -1,26 +1,36 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.conv_transpose3d)
-class TorchNNFunctionalConvTranspose3dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalConvtranspose3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_conv_transpose3d_common(self, input=None):
-        if input is not None:
-            result = torch.nn.functional.conv_transpose3d(input[0], input[1], bias=input[2], stride=input[3], padding=input[4], output_padding=input[5], groups=input[6], dilation=input[7])
-            return [result, input]
-        a = torch.randn(1, 3, 8, 8, 4)
-        b = torch.randn(3, 3, 2, 2, 2)
-        c = None
-        d = 1
-        e = 0
-        f = 0
-        g = 1
-        h = 1
-        result = torch.nn.functional.conv_transpose3d(a, b, bias=c, stride=d, padding=e, output_padding=f, groups=g, dilation=h)
-        return [result, [a, b, c, d, e, f, g, h]]
-
-
+    def test_conv_transpose3d_correctness(self):
+        # Random input size
+        minibatch = random.randint(1, 3)
+        in_channels = random.randint(1, 5)
+        iT = random.randint(1, 10)
+        iH = random.randint(1, 10)
+        iW = random.randint(1, 10)
+        input_size = [minibatch, in_channels, iT, iH, iW]
+    
+        # Random weight size, output_channels is divisible by groups
+        kT = random.randint(1, 5)
+        kH = random.randint(1, 5)
+        kW = random.randint(1, 5)
+        groups = random.randint(1, in_channels)
+        out_channels = random.randint(1, 5) * groups
+        weight_size = [in_channels, out_channels // groups, kT, kH, kW]
+    
+        input_tensor = torch.randn(input_size)
+        weight_tensor = torch.randn(weight_size)
+        result = torch.nn.functional.conv_transpose3d(input_tensor, weight_tensor)
+        return result
+    
+    
+    
+    

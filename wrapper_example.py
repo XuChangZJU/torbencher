@@ -1,11 +1,11 @@
 import torch
 import torch.nn.functional as F
 
-from torbencher import TorchWrapper
+from src import TorchWrapper
 
 wrapper = TorchWrapper(
     {
-        "out_dir": "./result",
+        "out_dir": "result",
         "format": "csv",
         "file_max_size": "512MB",
         "file_name_spec": "timestamp",
@@ -24,3 +24,4 @@ def my_code(*args, **kwargs):
 
 
 result = wrapper.start(my_code, 1, 2, x=3, y=4)
+print(result)

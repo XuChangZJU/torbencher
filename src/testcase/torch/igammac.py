@@ -1,5 +1,6 @@
-
 import torch
+import random
+
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,53 +9,21 @@ from src.util.decorator import test_api
 @test_api(torch.igammac)
 class TorchIgammacTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_igammac_0d(self, input=None):
-        if input is not None:
-            result = torch.igammac(input[0], input[1])
-            return [result, input]
-        a = torch.randn(()) + 1
-        b = torch.randn(()) + 1
-        result = torch.igammac(a, b)
-        return [result, [a, b]]
-
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_1d(self, input=None):
-        if input is not None:
-            result = torch.igammac(input[0], input[1])
-            return [result, input]
-        a = torch.randn(4) + 1
-        b = torch.randn(4) + 1
-        result = torch.igammac(a, b)
-        return [result, [a, b]]
-
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_2d(self, input=None):
-        if input is not None:
-            result = torch.igammac(input[0], input[1])
-            return [result, input]
-        a = torch.randn(4, 4) + 1
-        b = torch.randn(4, 4) + 1
-        result = torch.igammac(a, b)
-        return [result, [a, b]]
-
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_3d(self, input=None):
-        if input is not None:
-            result = torch.igammac(input[0], input[1])
-            return [result, input]
-        a = torch.randn(4, 4, 4) + 1
-        b = torch.randn(4, 4, 4) + 1
-        result = torch.igammac(a, b)
-        return [result, [a, b]]
-
-    @test_api_version.larger_than("1.1.3")
-    def test_igammac_4d(self, input=None):
-        if input is not None:
-            result = torch.igammac(input[0], input[1])
-            return [result, input]
-        a = torch.randn(4, 4, 4, 4) + 1
-        b = torch.randn(4, 4, 4, 4) + 1
-        result = torch.igammac(a, b)
-        return [result, [a, b]]
-
-
+    def test_igammac_correctness(self):
+        # Generate random input tensors
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+    
+        input_tensor = torch.rand(input_size)  # input should be positive real numbers
+        other_tensor = torch.rand(input_size)  # other should be positive real numbers
+    
+        result = torch.igammac(input_tensor, other_tensor)
+        return result
+    
+    
+    
+    
+    
+    
+    

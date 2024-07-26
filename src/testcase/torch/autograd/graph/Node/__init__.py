@@ -1,0 +1,5 @@
+from .register_prehook import TorchAutogradGraphNodeRegisterprehookTestCase
+from .name import TorchAutogradGraphNodeNameTestCase
+from .register_hook import TorchAutogradGraphNodeRegisterhookTestCase
+from .metadata import TorchAutogradGraphNodeMetadataTestCase
+from .next_functions import TorchAutogradGraphNodeNextfunctionsTestCase

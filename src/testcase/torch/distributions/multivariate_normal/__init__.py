@@ -1,0 +1,1 @@
+from .MultivariateNormal import TorchDistributionsMultivariatenormalMultivariatenormalTestCase
