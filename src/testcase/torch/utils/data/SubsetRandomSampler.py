@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.utils.data.SubsetRandomSampler)
 class TorchUtilsDataSubsetrandomsamplerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -17,4 +16,3 @@ class TorchUtilsDataSubsetrandomsamplerTestCase(TorBencherTestCaseBase):
         indices = list(range(length_indices))
         subset_random_sampler = torch.utils.data.SubsetRandomSampler(indices)
         return subset_random_sampler
-    

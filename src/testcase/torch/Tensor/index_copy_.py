@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.index_copy_)
 class TorchTensorIndexcopyTestCase(TorBencherTestCaseBase):
@@ -25,7 +25,3 @@ class TorchTensorIndexcopyTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(tensor_size)
         result = self_tensor.index_copy_(dim, index, tensor)
         return result
-    
-    
-    
-    

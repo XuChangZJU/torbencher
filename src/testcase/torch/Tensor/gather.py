@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.gather)
 class TorchTensorGatherTestCase(TorBencherTestCaseBase):
@@ -29,7 +29,3 @@ class TorchTensorGatherTestCase(TorBencherTestCaseBase):
         # Gather values from the input tensor
         result = input_tensor.gather(gather_dim, index_tensor)
         return result
-    
-    
-    
-    

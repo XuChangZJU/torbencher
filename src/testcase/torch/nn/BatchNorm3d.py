@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.BatchNorm3d)
 class TorchNnBatchnorm3dTestCase(TorBencherTestCaseBase):
@@ -17,18 +17,14 @@ class TorchNnBatchnorm3dTestCase(TorBencherTestCaseBase):
         height = random.randint(2, 10)
         width = random.randint(2, 10)
         input_size = (num_batches, num_channels, depth, height, width)
-    
+
         # Random input tensor
         input_tensor = torch.randn(input_size)
-    
+
         # Create a BatchNorm3d layer
         batch_norm_3d = torch.nn.BatchNorm3d(num_channels)
-    
+
         # Apply batch normalization
         output_tensor = batch_norm_3d(input_tensor)
-    
+
         return output_tensor
-    
-    
-    
-    

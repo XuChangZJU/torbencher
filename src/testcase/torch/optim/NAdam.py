@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.NAdam)
 class TorchOptimNadamTestCase(TorBencherTestCaseBase):
@@ -20,20 +20,16 @@ class TorchOptimNadamTestCase(TorBencherTestCaseBase):
         eps = random.uniform(1e-9, 1e-7)  # Random epsilon
         weight_decay = random.uniform(0.0, 0.1)  # Random weight decay
         momentum_decay = random.uniform(1e-4, 1e-2)  # Random momentum decay
-    
+
         # Create the optimizer
         optimizer = torch.optim.NAdam(
             [weight], lr, betas, eps, weight_decay, momentum_decay
         )
-    
+
         # Perform a single optimization step
         output = weight * 2
         loss = output.mean()
         loss.backward()
         optimizer.step()
-    
+
         return output
-        
-    
-    
-    

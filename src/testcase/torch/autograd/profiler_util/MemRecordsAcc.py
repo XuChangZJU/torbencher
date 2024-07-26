@@ -18,7 +18,7 @@ class MemoryEvent:
 class MemRecordsAcc:
     def __init__(self, events):
         self.events = events
-    
+
     def mem_records(self):
         return [event.__dict__ for event in self.events]
 
@@ -32,18 +32,17 @@ class TorchAutogradProfilerutilMemrecordsaccTestCase(TorBencherTestCaseBase):
         address = random.randint(1, 1000)
         size = random.randint(1, 1000)
         alloc_dealloc = random.choice([True, False])
-        
+
         # 创建 MemoryEvent 对象
         mem_event = MemoryEvent(address, size, alloc_dealloc)
-        
+
         # 将单个事件放入列表
         mem_records = [mem_event]
-        
+
         # 创建 MemRecordsAcc 对象
         mem_records_acc = MemRecordsAcc(mem_records)
-        
+
         # 调用 mem_records 方法并获取结果
         result = mem_records_acc.mem_records()
-        
+
         return result
-    

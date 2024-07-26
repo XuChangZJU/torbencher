@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.q_per_channel_zero_points)
 class TorchTensorQperchannelzeropointsTestCase(TorBencherTestCaseBase):
@@ -20,7 +20,3 @@ class TorchTensorQperchannelzeropointsTestCase(TorBencherTestCaseBase):
         quantized_tensor = torch.quantize_per_channel(X, scales, zero_points, q_per_channel_axis, torch.quint8)
         result = quantized_tensor.q_per_channel_zero_points()
         return result
-    
-    
-    
-    

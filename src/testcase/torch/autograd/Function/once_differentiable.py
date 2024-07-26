@@ -33,13 +33,12 @@ class TorchAutogradFunctionOncedifferentiableTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(dim)]
         x = torch.randn(input_size, requires_grad=True)
-    
+
         # Apply the custom function
         result = CustomClampFunction.apply(x)
-    
+
         # Calculate gradients
         result.sum().backward()
-    
+
         # Return the result and the gradients
         return result, x.grad
-    

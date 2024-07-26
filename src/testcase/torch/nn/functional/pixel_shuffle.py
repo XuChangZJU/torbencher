@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.functional.pixel_shuffle)
 class TorchNnFunctionalPixelshuffleTestCase(TorBencherTestCaseBase):
@@ -17,15 +17,11 @@ class TorchNnFunctionalPixelshuffleTestCase(TorBencherTestCaseBase):
         height = random.randint(1, 10)
         width = random.randint(1, 10)
         input_size = [batch_size, channels * (upscale_factor ** 2), height, width]
-    
+
         # Create random input tensor
         input_tensor = torch.randn(input_size)
-    
+
         # Apply pixel_shuffle
         output_tensor = torch.nn.functional.pixel_shuffle(input_tensor, upscale_factor)
-    
+
         return output_tensor
-    
-    
-    
-    

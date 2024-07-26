@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.linalg.svdvals)
 class TorchLinalgSvdvalsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -22,4 +21,3 @@ class TorchLinalgSvdvalsTestCase(TorBencherTestCaseBase):
         result = torch.linalg.svdvals(input_tensor)
         # Return the calculated singular values
         return result
-    

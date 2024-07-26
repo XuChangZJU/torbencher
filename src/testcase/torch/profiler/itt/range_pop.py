@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.profiler.itt.range_pop)
 class TorchProfilerIttRangepopTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -22,4 +21,3 @@ class TorchProfilerIttRangepopTestCase(TorBencherTestCaseBase):
         # depth_inner should be 0 (innermost range)
         # depth_outer should be 1 
         return depth_inner, depth_outer
-    

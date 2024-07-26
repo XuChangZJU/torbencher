@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.repeat_interleave)
 class TorchTensorRepeatinterleaveTestCase(TorBencherTestCaseBase):
@@ -24,7 +24,3 @@ class TorchTensorRepeatinterleaveTestCase(TorBencherTestCaseBase):
         dim = random.randint(-dim, dim - 1)
         result = input_tensor.repeat_interleave(repeats, dim)
         return result
-    
-    
-    
-    

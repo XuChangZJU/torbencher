@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.double)
 class TorchTensorDoubleTestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorDoubleTestCase(TorBencherTestCaseBase):
         result = input_tensor.double()
         # Return the result tensor
         return result
-    
-    
-    
-    

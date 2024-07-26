@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.special.log_softmax)
 class TorchSpecialLogsoftmaxTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -24,4 +23,3 @@ class TorchSpecialLogsoftmaxTestCase(TorBencherTestCaseBase):
         # Calculate the log_softmax using the function
         result = torch.special.log_softmax(input_tensor, dim_to_compute)
         return result
-    

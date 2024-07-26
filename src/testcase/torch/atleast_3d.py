@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.atleast_3d)
 class TorchAtleast3dTestCase(TorBencherTestCaseBase):
@@ -16,14 +16,14 @@ class TorchAtleast3dTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
         input_tensor = torch.randn(input_size)
         result = torch.atleast_3d(input_tensor)
-    
+
         # Case 2: Input is a single tensor with dim >= 3
         dim = random.randint(3, 6)  # Random dimension for the tensor (3, 4, 5, or 6)
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for i in range(dim)]
         input_tensor = torch.randn(input_size)
         result = torch.atleast_3d(input_tensor)
-    
+
         # Case 3: Input is a tuple of tensors
         num_of_tensors = random.randint(2, 4)  # Random number of tensors in the tuple
         tensors = []
@@ -34,10 +34,3 @@ class TorchAtleast3dTestCase(TorBencherTestCaseBase):
             tensors.append(torch.randn(input_size))
         result = torch.atleast_3d(tuple(tensors))
         return result
-    
-    
-    
-    
-    
-    
-    

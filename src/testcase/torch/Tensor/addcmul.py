@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.addcmul)
 class TorchTensorAddcmulTestCase(TorBencherTestCaseBase):
@@ -24,7 +24,3 @@ class TorchTensorAddcmulTestCase(TorBencherTestCaseBase):
         result = input.addcmul(tensor1, tensor2)
         # Return the result
         return result
-    
-    
-    
-    

@@ -6,9 +6,10 @@ import torch
 import csv
 import logging
 
-from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 class bencherDebugger:
     SUPPORTED_FORMATS = ["json"]
@@ -30,7 +31,6 @@ class bencherDebugger:
         ERROR_DETAILS = "error_details"
         FAILURES = "failures"
         FAILURE_DETAILS = "failure_details"
-
 
     def __init__(self, config: dict):
         """
@@ -60,7 +60,8 @@ class bencherDebugger:
         config.setdefault(bencherDebugger.ConfigKey.INCLUDING_SUCCESS, False)
         config.setdefault(bencherDebugger.ConfigKey.NUM_EPOCHES, 1)
 
-        if bencherDebugger.ConfigKey.FORMAT not in config or config[bencherDebugger.ConfigKey.FORMAT] not in bencherDebugger.SUPPORTED_FORMATS:
+        if bencherDebugger.ConfigKey.FORMAT not in config or config[
+            bencherDebugger.ConfigKey.FORMAT] not in bencherDebugger.SUPPORTED_FORMATS:
             raise ValueError(f"Unsupported format. Supported formats are {bencherDebugger.SUPPORTED_FORMATS}")
 
         return config
@@ -157,10 +158,12 @@ class bencherDebugger:
         **returns**
         - list: List of discovered test cases information.
         """
+
         def discoverTestcases(module):
             assert inspect.ismodule(module), "The provided input is not a module"
 
-            testcases = [attr for name, attr in inspect.getmembers(module, inspect.isclass) if issubclass(attr, TorBencherTestCaseBase) and attr is not TorBencherTestCaseBase]
+            testcases = [attr for name, attr in inspect.getmembers(module, inspect.isclass) if
+                         issubclass(attr, TorBencherTestCaseBase) and attr is not TorBencherTestCaseBase]
             return testcases
 
         testcases_info = []
@@ -248,7 +251,8 @@ class bencherDebugger:
             result["testcase"] = name
             formattedResults.append(result)
             # fieldnames.update(result.keys())
-        fieldnames = [getattr(bencherDebugger.ResultKey, col) for col in dir(bencherDebugger.ResultKey) if "__" not in col]
+        fieldnames = [getattr(bencherDebugger.ResultKey, col) for col in dir(bencherDebugger.ResultKey) if
+                      "__" not in col]
 
         with open('test_results.csv', 'w', newline='') as output_file:
             dict_writer = csv.DictWriter(output_file, fieldnames=list(fieldnames))

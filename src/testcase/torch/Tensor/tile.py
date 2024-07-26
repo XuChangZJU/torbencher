@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.tile)
 class TorchTensorTileTestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorTileTestCase(TorBencherTestCaseBase):
         # Perform the tile operation
         result = input_tensor.tile(dims)
         return result
-    
-    
-    
-    

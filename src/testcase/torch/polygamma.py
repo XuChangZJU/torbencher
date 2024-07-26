@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.polygamma)
 class TorchPolygammaTestCase(TorBencherTestCaseBase):
@@ -22,10 +22,3 @@ class TorchPolygammaTestCase(TorBencherTestCaseBase):
         input = torch.randn(input_size)
         result = torch.polygamma(n, input)
         return result
-    
-    
-    
-    
-    
-    
-    

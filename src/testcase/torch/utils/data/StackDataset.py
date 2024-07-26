@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.utils.data.StackDataset)
 class TorchUtilsDataStackdatasetTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -24,4 +23,3 @@ class TorchUtilsDataStackdatasetTestCase(TorBencherTestCaseBase):
         tuple_result = tuple_stack[index]
         dict_result = dict_stack[index]
         return tuple_result, dict_result
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.ASGD)
 class TorchOptimAsgdTestCase(TorBencherTestCaseBase):
@@ -19,14 +19,14 @@ class TorchOptimAsgdTestCase(TorBencherTestCaseBase):
         lambd = random.uniform(1e-5, 1e-3)  # Decay term
         alpha = random.uniform(0.6, 0.9)  # Power for eta update
         t0 = random.uniform(1e5, 1e7)  # Point at which to start averaging
-    
+
         # Create an ASGD optimizer
         optimizer = torch.optim.ASGD(params=[weights], lr=lr, lambd=lambd, alpha=alpha, t0=t0)
-    
+
         # Define a simple loss function
         def loss_fn(weights):
             return (weights * torch.randn(input_size)).sum()
-    
+
         # Perform a few optimization steps
         num_steps = random.randint(5, 10)
         for _ in range(num_steps):
@@ -34,9 +34,5 @@ class TorchOptimAsgdTestCase(TorBencherTestCaseBase):
             loss = loss_fn(weights)
             loss.backward()
             optimizer.step()
-    
+
         return weights
-        
-    
-    
-    

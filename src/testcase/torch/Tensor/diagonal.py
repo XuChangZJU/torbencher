@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.diagonal)
 class TorchTensorDiagonalTestCase(TorBencherTestCaseBase):
@@ -27,7 +27,3 @@ class TorchTensorDiagonalTestCase(TorBencherTestCaseBase):
             dim2 = random.randint(0, dim - 1)
         result = input_tensor.diagonal(offset, dim1, dim2)
         return result
-    
-    
-    
-    

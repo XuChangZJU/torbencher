@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.Adagrad)
 class TorchOptimAdagradTestCase(TorBencherTestCaseBase):
@@ -18,13 +18,14 @@ class TorchOptimAdagradTestCase(TorBencherTestCaseBase):
         lr_decay = random.uniform(0, 1)  # lr_decay should be in [0, 1)
         weight_decay = random.uniform(0, 1)
         eps = random.uniform(1e-10, 1e-6)
-    
+
         # Create random tensor
         tensor = torch.randn(input_size, requires_grad=True)
-    
+
         # Define optimizer
-        optimizer = torch.optim.Adagrad(params=[tensor], lr=learning_rate, lr_decay=lr_decay, weight_decay=weight_decay, eps=eps)
-    
+        optimizer = torch.optim.Adagrad(params=[tensor], lr=learning_rate, lr_decay=lr_decay, weight_decay=weight_decay,
+                                        eps=eps)
+
         # Perform optimization steps
         num_steps = random.randint(1, 10)
         for _ in range(num_steps):
@@ -32,9 +33,5 @@ class TorchOptimAdagradTestCase(TorBencherTestCaseBase):
             output = tensor.sum()
             output.backward()
             optimizer.step()
-    
+
         return tensor
-        
-    
-    
-    

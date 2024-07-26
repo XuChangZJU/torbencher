@@ -2,7 +2,6 @@ import torch
 import random
 import torch.nn.utils.prune as prune
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
@@ -20,6 +19,7 @@ class CustomPruningMethod(prune.BasePruningMethod):
         mask = self.compute_mask(getattr(module, name), torch.ones_like(getattr(module, name)))
         module.register_buffer(name + '_mask', mask)
         module._parameters[name] = getattr(module, name) * mask
+
 
 @test_api(torch.nn.utils.prune.BasePruningMethod)
 class TorchNnUtilsPruneBasepruningmethodTestCase(TorBencherTestCaseBase):
@@ -39,12 +39,9 @@ class TorchNnUtilsPruneBasepruningmethodTestCase(TorBencherTestCaseBase):
 
         # Apply custom pruning method
         pruning_method = CustomPruningMethod()
-        prune.custom_from_mask(module, name='weight', mask=pruning_method.compute_mask(module.weight, torch.ones_like(module.weight)))
+        prune.custom_from_mask(module, name='weight',
+                               mask=pruning_method.compute_mask(module.weight, torch.ones_like(module.weight)))
 
         # Check the pruned tensor
         pruned_tensor = module.weight * module.weight_mask
         return pruned_tensor
-    
-    
-    
-    

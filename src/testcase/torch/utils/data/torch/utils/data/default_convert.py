@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.utils.data.torch.utils.data.default_convert)
 class TorchUtilsDataTorchUtilsDataDefaultconvertTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -25,4 +24,3 @@ class TorchUtilsDataTorchUtilsDataDefaultconvertTestCase(TorBencherTestCaseBase)
         ]
         result = torch.utils.data.default_convert(data)
         return result
-    

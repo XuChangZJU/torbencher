@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.tril_indices)
 class TorchTrilindicesTestCase(TorBencherTestCaseBase):
@@ -15,10 +15,3 @@ class TorchTrilindicesTestCase(TorBencherTestCaseBase):
         offset = random.randint(-min(row, col) + 1, max(row, col) - 1)  # Random offset within valid range
         result = torch.tril_indices(row, col, offset)
         return result
-    
-    
-    
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.flip)
 class TorchFlipTestCase(TorBencherTestCaseBase):
@@ -17,10 +17,3 @@ class TorchFlipTestCase(TorBencherTestCaseBase):
         dims = list(range(dim))  # Flip all dimensions
         result = torch.flip(input_tensor, dims)
         return result
-    
-    
-    
-    
-    
-    
-    

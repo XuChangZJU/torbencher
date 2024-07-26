@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.pinverse)
 class TorchPinverseTestCase(TorBencherTestCaseBase):
@@ -16,18 +16,11 @@ class TorchPinverseTestCase(TorBencherTestCaseBase):
         m = random.randint(1, 5)
         n = random.randint(1, 5)
         input_size = [m, n]
-    
+
         # Generate a random tensor of shape (m, n)
         input_tensor = torch.randn(input_size)
-        
+
         # Calculate the pseudoinverse of the input tensor
         result = torch.pinverse(input_tensor)
-        
+
         return result
-    
-    
-    
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.bernoulli)
 class TorchTensorBernoulliTestCase(TorBencherTestCaseBase):
@@ -17,11 +17,7 @@ class TorchTensorBernoulliTestCase(TorBencherTestCaseBase):
         # Generate input size list for the input tensor
         input_size = [num_of_elements_each_dim for i in range(dim)]
         # Generate a random tensor with floating point dtype
-        input_tensor = torch.rand(input_size) 
+        input_tensor = torch.rand(input_size)
         # Apply bernoulli function
         result = input_tensor.bernoulli()
         return result
-    
-    
-    
-    

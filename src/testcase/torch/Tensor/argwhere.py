@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.argwhere)
 class TorchTensorArgwhereTestCase(TorBencherTestCaseBase):
@@ -21,7 +21,3 @@ class TorchTensorArgwhereTestCase(TorBencherTestCaseBase):
         # Call argwhere on the tensor
         result = input_tensor.argwhere()
         return result
-    
-    
-    
-    

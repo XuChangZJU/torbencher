@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.cumprod_)
 class TorchTensorCumprodTestCase(TorBencherTestCaseBase):
@@ -24,7 +24,3 @@ class TorchTensorCumprodTestCase(TorBencherTestCaseBase):
         input_tensor.cumprod_(dim)
         # Return the tensor after in-place operation
         return input_tensor
-    
-    
-    
-    

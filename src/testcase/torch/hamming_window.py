@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.hamming_window)
 class TorchHammingwindowTestCase(TorBencherTestCaseBase):
@@ -16,10 +16,3 @@ class TorchHammingwindowTestCase(TorBencherTestCaseBase):
         beta = random.uniform(0.1, 1.0)
         result = torch.hamming_window(window_length, periodic, alpha, beta)
         return result
-    
-    
-    
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.masked_scatter_)
 class TorchTensorMaskedscatterTestCase(TorBencherTestCaseBase):
@@ -22,11 +22,7 @@ class TorchTensorMaskedscatterTestCase(TorBencherTestCaseBase):
         mask = torch.randint(0, 2, input_size, dtype=torch.bool)
         # Generate a random source tensor with at least as many elements as the number of ones in the mask
         source_size = input_size[:]
-        source_size[random.randint(0, len(input_size)-1)] = mask.sum().item()
+        source_size[random.randint(0, len(input_size) - 1)] = mask.sum().item()
         source = torch.randn(source_size)
         result = input.masked_scatter_(mask, source)
         return result
-    
-    
-    
-    

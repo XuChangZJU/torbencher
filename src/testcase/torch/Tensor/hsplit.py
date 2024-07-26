@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.hsplit)
 class TorchTensorHsplitTestCase(TorBencherTestCaseBase):
@@ -13,10 +13,10 @@ class TorchTensorHsplitTestCase(TorBencherTestCaseBase):
         # Randomly choose the number of rows and columns for the tensor
         num_rows = random.randint(1, 10)
         num_cols = random.randint(2, 10)  # Ensure at least 2 columns for splitting
-    
+
         # Generate a random 2D tensor with the chosen dimensions
         tensor = torch.randn(num_rows, num_cols)
-    
+
         # Randomly choose the number of sections to split into or a split size
         if random.choice([True, False]):
             # Split by number of sections
@@ -30,9 +30,5 @@ class TorchTensorHsplitTestCase(TorBencherTestCaseBase):
             while num_cols % split_size != 0:
                 split_size = random.randint(1, num_cols - 1)  # Ensure divisible split size
             result = torch.hsplit(tensor, split_size)
-    
+
         return result
-    
-    
-    
-    

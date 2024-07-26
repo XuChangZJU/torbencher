@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.nn.init.trunc_normal_)
 class TorchNnInitTruncnormalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -28,4 +27,3 @@ class TorchNnInitTruncnormalTestCase(TorBencherTestCaseBase):
         # Apply trunc_normal_
         result = torch.nn.init.trunc_normal_(tensor, mean, std, a, b)
         return result
-    

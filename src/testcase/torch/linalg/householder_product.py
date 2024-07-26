@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.linalg.householder_product)
 class TorchLinalgHouseholderproductTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -17,9 +16,8 @@ class TorchLinalgHouseholderproductTestCase(TorBencherTestCaseBase):
         # k should be less than or equal to n
         k = random.randint(1, n)
         # Generate random input tensors A and tau
-        A = torch.randn(m, n)  
+        A = torch.randn(m, n)
         tau = torch.randn(k)
         # Calculate the householder product
         result = torch.linalg.householder_product(A, tau)
         return result
-    

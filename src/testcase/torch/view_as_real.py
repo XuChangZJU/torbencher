@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.view_as_real)
 class TorchViewasrealTestCase(TorBencherTestCaseBase):
@@ -21,10 +21,3 @@ class TorchViewasrealTestCase(TorBencherTestCaseBase):
         # Apply view_as_real
         result = torch.view_as_real(input_tensor)
         return result
-    
-    
-    
-    
-    
-    
-    

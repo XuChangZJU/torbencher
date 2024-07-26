@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.functional.gumbel_softmax)
 class TorchNnFunctionalGumbelsoftmaxTestCase(TorBencherTestCaseBase):
@@ -16,7 +16,7 @@ class TorchNnFunctionalGumbelsoftmaxTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)
         # Generate input size
         input_size = [num_of_elements_each_dim for i in range(dim)]
-    
+
         # Generate random input tensor
         logits = torch.randn(input_size)
         # Generate random tau value
@@ -26,7 +26,3 @@ class TorchNnFunctionalGumbelsoftmaxTestCase(TorBencherTestCaseBase):
         # Calculate gumbel_softmax
         result = torch.nn.functional.gumbel_softmax(logits, tau, hard)
         return result
-    
-    
-    
-    

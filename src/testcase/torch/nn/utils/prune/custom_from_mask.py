@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.utils.prune.custom_from_mask)
 class TorchNnUtilsPruneCustomfrommaskTestCase(TorBencherTestCaseBase):
@@ -28,7 +28,3 @@ class TorchNnUtilsPruneCustomfrommaskTestCase(TorBencherTestCaseBase):
         pruned_module = torch.nn.utils.prune.custom_from_mask(linear_module, 'weight', mask)
         # Return the pruned module, pruned weight, and the mask
         return pruned_module, pruned_module.weight, pruned_module.weight_mask
-    
-    
-    
-    

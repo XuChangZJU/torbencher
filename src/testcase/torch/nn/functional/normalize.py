@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.functional.normalize)
 class TorchNnFunctionalNormalizeTestCase(TorBencherTestCaseBase):
@@ -15,7 +15,7 @@ class TorchNnFunctionalNormalizeTestCase(TorBencherTestCaseBase):
         # Random number of elements each dimension
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(dim)]
-    
+
         # Random input tensor
         input_tensor = torch.randn(input_size)
         # Random p value
@@ -25,7 +25,3 @@ class TorchNnFunctionalNormalizeTestCase(TorBencherTestCaseBase):
         # Calculate the result of normalize
         result = torch.nn.functional.normalize(input_tensor, p, dim)
         return result
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.utils.parameters_to_vector)
 class TorchNnUtilsParameterstovectorTestCase(TorBencherTestCaseBase):
@@ -21,7 +21,3 @@ class TorchNnUtilsParameterstovectorTestCase(TorBencherTestCaseBase):
         # Flatten parameters into a single vector
         result = torch.nn.utils.parameters_to_vector(parameters)
         return result
-    
-    
-    
-    

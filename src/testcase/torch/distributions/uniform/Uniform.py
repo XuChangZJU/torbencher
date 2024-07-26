@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.distributions.uniform.Uniform)
 class TorchDistributionsUniformUniformTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -25,4 +24,3 @@ class TorchDistributionsUniformUniformTestCase(TorBencherTestCaseBase):
         # Sample from the distribution
         result = uniform_distribution.sample()
         return result
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.amin)
 class TorchAminTestCase(TorBencherTestCaseBase):
@@ -17,10 +17,3 @@ class TorchAminTestCase(TorBencherTestCaseBase):
         dim_to_reduce = random.randint(0, dim - 1)  # Random valid dimension to reduce
         result = torch.amin(input_tensor, dim_to_reduce)
         return result
-    
-    
-    
-    
-    
-    
-    

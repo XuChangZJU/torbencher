@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.stride)
 class TorchTensorStrideTestCase(TorBencherTestCaseBase):
@@ -17,7 +17,3 @@ class TorchTensorStrideTestCase(TorBencherTestCaseBase):
         dim_stride = random.randint(0, len(input_size) - 1)  # Random valid dimension
         result = torch.Tensor.stride(tensor, dim_stride)
         return result
-    
-    
-    
-    

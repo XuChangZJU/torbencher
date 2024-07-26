@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.distributions.von_mises.VonMises)
 class TorchDistributionsVonmisesVonmisesTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -26,4 +25,3 @@ class TorchDistributionsVonmisesVonmisesTestCase(TorBencherTestCaseBase):
         # Sample from the distribution
         result = von_mises_distribution.sample()
         return result
-    

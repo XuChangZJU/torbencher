@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.arctan_)
 class TorchTensorArctanTestCase(TorBencherTestCaseBase):
@@ -19,7 +19,3 @@ class TorchTensorArctanTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)  # Generate random tensor data
         input_tensor.arctan_()  # In-place arctan_ operation
         return input_tensor
-    
-    
-    
-    

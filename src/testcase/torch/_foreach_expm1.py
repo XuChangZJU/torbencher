@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch._foreach_expm1)
 class TorchForeachexpm1TestCase(TorBencherTestCaseBase):
@@ -18,10 +18,3 @@ class TorchForeachexpm1TestCase(TorBencherTestCaseBase):
         input_tensors = [torch.randn(input_size) for _ in range(input_list_length)]
         result = torch._foreach_expm1(input_tensors)
         return result
-    
-    
-    
-    
-    
-    
-    

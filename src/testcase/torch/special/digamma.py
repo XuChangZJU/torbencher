@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.special.digamma)
 class TorchSpecialDigammaTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -22,4 +21,3 @@ class TorchSpecialDigammaTestCase(TorBencherTestCaseBase):
         # Calculate the digamma function
         result = torch.special.digamma(input_tensor)
         return result
-    

@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.autograd.profiler.profile.self_cpu_time_total)
 class TorchAutogradProfilerProfileSelfcputimetotalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -28,4 +27,3 @@ class TorchAutogradProfilerProfileSelfcputimetotalTestCase(TorBencherTestCaseBas
             result = torch.div(result, tensor2)
         total_cpu_time = prof.self_cpu_time_total
         return total_cpu_time
-    

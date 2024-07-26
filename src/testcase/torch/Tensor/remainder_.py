@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.remainder_)
 class TorchTensorRemainderTestCase(TorBencherTestCaseBase):
@@ -19,12 +19,8 @@ class TorchTensorRemainderTestCase(TorBencherTestCaseBase):
         # Generate a random tensor with the specified input size
         input_tensor = torch.randn(input_size)
         # Generate a random divisor tensor with the same size as the input tensor
-        divisor_tensor = torch.randn(input_size) 
+        divisor_tensor = torch.randn(input_size)
         # Perform the in-place remainder operation
         input_tensor.remainder_(divisor_tensor)
         # Return the modified input tensor
         return input_tensor
-    
-    
-    
-    

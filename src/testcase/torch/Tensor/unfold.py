@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.unfold)
 class TorchTensorUnfoldTestCase(TorBencherTestCaseBase):
@@ -19,7 +19,3 @@ class TorchTensorUnfoldTestCase(TorBencherTestCaseBase):
         step = random.randint(1, input_size[unfold_dim] - size + 1)  # Random valid step
         result = tensor.unfold(unfold_dim, size, step)
         return result
-    
-    
-    
-    

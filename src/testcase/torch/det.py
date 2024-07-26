@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.det)
 class TorchDetTestCase(TorBencherTestCaseBase):
@@ -14,7 +14,3 @@ class TorchDetTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(n, n)  # Generating a random square tensor matrix
         result = torch.det(input_tensor)
         return result
-    
-    
-    
-    

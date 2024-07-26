@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.view_as_complex)
 class TorchViewascomplexTestCase(TorBencherTestCaseBase):
@@ -23,10 +23,3 @@ class TorchViewascomplexTestCase(TorBencherTestCaseBase):
         # Call view_as_complex function
         result = torch.view_as_complex(input_tensor)
         return result
-    
-    
-    
-    
-    
-    
-    

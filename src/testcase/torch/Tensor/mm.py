@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.mm)
 class TorchTensorMmTestCase(TorBencherTestCaseBase):
@@ -16,13 +16,9 @@ class TorchTensorMmTestCase(TorBencherTestCaseBase):
         dim3 = random.randint(1, 10)
         # Generate random input tensors
         input_size1 = [dim1, dim2]
-        input_size2 = [dim2, dim3] # dim2 should be same to make mm valid
+        input_size2 = [dim2, dim3]  # dim2 should be same to make mm valid
         tensor1 = torch.randn(input_size1)
         tensor2 = torch.randn(input_size2)
         # Perform matrix multiplication
         result = tensor1.mm(tensor2)
         return result
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.Softmin)
 class TorchNnSoftminTestCase(TorBencherTestCaseBase):
@@ -26,7 +26,3 @@ class TorchNnSoftminTestCase(TorBencherTestCaseBase):
         output_tensor = softmin_module(input_tensor)
         # Return the output tensor
         return output_tensor
-    
-    
-    
-    

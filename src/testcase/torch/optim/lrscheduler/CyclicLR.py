@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.lr_scheduler.CyclicLR)
 class TorchOptimLrschedulerCycliclrTestCase(TorBencherTestCaseBase):
@@ -14,7 +14,7 @@ class TorchOptimLrschedulerCycliclrTestCase(TorBencherTestCaseBase):
         learning_rate = random.uniform(0.001, 0.1)  # Random learning rate between 0.001 and 0.1
         momentum = random.uniform(0.5, 0.9)  # Random momentum between 0.5 and 0.9
         params = [torch.randn(10, 20), torch.randn(20, 30)]  # Random parameters for the optimizer
-    
+
         # Define CyclicLR parameters
         optimizer = torch.optim.SGD(params, lr=learning_rate, momentum=momentum)
         base_lr = random.uniform(0.001, learning_rate)  # Base learning rate
@@ -26,17 +26,16 @@ class TorchOptimLrschedulerCycliclrTestCase(TorBencherTestCaseBase):
         cycle_momentum = random.choice([True, False])  # Whether to cycle momentum
         base_momentum = random.uniform(0.5, momentum) if cycle_momentum else momentum  # Base momentum
         max_momentum = random.uniform(momentum, 0.9) if cycle_momentum else momentum  # Max momentum
-    
+
         # Create CyclicLR scheduler
-        scheduler = torch.optim.lr_scheduler.CyclicLR(optimizer, base_lr=base_lr, max_lr=max_lr, step_size_up=step_size_up, step_size_down=step_size_down, mode=mode, gamma=gamma, cycle_momentum=cycle_momentum, base_momentum=base_momentum, max_momentum=max_momentum)
-    
+        scheduler = torch.optim.lr_scheduler.CyclicLR(optimizer, base_lr=base_lr, max_lr=max_lr,
+                                                      step_size_up=step_size_up, step_size_down=step_size_down,
+                                                      mode=mode, gamma=gamma, cycle_momentum=cycle_momentum,
+                                                      base_momentum=base_momentum, max_momentum=max_momentum)
+
         # Run scheduler for a few iterations
         for i in range(random.randint(1, 1000)):
             scheduler.step()
-    
+
         # Return the last learning rate
         return scheduler.get_last_lr()
-    
-    
-    
-    

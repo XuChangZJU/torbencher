@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.autograd.graph.Node.next_functions)
 class TorchAutogradGraphNodeNextfunctionsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -24,4 +23,3 @@ class TorchAutogradGraphNodeNextfunctionsTestCase(TorBencherTestCaseBase):
         node = d.grad_fn.next_functions[0][0]
         next_functions = node.next_functions
         return next_functions
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.expm1_)
 class TorchTensorExpm1TestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorExpm1TestCase(TorBencherTestCaseBase):
         input_tensor.expm1_()
         # Return the tensor after the operation.
         return input_tensor
-    
-    
-    
-    

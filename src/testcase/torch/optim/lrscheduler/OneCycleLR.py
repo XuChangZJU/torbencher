@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.lr_scheduler.OneCycleLR)
 class TorchOptimLrschedulerOnecyclelrTestCase(TorBencherTestCaseBase):
@@ -20,10 +20,11 @@ class TorchOptimLrschedulerOnecyclelrTestCase(TorBencherTestCaseBase):
         max_lr = random.uniform(learning_rate, 0.1)  # max_lr should be greater than initial lr
         steps_per_epoch = random.randint(10, 100)  # Random steps per epoch between 10 and 100
         epochs = random.randint(1, 10)  # Random number of epochs between 1 and 10
-    
+
         # Create the OneCycleLR scheduler
-        scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr, steps_per_epoch=steps_per_epoch, epochs=epochs)
-    
+        scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr, steps_per_epoch=steps_per_epoch,
+                                                        epochs=epochs)
+
         # Loop through the epochs and batches, updating the learning rate and recording it
         learning_rates = []
         for epoch in range(epochs):
@@ -31,9 +32,5 @@ class TorchOptimLrschedulerOnecyclelrTestCase(TorBencherTestCaseBase):
                 optimizer.step()
                 scheduler.step()
                 learning_rates.append(optimizer.param_groups[0]['lr'])
-    
+
         return learning_rates
-    
-    
-    
-    

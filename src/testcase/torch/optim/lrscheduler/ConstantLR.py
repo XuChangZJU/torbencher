@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.lr_scheduler.ConstantLR)
 class TorchOptimLrschedulerConstantlrTestCase(TorBencherTestCaseBase):
@@ -29,7 +29,3 @@ class TorchOptimLrschedulerConstantlrTestCase(TorBencherTestCaseBase):
         # Get last learning rate
         last_lr = scheduler.get_last_lr()[0]
         return last_lr
-    
-    
-    
-    

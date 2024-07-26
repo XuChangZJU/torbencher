@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.Softmax)
 class TorchNnSoftmaxTestCase(TorBencherTestCaseBase):
@@ -24,7 +24,3 @@ class TorchNnSoftmaxTestCase(TorBencherTestCaseBase):
         softmax = torch.nn.Softmax(dim=dim)
         result = softmax(input_tensor)
         return result
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.compiled_with_cxx11_abi)
 class TorchCompiledwithcxx11abiTestCase(TorBencherTestCaseBase):
@@ -13,10 +13,3 @@ class TorchCompiledwithcxx11abiTestCase(TorBencherTestCaseBase):
         # No random parameters needed for this test as it checks a build configuration.
         result = torch.compiled_with_cxx11_abi()
         return result
-    
-    
-    
-    
-    
-    
-    

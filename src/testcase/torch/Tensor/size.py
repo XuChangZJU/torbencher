@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.size)
 class TorchTensorSizeTestCase(TorBencherTestCaseBase):
@@ -21,7 +21,7 @@ class TorchTensorSizeTestCase(TorBencherTestCaseBase):
         # Get the size of the tensor
         result = tensor.size()
         return result
-    
+
     def test_size_with_dim_correctness(self):
         # Generate random dimension for the tensor
         dim = random.randint(1, 4)
@@ -36,5 +36,3 @@ class TorchTensorSizeTestCase(TorBencherTestCaseBase):
         # Get the size of the tensor at the specified dimension
         result = tensor.size(dim)
         return result
-    
-    

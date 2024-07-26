@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.special.i1e)
 class TorchSpecialI1eTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -23,4 +22,3 @@ class TorchSpecialI1eTestCase(TorBencherTestCaseBase):
         result = torch.special.i1e(input_tensor)
         # Return the result
         return result
-    

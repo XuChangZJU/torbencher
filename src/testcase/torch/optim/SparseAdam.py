@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.SparseAdam)
 class TorchOptimSparseadamTestCase(TorBencherTestCaseBase):
@@ -23,19 +23,15 @@ class TorchOptimSparseadamTestCase(TorBencherTestCaseBase):
         indices = torch.randint(0, num_of_elements_each_dim, (dim, nnz))
         values = torch.randn(nnz)
         sparse_grad = torch.sparse_coo_tensor(indices, values, input_size)
-    
+
         # Random dense tensor for parameters
         params = torch.randn(input_size, requires_grad=True)
-    
+
         # Initialize SparseAdam optimizer
         optimizer = torch.optim.SparseAdam([params])
-    
+
         # Perform a single optimization step
         params.grad = sparse_grad
         optimizer.step()
-    
+
         return params
-    
-    
-    
-    

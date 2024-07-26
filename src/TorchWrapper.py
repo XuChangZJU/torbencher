@@ -84,7 +84,7 @@ class TorchWrapper:
         return ret
 
     def save_result(
-        self, path: str, format: str, file_max_size: str, file_name_spec: str
+            self, path: str, format: str, file_max_size: str, file_name_spec: str
     ):
         def parse_file_max_size_str(file_max_size: str):
             max_size = 0
@@ -200,7 +200,7 @@ class TorchWrapper:
         MAX_CHUNK_SIZE = 1024 * 1024
         df = self._get_df_result()
         for i in range(int(len(df) / MAX_CHUNK_SIZE) + 1):
-            chunk = df.iloc[i * MAX_CHUNK_SIZE : (i + 1) * MAX_CHUNK_SIZE]
+            chunk = df.iloc[i * MAX_CHUNK_SIZE: (i + 1) * MAX_CHUNK_SIZE]
             chunk.to_csv(os.path.join(path, f"{file_name}_{i}.csv"), index=False)
 
     def _save_df_result_to_json(self, path: str, max_size: int, name_suffix: str):
@@ -239,7 +239,8 @@ class TorchWrapper:
             )
 
             scale_obj = {}
-            scale_obj[TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER] = self.call_count[full_name][TorchWrapper.ResultKey.COUNT]
+            scale_obj[TorchWrapper.ResultKey.ScaleKey.CALL_NUMBER] = self.call_count[full_name][
+                TorchWrapper.ResultKey.COUNT]
             scale_obj[TorchWrapper.ResultKey.ScaleKey.START_TIMESTAMP] = start_time
             scale_obj[TorchWrapper.ResultKey.ScaleKey.COST_TIME] = elapsed_time
 
@@ -284,7 +285,7 @@ class TorchWrapper:
                     self._set_new_attr(module, attr_name, attr)
                     # print(f"Decorated function: {module_name}.{attr_name}")
                 elif isinstance(attr, types.ModuleType) and attr.__name__.startswith(
-                    "torch"
+                        "torch"
                 ):
                     # print(f"Descending into module: {attr.__name__}")
                     self.decorate_module(attr, visited)

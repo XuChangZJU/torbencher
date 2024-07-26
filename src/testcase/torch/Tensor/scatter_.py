@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.scatter_)
 class TorchTensorScatterTestCase(TorBencherTestCaseBase):
@@ -30,7 +30,3 @@ class TorchTensorScatterTestCase(TorBencherTestCaseBase):
         # Call scatter_ function
         result = self_tensor.scatter_(dim, index_tensor, src_tensor)
         return result
-    
-    
-    
-    

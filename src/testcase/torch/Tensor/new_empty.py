@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.new_empty)
 class TorchTensorNewemptyTestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorNewemptyTestCase(TorBencherTestCaseBase):
         result = tensor.new_empty(input_size)
         # Return the result tensor
         return result
-    
-    
-    
-    

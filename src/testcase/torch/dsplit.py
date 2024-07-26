@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.dsplit)
 class TorchDsplitTestCase(TorBencherTestCaseBase):
@@ -15,10 +15,10 @@ class TorchDsplitTestCase(TorBencherTestCaseBase):
         dim2 = random.randint(1, 4)
         dim3 = random.randint(2, 4)  # Ensure dim3 is at least 2 to avoid empty range error
         input_shape = [dim1, dim2, dim3]
-    
+
         # Generate a random tensor with the specified dimensions
         tensor = torch.randn(input_shape)
-        
+
         # Randomly choose whether indices_or_sections will be an integer or a list of integers
         if random.choice([True, False]):
             # If integer, ensure it evenly divides the third dimension
@@ -34,9 +34,5 @@ class TorchDsplitTestCase(TorBencherTestCaseBase):
             else:
                 indices = []
             result = torch.dsplit(tensor, indices)
-        
+
         return result
-    
-    
-    
-    

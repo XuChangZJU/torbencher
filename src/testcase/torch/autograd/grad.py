@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.autograd.grad)
 class TorchAutogradGradTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -24,4 +23,3 @@ class TorchAutogradGradTestCase(TorBencherTestCaseBase):
         # Compute gradients
         gradients = torch.autograd.grad(output_tensor, input_tensor)
         return gradients
-    

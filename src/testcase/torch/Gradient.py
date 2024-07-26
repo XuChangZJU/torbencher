@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.gradient)
 class TorchGradientTestCase(TorBencherTestCaseBase):
@@ -16,15 +16,11 @@ class TorchGradientTestCase(TorBencherTestCaseBase):
         num_elements = random.randint(2, 5)
         # Create input size list based on the number of dimensions
         input_size = [num_elements for _ in range(dim)]
-        
+
         # Generate a random tensor with the calculated size
         input_tensor = torch.randn(input_size)
-        
+
         # Calculate the gradient of the input tensor
         result = torch.gradient(input_tensor)
-        
+
         return result
-    
-    
-    
-    

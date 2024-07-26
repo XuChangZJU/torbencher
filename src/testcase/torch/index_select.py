@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.index_select)
 class TorchIndexselectTestCase(TorBencherTestCaseBase):
@@ -27,10 +27,3 @@ class TorchIndexselectTestCase(TorBencherTestCaseBase):
         indices = torch.tensor(random.sample(range(input_size[dim_to_index]), num_of_indices), dtype=torch.int64)
         result = torch.index_select(input_tensor, dim_to_index, indices)
         return result
-    
-    
-    
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.functional.relu6)
 class TorchNnFunctionalRelu6TestCase(TorBencherTestCaseBase):
@@ -21,7 +21,3 @@ class TorchNnFunctionalRelu6TestCase(TorBencherTestCaseBase):
         # Apply the ReLU6 function
         result = torch.nn.functional.relu6(input_tensor)
         return result
-    
-    
-    
-    

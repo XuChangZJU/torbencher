@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.arcsinh_)
 class TorchTensorArcsinhTestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorArcsinhTestCase(TorBencherTestCaseBase):
         input_tensor.arcsinh_()
         # Return the tensor after the in-place operation
         return input_tensor
-    
-    
-    
-    

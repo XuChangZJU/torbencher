@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.scatter_add_)
 class TorchTensorScatteraddTestCase(TorBencherTestCaseBase):
@@ -16,7 +16,7 @@ class TorchTensorScatteraddTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)
         # Generate input size list for tensors
         input_size = [num_of_elements_each_dim for i in range(dim)]
-    
+
         # Generate a random tensor as the input tensor to be scattered and added
         input_tensor = torch.randn(input_size)
         # Generate a random dimension along which to index
@@ -28,12 +28,8 @@ class TorchTensorScatteraddTestCase(TorBencherTestCaseBase):
         index_tensor = torch.randint(0, input_size[dim], index_size)
         # Generate a random tensor as the source tensor to scatter and add
         src_tensor = torch.randn(index_size)
-        
+
         # Apply scatter_add_ operation
         result = input_tensor.scatter_add_(dim, index_tensor, src_tensor)
-        
+
         return result
-    
-    
-    
-    

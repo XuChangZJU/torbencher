@@ -4,24 +4,28 @@ import inspect
 
 from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
+
 def get_class_that_defined_method(meth):
     """
     https://stackoverflow.com/questions/3589311/get-defining-class-of-unbound-method-object-in-python-3
     """
     if isinstance(meth, functools.partial):
         return get_class_that_defined_method(meth.func)
-    if inspect.ismethod(meth) or (inspect.isbuiltin(meth) and getattr(meth, '__self__', None) is not None and getattr(meth.__self__, '__class__', None)):
+    if inspect.ismethod(meth) or (
+            inspect.isbuiltin(meth) and getattr(meth, '__self__', None) is not None and getattr(meth.__self__,
+                                                                                                '__class__', None)):
         for cls in inspect.getmro(meth.__self__.__class__):
             if meth.__name__ in cls.__dict__:
                 return cls
         meth = getattr(meth, '__func__', meth)  # fallback to __qualname__ parsing
     if inspect.isfunction(meth):
         cls = getattr(inspect.getmodule(meth),
-                    meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0],
-                    None)
+                      meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0],
+                      None)
         if isinstance(cls, type):
             return cls
     return getattr(meth, '__objclass__', None)  # handle special descriptor objects
+
 
 def is_static_method_of_class(func, cls=None):
     if cls is None:
@@ -49,6 +53,7 @@ def is_static_method_of_class(func, cls=None):
 
     return isinstance(inspect.getattr_static(cls, func_name), staticmethod)
 
+
 def timing_decorator(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -59,7 +64,7 @@ def timing_decorator(func):
         timing_log = f"{func.__name__}() cost {delta} ms"
         return ret, delta
 
-    if is_static_method_of_class(func) == True: # func is a static method
+    if is_static_method_of_class(func) == True:  # func is a static method
         return staticmethod(wrapper)
     else:
         return wrapper

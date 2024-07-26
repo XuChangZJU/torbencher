@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.matrix_power)
 class TorchMatrixpowerTestCase(TorBencherTestCaseBase):
@@ -23,10 +23,3 @@ class TorchMatrixpowerTestCase(TorBencherTestCaseBase):
         # Calculate matrix power
         result = torch.matrix_power(input, n)
         return result
-    
-    
-    
-    
-    
-    
-    

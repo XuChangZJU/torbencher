@@ -7,7 +7,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.utils.cpp_extension.is_ninja_available)
 class TorchUtilsCppextensionIsninjaavailableTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -15,4 +14,3 @@ class TorchUtilsCppextensionIsninjaavailableTestCase(TorBencherTestCaseBase):
         # Check if ninja is available
         ninja_available = is_ninja_available()
         return ninja_available
-    

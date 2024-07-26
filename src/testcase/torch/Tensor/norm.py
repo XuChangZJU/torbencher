@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.norm)
 class TorchTensorNormTestCase(TorBencherTestCaseBase):
@@ -20,6 +20,3 @@ class TorchTensorNormTestCase(TorBencherTestCaseBase):
         p = random.uniform(0.1, 10.0)  # Random p value between 0.1 and 10.0
         result = torch.Tensor.norm(input_tensor, p)
         return result
-    
-    
-    

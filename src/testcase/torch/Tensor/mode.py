@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.mode)
 class TorchTensorModeTestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorModeTestCase(TorBencherTestCaseBase):
         random_dim = random.randint(0, dim - 1)
         result = tensor.mode(random_dim)
         return result
-    
-    
-    
-    

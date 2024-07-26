@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.sym_not)
 class TorchSymnotTestCase(TorBencherTestCaseBase):
@@ -14,7 +14,3 @@ class TorchSymnotTestCase(TorBencherTestCaseBase):
         random_bool_val = random.choice([True, False])  # Generate a random boolean value
         result = torch.sym_not(random_bool_val)
         return result
-    
-    
-    
-    

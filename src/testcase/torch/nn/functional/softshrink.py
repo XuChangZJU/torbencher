@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.functional.softshrink)
 class TorchNnFunctionalSoftshrinkTestCase(TorBencherTestCaseBase):
@@ -21,7 +21,3 @@ class TorchNnFunctionalSoftshrinkTestCase(TorBencherTestCaseBase):
         # Apply softshrink function
         result = torch.nn.functional.softshrink(input_tensor)
         return result
-    
-    
-    
-    

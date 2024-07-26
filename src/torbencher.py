@@ -10,6 +10,7 @@ import torch.version
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
 from .util.unitest import MyTestRunner, MyTestLoader;
 
+
 class torbencher:
     SUPPORTED_FORMATS = ["json"]
     AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
@@ -82,7 +83,7 @@ class torbencher:
 
         # machine info
         result[torbencher.ResultKey.CPU] = platform.processor()
-        result[torbencher.ResultKey.MEMORY] = "{:.2f} GB".format(round(psutil.virtual_memory().total / (1024**3), 2))
+        result[torbencher.ResultKey.MEMORY] = "{:.2f} GB".format(round(psutil.virtual_memory().total / (1024 ** 3), 2))
 
         # os info
         result[torbencher.ResultKey.OS] = platform.system()
@@ -141,6 +142,5 @@ class torbencher:
                     suite = loader.loadTestsFromTestCase(testcase)
                     result = runner.run(suite)
                     output_results[device].append(result.getReturnValues());
-
 
         return output_results

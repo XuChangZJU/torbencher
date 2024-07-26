@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.split)
 class TorchTensorSplitTestCase(TorBencherTestCaseBase):
@@ -25,7 +25,3 @@ class TorchTensorSplitTestCase(TorBencherTestCaseBase):
         # Split the tensor
         result = torch.Tensor.split(tensor, split_size, dim)
         return result
-    
-    
-    
-    

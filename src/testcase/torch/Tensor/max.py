@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.max)
 class TorchTensorMaxTestCase(TorBencherTestCaseBase):
@@ -22,7 +22,7 @@ class TorchTensorMaxTestCase(TorBencherTestCaseBase):
         max_value = random_tensor.max()
         # Return the max value
         return max_value
-    
+
     def test_torch_Tensor_max_dim_correctness(self):
         # Define the dimension of the tensor
         dim = random.randint(1, 4)
@@ -38,5 +38,3 @@ class TorchTensorMaxTestCase(TorBencherTestCaseBase):
         max_value, max_index = random_tensor.max(dim)
         # Return the max value and its index
         return max_value, max_index
-    
-    

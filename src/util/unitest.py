@@ -1,5 +1,6 @@
 import unittest;
 
+
 class CustomTestResult(unittest.TextTestResult):
     """
     **description**
@@ -8,6 +9,7 @@ class CustomTestResult(unittest.TextTestResult):
     **params**
     *args: Variable length argument list. **kwargs: Arbitrary keyword arguments.
     """
+
     def __init__(self, *args, **kwargs):
         """
         **description**
@@ -56,6 +58,7 @@ class CustomTestResult(unittest.TextTestResult):
         """
         return self.returnValues;
 
+
 class MyTestRunner(unittest.TextTestRunner):
     """
     **description**
@@ -66,6 +69,7 @@ class MyTestRunner(unittest.TextTestRunner):
     """
     resultclass = CustomTestResult;
 
+
 class MyTestLoader(unittest.TestLoader):
     """
     **description**
@@ -74,6 +78,7 @@ class MyTestLoader(unittest.TestLoader):
     **params**
     None
     """
+
     def loadTestsFromTestCase(self, testCaseClass):
         """
         **description**

@@ -8,7 +8,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.utils.cpp_extension.load_inline)
 class TorchUtilsCppextensionLoadinlineTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -18,10 +17,10 @@ class TorchUtilsCppextensionLoadinlineTestCase(TorBencherTestCaseBase):
             subprocess.run(["ninja", "--version"], check=True)
         except subprocess.CalledProcessError:
             raise RuntimeError("Ninja is required to load C++ extensions. Please install it using 'pip install ninja'.")
-    
+
         # Randomly generate a name for the extension
         extension_name = f"extension_{random.randint(1, 1000)}"
-        
+
         # Randomly generate a simple C++ source code
         cpp_source = """
         #include <torch/extension.h>
@@ -32,7 +31,7 @@ class TorchUtilsCppextensionLoadinlineTestCase(TorBencherTestCaseBase):
             m.def("add", &add, "A function that adds two tensors");
         }
         """
-        
+
         # Randomly generate a simple CUDA source code
         cuda_source = """
         __global__ void add_kernel(float* a, float* b, float* c, int size) {
@@ -55,24 +54,24 @@ class TorchUtilsCppextensionLoadinlineTestCase(TorBencherTestCaseBase):
             m.def("add_cuda", &add_cuda, "A function that adds two tensors using CUDA");
         }
         """
-        
+
         # Load the inline extension
-        extension = load_inline(extension_name, cpp_sources=cpp_source, cuda_sources=cuda_source, extra_cuda_cflags=['-std=c++14'])
-        
+        extension = load_inline(extension_name, cpp_sources=cpp_source, cuda_sources=cuda_source,
+                                extra_cuda_cflags=['-std=c++14'])
+
         # Randomly generate tensor sizes
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for _ in range(dim)]
-        
+
         # Generate random tensors
         tensor1 = torch.randn(input_size, device='cuda')
         tensor2 = torch.randn(input_size, device='cuda')
-        
+
         # Test the C++ function
         result_cpp = extension.add(tensor1.cpu(), tensor2.cpu())
-        
+
         # Test the CUDA function
         result_cuda = extension.add_cuda(tensor1, tensor2)
-        
+
         return result_cpp, result_cuda
-    

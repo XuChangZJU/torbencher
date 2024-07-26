@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.adjoint)
 class TorchAdjointTestCase(TorBencherTestCaseBase):
@@ -22,10 +22,3 @@ class TorchAdjointTestCase(TorBencherTestCaseBase):
         result = torch.adjoint(input_tensor)
         # Return the result tensor
         return result
-    
-    
-    
-    
-    
-    
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.unravel_index)
 class TorchUnravelindexTestCase(TorBencherTestCaseBase):
@@ -23,10 +23,3 @@ class TorchUnravelindexTestCase(TorBencherTestCaseBase):
         # Call the unravel_index function
         result = torch.unravel_index(indices, shape)
         return result
-    
-    
-    
-    
-    
-    
-    

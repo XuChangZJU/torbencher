@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.vstack)
 class TorchVstackTestCase(TorBencherTestCaseBase):
@@ -23,7 +23,7 @@ class TorchVstackTestCase(TorBencherTestCaseBase):
             tensors.append(torch.randn(num_rows, num_columns))
             # size = [random.randint(1, 4) for _ in range(2)]  # Ensure 2D tensors for vstack
             # tensors.append(torch.randn(size))
-        
+
         result = torch.vstack(tensors)
 
         # Check the shape of the resulting tensor
@@ -33,7 +33,3 @@ class TorchVstackTestCase(TorBencherTestCaseBase):
         assert result.shape == expected_shape, f"Expected shape {expected_shape}, but got {result.shape}"
 
         return result
-    
-    
-    
-    

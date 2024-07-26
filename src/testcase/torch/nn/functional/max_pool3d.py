@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.functional.max_pool3d)
 class TorchNnFunctionalMaxpool3dTestCase(TorBencherTestCaseBase):
@@ -17,30 +17,30 @@ class TorchNnFunctionalMaxpool3dTestCase(TorBencherTestCaseBase):
         height = random.randint(5, 10)
         width = random.randint(5, 10)
         input_size = [batch_size, in_channels, depth, height, width]
-    
+
         # Generate random input tensor
         input_tensor = torch.randn(input_size)
-    
+
         # Random kernel size, ensuring it's smaller than the input dimensions
-        kernel_size = (random.randint(2, min(4, depth)), random.randint(2, min(4, height)), random.randint(2, min(4, width)))
-    
+        kernel_size = (
+        random.randint(2, min(4, depth)), random.randint(2, min(4, height)), random.randint(2, min(4, width)))
+
         # Random stride, ensuring it's smaller than or equal to the kernel size
-        stride = (random.randint(1, kernel_size[0]), random.randint(1, kernel_size[1]), random.randint(1, kernel_size[2]))
-    
+        stride = (
+        random.randint(1, kernel_size[0]), random.randint(1, kernel_size[1]), random.randint(1, kernel_size[2]))
+
         # Random padding, ensuring it's valid
-        padding = (random.randint(0, kernel_size[0] // 2), random.randint(0, kernel_size[1] // 2), random.randint(0, kernel_size[2] // 2))
-    
+        padding = (random.randint(0, kernel_size[0] // 2), random.randint(0, kernel_size[1] // 2),
+                   random.randint(0, kernel_size[2] // 2))
+
         # Random dilation, ensuring it's greater than 0
         dilation = (random.randint(1, 2), random.randint(1, 2), random.randint(1, 2))
-    
+
         # Random ceil_mode and return_indices
         ceil_mode = random.choice([True, False])
         return_indices = random.choice([True, False])
-    
+
         # Apply max_pool3d
-        result = torch.nn.functional.max_pool3d(input_tensor, kernel_size, stride, padding, dilation, ceil_mode, return_indices)
+        result = torch.nn.functional.max_pool3d(input_tensor, kernel_size, stride, padding, dilation, ceil_mode,
+                                                return_indices)
         return result
-    
-    
-    
-    

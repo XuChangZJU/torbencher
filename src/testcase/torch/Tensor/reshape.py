@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.reshape)
 class TorchTensorReshapeTestCase(TorBencherTestCaseBase):
@@ -26,7 +26,3 @@ class TorchTensorReshapeTestCase(TorBencherTestCaseBase):
         reshaped_tensor = original_tensor.reshape(new_shape)
 
         return reshaped_tensor
-    
-    
-    
-    

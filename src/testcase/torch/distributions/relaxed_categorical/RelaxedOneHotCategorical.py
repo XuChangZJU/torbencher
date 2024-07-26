@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.distributions.relaxed_categorical.RelaxedOneHotCategorical)
 class TorchDistributionsRelaxedcategoricalRelaxedonehotcategoricalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -18,9 +17,8 @@ class TorchDistributionsRelaxedcategoricalRelaxedonehotcategoricalTestCase(TorBe
         num_events = random.randint(2, 10)  # Ensure at least two events
         temperature = random.uniform(0.1, 10.0)
         probs = torch.randn(batch_size, num_events).softmax(dim=-1)  # Ensure probabilities sum to 1
-        
+
         distribution = torch.distributions.relaxed_categorical.RelaxedOneHotCategorical(temperature, probs)
         sample = distribution.sample()
-        
+
         return sample
-    

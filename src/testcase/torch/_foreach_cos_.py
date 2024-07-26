@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch._foreach_cos_)
 class TorchForeachcosTestCase(TorBencherTestCaseBase):
@@ -24,10 +24,3 @@ class TorchForeachcosTestCase(TorBencherTestCaseBase):
         # apply foreach_cos_ operator
         torch._foreach_cos_(tensor_list)
         # return the first tensor in the list after applying foreach_cos_
-    
-    
-    
-    
-    
-    
-    

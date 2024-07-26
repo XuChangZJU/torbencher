@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.fill_diagonal_)
 class TorchTensorFilldiagonalTestCase(TorBencherTestCaseBase):
@@ -15,16 +15,12 @@ class TorchTensorFilldiagonalTestCase(TorBencherTestCaseBase):
         # Randomly generate the size of each dimension (all dimensions must be of equal length)
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(dim)]
-    
+
         # Create a random tensor
         tensor = torch.randn(input_size)
         # Generate a random fill value
         fill_value = random.uniform(0.1, 10.0)
         # Apply the fill_diagonal_ operation
         result = tensor.fill_diagonal_(fill_value)
-        
+
         return result
-    
-    
-    
-    

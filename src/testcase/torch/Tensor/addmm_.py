@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.addmm_)
 class TorchTensorAddmmTestCase(TorBencherTestCaseBase):
@@ -14,16 +14,12 @@ class TorchTensorAddmmTestCase(TorBencherTestCaseBase):
         m = random.randint(1, 4)
         n = random.randint(1, 4)
         p = random.randint(1, 4)
-        
+
         # Random tensors for the operation
         mat1 = torch.randn(m, n)
         mat2 = torch.randn(n, p)
         input_tensor = torch.randn(m, p)
-        
+
         # Perform the in-place addmm_ operation
         result = input_tensor.addmm_(mat1, mat2)
         return result
-    
-    
-    
-    

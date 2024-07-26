@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.diagflat)
 class TorchTensorDiagflatTestCase(TorBencherTestCaseBase):
@@ -17,10 +17,7 @@ class TorchTensorDiagflatTestCase(TorBencherTestCaseBase):
         # Generate a random 1D tensor
         input_tensor = torch.randn(num_of_elements)
         # Random offset
-        offset = random.randint(-num_of_elements, num_of_elements) # offset should be within the range of -num_of_elements and num_of_elements
+        offset = random.randint(-num_of_elements,
+                                num_of_elements)  # offset should be within the range of -num_of_elements and num_of_elements
         result = input_tensor.diagflat(offset)
         return result
-    
-    
-    
-    

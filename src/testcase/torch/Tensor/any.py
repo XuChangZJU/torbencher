@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.any)
 class TorchTensorAnyTestCase(TorBencherTestCaseBase):
@@ -21,6 +21,3 @@ class TorchTensorAnyTestCase(TorBencherTestCaseBase):
         # Apply any operation on the tensor
         result = tensor.any()
         return result
-    
-    
-    

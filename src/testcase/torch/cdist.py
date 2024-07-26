@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.cdist)
 class TorchCdistTestCase(TorBencherTestCaseBase):
@@ -18,10 +18,3 @@ class TorchCdistTestCase(TorBencherTestCaseBase):
         x2 = torch.randn(batch_size, r, m)
         result = torch.cdist(x1, x2)
         return result
-    
-    
-    
-    
-    
-    
-    

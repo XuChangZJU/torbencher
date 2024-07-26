@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.permute)
 class TorchTensorPermuteTestCase(TorBencherTestCaseBase):
@@ -19,11 +19,7 @@ class TorchTensorPermuteTestCase(TorBencherTestCaseBase):
         # Generate a random tensor with the specified input size
         tensor = torch.randn(input_size)
         # Generate a random permutation of the dimensions
-        dims = torch.randperm(dim).tolist() # Generate a valid permutation of dimensions
+        dims = torch.randperm(dim).tolist()  # Generate a valid permutation of dimensions
         # Permute the dimensions of the tensor
         result = tensor.permute(dims)
         return result
-    
-    
-    
-    

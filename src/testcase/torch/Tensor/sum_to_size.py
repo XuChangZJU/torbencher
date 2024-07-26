@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.sum_to_size)
 class TorchTensorSumtosizeTestCase(TorBencherTestCaseBase):
@@ -14,10 +14,10 @@ class TorchTensorSumtosizeTestCase(TorBencherTestCaseBase):
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(dim)]
-    
+
         # Generate random tensor 
         tensor = torch.randn(input_size)
-    
+
         # Generate random size to which the tensor will be summed
         # size should be broadcastable to tensor's size, 
         # meaning its each dimension should be either equal to the corresponding dimension in tensor's size
@@ -28,10 +28,6 @@ class TorchTensorSumtosizeTestCase(TorBencherTestCaseBase):
                 size.append(tensor.size(i))
             else:
                 size.append(1)
-    
+
         result = tensor.sum_to_size(size)
         return result
-    
-    
-    
-    

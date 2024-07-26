@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.concatenate)
 class TorchConcatenateTestCase(TorBencherTestCaseBase):
@@ -24,10 +24,3 @@ class TorchConcatenateTestCase(TorBencherTestCaseBase):
         axis = random.randint(0, len(input_size) - 1)
         result = torch.concatenate(tensors, axis)
         return result
-    
-    
-    
-    
-    
-    
-    

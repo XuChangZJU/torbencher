@@ -6,14 +6,13 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.linalg.multi_dot)
 class TorchLinalgMultidotTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_multi_dot_correctness(self):
         # Define the number of matrices to multiply
-        num_matrices = random.randint(2, 5) 
-    
+        num_matrices = random.randint(2, 5)
+
         # Generate random dimensions for the matrices, ensuring valid matrix multiplication
         matrix_dims = []
         for i in range(num_matrices + 1):
@@ -27,7 +26,7 @@ class TorchLinalgMultidotTestCase(TorBencherTestCaseBase):
             else:
                 # Intermediate dimensions need to match for valid multiplication
                 matrix_dims.append(random.randint(1, 5))
-    
+
         # Create the list of random tensors
         tensors = []
         for i in range(num_matrices):
@@ -39,9 +38,8 @@ class TorchLinalgMultidotTestCase(TorBencherTestCaseBase):
                 tensors.append(torch.randn(matrix_dims[i]))
             else:
                 tensors.append(torch.randn(matrix_dims[i], matrix_dims[i + 1]))
-    
+
         # Calculate the multi_dot result
         result = torch.linalg.multi_dot(tensors)
-        
+
         return result
-    

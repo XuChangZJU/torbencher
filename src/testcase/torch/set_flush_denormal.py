@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.set_flush_denormal)
 class TorchSetflushdenormalTestCase(TorBencherTestCaseBase):
@@ -13,7 +13,7 @@ class TorchSetflushdenormalTestCase(TorBencherTestCaseBase):
         # Randomly enable or disable flush denormal mode
         mode = random.choice([True, False])
         result = torch.set_flush_denormal(mode)
-    
+
         # Verify if the function returns True when supported and the setting is applied
         if result:
             # Create a very small denormal number tensor
@@ -24,9 +24,5 @@ class TorchSetflushdenormalTestCase(TorBencherTestCaseBase):
             else:
                 # When not flushing denormals, tensor should retain its denormal value
                 assert torch.all(denormal_tensor != 0), "Expected denormal tensor to retain its value"
-    
+
         return result
-    
-    
-    
-    

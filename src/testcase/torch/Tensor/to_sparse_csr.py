@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.to_sparse_csr)
 class TorchTensorTosparsecsrTestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorTosparsecsrTestCase(TorBencherTestCaseBase):
         sparse_csr_tensor = dense_tensor.to_sparse_csr()
         # Return the sparse CSR tensor
         return sparse_csr_tensor
-    
-    
-    
-    

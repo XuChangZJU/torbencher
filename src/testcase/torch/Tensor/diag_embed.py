@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.diag_embed)
 class TorchTensorDiagembedTestCase(TorBencherTestCaseBase):
@@ -19,11 +19,7 @@ class TorchTensorDiagembedTestCase(TorBencherTestCaseBase):
         # Generate a random tensor
         tensor = torch.randn(input_size)
         # Random offset
-        offset = random.randint(-max(input_size), max(input_size)) # offset should be within the range of tensor size
+        offset = random.randint(-max(input_size), max(input_size))  # offset should be within the range of tensor size
         # Calculate diag_embed
         result = tensor.diag_embed(offset)
         return result
-    
-    
-    
-    

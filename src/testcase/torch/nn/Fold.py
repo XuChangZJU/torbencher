@@ -5,6 +5,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
+
 @test_api(torch.nn.Fold)
 class TorchNnFoldTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -21,9 +22,10 @@ class TorchNnFoldTestCase(TorBencherTestCaseBase):
             padding_width = random.randint(0, kernel_width - 1)
             dilation_height = 1  # For simplicity, keeping dilation as 1
             dilation_width = 1
-            
+
             # Calculate L based on generated parameters
-            L_height = (output_height + 2 * padding_height - dilation_height * (kernel_height - 1) - 1) // stride_height + 1
+            L_height = (output_height + 2 * padding_height - dilation_height * (
+                        kernel_height - 1) - 1) // stride_height + 1
             L_width = (output_width + 2 * padding_width - dilation_width * (kernel_width - 1) - 1) // stride_width + 1
             L = L_height * L_width
 
@@ -34,21 +36,17 @@ class TorchNnFoldTestCase(TorBencherTestCaseBase):
         # Randomly generate batch size and number of channels
         N = random.randint(1, 4)
         C = random.randint(1, 3)
-        
+
         # Create random input tensor based on calculated L
         input_tensor = torch.randn(N, C * kernel_height * kernel_width, L)
-        
+
         # Create Fold instance with the validated parameters
-        fold = torch.nn.Fold(output_size=(output_height, output_width), 
-                            kernel_size=(kernel_height, kernel_width), 
-                            dilation=(dilation_height, dilation_width), 
-                            padding=(padding_height, padding_width), 
-                            stride=(stride_height, stride_width))
-        
+        fold = torch.nn.Fold(output_size=(output_height, output_width),
+                             kernel_size=(kernel_height, kernel_width),
+                             dilation=(dilation_height, dilation_width),
+                             padding=(padding_height, padding_width),
+                             stride=(stride_height, stride_width))
+
         # Apply Fold operation
         output_tensor = fold(input_tensor)
         return output_tensor
-    
-    
-    
-    

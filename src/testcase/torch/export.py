@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.export.export)
 class TorchExportTestCase(TorBencherTestCaseBase):
@@ -42,10 +42,4 @@ class TorchExportTestCase(TorBencherTestCaseBase):
         # 导出模型
         exported_mod = torch.export.export(mod, (x_input, y_input))
 
-
-
         return exported_mod
-    
-    
-    
-    

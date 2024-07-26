@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.untyped_storage)
 class TorchTensorUntypedstorageTestCase(TorBencherTestCaseBase):
@@ -16,7 +16,3 @@ class TorchTensorUntypedstorageTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(input_size)  # Create a random tensor
         untyped_storage = tensor.untyped_storage()  # Get the underlying UntypedStorage
         return untyped_storage
-    
-    
-    
-    

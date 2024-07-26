@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.log2_)
 class TorchTensorLog2TestCase(TorBencherTestCaseBase):
@@ -22,7 +22,3 @@ class TorchTensorLog2TestCase(TorBencherTestCaseBase):
         input_tensor.log2_()
         # Return the modified tensor.
         return input_tensor
-    
-    
-    
-    

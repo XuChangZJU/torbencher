@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.nn.LazyInstanceNorm2d)
 class TorchNnLazyinstancenorm2dTestCase(TorBencherTestCaseBase):
@@ -15,18 +15,14 @@ class TorchNnLazyinstancenorm2dTestCase(TorBencherTestCaseBase):
         C = random.randint(1, 4)  # Number of channels
         H = random.randint(2, 5)  # Height
         W = random.randint(2, 5)  # Width
-    
+
         # Generate a random input tensor with the specified dimensions
         input_tensor = torch.randn(N, C, H, W)
-    
+
         # Create an instance of LazyInstanceNorm2d
         lazy_instance_norm2d = torch.nn.LazyInstanceNorm2d()
-    
+
         # Apply the LazyInstanceNorm2d to the input tensor
         result = lazy_instance_norm2d(input_tensor)
-        
+
         return result
-    
-    
-    
-    

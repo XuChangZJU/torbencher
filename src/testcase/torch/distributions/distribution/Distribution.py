@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.distributions.distribution.Distribution)
 class TorchDistributionsDistributionDistributionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -24,4 +23,3 @@ class TorchDistributionsDistributionDistributionTestCase(TorBencherTestCaseBase)
         # Calculate the log probability of the tensor
         result = distribution.log_prob(tensor)
         return result
-    

@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.histc)
 class TorchTensorHistcTestCase(TorBencherTestCaseBase):
@@ -21,7 +21,3 @@ class TorchTensorHistcTestCase(TorBencherTestCaseBase):
         # Calculate histogram
         result = input_tensor.histc()
         return result
-    
-    
-    
-    

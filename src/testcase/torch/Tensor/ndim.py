@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.ndim)
 class TorchTensorNdimTestCase(TorBencherTestCaseBase):
@@ -17,7 +17,3 @@ class TorchTensorNdimTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(input_size)  # Generate a random tensor with the specified dimensions
         result = tensor.ndim  # Get the number of dimensions of the tensor
         return result
-    
-    
-    
-    

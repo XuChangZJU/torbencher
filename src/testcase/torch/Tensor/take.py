@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.take)
 class TorchTensorTakeTestCase(TorBencherTestCaseBase):
@@ -24,7 +24,3 @@ class TorchTensorTakeTestCase(TorBencherTestCaseBase):
         # Call torch.Tensor.take()
         result = input_tensor.take(indices_tensor)
         return result
-    
-    
-    
-    

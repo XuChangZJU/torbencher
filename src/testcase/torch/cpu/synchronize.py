@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.cpu.synchronize)
 class TorchCpuSynchronizeTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -15,16 +14,15 @@ class TorchCpuSynchronizeTestCase(TorBencherTestCaseBase):
         dim = random.randint(1, 4)  # Random dimension for the tensors
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for _ in range(dim)]
-    
+
         # Create random tensors
         tensor1 = torch.randn(input_size)
         tensor2 = torch.randn(input_size)
-    
+
         # Perform some operations on CPU
         result = torch.add(tensor1, tensor2)
-    
+
         # Synchronize CPU
         torch.cpu.synchronize()
-    
+
         return result
-    

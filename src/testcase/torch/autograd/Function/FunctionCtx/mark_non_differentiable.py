@@ -6,6 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
+
 class TestFunction(Function):
     @staticmethod
     def forward(ctx, x):
@@ -22,6 +23,7 @@ class TestFunction(Function):
         grad_input.scatter_(0, indices, grad_sorted)
         return grad_input, None
 
+
 @test_api(torch.autograd.function.FunctionCtx.mark_non_differentiable)
 class TorchAutogradFunctionFunctionctxMarknondifferentiableTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -29,13 +31,12 @@ class TorchAutogradFunctionFunctionctxMarknondifferentiableTestCase(TorBencherTe
         dim = random.randint(1, 4)  # Random dimension for the tensor
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for _ in range(dim)]  # Generate input size
-    
+
         input_tensor = torch.randn(input_size, requires_grad=True)  # Random input tensor with gradient tracking
         sorted_tensor, indices = TestFunction.apply(input_tensor)  # Apply the custom function
-    
+
         # Perform backward pass
         sorted_tensor.sum().backward()
-    
+
         # Check if gradients are correctly computed
         return input_tensor.grad, indices.requires_grad
-    

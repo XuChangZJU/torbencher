@@ -7,7 +7,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.jit.annotate)
 class TorchJitAnnotateTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -19,7 +18,7 @@ class TorchJitAnnotateTestCase(TorBencherTestCaseBase):
         random_tensor = torch.randn([random.randint(1, 10) for _ in range(random.randint(1, 4))])
         random_list = [random.randint(0, 100) for _ in range(random.randint(1, 10))]
         random_dict = {str(i): random.randint(0, 100) for i in range(random.randint(1, 10))}
-    
+
         # Use torch.jit.annotate to annotate different types
         annotated_int = torch.jit.annotate(int, random_int)
         annotated_float = torch.jit.annotate(float, random_float)
@@ -27,7 +26,7 @@ class TorchJitAnnotateTestCase(TorBencherTestCaseBase):
         annotated_tensor = torch.jit.annotate(torch.Tensor, random_tensor)
         annotated_list = torch.jit.annotate(list, random_list)
         annotated_dict = torch.jit.annotate(Dict[str, int], random_dict)
-    
+
         # Return a dictionary containing all annotated values
         return {"annotated_int": annotated_int,
                 "annotated_float": annotated_float,
@@ -35,4 +34,3 @@ class TorchJitAnnotateTestCase(TorBencherTestCaseBase):
                 "annotated_tensor": annotated_tensor,
                 "annotated_list": annotated_list,
                 "annotated_dict": annotated_dict}
-    

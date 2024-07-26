@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.distributions.half_cauchy.HalfCauchy)
 class TorchDistributionsHalfcauchyHalfcauchyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -24,4 +23,3 @@ class TorchDistributionsHalfcauchyHalfcauchyTestCase(TorBencherTestCaseBase):
         # Sample from the distribution
         result = half_cauchy_distribution.sample()
         return result
-    

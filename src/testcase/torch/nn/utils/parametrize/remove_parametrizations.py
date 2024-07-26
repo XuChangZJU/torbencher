@@ -3,10 +3,10 @@ import torch.nn as nn
 import torch.nn.utils.parametrize as parametrize
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 class TestModule(nn.Module):
     def __init__(self, input_size):
@@ -15,7 +15,8 @@ class TestModule(nn.Module):
 
     def forward(self, x):
         return x * self.param
-    
+
+
 @test_api(torch.nn.utils.parametrize.remove_parametrizations)
 class TorchNnUtilsParametrizeRemoveparametrizationsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -42,7 +43,3 @@ class TorchNnUtilsParametrizeRemoveparametrizationsTestCase(TorBencherTestCaseBa
         result_without_param = module_without_param.param
 
         return result_with_param, result_without_param
-    
-    
-    
-    

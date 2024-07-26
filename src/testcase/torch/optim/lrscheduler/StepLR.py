@@ -1,10 +1,10 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.optim.lr_scheduler.StepLR)
 class TorchOptimLrschedulerSteplrTestCase(TorBencherTestCaseBase):
@@ -30,7 +30,3 @@ class TorchOptimLrschedulerSteplrTestCase(TorBencherTestCaseBase):
             scheduler.step()
         # Return the last learning rate
         return optimizer.param_groups[0]['lr']
-    
-    
-    
-    

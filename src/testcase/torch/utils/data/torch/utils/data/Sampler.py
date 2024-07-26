@@ -6,7 +6,6 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-
 @test_api(torch.utils.data.torch.utils.data.Sampler)
 class TorchUtilsDataTorchUtilsDataSamplerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -20,4 +19,3 @@ class TorchUtilsDataTorchUtilsDataSamplerTestCase(TorBencherTestCaseBase):
         # Convert the sampler object to a list
         result = list(sampler)
         return result
-    

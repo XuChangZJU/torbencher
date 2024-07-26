@@ -1,17 +1,17 @@
 import torch
 import random
 
-
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+
 
 @test_api(torch.Tensor.scatter_reduce)
 class TorchTensorScatterreduceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_scatter_reduce_correctness(self):
         # Define the dimension of the tensor
-        dim = random.randint(0, 3) # Dimension to reduce along
+        dim = random.randint(0, 3)  # Dimension to reduce along
         # Define the size of the tensor
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(4)]
@@ -25,7 +25,3 @@ class TorchTensorScatterreduceTestCase(TorBencherTestCaseBase):
         # Perform scatter_reduce operation
         result = torch.scatter_reduce(input, dim, index, src, reduce)
         return result
-    
-    
-    
-    
