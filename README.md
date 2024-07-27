@@ -74,7 +74,7 @@ print(result)
 ## 配置说明
 
 - `seed`: 随机种子，默认为`time.time_ns()`。
-- `devices`: 设备名，由厂商指定，框架将对每个设备依次调用`torch.device(name)`并进行测试，CPU的指定可以省略。
+- `devices`: 设备名，由厂商指定，框架将对每个设备依次调用`torch.device(name)`并进行测试，CPU~~的指定可以省略~~**无需指定**。
 - `test_modules`：要测试的包名，默认是对应版本的所有包（仅限框架目前所支持的）
 - `format`：输出格式目前仅支持`json`
 
