@@ -121,8 +121,7 @@ class TorchAddTestCase(TorBencherTestCaseBase):
         result = torch.add(a, b, alpha=10)
         return result            # 仅返回结果，不需要像以前一样其他参数什么的
 ```
-
-**（以下不再需要，只需要所有`__init.py`文件改为通用脚本即可，具体脚本见`src.README.md`）**
+**（以下不再需要，只需要所有`__init.py`文件改为通用脚本即可，具体脚本见`src.README.md`）**  
 测试用例编写完成后，在对应模块的`__init__.py`文件中导出该用例（如果不导出该用例，框架将不会发现并测试它），如
 ```python
 from .add import TorchAddTestCase
