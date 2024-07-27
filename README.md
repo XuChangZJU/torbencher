@@ -98,7 +98,7 @@ print(result)
 - 每个包的目录下的每个文件代表一个接口的测试用例，其命名按照接口的驼峰命名，例如`torch`包的`is_tensor`
   接口的测试用例编写在`src/testcase/torch/isTensor.py`
 
-### 代码规范
+### 代码规范（2024年7月27日更新，完善中）
 
 一个接口的测试用例如下（以`torch.add`为例）：
 
@@ -108,10 +108,8 @@ print(result)
 import torch
 import src.util.test_api_version as test_api_version
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
-from src.util.decorator import test_api
 
 
-@test_api(torch.add)
 class TorchAddTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_add_4d(self, input=None):
@@ -121,25 +119,25 @@ class TorchAddTestCase(TorBencherTestCaseBase):
         a = torch.randn(4)
         b = torch.randn(4)
         result = torch.add(a, b, alpha=10)
-        return [result, [a, b, 10]]
+        return result            # 仅返回结果，不需要像以前一样其他参数什么的
 ```
 
+**（以下不再需要，只需要所有`__init.py`文件改为通用脚本即可，具体脚本见`src.README.md`）**
 测试用例编写完成后，在对应模块的`__init__.py`文件中导出该用例（如果不导出该用例，框架将不会发现并测试它），如
 ```python
 from .add import TorchAddTestCase
 ```
 
 要点：
-
-- 每个用例的返回值格式为：
-
+1. 当前已通过扩展`unittest`的loader和runner的方法实现了对测试用例名称与测试用例计算结果的获取，应将所有的`@test_api(api)`删除，
+2. 目前已完成稳定器注入的`random`方法已有`random.randint`、`random.uniform`和`torch.randn`，在`SingleTester`未进行相应适配前尽可能使用已适配的方法
+3. `torch.nn.modules`里的神经网络内部的权重初始化暂时要求以`torch.randn`的形式自行初始化，稳定器注入遇到困难：
+ - 初始化方法（以`torch.nn.Linear`为例）
+```python
+        with torch.no_grad():
+            linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01)
+            linear_layer.bias = torch.nn.Parameter(torch.randn(out_features) * 0.01)
 ```
-[结果，调用参数]
-```
-
-其中，结果目前只允许返回以下类型：`Tensor/Boolean/Number/String/List/Set`
-
-调用参数是调用要测试的接口的参数输入，以数组方式返回。如果测试本接口不需要任何参数输入，可返回`None`
-
-- 每个用例的输入参数可接受返回的参数格式，如输入参数为None，则可以自由随机生成测试参数（但需要返回）
-- 如果用例有pytorch版本限制，可以通过`@api_test_version.larger_than(ver)/less_than(ver)/between(low, high)/equal(ver)`的装饰器来标定范围。
+5. **返回值仅包含测试方法返回值，为None的自行判断正确性，但也可通过`SingleTester`测试其语法正确性**
+6. 如果用例有pytorch版本限制，可以通过`@api_test_version.larger_than(ver)/less_than(ver)/between(low, high)/equal(ver)`的装饰器来标定范围
+7. 
