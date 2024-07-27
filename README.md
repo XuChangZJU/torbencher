@@ -131,8 +131,8 @@ from .add import TorchAddTestCase
 1. 当前已通过扩展`unittest`的loader和runner的方法实现了对测试用例名称与测试用例计算结果的获取，应将所有的`@test_api(api)`删除，
 2. 目前已完成稳定器注入的`random`方法已有`random.randint`, `random.uniform`, `torch.randn`和`torch.normal`，在`SingleTester`未进行相应适配前尽可能使用已适配的方法
 3. `torch.nn.modules`里的神经网络内部的权重初始化暂时要求以`torch.randn`的形式自行初始化，稳定器注入遇到困难：
- - 初始化方法（以`torch.nn.Linear`为例）
- - 可使用`torch.randn`
+ - 初始化方法（以`torch.nn.Linear`为例）  
+可使用`torch.randn`
 ```python
 with torch.no_grad():
     linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01);
