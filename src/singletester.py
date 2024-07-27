@@ -1,7 +1,7 @@
 import torch;
 import random;
-from .utils.apitools import *;
 
+from .util.apitools import *;
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
 from .util.unitest import MyTestRunner, MyTestLoader;
 from .util.decorator import randomInjector;
