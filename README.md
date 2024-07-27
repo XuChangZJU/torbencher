@@ -129,13 +129,20 @@ from .add import TorchAddTestCase
 
 要点：
 1. 当前已通过扩展`unittest`的loader和runner的方法实现了对测试用例名称与测试用例计算结果的获取，应将所有的`@test_api(api)`删除，
-2. 目前已完成稳定器注入的`random`方法已有`random.randint`、`random.uniform`和`torch.randn`，在`SingleTester`未进行相应适配前尽可能使用已适配的方法
+2. 目前已完成稳定器注入的`random`方法已有`random.randint`, `random.uniform`, `torch.randn`和`torch.normal`，在`SingleTester`未进行相应适配前尽可能使用已适配的方法
 3. `torch.nn.modules`里的神经网络内部的权重初始化暂时要求以`torch.randn`的形式自行初始化，稳定器注入遇到困难：
  - 初始化方法（以`torch.nn.Linear`为例）
+ - 可使用`torch.randn`
 ```python
-        with torch.no_grad():
-            linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01)
-            linear_layer.bias = torch.nn.Parameter(torch.randn(out_features) * 0.01)
+with torch.no_grad():
+    linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01);
+    linear_layer.bias = torch.nn.Parameter(torch.randn(out_features) * 0.01);
+```
+或使用`torch.normal`（**建议**，使用`torch.normal`往往**更好更规范**）  
+```python
+with torch.no_grad():
+    linear_layer.weight = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features, in_features)));
+    linear_layer.bias = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features,)));
 ```
 5. **返回值仅包含测试方法返回值，为None的自行判断正确性，但也可通过`SingleTester`测试其语法正确性**
 6. 如果用例有pytorch版本限制，可以通过`@api_test_version.larger_than(ver)/less_than(ver)/between(low, high)/equal(ver)`的装饰器来标定范围
