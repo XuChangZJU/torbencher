@@ -65,31 +65,97 @@ def timing_decorator(func):
         return wrapper
 
 
-def test_api(api):
+
+def test_api(api):               # Useless, 已弃用
+    """
+    **description**
+    Decorator to wrap a test class so that its test methods record their results upon execution.
+
+    **params**
+    api: The operation function or method to be tested.
+
+    **returns**
+    class_decorator: A decorator to decorate a class.
+    """
+
+    @functools.wraps(api)
     def class_decorator(cls):
+        """
+        **description**
+        Class decorator to wrap the class, ensure it meets requirements, and decorate its test methods.
+
+        **params**
+        cls: The class to be decorated.
+
+        **returns**
+        cls: The decorated class.
+        """
         assert issubclass(cls, TorBencherTestCaseBase)
-        cls._api = api
-        cls.final_stats = []  # statistics list
-        for name, method in cls.__dict__.items():
-            if callable(method) and name.startswith("test"):
-                setattr(
-                    cls, name, decorate_test_function(cls, method, api)
-                )  # 用装饰后的方法替换原始方法
+        # cls._api = api  # Assign the provided api to the class's _api attribute
+        # for name, method in cls.__dict__.items():
+        #     if callable(method) and name.startswith("test"):
+        #         setattr(
+        #             cls, name, decorate_test_function(cls, method, api)
+        #         )  # Replace the original method with the decorated method
         return cls
 
-    def decorate_test_function(cls, method, operator):
-        @functools.wraps(method)
-        def wrapper(*args, **kwargs):
-            result = method(*args, **kwargs)
-            assert hasattr(cls, "final_stats")
-            stat_obj = {
-                "operator_name": f"{operator.__qualname__}",
-                "operator_result": result,
-                "specs": None,
-            }
-            cls.final_stats.append(stat_obj)
-            return result;
-
-        return wrapper
+    # def decorate_test_function(cls, method, operator):
+    #     """
+    #     **description**
+    #     Method decorator to wrap test methods and record results after execution.
+    #
+    #     **params**
+    #     cls: The class to which the method belongs.
+    #     method: The method to be decorated.
+    #     operator: The operation function or method being tested.
+    #
+    #     **returns**
+    #     wrapper: The decorated method.
+    #     """
+    #
+    #     @functools.wraps(method)
+    #     def wrapper(*args, **kwargs):
+    #         result = method(*args, **kwargs)
+    #         return result  # Ensure the original method's result is returned
+    #
+    #     return wrapper
 
     return class_decorator
+
+
+
+def randomInjector(func, storage, testcaseName):
+    """
+    Decorator that injects random values into a function and stores the results in a storage dictionary.
+
+    Params:
+    func (callable): The random function to be decorated.
+    storage (dict): The storage dictionary to store results.
+    testcaseName (str): The name of the test case.
+
+    Returns:
+    wrapper (function): The wrapped function.
+    """
+
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        funcName = func.__name__;
+        if testcaseName not in storage:
+            storage[testcaseName] = {"result": {}, "status": False, "count": {}};
+        if funcName not in storage[testcaseName]["result"]:
+            storage[testcaseName]["result"][funcName] = [];
+        if funcName not in storage[testcaseName]["count"]:
+            storage[testcaseName]["count"][funcName] = 0;
+
+        if not storage[testcaseName]["status"]:
+            rst = func(*args, **kwargs)
+            storage[testcaseName]["result"][funcName].append(rst)
+            return rst
+        else:
+            result = storage[testcaseName]["result"][funcName][storage[testcaseName]["count"][funcName]]
+            storage[testcaseName]["count"][funcName] += 1
+            if storage[testcaseName]["count"][funcName] == len(storage[testcaseName]["result"][funcName]):
+                storage[testcaseName]["count"][funcName] = 0
+            return result
+
+    return wrapper
