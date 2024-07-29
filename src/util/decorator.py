@@ -70,8 +70,7 @@ def timing_decorator(func):
         return wrapper
 
 
-
-def test_api(api):               # Useless, 已弃用
+def test_api(api):  # Useless, 已弃用
     """
     **description**
     Decorator to wrap a test class so that its test methods record their results upon execution.
@@ -128,7 +127,6 @@ def test_api(api):               # Useless, 已弃用
     return class_decorator
 
 
-
 def randomInjector(func, storage, testcaseName):
     """
     Decorator that injects random values into a function and stores the results in a storage dictionary.
@@ -144,13 +142,13 @@ def randomInjector(func, storage, testcaseName):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        funcName = func.__name__;
+        funcName = func.__name__
         if testcaseName not in storage:
-            storage[testcaseName] = {"result": {}, "status": False, "count": {}};
+            storage[testcaseName] = {"result": {}, "status": False, "count": {}}
         if funcName not in storage[testcaseName]["result"]:
-            storage[testcaseName]["result"][funcName] = [];
+            storage[testcaseName]["result"][funcName] = []
         if funcName not in storage[testcaseName]["count"]:
-            storage[testcaseName]["count"][funcName] = 0;
+            storage[testcaseName]["count"][funcName] = 0
 
         if not storage[testcaseName]["status"]:
             rst = func(*args, **kwargs)
