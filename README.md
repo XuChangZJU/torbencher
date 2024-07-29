@@ -137,14 +137,14 @@ from .add import TorchAddTestCase
 可使用`torch.randn`
 ```python
 with torch.no_grad():
-    linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01);
-    linear_layer.bias = torch.nn.Parameter(torch.randn(out_features) * 0.01);
+    linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01)
+    linear_layer.bias = torch.nn.Parameter(torch.randn(out_features) * 0.01)
 ```
 或使用`torch.normal`（**建议**，使用`torch.normal`往往**更好更规范**）  
 ```python
 with torch.no_grad():
-    linear_layer.weight = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features, in_features)));
-    linear_layer.bias = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features,)));
+    linear_layer.weight = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features, in_features)))
+    linear_layer.bias = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features,)))
 ```
 5. **返回值仅包含测试方法返回值，为None的自行判断正确性，但也可通过`SingleTester`测试其语法正确性**
 6. 如果用例有pytorch版本限制，可以通过`@api_test_version.larger_than(ver)/less_than(ver)/between(low, high)/equal(ver)`的装饰器来标定范围

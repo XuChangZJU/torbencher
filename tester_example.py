@@ -1,7 +1,9 @@
-from torbencher import SingleTester;
-stester = SingleTester();
+from src.singleTester import SingleTester
 
-from src.testcase.torch.addmm import TorchAddmmTestCase;
-stester.run(TorchAddmmTestCase, device= "cuda", seed=123);
-# from src.testcase.torch.nn.Linear import TorchNnLinearTestCase;
-# stester.run(TorchNnLinearTestCase, device= "cuda", seed=123);
+tester = SingleTester()
+
+from src.testcase.torch.addmm import TorchAddmmTestCase
+tester.run(TorchAddmmTestCase, device="cuda", seed=123)
+
+# from src.testcase.torch.nn.Linear import TorchNnLinearTestCase
+# stester.run(TorchNnLinearTestCase, device= "cuda", seed=123)
