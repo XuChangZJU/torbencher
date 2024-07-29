@@ -112,14 +112,16 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 class TorchAddTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
-    def test_add_4d(self, input=None):
-        if input is not None:
-            result = torch.add(input[0], input[1], input[2])
-            return [result, input]
-        a = torch.randn(4)
-        b = torch.randn(4)
-        result = torch.add(a, b, alpha=10)
-        return result            # 仅返回结果，不需要像以前一样其他参数什么的
+    def test_add(self):
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+
+        input_tensor = torch.randn(input_size)
+        other_tensor = torch.randn(input_size)
+
+        result = torch.add(input_tensor, other_tensor)
+        return result
 ```
 **（以下不再需要，只需要所有`__init.py`文件改为通用脚本即可，具体脚本见`src.README.md`）**  
 测试用例编写完成后，在对应模块的`__init__.py`文件中导出该用例（如果不导出该用例，框架将不会发现并测试它），如
