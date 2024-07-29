@@ -1,11 +1,12 @@
 from src import bencherDebugger
 
+# masked等包先不测试
 modules = [
     "torch.nn.functional",
     "torch.optim",
     "torch.special",
     "torch.random",
-    "torch.utils.cpp_extension",
+    # "torch.utils.cpp_extension",
     "torch.utils.data",
     # "torch.xpu",
     # "torch.mps",
@@ -26,14 +27,14 @@ modules = [
     "torch.export",
     "torch.profiler",
     "torch.backends",
-    "torch.fx",
+    # "torch.fx",
     "torch.cpu",
     # "torch.hub",
     "torch.testing",
-    "torch.masked",
-    "torch.utils.tensorboard",
+    # "torch.masked", 
+    # "torch.utils.tensorboard",
     "torch.nn.init",
-    "torch.fft",
+    # "torch.fft",
     "torch.autograd"
 ]
 
