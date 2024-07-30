@@ -61,7 +61,7 @@ class SingleTester:
 
         self.applyRandomInjectors(testcaseName);
 
-        cpuResult = self.runner.run(suite).getReturnValues()[testcaseName][0];
+        cpuResult = self.runner.run(suite).getReturnValues()[testcaseName];
         for record in self.storage.values():
             record["status"] = True;
 
@@ -75,7 +75,7 @@ class SingleTester:
             torch.manual_seed(seed);
             random.seed(seed);
 
-            deviceResult = self.runner.run(suite).getReturnValues()[testcaseName][0];
+            deviceResult = self.runner.run(suite).getReturnValues()[testcaseName];
             print(f"[DEBUG] result on {device} is {deviceResult}");
         else:
             print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here");
