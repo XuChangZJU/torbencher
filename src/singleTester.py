@@ -96,6 +96,7 @@ class SingleTester:
 
         # reset the status of tester.
         # self.resetTester();
+        self.resetRandom();
 
     def applyRandomInjectors(self, testcaseName: str) -> None:
         """
@@ -136,3 +137,9 @@ class SingleTester:
         self.loader = MyTestLoader();
         self.runner = MyTestRunner(verbosity=2);
         self.storage = {};
+
+    def resetRandom(self):
+        setattr(random, 'randint', self.randint);
+        setattr(random, 'uniform', self.uniform);
+        setattr(torch, 'randn', self.randn);
+        setattr(torch, 'normal', self.normal);
