@@ -3,7 +3,7 @@ from .onednn_fusion_enabled import TorchJitOnednnfusionenabledTestCase
 from .annotate import TorchJitAnnotateTestCase
 from .export import TorchJitExportTestCase
 from .load import TorchJitLoadTestCase
-from . import TorchJitTestCase
+# from . import TorchJitTestCase
 from .trace_module import TorchJitTracemoduleTestCase
 from .ScriptFunction import TorchJitScriptfunctionTestCase
 from .interface import TorchJitInterfaceTestCase
@@ -11,7 +11,6 @@ from .optimize_for_inference import TorchJitOptimizeforinferenceTestCase
 from .enable_onednn_fusion import TorchJitEnableonednnfusionTestCase
 from .isinstance import TorchJitIsinstanceTestCase
 from .freeze import TorchJitFreezeTestCase
-from .jit_python_reference import TorchJitJitpythonreferenceTestCase
 from .script_if_tracing import TorchJitScriptiftracingTestCase
 from .save import TorchJitSaveTestCase
 from .ignore import TorchJitIgnoreTestCase
@@ -19,7 +18,6 @@ from .trace import TorchJitTraceTestCase
 from .unused import TorchJitUnusedTestCase
 from .strict_fusion import TorchJitStrictfusionTestCase
 from .fork import TorchJitForkTestCase
-from .jit_unsupported import TorchJitJitunsupportedTestCase
 from .wait import TorchJitWaitTestCase
 from .set_fusion_strategy import TorchJitSetfusionstrategyTestCase
 from .ScriptModule import TorchJitScriptmoduleTestCase

@@ -1,3 +1,4 @@
+import random
 import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase

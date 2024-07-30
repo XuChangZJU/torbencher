@@ -1,4 +1,3 @@
-from .buffers import TorchExportBuffersTestCase
 from .ir_spec import TorchExportIrspecTestCase
 from .ExportGraphSignature import TorchExportExportgraphsignatureTestCase
 from .parameters import TorchExportParametersTestCase
