@@ -22,6 +22,7 @@ class bencherDebugger:
         FORMAT = "format"
         INCLUDING_SUCCESS = "including_success"
         NUM_EPOCHES = "num_epoches"
+        RESULT_FILE = "result_file"
 
     class ResultKey:
         TESTCASE = "testcase"
@@ -59,6 +60,7 @@ class bencherDebugger:
         config.setdefault(bencherDebugger.ConfigKey.TEST_MODULES, bencherDebugger.AVAILABLE_TEST_MODULES)
         config.setdefault(bencherDebugger.ConfigKey.INCLUDING_SUCCESS, False)
         config.setdefault(bencherDebugger.ConfigKey.NUM_EPOCHES, 1)
+        config.setdefault(bencherDebugger.ConfigKey.RESULT_FILE, "test_results.csv")
 
         if bencherDebugger.ConfigKey.FORMAT not in config or config[
             bencherDebugger.ConfigKey.FORMAT] not in bencherDebugger.SUPPORTED_FORMATS:
@@ -254,7 +256,7 @@ class bencherDebugger:
         fieldnames = [getattr(bencherDebugger.ResultKey, col) for col in dir(bencherDebugger.ResultKey) if
                       "__" not in col]
 
-        with open('test_results.csv', 'w', newline='') as output_file:
+        with open(self.config.get(bencherDebugger.ConfigKey.RESULT_FILE), 'w', newline='') as output_file:
             dict_writer = csv.DictWriter(output_file, fieldnames=list(fieldnames))
             dict_writer.writeheader()
             dict_writer.writerows(formattedResults)
