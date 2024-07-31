@@ -35,6 +35,7 @@ class SingleTester:
         self.randint = random.randint
         self.randn = torch.randn
         self.normal = torch.normal
+        self.rand = torch.rand
 
     def run(self, testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> None:
         """
@@ -110,6 +111,7 @@ class SingleTester:
         setattr(random, 'uniform', randomInjector(self.uniform, self.storage, testcaseName));
         setattr(torch, 'randn', randomInjector(self.randn, self.storage, testcaseName));
         setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName));
+        setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName));
         # self.injectModule(nn, testcaseName);
 
     def injectModule(self, module, testcaseName):
@@ -143,3 +145,4 @@ class SingleTester:
         setattr(random, 'uniform', self.uniform);
         setattr(torch, 'randn', self.randn);
         setattr(torch, 'normal', self.normal);
+        setattr(torch, 'rand', self.rand);
