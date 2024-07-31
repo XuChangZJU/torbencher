@@ -46,6 +46,8 @@ class SingleTester:
         self.randn = torch.randn;
         self.normal = torch.normal;
         self.rand = torch.rand;
+        self.rchoice = random.choice;
+        self.rrandom = random.random;
 
     def run(self, testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
         """
@@ -108,15 +110,7 @@ class SingleTester:
                     deviceResult = deviceResult.to(torch.device("cpu"));
 
                 # Comparison
-
-                try:
-                    if isinstance(cpuResult, bool):
-                        passed = cpuResult == deviceResult;
-
-                    if torch.is_tensor(cpuResult):
-                        passed = torch.allclose(cpuResult, deviceResult);
-                except Exception as e:
-                    raise ValueError(f"The testcase that cause the error is {testcaseName}") from e;
+                passed = self.judgeCommon(cpuResult, deviceResult, testcaseName);
 
                 if passed:
                     print(testcaseName + " has passed the test\n\n\n");
@@ -140,6 +134,8 @@ class SingleTester:
         setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName));
         setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName));
         setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName));
+        setattr(random, 'choice', randomInjector(self.rchoice, self.storage, testcaseName));
+        setattr(random, 'random', randomInjector(self.rrandom, self.storage, testcaseName));
 
     def injectModule(self, module: type, testcaseName: str) -> None:
         """
@@ -153,6 +149,31 @@ class SingleTester:
         for attr in getAttributes(module):
             obj = getattr(module, attr);
             setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName));
+
+    def judgeCommon(self, cpuResult, deviceResult, testcaseName):
+        torch.set_default_device("cpu");
+        cpu = torch.device("cpu");
+        passed = False;
+        try:
+            if isinstance(cpuResult, bool):
+                passed = cpuResult == deviceResult;
+
+            if torch.is_tensor(cpuResult):
+                passed = torch.allclose(cpuResult, deviceResult);
+            if isinstance(cpuResult, tuple):
+                for idx in range(len(cpuResult)):
+                    if isinstance(cpuResult[idx], bool):
+
+                        passed = cpuResult[idx] == deviceResult[idx];
+                        if not passed: return False;
+                    if torch.is_tensor(cpuResult[idx]):
+                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu));
+                        if not passed: return False;
+        except Exception as e:
+            passed = False;
+            raise ValueError(f"The testcase that cause the error is `{testcaseName}`") from e;
+        return passed;
+
 
     def sendValueToDevice(self, testcaseName: str, storage: dict, device: str) -> None:
         """
@@ -199,3 +220,5 @@ class SingleTester:
         setattr(torch, 'normal', self.normal);
         setattr(torch, 'rand', self.rand);
         setattr(torch, 'randint', self.trandint);
+        setattr(random, 'choice', self.rchoice);
+        setattr(random, 'random', self.rrandom);
