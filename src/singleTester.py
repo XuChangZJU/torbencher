@@ -6,6 +6,8 @@ from .util.apitools import *;
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
 from .util.unitest import MyTestRunner, MyTestLoader;
 from .util.decorator import randomInjector;
+
+
 # from torch import nn;
 
 class SingleTester:
@@ -19,7 +21,7 @@ class SingleTester:
     storage (dict): Dictionary to store intermediate values for random number injections.
 
     **Methods**
-    run(testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> None:
+    run(testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
     applyRandomInjectors(testcaseName: str) -> None:
         Apply the randomInjector decorator to random functions.
@@ -27,17 +29,25 @@ class SingleTester:
         Send the values from storage to the specified device.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        **description**
+        Initializes the SingleTester class by setting up the test loader, runner, and storage.
+
+        **params**
+        None
+        """
         self.loader = MyTestLoader();
         self.runner = MyTestRunner(verbosity=2);
         self.storage = {};
-        self.uniform = random.uniform
-        self.randint = random.randint
-        self.randn = torch.randn
-        self.normal = torch.normal
-        self.rand = torch.rand
+        self.uniform = random.uniform;
+        self.rrandint = random.randint;
+        self.trandint = torch.randint;
+        self.randn = torch.randn;
+        self.normal = torch.normal;
+        self.rand = torch.rand;
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> None:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
@@ -47,21 +57,27 @@ class SingleTester:
         device (str, optional): The device to test on (e.g., 'cuda'). Defaults to None.
         seed (int, optional): The seed for random number generation. Defaults to 443.
 
+        **returns**
+        passed(bool): The passed status of the testcase.
+
         **raises**
         AssertionError: If the provided testcase is not a subclass of TorBencherTestCaseBase.
         Warning/Error: If one of CPU or Device has no return.
         """
         assert issubclass(testcase, TorBencherTestCaseBase);
         testcaseName = testcase.__name__;
-        print(f"[INITIALIZE] Start testing {testcaseName}");
+        if device:
+            print(f"[INITIALIZE] Start testing {testcaseName} on {device}");
+        else:
+            print(f"[INITIALIZE] Start testing {testcaseName}");
 
         suite = self.loader.loadTestsFromTestCase(testcase);
+        self.sendValueToDevice(testcaseName, self.storage, "cpu");
         torch.set_default_device("cpu");
         torch.manual_seed(seed);
         random.seed(seed);
 
         self.applyRandomInjectors(testcaseName);
-
         cpuResult = self.runner.run(suite).getReturnValues()[testcaseName];
         for record in self.storage.values():
             record["status"] = True;
@@ -69,6 +85,7 @@ class SingleTester:
         print(f"[DEBUG] result on cpu is {cpuResult}");
 
         deviceResult = None;
+        passed = False;
         if device:
             torch.set_default_device(device);
             suite = self.loader.loadTestsFromTestCase(testcase);
@@ -89,15 +106,25 @@ class SingleTester:
             if cpuResult is not None and deviceResult is not None:
                 if torch.is_tensor(deviceResult):
                     deviceResult = deviceResult.to(torch.device("cpu"));
-                passed = torch.allclose(cpuResult, deviceResult);
-                if passed:
-                    print(testcaseName + " has passed the test");
-                else:
-                    print(f"[WARN] {testcaseName} has not passed the test");
 
-        # reset the status of tester.
-        # self.resetTester();
+                # Comparison
+
+                try:
+                    if isinstance(cpuResult, bool):
+                        passed = cpuResult == deviceResult;
+
+                    if torch.is_tensor(cpuResult):
+                        passed = torch.allclose(cpuResult, deviceResult);
+                except Exception as e:
+                    raise ValueError(f"The testcase that cause the error is {testcaseName}") from e;
+
+                if passed:
+                    print(testcaseName + " has passed the test\n\n\n");
+                else:
+                    print(f"[WARN] {testcaseName} has not passed the test\n\n\n");
+
         self.resetRandom();
+        return passed;
 
     def applyRandomInjectors(self, testcaseName: str) -> None:
         """
@@ -107,14 +134,22 @@ class SingleTester:
         **params**
         testcaseName (str): The name of the test case.
         """
-        setattr(random, 'randint', randomInjector(self.randint, self.storage, testcaseName));
+        setattr(random, 'randint', randomInjector(self.rrandint, self.storage, testcaseName));
         setattr(random, 'uniform', randomInjector(self.uniform, self.storage, testcaseName));
         setattr(torch, 'randn', randomInjector(self.randn, self.storage, testcaseName));
         setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName));
         setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName));
-        # self.injectModule(nn, testcaseName);
+        setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName));
 
-    def injectModule(self, module, testcaseName):
+    def injectModule(self, module: type, testcaseName: str) -> None:
+        """
+        **description**
+        Inject the randomInjector into a module's attributes.
+
+        **params**
+        module (type): The module containing attributes to be injected.
+        testcaseName (str): The name of the test case.
+        """
         for attr in getAttributes(module):
             obj = getattr(module, attr);
             setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName));
@@ -129,20 +164,38 @@ class SingleTester:
         storage (dict): The storage dictionary containing intermediate values.
         device (str): The device to which values should be sent (e.g., 'cuda').
         """
-        device = torch.device(device);
-        for lst in storage[testcaseName]["result"].values():
-            for idx, val in enumerate(lst):
-                if torch.is_tensor(val):
-                    lst[idx] = val.to(device);
+        if testcaseName in storage:
+            device = torch.device(device);
+            for lst in storage[testcaseName]["result"].values():
+                for idx, val in enumerate(lst):
+                    if torch.is_tensor(val):
+                        lst[idx] = val.to(device);
+        else:
+            pass;
 
-    def resetTester(self):
+    def resetTester(self) -> None:
+        """
+        **description**
+        Resets the tester by reinitializing the loader, runner, and storage.
+
+        **params**
+        None
+        """
         self.loader = MyTestLoader();
         self.runner = MyTestRunner(verbosity=2);
         self.storage = {};
 
-    def resetRandom(self):
-        setattr(random, 'randint', self.randint);
+    def resetRandom(self) -> None:
+        """
+        **description**
+        Resets the random functions to their original state.
+
+        **params**
+        None
+        """
+        setattr(random, 'randint', self.rrandint);
         setattr(random, 'uniform', self.uniform);
         setattr(torch, 'randn', self.randn);
         setattr(torch, 'normal', self.normal);
         setattr(torch, 'rand', self.rand);
+        setattr(torch, 'randint', self.trandint);
