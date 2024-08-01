@@ -1,7 +1,9 @@
 import torch
 import random
+
+from torch.export import ModuleCallSignature
 from torch.utils._pytree import TreeSpec
-from torch.export.graph_signature import TensorArgument, SymIntArgument, ConstantArgument, ModuleCallSignature
+from torch.export.graph_signature import TensorArgument, SymIntArgument, ConstantArgument
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -17,23 +19,20 @@ class TorchExportModulecallsignatureTestCase(TorBencherTestCaseBase):
         num_outputs = random.randint(1, 4)
 
         # Generate random TensorArguments for inputs and outputs
-        inputs = [TensorArgument(torch.randn(random.randint(1, 5), random.randint(1, 5))) for _ in range(num_inputs)]
-        outputs = [TensorArgument(torch.randn(random.randint(1, 5), random.randint(1, 5))) for _ in range(num_outputs)]
+        inputs = [TensorArgument("tensor") for _ in range(num_inputs)]
+        outputs = [TensorArgument("tensor") for _ in range(num_outputs)]
 
         # Generate random SymIntArguments for inputs and outputs
-        inputs += [SymIntArgument(random.randint(1, 10)) for _ in range(random.randint(0, 2))]
-        outputs += [SymIntArgument(random.randint(1, 10)) for _ in range(random.randint(0, 2))]
+        inputs += [SymIntArgument("symint") for _ in range(random.randint(0, 2))]
+        outputs += [SymIntArgument("symint") for _ in range(random.randint(0, 2))]
 
         # Generate random ConstantArguments for inputs and outputs
         inputs += [ConstantArgument(random.uniform(0.1, 10.0)) for _ in range(random.randint(0, 2))]
         outputs += [ConstantArgument(random.uniform(0.1, 10.0)) for _ in range(random.randint(0, 2))]
 
         # Generate random TreeSpec for in_spec and out_spec
-        in_spec = TreeSpec(None, None, [TensorArgument(torch.randn(random.randint(1, 5), random.randint(1, 5))) for _ in
-                                        range(num_inputs)])
-        out_spec = TreeSpec(None, None,
-                            [TensorArgument(torch.randn(random.randint(1, 5), random.randint(1, 5))) for _ in
-                             range(num_outputs)])
+        in_spec = TreeSpec(None, None, [])
+        out_spec = TreeSpec(None, None, [])
 
         # Create ModuleCallSignature instance
         module_call_signature = ModuleCallSignature(inputs, outputs, in_spec, out_spec)
