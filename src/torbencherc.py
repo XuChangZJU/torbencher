@@ -60,7 +60,7 @@ class torbencherc:
         self.config = self.parseConfig(config)
         self.result = {}
         self.initBasics()
-        self.ttester = SingleTester()
+        self.tester = SingleTester()
 
     def parseConfig(self, config: dict) -> dict:
         """

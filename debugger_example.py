@@ -16,7 +16,7 @@ modules = [
     "torch",
     # "torch.onnx", # no testcases
     # "torch.cuda", # skip
-    "torch.linalg",
+    # "torch.linalg",
     # "torch.amp", # no testcases
     "torch.nn",
     "torch.utils.mobile_optimizer",
