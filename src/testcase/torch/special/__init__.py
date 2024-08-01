@@ -1,38 +1,30 @@
-from .i1e import TorchSpecialI1eTestCase
-from .bessel_j1 import TorchSpecialBesselj1TestCase
-from .i0e import TorchSpecialI0eTestCase
-from .ndtri import TorchSpecialNdtriTestCase
-from .airy_ai import TorchSpecialAiryaiTestCase
-from .logit import TorchSpecialLogitTestCase
-from .ndtr import TorchSpecialNdtrTestCase
-from .bessel_j0 import TorchSpecialBesselj0TestCase
-from .gammaincc import TorchSpecialGammainccTestCase
-from .log_softmax import TorchSpecialLogsoftmaxTestCase
-from .exp2 import TorchSpecialExp2TestCase
-from .sinc import TorchSpecialSincTestCase
-from .polygamma import TorchSpecialPolygammaTestCase
-from .xlog1py import TorchSpecialXlog1pyTestCase
-from .softmax import TorchSpecialSoftmaxTestCase
-from .multigammaln import TorchSpecialMultigammalnTestCase
-from .log_ndtr import TorchSpecialLogndtrTestCase
-from .expm1 import TorchSpecialExpm1TestCase
-from .psi import TorchSpecialPsiTestCase
-from .erfcx import TorchSpecialErfcxTestCase
-from .xlogy import TorchSpecialXlogyTestCase
-from .spherical_bessel_j0 import TorchSpecialSphericalbesselj0TestCase
-from .round import TorchSpecialRoundTestCase
-from .gammaln import TorchSpecialGammalnTestCase
-from .i1 import TorchSpecialI1TestCase
-from .scaled_modified_bessel_k0 import TorchSpecialScaledmodifiedbesselk0TestCase
-from .zeta import TorchSpecialZetaTestCase
-from .log1p import TorchSpecialLog1pTestCase
-from .erfc import TorchSpecialErfcTestCase
-from .erfinv import TorchSpecialErfinvTestCase
-from .gammainc import TorchSpecialGammaincTestCase
-from .erf import TorchSpecialErfTestCase
-from .i0 import TorchSpecialI0TestCase
-from .entr import TorchSpecialEntrTestCase
-from .logsumexp import TorchSpecialLogsumexpTestCase
-from .digamma import TorchSpecialDigammaTestCase
-from .scaled_modified_bessel_k1 import TorchSpecialScaledmodifiedbesselk1TestCase
-from .expit import TorchSpecialExpitTestCase
+import os
+import importlib
+import logging
+from inspect import isclass
+
+from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+
+# 设置日志配置
+logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+current_directory: str = os.path.dirname(os.path.abspath(__file__))
+script_files: list = [f for f in os.listdir(current_directory) if f.endswith('.py') and f != '__init__.py']
+
+for script_file in script_files:
+    module_name: str = script_file[:-3]  # Remove the .py extension
+    try:
+        module = importlib.import_module(f'.{module_name}', package=__package__)
+        # logger.debug(f"Successfully imported module {module_name}")
+    except Exception as e:
+        logger.debug(f"Failed to import module {module_name}: {e}")
+        continue
+    try:
+        for attribute_name in dir(module):
+            attribute = getattr(module, attribute_name)
+            if isclass(attribute) and issubclass(attribute, TorBencherTestCaseBase)\
+                    and attribute is not TorBencherTestCaseBase:
+                globals()[attribute_name] = attribute
+    except Exception as e:
+        raise ValueError(f"The testcase that cause error is {attribute_name}") from e
