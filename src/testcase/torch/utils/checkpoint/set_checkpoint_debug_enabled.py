@@ -1,5 +1,6 @@
 import torch
 import random
+import torch.utils.checkpoint
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -14,10 +15,6 @@ class TorchUtilsCheckpointSetcheckpointdebugenabledTestCase(TorBencherTestCaseBa
         enable_debug = random.choice([True, False])
 
         # Set checkpoint debug mode
-        previous_state = torch.utils.checkpoint.set_checkpoint_debug_mode(enable_debug)
+        previous_state = torch.utils.checkpoint.set_checkpoint_debug_enabled(enable_debug)
 
-        # Verify the state change
-        current_state = torch.utils.checkpoint.is_checkpoint_debug_mode()
-
-        # Return the previous and current state for verification
-        return previous_state, current_state
+        return previous_state

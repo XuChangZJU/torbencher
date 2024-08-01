@@ -15,13 +15,14 @@ class TorchUtilsCheckpointCheckpointsequentialTestCase(TorBencherTestCaseBase):
         num_layers = random.randint(2, 5)
 
         # Create a list of random linear layers
-        layers = [torch.nn.Linear(random.randint(1, 10), random.randint(1, 10)) for _ in range(num_layers)]
+        layer_sizes = [random.randint(1, 10) for _ in range(num_layers + 1)]
+        layers = [torch.nn.Linear(layer_sizes[i], layer_sizes[i + 1]) for i in range(num_layers)]
 
         # Randomly generate the number of segments
         num_segments = random.randint(1, num_layers)
 
         # Random input tensor
-        input_tensor = torch.randn(random.randint(1, 10), random.randint(1, 10))
+        input_tensor = torch.randn(random.randint(1, 10), layer_sizes[0])
 
         # Apply checkpoint_sequential
         result = checkpoint_sequential(layers, num_segments, input_tensor)

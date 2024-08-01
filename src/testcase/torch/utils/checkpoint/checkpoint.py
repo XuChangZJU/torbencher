@@ -26,8 +26,8 @@ class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
                 return x
 
         # Create a random input tensor
-        input_size = [random.randint(1, 5) for _ in range(2)]  # Random 2D tensor
-        input_tensor = torch.randn(input_size)
+        batch_size = random.randint(1, 5)  # Random 2D tensor
+        input_tensor = torch.randn(batch_size, 10)
 
         # Instantiate the model
         model = SimpleModel()

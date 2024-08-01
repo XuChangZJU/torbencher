@@ -12,11 +12,10 @@ class TorchUtilsMobileoptimizerOptimizeformobileTestCase(TorBencherTestCaseBase)
     @test_api_version.larger_than("1.1.3")
     def test_optimize_for_mobile_correctness(self):
         # Generate a random model
-        input_size = [random.randint(1, 5) for _ in range(random.randint(1, 4))]
+        input_size = [random.randint(1, 5) for _ in range(4)]
         model = torch.nn.Sequential(
             torch.nn.Linear(input_size[-1], random.randint(1, 10)),
-            torch.nn.ReLU(),
-            torch.nn.Linear(random.randint(1, 10), random.randint(1, 10))
+            torch.nn.ReLU()
         )
 
         # Generate a random input tensor
