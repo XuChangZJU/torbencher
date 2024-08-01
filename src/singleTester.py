@@ -1,14 +1,10 @@
-import torch;
-import random;
-import sys;
+import random
 
-from .util.apitools import *;
-from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
-from .util.unitest import MyTestRunner, MyTestLoader;
-from .util.decorator import randomInjector;
+from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from .util.apitools import *
+from .util.decorator import randomInjector
+from .util.CustomUnittest import MyTestRunner, MyTestLoader
 
-
-# from torch import nn;
 
 class SingleTester:
     """
@@ -37,17 +33,17 @@ class SingleTester:
         **params**
         None
         """
-        self.loader = MyTestLoader();
-        self.runner = MyTestRunner(verbosity=2);
-        self.storage = {};
-        self.uniform = random.uniform;
-        self.rrandint = random.randint;
-        self.trandint = torch.randint;
-        self.randn = torch.randn;
-        self.normal = torch.normal;
-        self.rand = torch.rand;
-        self.rchoice = random.choice;
-        self.rrandom = random.random;
+        self.loader = MyTestLoader()
+        self.runner = MyTestRunner(verbosity=2)
+        self.storage = {}
+        self.uniform = random.uniform
+        self.rrandint = random.randint
+        self.trandint = torch.randint
+        self.randn = torch.randn
+        self.normal = torch.normal
+        self.rand = torch.rand
+        self.rchoice = random.choice
+        self.rrandom = random.random
 
     def run(self, testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
         """
@@ -66,59 +62,59 @@ class SingleTester:
         AssertionError: If the provided testcase is not a subclass of TorBencherTestCaseBase.
         Warning/Error: If one of CPU or Device has no return.
         """
-        assert issubclass(testcase, TorBencherTestCaseBase);
-        testcaseName = testcase.__name__;
+        assert issubclass(testcase, TorBencherTestCaseBase)
+        testcaseName = testcase.__name__
         if device:
-            print(f"[INITIALIZE] Start testing {testcaseName} on {device}");
+            print(f"[INITIALIZE] Start testing {testcaseName} on {device}")
         else:
-            print(f"[INITIALIZE] Start testing {testcaseName}");
+            print(f"[INITIALIZE] Start testing {testcaseName}")
 
-        suite = self.loader.loadTestsFromTestCase(testcase);
-        self.sendValueToDevice(testcaseName, self.storage, "cpu");
-        torch.set_default_device("cpu");
-        torch.manual_seed(seed);
-        random.seed(seed);
+        suite = self.loader.loadTestsFromTestCase(testcase)
+        self.sendValueToDevice(testcaseName, self.storage, "cpu")
+        torch.set_default_device("cpu")
+        torch.manual_seed(seed)
+        random.seed(seed)
 
-        self.applyRandomInjectors(testcaseName);
-        cpuResult = self.runner.run(suite).getReturnValues()[testcaseName];
+        self.applyRandomInjectors(testcaseName)
+        cpuResult = self.runner.run(suite).getReturnValues()[testcaseName]
         for record in self.storage.values():
-            record["status"] = True;
+            record["status"] = True
 
-        print(f"[DEBUG] result on cpu is {cpuResult}");
+        print(f"[DEBUG] result on cpu is {cpuResult}")
 
-        deviceResult = None;
-        passed = False;
+        deviceResult = None
+        passed = False
         if device:
-            torch.set_default_device(device);
-            suite = self.loader.loadTestsFromTestCase(testcase);
-            self.sendValueToDevice(testcaseName, self.storage, device);
-            torch.manual_seed(seed);
-            random.seed(seed);
+            torch.set_default_device(device)
+            suite = self.loader.loadTestsFromTestCase(testcase)
+            self.sendValueToDevice(testcaseName, self.storage, device)
+            torch.manual_seed(seed)
+            random.seed(seed)
 
-            deviceResult = self.runner.run(suite).getReturnValues()[testcaseName];
-            print(f"[DEBUG] result on {device} is {deviceResult}");
+            deviceResult = self.runner.run(suite).getReturnValues()[testcaseName]
+            print(f"[DEBUG] result on {device} is {deviceResult}")
         else:
-            print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here");
+            print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
 
         if cpuResult is None and deviceResult is None:
-            print(f"[WARN] Both CPU and Device have no return, if normal ignore this.");
+            print(f"[WARN] Both CPU and Device have no return, if normal ignore this.")
         elif cpuResult is None or deviceResult is None:
-            print(f"[ERROR] One of CPU or Device has no return, there must be something wrong.");
+            print(f"[ERROR] One of CPU or Device has no return, there must be something wrong.")
         else:
             if cpuResult is not None and deviceResult is not None:
                 if torch.is_tensor(deviceResult):
-                    deviceResult = deviceResult.to(torch.device("cpu"));
+                    deviceResult = deviceResult.to(torch.device("cpu"))
 
                 # Comparison
-                passed = self.judgeCommon(cpuResult, deviceResult, testcaseName);
+                passed = self.judgeCommon(cpuResult, deviceResult, testcaseName)
 
                 if passed:
-                    print(testcaseName + " has passed the test\n\n\n");
+                    print(testcaseName + " has passed the test\n\n\n")
                 else:
-                    print(f"[WARN] {testcaseName} has not passed the test\n\n\n");
+                    print(f"[WARN] {testcaseName} has not passed the test\n\n\n")
 
-        self.resetRandom();
-        return passed;
+        self.resetRandom()
+        return passed
 
     def applyRandomInjectors(self, testcaseName: str) -> None:
         """
@@ -128,14 +124,14 @@ class SingleTester:
         **params**
         testcaseName (str): The name of the test case.
         """
-        setattr(random, 'randint', randomInjector(self.rrandint, self.storage, testcaseName));
-        setattr(random, 'uniform', randomInjector(self.uniform, self.storage, testcaseName));
-        setattr(torch, 'randn', randomInjector(self.randn, self.storage, testcaseName));
-        setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName));
-        setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName));
-        setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName));
-        setattr(random, 'choice', randomInjector(self.rchoice, self.storage, testcaseName));
-        setattr(random, 'random', randomInjector(self.rrandom, self.storage, testcaseName));
+        setattr(random, 'randint', randomInjector(self.rrandint, self.storage, testcaseName))
+        setattr(random, 'uniform', randomInjector(self.uniform, self.storage, testcaseName))
+        setattr(torch, 'randn', randomInjector(self.randn, self.storage, testcaseName))
+        setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName))
+        setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName))
+        setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName))
+        setattr(random, 'choice', randomInjector(self.rchoice, self.storage, testcaseName))
+        setattr(random, 'random', randomInjector(self.rrandom, self.storage, testcaseName))
 
     def injectModule(self, module: type, testcaseName: str) -> None:
         """
@@ -147,32 +143,32 @@ class SingleTester:
         testcaseName (str): The name of the test case.
         """
         for attr in getAttributes(module):
-            obj = getattr(module, attr);
-            setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName));
+            obj = getattr(module, attr)
+            setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName))
 
     def judgeCommon(self, cpuResult, deviceResult, testcaseName):
-        torch.set_default_device("cpu");
-        cpu = torch.device("cpu");
-        passed = False;
+        torch.set_default_device("cpu")
+        cpu = torch.device("cpu")
+        passed = False
         try:
             if isinstance(cpuResult, bool):
-                passed = cpuResult == deviceResult;
+                passed = cpuResult == deviceResult
 
             if torch.is_tensor(cpuResult):
-                passed = torch.allclose(cpuResult, deviceResult);
+                passed = torch.allclose(cpuResult, deviceResult)
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):
                     if isinstance(cpuResult[idx], bool):
 
-                        passed = cpuResult[idx] == deviceResult[idx];
-                        if not passed: return False;
+                        passed = cpuResult[idx] == deviceResult[idx]
+                        if not passed: return False
                     if torch.is_tensor(cpuResult[idx]):
-                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu));
-                        if not passed: return False;
+                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu))
+                        if not passed: return False
         except Exception as e:
-            passed = False;
-            raise ValueError(f"The testcase that cause the error is `{testcaseName}`") from e;
-        return passed;
+            passed = False
+            raise ValueError(f"The testcase that cause the error is `{testcaseName}`") from e
+        return passed
 
 
     def sendValueToDevice(self, testcaseName: str, storage: dict, device: str) -> None:
@@ -186,13 +182,13 @@ class SingleTester:
         device (str): The device to which values should be sent (e.g., 'cuda').
         """
         if testcaseName in storage:
-            device = torch.device(device);
+            device = torch.device(device)
             for lst in storage[testcaseName]["result"].values():
                 for idx, val in enumerate(lst):
                     if torch.is_tensor(val):
-                        lst[idx] = val.to(device);
+                        lst[idx] = val.to(device)
         else:
-            pass;
+            pass
 
     def resetTester(self) -> None:
         """
@@ -202,9 +198,9 @@ class SingleTester:
         **params**
         None
         """
-        self.loader = MyTestLoader();
-        self.runner = MyTestRunner(verbosity=2);
-        self.storage = {};
+        self.loader = MyTestLoader()
+        self.runner = MyTestRunner(verbosity=2)
+        self.storage = {}
 
     def resetRandom(self) -> None:
         """
@@ -214,11 +210,11 @@ class SingleTester:
         **params**
         None
         """
-        setattr(random, 'randint', self.rrandint);
-        setattr(random, 'uniform', self.uniform);
-        setattr(torch, 'randn', self.randn);
-        setattr(torch, 'normal', self.normal);
-        setattr(torch, 'rand', self.rand);
-        setattr(torch, 'randint', self.trandint);
-        setattr(random, 'choice', self.rchoice);
-        setattr(random, 'random', self.rrandom);
+        setattr(random, 'randint', self.rrandint)
+        setattr(random, 'uniform', self.uniform)
+        setattr(torch, 'randn', self.randn)
+        setattr(torch, 'normal', self.normal)
+        setattr(torch, 'rand', self.rand)
+        setattr(torch, 'randint', self.trandint)
+        setattr(random, 'choice', self.rchoice)
+        setattr(random, 'random', self.rrandom)

@@ -8,7 +8,7 @@ import psutil
 import torch
 import torch.version
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
-from .util.unitest import MyTestRunner, MyTestLoader
+from .util.CustomUnittest import MyTestRunner, MyTestLoader
 
 
 class torbencher:

@@ -37,19 +37,14 @@ def is_static_method_of_class(func, cls=None):
     assert inspect.isclass(cls)
 
     func_name = func.__name__
-    # if func_name == "<lambda>":
-    #     return False
 
-    # debug
-    # with open("test.log" , "a") as f:
-    #     f.write(f"{cls}\t{func.__qualname__}\t\n")
+    def class_has_method(cls, func_name):
+        for name in dir(cls):
+            if name.endswith(func_name):  # _Cls__method
+                return True
+        return False
 
-    # def class_has_method(cls, func_name):
-    #     for name in dir(cls):
-    #         if name.endswith(func_name): # _Cls__method
-    #             return True
-    #     return False
-    # assert class_has_method(cls, func_name)
+    assert class_has_method(cls, func_name)
 
     return isinstance(inspect.getattr_static(cls, func_name), staticmethod)
 

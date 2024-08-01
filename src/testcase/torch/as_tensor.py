@@ -14,8 +14,8 @@ class TorchAstensorTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Create random NumPy array
-        cpu = torch.device("cpu");
-        data_numpy = torch.randn(input_size).to(cpu).numpy();
+        cpu = torch.device("cpu")
+        data_numpy = torch.randn(input_size).to(cpu).numpy()
 
         # Convert NumPy array to tensor using torch.as_tensor
         tensor_from_numpy = torch.as_tensor(data_numpy)
