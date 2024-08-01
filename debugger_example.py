@@ -9,7 +9,7 @@ modules = [
     "torch.utils.data",
     # "torch.xpu", # skip
     # "torch.mps", # skip
-    "torch.jit",
+    # "torch.jit",
     "torch.utils",
     "torch.distributions",
     "torch.autograd",
@@ -22,7 +22,7 @@ modules = [
     "torch.utils.mobile_optimizer",
     # "torch.distributed", # no testcases
     "torch.utils.checkpoint",
-    "torch.Tensor",
+    # "torch.Tensor",
     "torch.export",
     "torch.profiler",
     "torch.backends",
