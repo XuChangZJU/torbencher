@@ -1,50 +1,50 @@
-import time
-import os
-import platform
-import psutil
-import pandas as pd
-import importlib
-import torch
+import time;
+import os;
+import platform;
+import psutil;
+import pandas as pd;
+import importlib;
+import torch;
 
-from .util.apitools import *
-from .singleTester import SingleTester
-from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from .util.apitools import *;
+from .singleTester import SingleTester;
+from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
 
 
 class torbencherc:
-    SUPPORTED_FORMATS = ["csv", 'json', 'xlsx']
-    AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+    SUPPORTED_FORMATS = ["csv", 'json', 'xlsx'];
+    AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"];
 
     class DEFAULTS:
-        FORMAT = "csv"
-        TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+        FORMAT = "csv";
+        TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"];
 
     class ConfigKey:
-        OUT_DIR = "out_dir"
-        SEED = "seed"
-        DEVICES = "devices"
-        TEST_MODULES = "test_modules"
-        FORMAT = "format"
-        NUM_EPOCH = "num_epoch"
+        OUT_DIR = "out_dir";
+        SEED = "seed";
+        DEVICES = "devices";
+        TEST_MODULES = "test_modules";
+        FORMAT = "format";
+        NUM_EPOCH = "num_epoch";
 
     class ResultKey:
-        CPU = "cpu"
-        MEMORY = "memory"
-        OS = "os"
-        OS_RELEASE = "os_release"
-        OS_VERSION = "os_version"
-        NODE = "node"
-        MACHINE = "machine"
-        PYTHON_VERSION = "python_version"
-        TORCH_VERSION = "torch_version"
-        TEST_RESULTS = "test_results"
-        START_TIME = "start_time"
+        CPU = "cpu";
+        MEMORY = "memory";
+        OS = "os";
+        OS_RELEASE = "os_release";
+        OS_VERSION = "os_version";
+        NODE = "node";
+        MACHINE = "machine";
+        PYTHON_VERSION = "python_version";
+        TORCH_VERSION = "torch_version";
+        TEST_RESULTS = "test_results";
+        START_TIME = "start_time";
 
     class TestResultKey:
-        MODULE_NAME = "module_name"
-        TESTCASE = "testcase"
-        PASSED = "passed"
-        FAILURE_DETAILS = "failure_details"
+        MODULE_NAME = "module_name";
+        TESTCASE = "testcase";
+        PASSED = "passed";
+        FAILURE_DETAILS = "failure_details";
 
     def __init__(self, config: dict):
         """
@@ -57,10 +57,10 @@ class torbencherc:
         **returns**
         - None
         """
-        self.config = self.parseConfig(config)
-        self.result = {}
-        self.initBasics()
-        self.tester = SingleTester()
+        self.config = self.parseConfig(config);
+        self.result = {};
+        self.initBasics();
+        self.tester = SingleTester();
 
     def parseConfig(self, config: dict) -> dict:
         """
@@ -74,34 +74,34 @@ class torbencherc:
         - dict: Parsed configuration dictionary.
         """
         if torbencherc.ConfigKey.OUT_DIR not in config:
-            print("No output directory found in config, check your result at pwd/cwd.")
+            print("No output directory found in config, check your result at pwd/cwd.");
         if torbencherc.ConfigKey.SEED in config:
-            seed = config[torbencherc.ConfigKey.SEED]
-            assert isinstance(seed, int)
+            seed = config[torbencherc.ConfigKey.SEED];
+            assert isinstance(seed, int);
         else:
-            config[torbencherc.ConfigKey.SEED] = time.time_ns()
+            config[torbencherc.ConfigKey.SEED] = time.time_ns();
 
         if torbencherc.ConfigKey.DEVICES in config:
             if isinstance(config[torbencherc.ConfigKey.DEVICES], list):
-                pass
+                pass;
             elif isinstance(config[torbencherc.ConfigKey.DEVICES], str):
-                config[torbencherc.ConfigKey.DEVICES] = [config[torbencherc.ConfigKey.DEVICES]]
+                config[torbencherc.ConfigKey.DEVICES] = [config[torbencherc.ConfigKey.DEVICES]];
         else:
-            config[torbencherc.ConfigKey.DEVICES] = ["cpu"]
+            config[torbencherc.ConfigKey.DEVICES] = ["cpu"];
 
         if torbencherc.ConfigKey.TEST_MODULES in config:
-            test_modules = config[torbencherc.ConfigKey.TEST_MODULES]
-            assert isinstance(test_modules, list)
+            test_modules = config[torbencherc.ConfigKey.TEST_MODULES];
+            assert isinstance(test_modules, list);
         else:
-            config[torbencherc.ConfigKey.TEST_MODULES] = torbencherc.DEFAULTS.TEST_MODULES
+            config[torbencherc.ConfigKey.TEST_MODULES] = torbencherc.DEFAULTS.TEST_MODULES;
 
         if not torbencherc.ConfigKey.FORMAT in config:
-            config[torbencherc.ConfigKey.FORMAT] = torbencherc.DEFAULTS.FORMAT
+            config[torbencherc.ConfigKey.FORMAT] = torbencherc.DEFAULTS.FORMAT;
         else:
             if config[torbencherc.ConfigKey.FORMAT] not in torbencherc.SUPPORTED_FORMATS:
-                raise ValueError(f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
+                raise ValueError(f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}");
 
-        return config
+        return config;
 
     def initBasics(self):
         """
@@ -114,20 +114,20 @@ class torbencherc:
         **returns**
         - None
         """
-        self.result[torbencherc.ResultKey.START_TIME] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        self.result[torbencherc.ResultKey.START_TIME] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime());
 
-        self.result[torbencherc.ResultKey.CPU] = platform.processor()
+        self.result[torbencherc.ResultKey.CPU] = platform.processor();
         self.result[torbencherc.ResultKey.MEMORY] = "{:.2f} GB".format(
-            round(psutil.virtual_memory().total / (1024 ** 3), 2))
+            round(psutil.virtual_memory().total / (1024 ** 3), 2));
 
-        self.result[torbencherc.ResultKey.OS] = platform.system()
-        self.result[torbencherc.ResultKey.OS_RELEASE] = platform.release()
-        self.result[torbencherc.ResultKey.OS_VERSION] = platform.version()
-        self.result[torbencherc.ResultKey.NODE] = platform.node()
-        self.result[torbencherc.ResultKey.MACHINE] = platform.machine()
+        self.result[torbencherc.ResultKey.OS] = platform.system();
+        self.result[torbencherc.ResultKey.OS_RELEASE] = platform.release();
+        self.result[torbencherc.ResultKey.OS_VERSION] = platform.version();
+        self.result[torbencherc.ResultKey.NODE] = platform.node();
+        self.result[torbencherc.ResultKey.MACHINE] = platform.machine();
 
-        self.result[torbencherc.ResultKey.PYTHON_VERSION] = platform.python_version()
-        self.result[torbencherc.ResultKey.TORCH_VERSION] = torch.__version__
+        self.result[torbencherc.ResultKey.PYTHON_VERSION] = platform.python_version();
+        self.result[torbencherc.ResultKey.TORCH_VERSION] = torch.__version__;
 
     def run(self):
         """
@@ -140,11 +140,11 @@ class torbencherc:
         **returns**
         - dict: Test results.
         """
-        testResult = self.runTest(self.config)
-        self.result[torbencherc.ResultKey.TEST_RESULTS] = testResult
-        self.saveResult(self.config, self.result)
-        print(f"Torbencher has finished testing, check your result at {self.config[torbencherc.ConfigKey.OUT_DIR]}")
-        return testResult
+        testResult = self.runTest(self.config);
+        self.result[torbencherc.ResultKey.TEST_RESULTS] = testResult;
+        self.saveResult(self.config, self.result);
+        print(f"Torbencher has finished testing, check your result at {self.config[torbencherc.ConfigKey.OUT_DIR]}");
+        return testResult;
 
     def runTest(self, config: dict) -> dict:
         """
@@ -158,16 +158,16 @@ class torbencherc:
         - dict: Test results.
         """
         if torch.__version__ < "2.1.0":
-            raise RuntimeError("Torch version must be greater than 2.1.0")
+            raise RuntimeError("Torch version must be greater than 2.1.0");
 
-        outputResults = {}
-        names = [f"src.testcase.{test_module}" for test_module in config[torbencherc.ConfigKey.TEST_MODULES]]
+        outputResults = {};
+        names = [f"src.testcase.{test_module}" for test_module in config[torbencherc.ConfigKey.TEST_MODULES]];
 
-        moduleList = self.importModules(names, outputResults)
-        allTestCases = self.getTestCases(moduleList)
+        moduleList = self.importModules(names, outputResults);
+        allTestCases = self.getTestCases(moduleList);
 
-        outputResults = self.runWithTester(config=self.config, allTestCases=allTestCases, outputResults=outputResults)
-        return outputResults
+        outputResults = self.runWithTester(config=self.config, allTestCases=allTestCases, outputResults=outputResults);
+        return outputResults;
 
     def importModules(self, names: list, outputResults: dict) -> dict:
         """
@@ -181,20 +181,20 @@ class torbencherc:
         **returns**
         - dict: Dictionary of imported modules.
         """
-        modules = {}
+        modules = {};
         for name in names:
             try:
-                module = importlib.import_module(name)
+                module = importlib.import_module(name);
                 if name not in modules:
-                    modules[name] = []
-                modules[name].append(module)
+                    modules[name] = [];
+                modules[name].append(module);
             except Exception as e:
-                print(f"Error importing module {name}: {e}")
+                print(f"Error importing module {name}: {e}");
                 outputResults[name] = {
                     torbencherc.TestResultKey.PASSED: "ModuleImportError",
                     torbencherc.TestResultKey.FAILURE_DETAILS: str(e)
-                }
-        return modules
+                };
+        return modules;
 
     def getTestCases(self, moduleList: dict) -> dict:
         """
@@ -207,17 +207,17 @@ class torbencherc:
         **returns**
         - dict: Dictionary of test cases.
         """
-        allTestCases = {}
+        allTestCases = {};
         for name, testcaseModules in moduleList.items():
-            allTestCases[name] = []
+            allTestCases[name] = [];
             for module in testcaseModules:
-                attrNames = getAttributes(module)
+                attrNames = getAttributes(module);
                 for attrName in attrNames:
-                    attr = getattr(module, attrName, None)
+                    attr = getattr(module, attrName, None);
                     if isinstance(attr, type) and issubclass(attr, TorBencherTestCaseBase) \
                             and attr is not TorBencherTestCaseBase:
-                        allTestCases[name].append(attr)
-        return allTestCases
+                        allTestCases[name].append(attr);
+        return allTestCases;
 
     def runWithTester(self, config: dict, allTestCases: dict, outputResults: dict) -> dict:
         """
@@ -232,21 +232,22 @@ class torbencherc:
         **returns**
         - dict: Updated test results.
         """
-        devices = config[torbencherc.ConfigKey.DEVICES]
-        seed = config[torbencherc.ConfigKey.SEED]
-        repeat = config[torbencherc.ConfigKey.NUM_EPOCH]
+        devices = config[torbencherc.ConfigKey.DEVICES];
+        seed = config[torbencherc.ConfigKey.SEED];
+        repeat = config[torbencherc.ConfigKey.NUM_EPOCH];
         for device in devices:
-            outputResults[device] = {}
+            outputResults[device] = {};
             for testModuleName, testCases in allTestCases.items():
-                outputResults[device][testModuleName] = {}
+                outputResults[device][testModuleName] = {};
                 for testCase in testCases:
-                    testcaseName = testCase.__name__
-                    outputResults[device][testModuleName][testcaseName] = "Passed"
+                    testcaseName = testCase.__name__;
+                    outputResults[device][testModuleName][testcaseName] = "Passed";
                     for _ in range(repeat):
-                        passed = self.tester.run(testCase, device=device, seed=seed)
+                        passed = self.tester.run(testCase, device=device, seed=seed);
                         if not passed:
-                            outputResults[device][testModuleName][testcaseName] = "Failed"
-        return outputResults
+                            outputResults[device][testModuleName][testcaseName] = "Failed";
+                            break;
+        return outputResults;
 
     def saveResult(self, config: dict, result: dict):
         """
@@ -260,9 +261,9 @@ class torbencherc:
         **returns**
         - None
         """
-        testResult = result[torbencherc.ResultKey.TEST_RESULTS]
-        formattedResult = self.getDFFormattedTestResult(testResult)
-        self.saveDFFormattedResult(config, formattedResult)
+        testResult = result[torbencherc.ResultKey.TEST_RESULTS];
+        formattedResult = self.getDFFormattedTestResult(testResult);
+        self.saveDFFormattedResult(config, formattedResult);
 
     def getDFFormattedTestResult(self, testResult: dict) -> pd.DataFrame:
         """
@@ -275,17 +276,17 @@ class torbencherc:
         **returns**
         - pd.DataFrame: Formatted test results as DataFrame.
         """
-        rows = []
-        devices = list(testResult.keys())
-        header = [torbencherc.TestResultKey.MODULE_NAME, torbencherc.TestResultKey.TESTCASE] + devices
+        rows = [];
+        devices = list(testResult.keys());
+        header = [torbencherc.TestResultKey.MODULE_NAME, torbencherc.TestResultKey.TESTCASE] + devices;
         for device, testModules in testResult.items():
             for moduleName, testCases in testModules.items():
                 for testCase, result in testCases.items():
-                    row = [moduleName, testCase]
+                    row = [moduleName, testCase];
                     for dev in devices:
-                        row.append(testResult[dev].get(moduleName, {}).get(testCase, "N/A"))
-                    rows.append(row)
-        return pd.DataFrame(rows, columns=header)
+                        row.append(testResult[dev].get(moduleName, {}).get(testCase, "N/A"));
+                    rows.append(row);
+        return pd.DataFrame(rows, columns=header);
 
     def saveDFFormattedResult(self, config: dict, formattedResult: pd.DataFrame):
         """
@@ -299,14 +300,14 @@ class torbencherc:
         **returns**
         - None
         """
-        out_dir = config[torbencherc.ConfigKey.OUT_DIR]
+        out_dir = config[torbencherc.ConfigKey.OUT_DIR];
         if not os.path.exists(out_dir):
-            os.makedirs(out_dir)
-        format = config[torbencherc.ConfigKey.FORMAT]
+            os.makedirs(out_dir);
+        format = config[torbencherc.ConfigKey.FORMAT];
 
         if format == "csv":
-            formattedResult.to_csv(os.path.join(out_dir, 'result.csv'), index=False)
+            formattedResult.to_csv(os.path.join(out_dir, 'result.csv'), index=False);
         elif format == "json":
-            formattedResult.to_json(os.path.join(out_dir, 'result.json'), orient='records')
+            formattedResult.to_json(os.path.join(out_dir, 'result.json'), orient='records');
         elif format == "xlsx":
-            formattedResult.to_excel(os.path.join(out_dir, 'result.xlsx'), index=False)
+            formattedResult.to_excel(os.path.join(out_dir, 'result.xlsx'), index=False);
