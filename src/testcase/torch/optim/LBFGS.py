@@ -25,7 +25,7 @@ class TorchOptimLbfgsTestCase(TorBencherTestCaseBase):
         optimizer = torch.optim.LBFGS([x])
 
         # Define closure for LBFGS
-        def closure(self):
+        def closure():
             optimizer.zero_grad()
             output = func(x)
             output.backward()

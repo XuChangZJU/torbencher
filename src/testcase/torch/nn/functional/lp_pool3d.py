@@ -26,9 +26,7 @@ class TorchNnFunctionalLppool3dTestCase(TorBencherTestCaseBase):
         # Randomly generate kernel size, stride, and padding
         kernel_size = random.randint(2, 4)  # Random kernel size
         stride = random.randint(1, 3)  # Random stride
-        padding = random.randint(0, 2)  # Random padding
 
         # Apply lp_pool3d with the generated parameters
-        result = torch.nn.functional.lp_pool3d(input_tensor, norm_type=p, kernel_size=kernel_size, stride=stride,
-                                               padding=padding)
+        result = torch.nn.functional.lp_pool3d(input_tensor, norm_type=p, kernel_size=kernel_size, stride=stride)
         return result

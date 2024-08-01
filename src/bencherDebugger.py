@@ -196,7 +196,7 @@ class bencherDebugger:
         - dict: Dictionary with test results.
         """
         loader = unittest.TestLoader()
-        runner = unittest.TextTestRunner()
+        runner = unittest.TextTestRunner(verbosity=2)
 
         suite = loader.loadTestsFromTestCase(testcase)
 

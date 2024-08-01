@@ -116,14 +116,35 @@ debugger.run()
 ## 输出内容
 
 | 字段名称            | 可能的取值示例                                            |
-|-----------------|----------------------------------------------------|
-| errors          | assert失败的个数                                        |
-| error_details   | 报错的具体信息                                            |
-| failures        | 非报错未通过点的个数                                         |
-| failure_details | 非报错未通过点的详情                                         |
-| status          | Success, Failed, UnitTestError, ModuleImportError. |
+|-----------------|----------------------------------------------------         |
+| errors          | assert失败的个数                                             |
+| error_details   | 报错的具体信息                                                |
+| failures        | 非报错未通过点的个数                                          |
+| failure_details | 非报错未通过点的详情                                          |
+| status          | Success, Failed, UnitTestError, ModuleImportError.           |
 | testcase        | 导入失败的模块名, TorbencherTestCaseBase的子类等               |
 
+
+
+# SingleTester（最终版TorBencher的最小测试执行单元）
+用于对单个测试用例的正确性和可用性进行检测（测试用例开发时的不同设备结果对比假定**CPU计算结果完全正确**和**PyTorch与CUDA(MPS)完全兼容**）
+## 使用（非常简单）
+```python
+from src.testcase.yourTestCaseModule import yourTestCase
+
+tester = SingleTester()                                 # 无参实例化SingleTester
+tester.run(yourTestCase, device='cuda', seed=443)       # 使用SingleTester测试算子用例
+```
+## 部分模块和运行原理简介
+### MyTestCaseLoader
+一个扩展自`unittest.runner`的TestCase加载工具，可以保持返回的`suite`依然保持`TestCase.__name__`的可访问性。
+### MyTestCaseRunner
+一个扩展自`unittest.runner`的TestCase执行工具，可以用自身容器捕获到测试的TestCase的返回值并使用`getReturnValue()`获取该返回值（默认每个TestCase仅一个测试方法，一个返回值）。
+### 随机控制
+使用随机函数注入的方式进行将一个TestCase的里初次CPU执行的随机结果捕获并保存在`SingleTester.storage`中，在下一次device执行该随机函数时直接返回指定函数的顺位该次调用的指定结果以保证计算参数的一致性。
+### 结果对比
+拥有数值或`tensor`返回值的TestCase直接使用`torch.allclose`进行结果比较并给予相应的命令行窗口提示。
+## 返回值（根据具体需要后续添加）
 # 一个通用`__init__.py`脚本：
 
 该脚本可以放在本工具的任意`__init__.py`中使用，同时增加import时的debug信息以辅助开发过程
@@ -132,6 +153,7 @@ debugger.run()
 import os
 import importlib
 import logging
+from inspect import isclass
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
@@ -150,9 +172,12 @@ for script_file in script_files:
     except Exception as e:
         logger.debug(f"Failed to import module {module_name}: {e}")
         continue
-
-    for attribute_name in dir(module):
-        attribute = getattr(module, attribute_name)
-        if isinstance(attribute, type) and issubclass(attribute, TorBencherTestCaseBase):
-            globals()[attribute_name] = attribute
+    try:
+        for attribute_name in dir(module):
+            attribute = getattr(module, attribute_name)
+            if isclass(attribute) and issubclass(attribute, TorBencherTestCaseBase)\
+                    and attribute is not TorBencherTestCaseBase:
+                globals()[attribute_name] = attribute
+    except Exception as e:
+        raise ValueError(f"The testcase that cause error is {attribute_name}") from e
 ```

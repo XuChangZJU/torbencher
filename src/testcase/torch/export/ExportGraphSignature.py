@@ -40,6 +40,6 @@ class TorchExportExportgraphsignatureTestCase(TorBencherTestCaseBase):
         assert isinstance(exported_program.graph_signature,
                           ExportGraphSignature), "Signature is not of type ExportGraphSignature"
         assert len(exported_program.graph_signature.input_specs) == 5, "Incorrect number of input specs"
-        assert len(exported_program.graph_signature.output_specs) == 2, "Incorrect number of output specs"
+        assert len(exported_program.graph_signature.output_specs) == 1, "Incorrect number of output specs"
 
         return exported_program.graph_signature

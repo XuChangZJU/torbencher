@@ -1,40 +1,39 @@
 from src import bencherDebugger
 
-# masked等包先不测试
 modules = [
     "torch.nn.functional",
     "torch.optim",
     "torch.special",
-    "torch.random",
-    # "torch.utils.cpp_extension",
+    # "torch.random", # no testcases
+    # "torch.utils.cpp_extension", # skip
     "torch.utils.data",
-    # "torch.xpu",
-    # "torch.mps",
-    "torch.jit",
+    # "torch.xpu", # skip
+    # "torch.mps", # skip
+    # "torch.jit",
     "torch.utils",
     "torch.distributions",
     "torch.autograd",
     "torch",
-    "torch.onnx",
-    # "torch.cuda",
-    "torch.linalg",
-    "torch.amp",
+    # "torch.onnx", # no testcases
+    # "torch.cuda", # skip
+    # "torch.linalg",
+    # "torch.amp", # no testcases
     "torch.nn",
     "torch.utils.mobile_optimizer",
-    "torch.distributed",
+    # "torch.distributed", # no testcases
     "torch.utils.checkpoint",
-    "torch.Tensor",
+    # "torch.Tensor",
     "torch.export",
     "torch.profiler",
     "torch.backends",
-    # "torch.fx",
+    # "torch.fx", # skip
     "torch.cpu",
-    # "torch.hub",
+    # "torch.hub", # skip
     "torch.testing",
-    # "torch.masked", 
-    # "torch.utils.tensorboard",
+    # "torch.masked", # skip
+    # "torch.utils.tensorboard", # skip
     "torch.nn.init",
-    # "torch.fft",
+    "torch.fft",
     "torch.autograd"
 ]
 

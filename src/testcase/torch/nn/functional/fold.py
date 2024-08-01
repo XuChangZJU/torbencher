@@ -28,6 +28,6 @@ class TorchNnFunctionalFoldTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(batch_size, channels * kernel_size[0] * kernel_size[1], input_height * input_width)
 
         # Perform fold operation
-        result = torch.nn.functional.fold(input_tensor, (output_height, output_width), kernel_size, stride, padding,
-                                          dilation)
+        result = torch.nn.functional.fold(input_tensor, (output_height, output_width), kernel_size, dilation, padding,
+                                          stride)
         return result

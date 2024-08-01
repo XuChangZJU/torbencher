@@ -6,4 +6,4 @@ from src.testcase.torch.addmm import TorchAddmmTestCase
 tester.run(TorchAddmmTestCase, device="cuda", seed=123)
 
 # from src.testcase.torch.nn.Linear import TorchNnLinearTestCase
-# stester.run(TorchNnLinearTestCase, device= "cuda", seed=123)
+# tester.run(TorchNnLinearTestCase, device= "cuda", seed=123)

@@ -11,8 +11,8 @@ class TorchNnMultiheadattentionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_nn_MultiheadAttention_correctness(self):
         # Define the parameters for the MultiheadAttention module
-        embed_dim = random.randint(1, 10)  # Total dimension of the model
-        num_heads = random.randint(1, embed_dim)  # Number of parallel attention heads, should divide embed_dim
+        embed_dim = 10  # Total dimension of the model
+        num_heads = 5  # Number of parallel attention heads, should divide embed_dim
         dropout = random.uniform(0.0, 1.0)  # Dropout probability
         bias = random.choice([True, False])  # Whether to add bias to input/output projection layers
         add_bias_kv = random.choice([True, False])  # Whether to add bias to the key and value sequences
@@ -29,14 +29,14 @@ class TorchNnMultiheadattentionTestCase(TorBencherTestCaseBase):
             batch_size = random.randint(1, 5)
             seq_len_q = random.randint(1, 10)
             seq_len_k = random.randint(1, 10)
-            seq_len_v = random.randint(1, 10)
+            seq_len_v = seq_len_k
             query = torch.randn(batch_size, seq_len_q, embed_dim)
             key = torch.randn(batch_size, seq_len_k, kdim)
             value = torch.randn(batch_size, seq_len_v, vdim)
         else:
             seq_len_q = random.randint(1, 10)
             seq_len_k = random.randint(1, 10)
-            seq_len_v = random.randint(1, 10)
+            seq_len_v = seq_len_k
             batch_size = random.randint(1, 5)
             query = torch.randn(seq_len_q, batch_size, embed_dim)
             key = torch.randn(seq_len_k, batch_size, kdim)
