@@ -14,23 +14,23 @@ class TorchNnFunctionalInstancenormTestCase(TorBencherTestCaseBase):
         dim = random.randint(1, 3)
 
         # Randomly generate the batch size and number of channels
-        batch_size = random.randint(1, 4)
-        num_channels = random.randint(1, 4)
+        batch_size = random.randint(2, 4)
+        num_channels = random.randint(2, 4)
 
         if dim == 1:
             # For InstanceNorm1d, generate random length for each sequence
-            length = random.randint(1, 10)
+            length = random.randint(2, 10)
             input_size = [batch_size, num_channels, length]
         elif dim == 2:
             # For InstanceNorm2d, generate random height and width for each image
-            height = random.randint(1, 10)
-            width = random.randint(1, 10)
+            height = random.randint(2, 10)
+            width = random.randint(2, 10)
             input_size = [batch_size, num_channels, height, width]
         else:
             # For InstanceNorm3d, generate random depth, height, and width for each volume
-            depth = random.randint(1, 10)
-            height = random.randint(1, 10)
-            width = random.randint(1, 10)
+            depth = random.randint(2, 10)
+            height = random.randint(2, 10)
+            width = random.randint(2, 10)
             input_size = [batch_size, num_channels, depth, height, width]
 
         # Generate random input tensor with the specified size
