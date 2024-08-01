@@ -155,6 +155,8 @@ class SingleTester:
                 passed = cpuResult == deviceResult
 
             if torch.is_tensor(cpuResult):
+                cpuResult = cpuResult.to(cpu)
+                deviceResult = deviceResult.to(cpu)
                 passed = torch.allclose(cpuResult, deviceResult)
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):
