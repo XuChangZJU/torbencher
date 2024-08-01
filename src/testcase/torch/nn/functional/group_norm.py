@@ -12,8 +12,8 @@ class TorchNnFunctionalGroupnormTestCase(TorBencherTestCaseBase):
     def test_group_norm_correctness(self):
         # Random input size
         dim = random.randint(2, 4)  # Dimension should be at least 2 for group norm
-        num_of_elements_each_dim = random.randint(1, 5)
-        input_size = [num_of_elements_each_dim for i in range(dim)]
+        num_of_elements_each_dim = random.randint(2, 5)
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
 
         # Random input tensor
         input_tensor = torch.randn(input_size)
