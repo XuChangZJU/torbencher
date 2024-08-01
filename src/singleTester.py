@@ -45,14 +45,14 @@ class SingleTester:
         self.rchoice = random.choice
         self.rrandom = random.random
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = 443) -> bool:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
 
         **params**
         testcase (TorBencherTestCaseBase): The test case class to be tested.
-        device (str, optional): The device to test on (e.g., 'cuda'). Defaults to None.
+        device (str, optional): The device to test on (e.g., 'cuda'). Defaults to cpu.
         seed (int, optional): The seed for random number generation. Defaults to 443.
 
         **returns**
@@ -92,7 +92,10 @@ class SingleTester:
             random.seed(seed)
 
             deviceResult = self.runner.run(suite).getReturnValues()[testcaseName]
-            print(f"[DEBUG] result on {device} is {deviceResult}")
+            if device == "cpu":
+                pass
+            else:
+                print(f"[DEBUG] result on {device} is {deviceResult}")
         else:
             print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
 
@@ -109,9 +112,9 @@ class SingleTester:
                 passed = self.judgeCommon(cpuResult, deviceResult, testcaseName)
 
                 if passed:
-                    print(testcaseName + " has passed the test\n\n\n")
+                    print(testcaseName + f" has passed the test on {device}\n\n\n")
                 else:
-                    print(f"[WARN] {testcaseName} has not passed the test\n\n\n")
+                    print(f"[WARN] {testcaseName} has not passed the test on {device}\n\n\n")
 
         self.resetRandom()
         return passed
