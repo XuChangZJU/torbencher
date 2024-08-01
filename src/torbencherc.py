@@ -144,6 +144,7 @@ class torbencherc:
         self.result[torbencherc.ResultKey.TEST_RESULTS] = testResult
         self.saveResult(self.config, self.result)
         print(f"Torbencher has finished testing, check your result at {self.config[torbencherc.ConfigKey.OUT_DIR]}")
+        self.deleteNonPyFiles()
         return testResult
 
     def runTest(self, config: dict) -> dict:
@@ -311,3 +312,16 @@ class torbencherc:
             formattedResult.to_json(os.path.join(out_dir, 'result.json'), orient='records')
         elif format == "xlsx":
             formattedResult.to_excel(os.path.join(out_dir, 'result.xlsx'), index=False)
+
+    import os
+
+    def deleteNonPyFiles(self, dirPath: str=None):
+        if not dirPath:
+            dirPath = os.path.join(os.getcwd(), "")
+        for root, dirs, files in os.walk(dirPath):
+            for file in files:
+                if file.endswith('.cpp') or file.endswith('.pyc') or file.endswith('.c') or file.endswith('.pt'):
+                    filePath = os.path.join(root, file)
+                    print(f"Deleting file: {filePath}")
+                    os.remove(filePath)
+
