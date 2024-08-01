@@ -1,20 +1,7 @@
-# from .triplet_margin_with_distance_loss import TorchNnFunctionalTripletmarginwithdistancelossTestCase
-# from .avg_pool1d import TorchNnFunctionalAvgpool1dTestCase
-# from .lp_pool3d import TorchNnFunctionalLppool3dTestCase
-# from .avg_pool2d import TorchNnFunctionalAvgpool2dTestCase
-# from .avg_pool3d import TorchNnFunctionalAvgpool3dTestCase
-# from .embedding_bag import TorchNnFunctionalEmbeddingbagTestCase
-# from .fractional_max_pool3d import TorchNnFunctionalFractionalmaxpool3dTestCase
-# from .fold import TorchNnFunctionalFoldTestCase
-# from .max_pool3d import TorchNnFunctionalMaxpool3dTestCase
-# from .max_pool2d import TorchNnFunctionalMaxpool2dTestCase
-# from .cosine_embedding_loss import TorchNnFunctionalCosineembeddinglossTestCase
-# from .max_unpool3d import TorchNnFunctionalMaxunpool3dTestCase
-# from .max_unpool1d import TorchNnFunctionalMaxunpool1dTestCase
-
 import os
 import importlib
 import logging
+from inspect import isclass
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
@@ -33,8 +20,11 @@ for script_file in script_files:
     except Exception as e:
         logger.debug(f"Failed to import module {module_name}: {e}")
         continue
-
-    for attribute_name in dir(module):
-        attribute = getattr(module, attribute_name)
-        if isinstance(attribute, type) and issubclass(attribute, TorBencherTestCaseBase):
-            globals()[attribute_name] = attribute
+    try:
+        for attribute_name in dir(module):
+            attribute = getattr(module, attribute_name)
+            if isclass(attribute) and issubclass(attribute, TorBencherTestCaseBase)\
+                    and attribute is not TorBencherTestCaseBase:
+                globals()[attribute_name] = attribute
+    except Exception as e:
+        raise ValueError(f"The testcase that cause error is {attribute_name}") from e
