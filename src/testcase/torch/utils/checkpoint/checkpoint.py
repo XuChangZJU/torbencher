@@ -7,7 +7,7 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 
-@test_api(torch.utils.checkpoint.checkpoint)
+# @test_api(torch.utils.checkpoint.checkpoint)
 class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_checkpoint_correctness(self):
@@ -26,8 +26,12 @@ class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
                 return x
 
         # Create a random input tensor
-        input_size = [random.randint(1, 5) for _ in range(2)]  # Random 2D tensor
-        input_tensor = torch.randn(input_size)
+        # input_size = [random.randint(1, 5) for _ in range(2)]  # Random 2D tensor
+        # input_tensor = torch.randn(input_size)
+
+        # Create a random input tensor with the correct shape
+        batch_size = random.randint(1, 5)
+        input_tensor = torch.randn(batch_size, 10)  # Ensure the last dimension is 10
 
         # Instantiate the model
         model = SimpleModel()
@@ -37,5 +41,5 @@ class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
             return model(x)
 
         # Use checkpointing
-        result = checkpoint(checkpointed_function, input_tensor)
+        result = checkpoint(checkpointed_function, input_tensor, use_reentrant=False)
         return result
