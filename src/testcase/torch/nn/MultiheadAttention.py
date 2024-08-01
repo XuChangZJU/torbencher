@@ -11,8 +11,8 @@ class TorchNnMultiheadattentionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_nn_MultiheadAttention_correctness(self):
         # Define the parameters for the MultiheadAttention module
-        embed_dim = random.randint(1, 10)  # Total dimension of the model
-        num_heads = embed_dim // random.randint(1, embed_dim)  # Number of parallel attention heads, should divide embed_dim
+        embed_dim = 10  # Total dimension of the model
+        num_heads = 5  # Number of parallel attention heads, should divide embed_dim
         dropout = random.uniform(0.0, 1.0)  # Dropout probability
         bias = random.choice([True, False])  # Whether to add bias to input/output projection layers
         add_bias_kv = random.choice([True, False])  # Whether to add bias to the key and value sequences
