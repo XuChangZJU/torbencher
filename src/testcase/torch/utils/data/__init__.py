@@ -1,25 +1,7 @@
-# from .StackDataset import TorchUtilsDataStackdatasetTestCase
-# from .SubsetRandomSampler import TorchUtilsDataSubsetrandomsamplerTestCase
-# from .Subset import TorchUtilsDataSubsetTestCase
-# from .get_worker_info import TorchUtilsDataGetworkerinfoTestCase
-# from .RandomSampler import TorchUtilsDataRandomsamplerTestCase
-# from .Sampler import TorchUtilsDataSamplerTestCase
-# from .ConcatDataset import TorchUtilsDataConcatdatasetTestCase
-# from .default_convert import TorchUtilsDataDefaultconvertTestCase
-# from .DataLoader import TorchUtilsDataDataloaderTestCase
-# from .random_split import TorchUtilsDataRandomsplitTestCase
-# from .BatchSampler import TorchUtilsDataBatchsamplerTestCase
-# from .Dataset import TorchUtilsDataDatasetTestCase
-# from .default_collate import TorchUtilsDataDefaultcollateTestCase
-# from .WeightedRandomSampler import TorchUtilsDataWeightedrandomsamplerTestCase
-# from .TensorDataset import TorchUtilsDataTensordatasetTestCase
-# from .IterableDataset import TorchUtilsDataIterabledatasetTestCase
-# from .SequentialSampler import TorchUtilsDataSequentialsamplerTestCase
-# from .ChainDataset import TorchUtilsDataChaindatasetTestCase
-
 import os
 import importlib
 import logging
+from inspect import isclass
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
@@ -38,8 +20,11 @@ for script_file in script_files:
     except Exception as e:
         logger.debug(f"Failed to import module {module_name}: {e}")
         continue
-
-    for attribute_name in dir(module):
-        attribute = getattr(module, attribute_name)
-        if isinstance(attribute, type) and issubclass(attribute, TorBencherTestCaseBase):
-            globals()[attribute_name] = attribute
+    try:
+        for attribute_name in dir(module):
+            attribute = getattr(module, attribute_name)
+            if isclass(attribute) and issubclass(attribute, TorBencherTestCaseBase)\
+                    and attribute is not TorBencherTestCaseBase:
+                globals()[attribute_name] = attribute
+    except Exception as e:
+        raise ValueError(f"The testcase that cause error is {attribute_name}") from e
