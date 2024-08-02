@@ -80,7 +80,7 @@ class SingleTester:
         for record in self.storage.values():
             record["status"] = True
 
-        print(f"[DEBUG] result on cpu is {cpuResult}")
+        print(f"[DEBUG] result on cpu is \n{cpuResult}")
 
         deviceResult = None
         passed = False
@@ -95,7 +95,7 @@ class SingleTester:
             if device == "cpu":
                 pass
             else:
-                print(f"[DEBUG] result on {device} is {deviceResult}")
+                print(f"[DEBUG] result on {device} is \n{deviceResult}")
         else:
             print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
 
