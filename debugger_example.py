@@ -25,7 +25,7 @@ modules = [
     # "torch.Tensor",
     "torch.export",
     "torch.profiler",
-    "torch.backends",
+    # "torch.backends", # skip
     # "torch.fx", # skip
     "torch.cpu",
     # "torch.hub", # skip

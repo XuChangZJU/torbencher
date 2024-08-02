@@ -8,8 +8,8 @@ config = {
         # other device names...
     ],
     "test_modules": [
-        # "torch",
-        # "torch.nn",
+        "torch",
+        "torch.nn",
         "torch.nn.functional",
         # other torch package names...
     ],
