@@ -13,8 +13,9 @@ config = {
         "torch.nn.functional",
         # other torch package names...
     ],
-    "format": "json",
-    "num_epoch": 3
+    "format": "csv",
+    "num_epoch": 1,
+    "name_spec": "timestamp"
 }
 
 bencher = torbencherc(config)
