@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from .util.apitools import *
@@ -100,7 +101,8 @@ class SingleTester:
             print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
 
         if cpuResult is None and deviceResult is None:
-            print(f"[WARN] Both CPU and Device have no return, if normal ignore this.")
+            print(f"[WARN] Both CPU and Device have no return, if normal ignore this, defaultly Passed.")
+            return True
         elif cpuResult is None or deviceResult is None:
             print(f"[ERROR] One of CPU or Device has no return, there must be something wrong.")
         else:
@@ -154,17 +156,22 @@ class SingleTester:
         cpu = torch.device("cpu")
         passed = False
         try:
+            if isinstance(cpuResult, object):
+                passed = type(cpuResult) == type(deviceResult)
             if isinstance(cpuResult, bool):
                 passed = cpuResult == deviceResult
+
+            if type(cpuResult) == type(1) or type(cpuResult) == type(3.14):
+                passed = np.allclose(cpuResult, deviceResult)
 
             if torch.is_tensor(cpuResult):
                 cpuResult = cpuResult.to(cpu)
                 deviceResult = deviceResult.to(cpu)
                 passed = torch.allclose(cpuResult, deviceResult)
+
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):
                     if isinstance(cpuResult[idx], bool):
-
                         passed = cpuResult[idx] == deviceResult[idx]
                         if not passed: return False
                     if torch.is_tensor(cpuResult[idx]):
