@@ -18,7 +18,7 @@ config = {
         # "torch",                          # From `TorchCompileTestCase` need checking on non-windows
         # "torch.nn",                       # Can B run through, Plz fixing `Failed`
         # "torch.utils.mobile_optimizer",   # Do not support CUDA.
-        "torch.utils.checkpoint",         # Well Done
+        "torch.utils.checkpoint",         # Well Done 
         # "torch.export",                   # Windows not support Compile, and I can do nothing
         # "torch.profiler",                 # Both support, but can't be judged, no need to test
         # "torch.backends",                 # Empty, needs to be dived into?
