@@ -20,8 +20,6 @@ config = {
         "torch.utils.checkpoint",
         "torch.export",
         "torch.profiler",
-        "torch.backends",
-        "torch.cpu",
         "torch.testing",
         "torch.nn.init",
         "torch.fft",
