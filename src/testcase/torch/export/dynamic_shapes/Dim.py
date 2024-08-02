@@ -17,7 +17,7 @@ class TorchExportDynamicshapesDimTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(dim_size)
 
         # Create a Dim object from the tensor's shape
-        dim = torch._dynamo.dynamic_shapes.Dim(tensor.shape[0])
+        dim = torch.export.dynamic_shapes.Dim("dim")
 
         # Return the dimension value
-        return dim.value()
+        return dim
