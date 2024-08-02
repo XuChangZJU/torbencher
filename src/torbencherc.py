@@ -14,10 +14,13 @@ from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 class torbencherc:
     SUPPORTED_FORMATS = ["csv", 'json', 'xlsx']
     AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+    SUPPORTED_NAME_SPECS = ["timestamp", "datetime"]
 
     class DEFAULTS:
+        OUT_DIR = "./"
         FORMAT = "csv"
         TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+        NAME_SPEC = "timestamp"
 
     class ConfigKey:
         OUT_DIR = "out_dir"
@@ -26,6 +29,7 @@ class torbencherc:
         TEST_MODULES = "test_modules"
         FORMAT = "format"
         NUM_EPOCH = "num_epoch"
+        NAME_SPEC = "name_spec"
 
     class ResultKey:
         CPU = "cpu"
@@ -75,6 +79,8 @@ class torbencherc:
         """
         if torbencherc.ConfigKey.OUT_DIR not in config:
             print("No output directory found in config, check your result at pwd/cwd.")
+            config[torbencherc.ConfigKey.OUT_DIR] = torbencherc.DEFAULTS.OUT_DIR
+
         if torbencherc.ConfigKey.SEED in config:
             seed = config[torbencherc.ConfigKey.SEED]
             assert isinstance(seed, int)
@@ -99,7 +105,15 @@ class torbencherc:
             config[torbencherc.ConfigKey.FORMAT] = torbencherc.DEFAULTS.FORMAT
         else:
             if config[torbencherc.ConfigKey.FORMAT] not in torbencherc.SUPPORTED_FORMATS:
-                raise ValueError(f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
+                raise ValueError(
+                    f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
+
+        if not torbencherc.ConfigKey.NAME_SPEC in config:
+            config[torbencherc.ConfigKey.NAME_SPEC] = torbencherc.DEFAULTS.NAME_SPEC
+        else:
+            if config[torbencherc.ConfigKey.NAME_SPEC] not in torbencherc.SUPPORTED_NAME_SPECS:
+                raise ValueError(
+                    f"Unsupported name spec {config[torbencherc.ConfigKey.NAME_SPEC]}. Supported formats are {torbencherc.SUPPORTED_NAME_SPECS}")
 
         return config
 
@@ -289,6 +303,23 @@ class torbencherc:
                     rows.append(row)
         return pd.DataFrame(rows, columns=header)
 
+    def getFileName(self, config: dict) -> str:
+        """
+        **description**
+        Generate a file name based on the name specification in the configuration.
+
+        **params**
+        - config (dict): Configuration dictionary.
+
+        **returns**
+        - str: Generated file name.
+        """
+        if config[torbencherc.ConfigKey.NAME_SPEC] == "timestamp":
+            return str(time.time_ns())
+        elif config[torbencherc.ConfigKey.NAME_SPEC] == "datetime":
+            return time.strftime("%Y%m%d_%H%M%S", time.localtime())
+        return "unknown_name_spec"
+
     def saveDFFormattedResult(self, config: dict, formattedResult: pd.DataFrame):
         """
         **description**
@@ -305,23 +336,32 @@ class torbencherc:
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
         format = config[torbencherc.ConfigKey.FORMAT]
+        fileNameSpec = self.getFileName(config)
 
         if format == "csv":
-            formattedResult.to_csv(os.path.join(out_dir, 'result.csv'), index=False)
+            formattedResult.to_csv(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.csv'), index=False)
         elif format == "json":
-            formattedResult.to_json(os.path.join(out_dir, 'result.json'), orient='records')
+            formattedResult.to_json(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.json'),
+                                    orient='records')
         elif format == "xlsx":
-            formattedResult.to_excel(os.path.join(out_dir, 'result.xlsx'), index=False)
+            formattedResult.to_excel(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.xlsx'), index=False)
 
-    import os
+    def deleteNonPyFiles(self, dirPath: str = None):
+        """
+        **description**
+        Delete non-Python files from the specified directory.
 
-    def deleteNonPyFiles(self, dirPath: str=None):
+        **params**
+        - dirPath (str, optional): Directory path to clean. Defaults to the current working directory.
+
+        **returns**
+        - None
+        """
         if not dirPath:
             dirPath = os.path.join(os.getcwd(), "")
         for root, dirs, files in os.walk(dirPath):
             for file in files:
                 if file.endswith('.cpp') or file.endswith('.pyc') or file.endswith('.c') or file.endswith('.pt'):
                     filePath = os.path.join(root, file)
-                    print(f"Deleting file: {filePath}")
+                    # print(f"Deleting file: {filePath}")
                     os.remove(filePath)
-
