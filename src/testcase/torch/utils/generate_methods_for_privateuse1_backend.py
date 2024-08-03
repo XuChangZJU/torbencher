@@ -21,11 +21,8 @@ class TorchUtilsGeneratemethodsforprivateuse1backendTestCase(TorBencherTestCaseB
 
         # Rename the privateuse1 backend to a random name
         backend_name = "backend_" + str(random.randint(1, 1000))
-        try:
-            torch.utils.rename_privateuse1_backend(backend_name)
-        except RuntimeError as e:
-            f"Error: {e}"
-            return
+        
+        torch.utils.rename_privateuse1_backend(backend_name)
 
         # Generate methods for the renamed backend
         torch.utils.generate_methods_for_privateuse1_backend(for_tensor, for_module, for_storage, unsupported_dtype)
