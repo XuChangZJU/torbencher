@@ -9,6 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.utils.data._utils.collate.collate)
 class TorchUtilsDataUtilsCollateCollateTestCase(TorBencherTestCaseBase):
+    @staticmethod
     @test_api_version.larger_than("1.1.3")
     def collate_tensor_fn(batch, *, collate_fn_map):
         return torch.stack(batch, 0)
@@ -28,7 +29,7 @@ class TorchUtilsDataUtilsCollateCollateTestCase(TorBencherTestCaseBase):
         batch = [torch.randn(tensor_size) for _ in range(batch_size)]
 
         # Define the custom collate function map
-        collate_fn_map = {torch.Tensor: collate_tensor_fn}
+        collate_fn_map = {torch.Tensor: self.collate_tensor_fn}
 
         # Call the collate function
         result = collate(batch, collate_fn_map=collate_fn_map)
