@@ -138,7 +138,7 @@ def randomInjector(func, storage, testcaseName):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        funcName = func.getAPIName(func)
+        funcName = getAPIName(func)
         if testcaseName not in storage:
             storage[testcaseName] = {"result": {}, "status": False, "count": {}}
         if funcName not in storage[testcaseName]["result"]:
