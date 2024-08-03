@@ -14,8 +14,11 @@ class TorchNnUtilsRnnUnpacksequenceTestCase(TorBencherTestCaseBase):
         # Randomly generate the number of sequences
         num_sequences = random.randint(1, 5)
 
-        # Randomly generate the length of each sequence
+        # Generate random lengths for each sequence
         sequences = [torch.randn(random.randint(1, 5)) for _ in range(num_sequences)]
+
+        # Sort sequences based on their lengths in descending order
+        sequences.sort(key=lambda x: x.size(0), reverse=True)
 
         # Pack the sequences
         packed_sequences = pack_sequence(sequences)

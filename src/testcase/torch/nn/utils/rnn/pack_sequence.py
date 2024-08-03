@@ -19,8 +19,11 @@ class TorchNnUtilsRnnPacksequenceTestCase(TorBencherTestCaseBase):
         # Sort lengths in decreasing order
         lengths.sort(reverse=True)
 
-        # Generate random sequences based on the lengths
-        sequences = [torch.randn(length, random.randint(1, 3)) for length in lengths]
+        # Fixed size for the second dimension
+        fixed_dim = 3
+
+        # Generate random sequences based on the lengths with fixed second dimension
+        sequences = [torch.randn(length, fixed_dim) for length in lengths]
 
         # Pack the sequences
         packed_sequence = torch.nn.utils.rnn.pack_sequence(sequences)
