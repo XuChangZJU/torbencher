@@ -20,7 +20,7 @@ def getAPIName(api: typing.Any) -> str:
     """
     try:
         # for function type
-        if isinstance(api, (types.FunctionType, types.BuiltinFunctionType)):
+        if isinstance(api, (types.FunctionType, types.BuiltinFunctionType, types.MethodType)):
             apiName = api.__module__ + "." + api.__name__
             return apiName
 
