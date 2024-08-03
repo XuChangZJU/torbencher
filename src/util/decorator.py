@@ -3,7 +3,7 @@ import time
 import inspect
 
 from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
-from apitools import *
+from .apitools import *
 
 
 def get_class_that_defined_method(meth):
