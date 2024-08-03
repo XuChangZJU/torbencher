@@ -3,6 +3,7 @@ import time
 import inspect
 
 from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from apitools import *
 
 
 def get_class_that_defined_method(meth):
@@ -137,7 +138,7 @@ def randomInjector(func, storage, testcaseName):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        funcName = func.__name__
+        funcName = func.getAPIName(func)
         if testcaseName not in storage:
             storage[testcaseName] = {"result": {}, "status": False, "count": {}}
         if funcName not in storage[testcaseName]["result"]:
