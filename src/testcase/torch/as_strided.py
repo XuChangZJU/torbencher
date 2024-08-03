@@ -19,9 +19,5 @@ class TorchAsstridedTestCase(TorBencherTestCaseBase):
         view_size = tuple(random.randint(1, num_of_elements_each_dim[i]) for i in range(dim))  # Random view size
         view_stride = tuple(random.randint(1, num_of_elements_each_dim[i]) for i in range(dim))  # Random stride
 
-        try:
-            result = torch.as_strided(tensor, view_size, view_stride)
-            return result
-        except RuntimeError:
-            # In case of invalid strided view, return None to imply the failure
-            return None
+        result = torch.as_strided(tensor, view_size, view_stride)
+        return result
