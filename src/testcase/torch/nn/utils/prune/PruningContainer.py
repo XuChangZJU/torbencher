@@ -1,34 +1,28 @@
 import torch
 import random
+import torch.nn as nn
 import torch.nn.utils.prune as prune
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-
-@test_api(torch.nn.utils.prune.PruningContainer)
+@test_api(prune.PruningContainer)
 class TorchNnUtilsPrunePruningcontainerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_pruning_container_correctness(self):
-        # Randomly generate tensor dimensions and size
-        dim = random.randint(1, 4)
-        num_of_elements_each_dim = random.randint(1, 5)
-        input_size = [num_of_elements_each_dim for _ in range(dim)]
+        # Create a simple model with a Linear layer
+        model = nn.Linear(10, 10)
 
-        # Create a random tensor
-        tensor = torch.randn(input_size)
+        # Create two pruning methods
+        pruning_method_1 = prune.L1Unstructured(amount=random.uniform(0.1, 0.5))
+        pruning_method_2 = prune.RandomUnstructured(amount=random.uniform(0.1, 0.5))
 
-        # Create a random mask with the same size as the tensor
-        mask = torch.randint(0, 2, input_size).float()
+        # Apply the pruning methods to the model's weight parameter
+        prune.l1_unstructured(model, name='weight', amount=pruning_method_1.amount)
+        prune.random_unstructured(model, name='weight', amount=pruning_method_2.amount)
 
-        # Create a pruning method (using L1Unstructured as an example)
-        pruning_method = prune.L1Unstructured(amount=random.uniform(0.1, 0.5))
+        # Check the pruned weights
+        pruned_weights = model.weight
 
-        # Create a PruningContainer and add the pruning method
-        pruning_container = prune.PruningContainer([pruning_method])
-
-        # Apply the pruning method to the tensor
-        pruned_tensor = pruning_container.apply(tensor, mask)
-
-        return pruned_tensor
+        return pruned_weights
