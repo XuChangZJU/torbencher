@@ -19,8 +19,6 @@ class TorchNnUtilsRnnPacksequenceTestCase(TorBencherTestCaseBase):
         # Sort lengths in decreasing order
         lengths.sort(reverse=True)
 
-        # lengths = lengths.cpu()
-
         # Generate random sequences based on the lengths
         sequences = [torch.randn(length, random.randint(1, 3)) for length in lengths]
         # for sequence in sequences:
