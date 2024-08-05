@@ -97,7 +97,7 @@ class SingleTester:
             deviceReturnValues = self.runner.run(suite).getReturnValues()
             deviceResult = deviceReturnValues[testcaseName] if testcaseName in deviceReturnValues else None
             if device == "cpu":
-		print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
+		print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
                 pass
             else:
                 print(f"[DEBUG] result on {device} is \n{deviceResult}")
@@ -197,7 +197,7 @@ class SingleTester:
                         if not passed: return False
         except Exception as e:
             passed = False
-            raise ValueError(f"The testcase that cause the error is `{testcaseName}`") from e
+            raise ValueError(f"The testcase that cause the comparison error is `{testcaseName}`") from e
         return passed
 
     def sendValueToDevice(self, testcaseName: str, storage: dict, device: str) -> None:
