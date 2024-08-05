@@ -66,7 +66,7 @@ class SingleTester:
         testcaseName = testcase.__name__
         if not seed:
             seed = time.time_ns()
-        if device:
+        if device != "cpu":
             print(f"[INITIALIZE] Start testing {testcaseName} on {device}")
         else:
             print(f"[INITIALIZE] Start testing {testcaseName}")
@@ -97,7 +97,7 @@ class SingleTester:
             deviceReturnValues = self.runner.run(suite).getReturnValues()
             deviceResult = deviceReturnValues[testcaseName] if testcaseName in deviceReturnValues else None
             if device == "cpu":
-													 print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
+		print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
                 pass
             else:
                 print(f"[DEBUG] result on {device} is \n{deviceResult}")
