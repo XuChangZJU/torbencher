@@ -77,7 +77,8 @@ class SingleTester:
         random.seed(seed)
 
         self.applyRandomInjectors(testcaseName)
-        cpuResult = self.runner.run(suite).getReturnValues()[testcaseName]
+        cpuReturnValues = self.runner.run(suite).getReturnValues()
+        cpuResult = cpuReturnValues[testcaseName] if testcaseName in cpuReturnValues else None
         for record in self.storage.values():
             record["status"] = True
 
@@ -92,7 +93,8 @@ class SingleTester:
             torch.manual_seed(seed)
             random.seed(seed)
 
-            deviceResult = self.runner.run(suite).getReturnValues()[testcaseName]
+            deviceReturnValues = self.runner.run(suite).getReturnValues()
+            deviceResult = deviceReturnValues[testcaseName] if testcaseName in deviceReturnValues else None
             if device == "cpu":
                 pass
             else:
@@ -181,7 +183,6 @@ class SingleTester:
             passed = False
             raise ValueError(f"The testcase that cause the error is `{testcaseName}`") from e
         return passed
-
 
     def sendValueToDevice(self, testcaseName: str, storage: dict, device: str) -> None:
         """
