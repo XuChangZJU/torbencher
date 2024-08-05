@@ -6,6 +6,7 @@ from .util.apitools import *
 from .util.decorator import randomInjector
 from .util.CustomUnittest import MyTestRunner, MyTestLoader
 
+
 class SingleTester:
     """
     **description**
@@ -97,11 +98,10 @@ class SingleTester:
             deviceReturnValues = self.runner.run(suite).getReturnValues()
             deviceResult = deviceReturnValues[testcaseName] if testcaseName in deviceReturnValues else None
             if device == "cpu":
-		print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
+                print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
                 pass
             else:
                 print(f"[DEBUG] result on {device} is \n{deviceResult}")
-            
 
         if cpuResult is None and deviceResult is None:
             print(f"[WARN] Both CPU and Device have no return, if normal ignore this, defaultly Passed.")
