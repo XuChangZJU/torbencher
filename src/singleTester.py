@@ -6,7 +6,6 @@ from .util.apitools import *
 from .util.decorator import randomInjector
 from .util.CustomUnittest import MyTestRunner, MyTestLoader
 
-
 class SingleTester:
     """
     **description**
@@ -46,7 +45,7 @@ class SingleTester:
         self.rchoice = random.choice
         self.rrandom = random.random
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = 443) -> bool:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None) -> bool:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
@@ -57,7 +56,7 @@ class SingleTester:
         seed (int, optional): The seed for random number generation. Defaults to 443.
 
         **returns**
-        passed(bool): The passed status of the testcase.
+        passed (bool): The passed status of the testcase.
 
         **raises**
         AssertionError: If the provided testcase is not a subclass of TorBencherTestCaseBase.
@@ -65,6 +64,8 @@ class SingleTester:
         """
         assert issubclass(testcase, TorBencherTestCaseBase)
         testcaseName = testcase.__name__
+        if not seed:
+            seed = time.time_ns()
         if device:
             print(f"[INITIALIZE] Start testing {testcaseName} on {device}")
         else:
@@ -86,7 +87,7 @@ class SingleTester:
 
         deviceResult = None
         passed = False
-        if device:
+        if device == "cpu":
             torch.set_default_device(device)
             suite = self.loader.loadTestsFromTestCase(testcase)
             self.sendValueToDevice(testcaseName, self.storage, device)
@@ -96,11 +97,11 @@ class SingleTester:
             deviceReturnValues = self.runner.run(suite).getReturnValues()
             deviceResult = deviceReturnValues[testcaseName] if testcaseName in deviceReturnValues else None
             if device == "cpu":
+													 print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
                 pass
             else:
                 print(f"[DEBUG] result on {device} is \n{deviceResult}")
-        else:
-            print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
+            
 
         if cpuResult is None and deviceResult is None:
             print(f"[WARN] Both CPU and Device have no return, if normal ignore this, defaultly Passed.")
@@ -154,6 +155,21 @@ class SingleTester:
             setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName))
 
     def judgeCommon(self, cpuResult, deviceResult, testcaseName):
+        """
+        **description**
+        Compares the results from the CPU and the specified device to determine if they match.
+
+        **params**
+        cpuResult: The result from the CPU run.
+        deviceResult: The result from the device run.
+        testcaseName (str): The name of the test case.
+
+        **returns**
+        passed (bool): True if the results match, False otherwise.
+
+        **raises**
+        ValueError: If an error occurs during comparison, providing the test case name.
+        """
         torch.set_default_device("cpu")
         cpu = torch.device("cpu")
         passed = False
