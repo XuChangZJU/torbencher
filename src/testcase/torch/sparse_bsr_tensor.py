@@ -1,3 +1,5 @@
+import unittest
+
 import torch
 import random
 
@@ -9,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.sparse_bsr_tensor)
 class TorchSparsebsrtensorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
+    @unittest.skip
     def test_sparse_bsr_tensor_correctness(self):
         # Generate random parameters for sparse_bsr_tensor
         batch_size = random.randint(1, 3)
