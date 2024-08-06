@@ -1,5 +1,6 @@
 import random
 import numpy as np
+import time
 
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from .util.apitools import *
@@ -80,7 +81,11 @@ class SingleTester:
 
         self.applyRandomInjectors(testcaseName)
         cpuReturnValues = self.runner.run(suite).getReturnValues()
-        cpuResult = cpuReturnValues[testcaseName] if testcaseName in cpuReturnValues else None
+        if testcaseName in cpuReturnValues:
+            cpuResult = cpuReturnValues[testcaseName]
+        else:
+            print(f"[ERROR] Error run {testcaseName} on cpu, return -1")
+            return -1
         for record in self.storage.values():
             record["status"] = True
 
@@ -88,7 +93,7 @@ class SingleTester:
 
         deviceResult = None
         passed = False
-        if device == "cpu":
+        if device:
             torch.set_default_device(device)
             suite = self.loader.loadTestsFromTestCase(testcase)
             self.sendValueToDevice(testcaseName, self.storage, device)
@@ -96,7 +101,11 @@ class SingleTester:
             random.seed(seed)
 
             deviceReturnValues = self.runner.run(suite).getReturnValues()
-            deviceResult = deviceReturnValues[testcaseName] if testcaseName in deviceReturnValues else None
+            if testcaseName in deviceReturnValues:
+                deviceResult = deviceReturnValues[testcaseName]
+            else:
+                print(f"[ERROR] Error run {testcaseName} on {device}, return -1")
+                return -1
             if device == "cpu":
                 print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
                 pass
