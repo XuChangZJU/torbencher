@@ -262,6 +262,7 @@ class torbencherc:
                             passed = self.tester.run(testCase, device=device, seed=seed)
                         except Exception as e:
                             outputResults[device][testModuleName][testcaseName] = "CompareError"
+                            break
                         if passed == -1:
                             outputResults[device][testModuleName][testcaseName] = "Error"
                             break
