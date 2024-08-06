@@ -265,9 +265,10 @@ class torbencherc:
                         if passed == -1:
                             outputResults[device][testModuleName][testcaseName] = "Error"
                             break
-                        if not passed:
+                        if passed:
                             outputResults[device][testModuleName][testcaseName] = "Failed"
                             break
+            self.tester.resetTester();
         return outputResults
 
     def saveResult(self, config: dict, result: dict):
