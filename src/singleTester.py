@@ -131,6 +131,7 @@ class SingleTester:
                     print(f"[WARN] {testcaseName} has not passed the test on {device}\n\n\n")
 
         self.resetRandom()
+        self.resetTester()
         return passed
 
     def applyRandomInjectors(self, testcaseName: str) -> None:
