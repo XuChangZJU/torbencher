@@ -258,7 +258,10 @@ class torbencherc:
                     testcaseName = testCase.__name__
                     outputResults[device][testModuleName][testcaseName] = "Passed"
                     for _ in range(repeat):
-                        passed = self.tester.run(testCase, device=device, seed=seed)
+                        try:
+                            passed = self.tester.run(testCase, device=device, seed=seed)
+                        except Exception as e:
+                            outputResults[device][testModuleName][testcaseName] = "CompareError"
                         if passed == -1:
                             outputResults[device][testModuleName][testcaseName] = "Error"
                             break
