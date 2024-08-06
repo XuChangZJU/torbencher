@@ -265,7 +265,7 @@ class torbencherc:
                         if passed == -1:
                             outputResults[device][testModuleName][testcaseName] = "Error"
                             break
-                        if passed:
+                        if not passed:
                             outputResults[device][testModuleName][testcaseName] = "Failed"
                             break
             self.tester.resetTester();
