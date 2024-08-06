@@ -17,7 +17,7 @@ class torbencherc:
     SUPPORTED_NAME_SPECS = ["timestamp", "datetime"]
 
     class DEFAULTS:
-        OUT_DIR = "./"
+        OUT_DIR = "./results"
         FORMAT = "csv"
         TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
         NAME_SPEC = "timestamp"
@@ -259,6 +259,9 @@ class torbencherc:
                     outputResults[device][testModuleName][testcaseName] = "Passed"
                     for _ in range(repeat):
                         passed = self.tester.run(testCase, device=device, seed=seed)
+                        if passed == -1:
+                            outputResults[device][testModuleName][testcaseName] = "Error"
+                            break
                         if not passed:
                             outputResults[device][testModuleName][testcaseName] = "Failed"
                             break
