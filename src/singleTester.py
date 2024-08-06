@@ -1,258 +1,370 @@
-import random
-import numpy as np
 import time
+import os
+import platform
+import psutil
+import pandas as pd
+import importlib
+import torch
 
-from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from .util.apitools import *
-from .util.decorator import randomInjector
-from .util.CustomUnittest import MyTestRunner, MyTestLoader
+from .singleTester import SingleTester
+from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
-class SingleTester:
-    """
-    **description**
-    SingleTester is a class responsible for running test cases derived from TorBencherTestCaseBase on both CPU and optionally a specified device (like GPU) while ensuring consistent random seeds.
+class torbencherc:
+    SUPPORTED_FORMATS = ["csv", 'json', 'xlsx']
+    AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+    SUPPORTED_NAME_SPECS = ["timestamp", "datetime"]
 
-    **Attributes**
-    loader (MyTestLoader): Instance for loading test cases.
-    runner (MyTestRunner): Instance for running test suites.
-    storage (dict): Dictionary to store intermediate values for random number injections.
+    class DEFAULTS:
+        OUT_DIR = "./results"
+        FORMAT = "csv"
+        TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
+        NAME_SPEC = "timestamp"
 
-    **Methods**
-    run(testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
-        Runs the provided test case on CPU and optionally on a specified device, comparing the results.
-    applyRandomInjectors(testcaseName: str) -> None:
-        Apply the randomInjector decorator to random functions.
-    sendValueToDevice(testcaseName: str, storage: dict, device: str) -> None:
-        Send the values from storage to the specified device.
-    """
+    class ConfigKey:
+        OUT_DIR = "out_dir"
+        SEED = "seed"
+        DEVICES = "devices"
+        TEST_MODULES = "test_modules"
+        FORMAT = "format"
+        NUM_EPOCH = "num_epoch"
+        NAME_SPEC = "name_spec"
 
-    def __init__(self) -> None:
+    class ResultKey:
+        CPU = "cpu"
+        MEMORY = "memory"
+        OS = "os"
+        OS_RELEASE = "os_release"
+        OS_VERSION = "os_version"
+        NODE = "node"
+        MACHINE = "machine"
+        PYTHON_VERSION = "python_version"
+        TORCH_VERSION = "torch_version"
+        TEST_RESULTS = "test_results"
+        START_TIME = "start_time"
+
+    class TestResultKey:
+        MODULE_NAME = "module_name"
+        TESTCASE = "testcase"
+        PASSED = "passed"
+        FAILURE_DETAILS = "failure_details"
+
+    def __init__(self, config: dict):
         """
         **description**
-        Initializes the SingleTester class by setting up the test loader, runner, and storage.
+        Initialize the Torbencher class with a configuration dictionary.
 
         **params**
-        None
-        """
-        self.loader = MyTestLoader()
-        self.runner = MyTestRunner(verbosity=2)
-        self.storage = {}
-        self.uniform = random.uniform
-        self.rrandint = random.randint
-        self.trandint = torch.randint
-        self.randn = torch.randn
-        self.normal = torch.normal
-        self.rand = torch.rand
-        self.rchoice = random.choice
-        self.rrandom = random.random
-
-    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None) -> bool:
-        """
-        **description**
-        Runs the provided test case on CPU and optionally on a specified device, comparing the results.
-
-        **params**
-        testcase (TorBencherTestCaseBase): The test case class to be tested.
-        device (str, optional): The device to test on (e.g., 'cuda'). Defaults to cpu.
-        seed (int, optional): The seed for random number generation. Defaults to 443.
+        - config (dict): Configuration dictionary.
 
         **returns**
-        passed (bool): The passed status of the testcase.
-
-        **raises**
-        AssertionError: If the provided testcase is not a subclass of TorBencherTestCaseBase.
-        Warning/Error: If one of CPU or Device has no return.
+        - None
         """
-        assert issubclass(testcase, TorBencherTestCaseBase)
-        testcaseName = testcase.__name__
-        if not seed:
-            seed = time.time_ns()
-        if device != "cpu":
-            print(f"[INITIALIZE] Start testing {testcaseName} on {device}")
+        self.config = self.parseConfig(config)
+        self.result = {}
+        self.initBasics()
+        self.tester = SingleTester()
+
+    def parseConfig(self, config: dict) -> dict:
+        """
+        **description**
+        Parse the configuration dictionary and set default values where necessary.
+
+        **params**
+        - config (dict): Configuration dictionary.
+
+        **returns**
+        - dict: Parsed configuration dictionary.
+        """
+        if torbencherc.ConfigKey.OUT_DIR not in config:
+            print("No output directory found in config, check your result at pwd/cwd.")
+            config[torbencherc.ConfigKey.OUT_DIR] = torbencherc.DEFAULTS.OUT_DIR
+
+        if torbencherc.ConfigKey.SEED in config:
+            seed = config[torbencherc.ConfigKey.SEED]
+            assert isinstance(seed, int)
         else:
-            print(f"[INITIALIZE] Start testing {testcaseName}")
+            config[torbencherc.ConfigKey.SEED] = time.time_ns()
 
-        suite = self.loader.loadTestsFromTestCase(testcase)
-        self.sendValueToDevice(testcaseName, self.storage, "cpu")
-        torch.set_default_device("cpu")
-        torch.manual_seed(seed)
-        random.seed(seed)
-
-        self.applyRandomInjectors(testcaseName)
-        cpuReturnValues = self.runner.run(suite).getReturnValues()
-        if testcaseName in cpuReturnValues:
-            cpuResult = cpuReturnValues[testcaseName]
-        else:
-            print(f"[ERROR] Error run {testcaseName} on cpu, return -1")
-            return -1
-        for record in self.storage.values():
-            record["status"] = True
-
-        print(f"[DEBUG] result on cpu is \n{cpuResult}")
-
-        deviceResult = None
-        passed = False
-        if device:
-            torch.set_default_device(device)
-            suite = self.loader.loadTestsFromTestCase(testcase)
-            self.sendValueToDevice(testcaseName, self.storage, device)
-            torch.manual_seed(seed)
-            random.seed(seed)
-
-            deviceReturnValues = self.runner.run(suite).getReturnValues()
-            if testcaseName in deviceReturnValues:
-                deviceResult = deviceReturnValues[testcaseName]
-            else:
-                print(f"[ERROR] Error run {testcaseName} on {device}, return -1")
-                return -1
-            if device == "cpu":
-                print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
+        if torbencherc.ConfigKey.DEVICES in config:
+            if isinstance(config[torbencherc.ConfigKey.DEVICES], list):
                 pass
-            else:
-                print(f"[DEBUG] result on {device} is \n{deviceResult}")
-
-        if cpuResult is None and deviceResult is None:
-            print(f"[WARN] Both CPU and Device have no return, if normal ignore this, defaultly Passed.")
-            return True
-        elif cpuResult is None or deviceResult is None:
-            print(f"[ERROR] One of CPU or Device has no return, there must be something wrong.")
+            elif isinstance(config[torbencherc.ConfigKey.DEVICES], str):
+                config[torbencherc.ConfigKey.DEVICES] = [config[torbencherc.ConfigKey.DEVICES]]
         else:
-            if cpuResult is not None and deviceResult is not None:
-                if torch.is_tensor(deviceResult):
-                    deviceResult = deviceResult.to(torch.device("cpu"))
+            config[torbencherc.ConfigKey.DEVICES] = ["cpu"]
 
-                # Comparison
-                passed = self.judgeCommon(cpuResult, deviceResult, testcaseName)
+        if torbencherc.ConfigKey.TEST_MODULES in config:
+            test_modules = config[torbencherc.ConfigKey.TEST_MODULES]
+            assert isinstance(test_modules, list)
+        else:
+            config[torbencherc.ConfigKey.TEST_MODULES] = torbencherc.DEFAULTS.TEST_MODULES
 
-                if passed:
-                    print(testcaseName + f" has passed the test on {device}\n\n\n")
-                else:
-                    print(f"[WARN] {testcaseName} has not passed the test on {device}\n\n\n")
+        if not torbencherc.ConfigKey.FORMAT in config:
+            config[torbencherc.ConfigKey.FORMAT] = torbencherc.DEFAULTS.FORMAT
+        else:
+            if config[torbencherc.ConfigKey.FORMAT] not in torbencherc.SUPPORTED_FORMATS:
+                raise ValueError(
+                    f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
 
-        self.resetRandom()
-        return passed
+        if not torbencherc.ConfigKey.NAME_SPEC in config:
+            config[torbencherc.ConfigKey.NAME_SPEC] = torbencherc.DEFAULTS.NAME_SPEC
+        else:
+            if config[torbencherc.ConfigKey.NAME_SPEC] not in torbencherc.SUPPORTED_NAME_SPECS:
+                raise ValueError(
+                    f"Unsupported name spec {config[torbencherc.ConfigKey.NAME_SPEC]}. Supported formats are {torbencherc.SUPPORTED_NAME_SPECS}")
 
-    def applyRandomInjectors(self, testcaseName: str) -> None:
+        return config
+
+    def initBasics(self):
         """
         **description**
-        Apply the randomInjector decorator to random functions.
+        Initialize basic information like start time, machine info, and software info.
 
         **params**
-        testcaseName (str): The name of the test case.
-        """
-        setattr(random, 'randint', randomInjector(self.rrandint, self.storage, testcaseName))
-        setattr(random, 'uniform', randomInjector(self.uniform, self.storage, testcaseName))
-        setattr(torch, 'randn', randomInjector(self.randn, self.storage, testcaseName))
-        setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName))
-        setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName))
-        setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName))
-        setattr(random, 'choice', randomInjector(self.rchoice, self.storage, testcaseName))
-        setattr(random, 'random', randomInjector(self.rrandom, self.storage, testcaseName))
-
-    def injectModule(self, module: type, testcaseName: str) -> None:
-        """
-        **description**
-        Inject the randomInjector into a module's attributes.
-
-        **params**
-        module (type): The module containing attributes to be injected.
-        testcaseName (str): The name of the test case.
-        """
-        for attr in getAttributes(module):
-            obj = getattr(module, attr)
-            setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName))
-
-    def judgeCommon(self, cpuResult, deviceResult, testcaseName):
-        """
-        **description**
-        Compares the results from the CPU and the specified device to determine if they match.
-
-        **params**
-        cpuResult: The result from the CPU run.
-        deviceResult: The result from the device run.
-        testcaseName (str): The name of the test case.
+        - None
 
         **returns**
-        passed (bool): True if the results match, False otherwise.
-
-        **raises**
-        ValueError: If an error occurs during comparison, providing the test case name.
+        - None
         """
-        torch.set_default_device("cpu")
-        cpu = torch.device("cpu")
-        passed = False
-        try:
-            if isinstance(cpuResult, object):
-                passed = type(cpuResult) == type(deviceResult)
-            if isinstance(cpuResult, bool):
-                passed = cpuResult == deviceResult
+        self.result[torbencherc.ResultKey.START_TIME] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-            if type(cpuResult) == type(1) or type(cpuResult) == type(3.14):
-                passed = np.allclose(cpuResult, deviceResult)
+        self.result[torbencherc.ResultKey.CPU] = platform.processor()
+        self.result[torbencherc.ResultKey.MEMORY] = "{:.2f} GB".format(
+            round(psutil.virtual_memory().total / (1024 ** 3), 2))
 
-            if torch.is_tensor(cpuResult):
-                cpuResult = cpuResult.to(cpu)
-                deviceResult = deviceResult.to(cpu)
-                passed = torch.allclose(cpuResult, deviceResult)
+        self.result[torbencherc.ResultKey.OS] = platform.system()
+        self.result[torbencherc.ResultKey.OS_RELEASE] = platform.release()
+        self.result[torbencherc.ResultKey.OS_VERSION] = platform.version()
+        self.result[torbencherc.ResultKey.NODE] = platform.node()
+        self.result[torbencherc.ResultKey.MACHINE] = platform.machine()
 
-            if isinstance(cpuResult, tuple):
-                for idx in range(len(cpuResult)):
-                    if isinstance(cpuResult[idx], bool):
-                        passed = cpuResult[idx] == deviceResult[idx]
-                        if not passed: return False
-                    if torch.is_tensor(cpuResult[idx]):
-                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu))
-                        if not passed: return False
-        except Exception as e:
-            passed = False
-            raise ValueError(f"The testcase that cause the comparison error is `{testcaseName}`") from e
-        return passed
+        self.result[torbencherc.ResultKey.PYTHON_VERSION] = platform.python_version()
+        self.result[torbencherc.ResultKey.TORCH_VERSION] = torch.__version__
 
-    def sendValueToDevice(self, testcaseName: str, storage: dict, device: str) -> None:
+    def run(self):
         """
         **description**
-        Send the values from storage to the specified device.
+        Run all the test cases on all the devices and save the results.
 
         **params**
-        testcaseName (str): The name of the test case.
-        storage (dict): The storage dictionary containing intermediate values.
-        device (str): The device to which values should be sent (e.g., 'cuda').
-        """
-        if testcaseName in storage:
-            device = torch.device(device)
-            for lst in storage[testcaseName]["result"].values():
-                for idx, val in enumerate(lst):
-                    if torch.is_tensor(val):
-                        lst[idx] = val.to(device)
-        else:
-            pass
+        - None
 
-    def resetTester(self) -> None:
+        **returns**
+        - dict: Test results.
+        """
+        testResult = self.runTest(self.config)
+        self.result[torbencherc.ResultKey.TEST_RESULTS] = testResult
+        self.saveResult(self.config, self.result)
+        print(f"Torbencher has finished testing, check your result at {self.config[torbencherc.ConfigKey.OUT_DIR]}")
+        self.deleteNonPyFiles()
+        return testResult
+
+    def runTest(self, config: dict) -> dict:
         """
         **description**
-        Resets the tester by reinitializing the loader, runner, and storage.
+        Run the specified test cases based on the configuration.
 
         **params**
-        None
-        """
-        self.loader = MyTestLoader()
-        self.runner = MyTestRunner(verbosity=2)
-        self.storage = {}
+        - config (dict): Configuration dictionary.
 
-    def resetRandom(self) -> None:
+        **returns**
+        - dict: Test results.
+        """
+        if torch.__version__ < "2.1.0":
+            raise RuntimeError("Torch version must be greater than 2.1.0")
+
+        outputResults = {}
+        names = [f"src.testcase.{test_module}" for test_module in config[torbencherc.ConfigKey.TEST_MODULES]]
+
+        moduleList = self.importModules(names, outputResults)
+        allTestCases = self.getTestCases(moduleList)
+
+        outputResults = self.runWithTester(config=self.config, allTestCases=allTestCases, outputResults=outputResults)
+        return outputResults
+
+    def importModules(self, names: list, outputResults: dict) -> dict:
         """
         **description**
-        Resets the random functions to their original state.
+        Import the specified test modules.
 
         **params**
-        None
+        - names (list): List of module names to import.
+        - outputResults (dict): Dictionary to store the import results.
+
+        **returns**
+        - dict: Dictionary of imported modules.
         """
-        setattr(random, 'randint', self.rrandint)
-        setattr(random, 'uniform', self.uniform)
-        setattr(torch, 'randn', self.randn)
-        setattr(torch, 'normal', self.normal)
-        setattr(torch, 'rand', self.rand)
-        setattr(torch, 'randint', self.trandint)
-        setattr(random, 'choice', self.rchoice)
-        setattr(random, 'random', self.rrandom)
+        modules = {}
+        for name in names:
+            try:
+                module = importlib.import_module(name)
+                if name not in modules:
+                    modules[name] = []
+                modules[name].append(module)
+            except Exception as e:
+                print(f"Error importing module {name}: {e}")
+                outputResults[name] = {
+                    torbencherc.TestResultKey.PASSED: "ModuleImportError",
+                    torbencherc.TestResultKey.FAILURE_DETAILS: str(e)
+                }
+        return modules
+
+    def getTestCases(self, moduleList: dict) -> dict:
+        """
+        **description**
+        Get test cases from the imported modules.
+
+        **params**
+        - moduleList (dict): Dictionary of imported modules.
+
+        **returns**
+        - dict: Dictionary of test cases.
+        """
+        allTestCases = {}
+        for name, testcaseModules in moduleList.items():
+            allTestCases[name] = []
+            for module in testcaseModules:
+                attrNames = getAttributes(module)
+                for attrName in attrNames:
+                    attr = getattr(module, attrName, None)
+                    if isinstance(attr, type) and issubclass(attr, TorBencherTestCaseBase) \
+                            and attr is not TorBencherTestCaseBase:
+                        allTestCases[name].append(attr)
+        return allTestCases
+
+    def runWithTester(self, config: dict, allTestCases: dict, outputResults: dict) -> dict:
+        """
+        **description**
+        Run the test cases with the tester.
+
+        **params**
+        - config (dict): Configuration dictionary.
+        - allTestCases (dict): Dictionary of test cases.
+        - outputResults (dict): Dictionary to store the test results.
+
+        **returns**
+        - dict: Updated test results.
+        """
+        devices = config[torbencherc.ConfigKey.DEVICES]
+        seed = config[torbencherc.ConfigKey.SEED]
+        repeat = config[torbencherc.ConfigKey.NUM_EPOCH]
+        for device in devices:
+            outputResults[device] = {}
+            for testModuleName, testCases in allTestCases.items():
+                outputResults[device][testModuleName] = {}
+                for testCase in testCases:
+                    testcaseName = testCase.__name__
+                    outputResults[device][testModuleName][testcaseName] = "Passed"
+                    for _ in range(repeat):
+                        passed = self.tester.run(testCase, device=device, seed=seed)
+                        if passed == -1:
+                            outputResults[device][testModuleName][testcaseName] = "Error"
+                            break
+                        if not passed:
+                            outputResults[device][testModuleName][testcaseName] = "Failed"
+                            break
+        return outputResults
+
+    def saveResult(self, config: dict, result: dict):
+        """
+        **description**
+        Save the test results based on the specified format.
+
+        **params**
+        - config (dict): Configuration dictionary.
+        - result (dict): Test results.
+
+        **returns**
+        - None
+        """
+        testResult = result[torbencherc.ResultKey.TEST_RESULTS]
+        formattedResult = self.getDFFormattedTestResult(testResult)
+        self.saveDFFormattedResult(config, formattedResult)
+
+    def getDFFormattedTestResult(self, testResult: dict) -> pd.DataFrame:
+        """
+        **description**
+        Format the test results into a DataFrame.
+
+        **params**
+        - testResult (dict): Dictionary of test results.
+
+        **returns**
+        - pd.DataFrame: Formatted test results as DataFrame.
+        """
+        rows = []
+        devices = list(testResult.keys())
+        header = [torbencherc.TestResultKey.MODULE_NAME, torbencherc.TestResultKey.TESTCASE] + devices
+        for device, testModules in testResult.items():
+            for moduleName, testCases in testModules.items():
+                for testCase, result in testCases.items():
+                    row = [moduleName, testCase]
+                    for dev in devices:
+                        row.append(testResult[dev].get(moduleName, {}).get(testCase, "N/A"))
+                    rows.append(row)
+        return pd.DataFrame(rows, columns=header)
+
+    def getFileName(self, config: dict) -> str:
+        """
+        **description**
+        Generate a file name based on the name specification in the configuration.
+
+        **params**
+        - config (dict): Configuration dictionary.
+
+        **returns**
+        - str: Generated file name.
+        """
+        if config[torbencherc.ConfigKey.NAME_SPEC] == "timestamp":
+            return str(time.time_ns())
+        elif config[torbencherc.ConfigKey.NAME_SPEC] == "datetime":
+            return time.strftime("%Y%m%d_%H%M%S", time.localtime())
+        return "unknown_name_spec"
+
+    def saveDFFormattedResult(self, config: dict, formattedResult: pd.DataFrame):
+        """
+        **description**
+        Save the DataFrame formatted result based on the specified format.
+
+        **params**
+        - config (dict): Configuration dictionary.
+        - formattedResult (pd.DataFrame): DataFrame of formatted results.
+
+        **returns**
+        - None
+        """
+        out_dir = config[torbencherc.ConfigKey.OUT_DIR]
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+        format = config[torbencherc.ConfigKey.FORMAT]
+        fileNameSpec = self.getFileName(config)
+
+        if format == "csv":
+            formattedResult.to_csv(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.csv'), index=False)
+        elif format == "json":
+            formattedResult.to_json(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.json'),
+                                    orient='records')
+        elif format == "xlsx":
+            formattedResult.to_excel(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.xlsx'), index=False)
+
+    def deleteNonPyFiles(self, dirPath: str = None):
+        """
+        **description**
+        Delete non-Python files from the specified directory.
+
+        **params**
+        - dirPath (str, optional): Directory path to clean. Defaults to the current working directory.
+
+        **returns**
+        - None
+        """
+        if not dirPath:
+            dirPath = os.path.join(os.getcwd(), "")
+        for root, dirs, files in os.walk(dirPath):
+            for file in files:
+                if file.endswith('.cpp') or file.endswith('.pyc') or file.endswith('.c') or file.endswith('.pt'):
+                    filePath = os.path.join(root, file)
+                    # print(f"Deleting file: {filePath}")
+                    os.remove(filePath)
