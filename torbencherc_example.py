@@ -50,9 +50,7 @@ config = {
         # "torch.utils.data",                   # 'TorchUtilsDataGetworkerinfoTestCase' stucked, hard to fix
         # "torch.utils.data._utils",            # Empty, needs to be dived into?
         # "torch.utils.data.distributed",       # 'TorchUtilsDataDistributedDistributedsamplerTestCase' can only run on cuda
-        # "torch.utils.data.utils",             # Empty, needs to be dived into?
         # "torch.utils.data._utils.collate",    # Only one, but Well Done
-        # "torch.utils.data.utils.collate",     # Only one, but Well Done(Doubt this the same as the one above)
     ],
     "format": "csv",
     "num_epoch": 1,
