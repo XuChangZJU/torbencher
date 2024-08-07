@@ -54,7 +54,7 @@ config = {
         "torch.utils.data._utils.collate",    # Only one, but Well Done
     ],
     "format": "csv",
-    "num_epoch": 30,
+    "num_epoch": 1,
     "name_spec": "timestamp"
 }
 freeze_support()
