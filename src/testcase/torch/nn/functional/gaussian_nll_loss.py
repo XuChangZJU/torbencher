@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.gaussian_nll_loss)
-class TorchNnFunctionalGaussiannlllossTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalGaussianUnllUlossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_gaussian_nll_loss_correctness(self):
         # Randomly generate input size

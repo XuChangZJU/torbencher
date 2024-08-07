@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.cpp_extension.BuildExtension)
-class TorchUtilsCppextensionBuildextensionTestCase(TorBencherTestCaseBase):
+class TorchUtilsCppUextensionBuildextensionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_build_extension_correctness(self):
         # Randomly generate a name for the extension

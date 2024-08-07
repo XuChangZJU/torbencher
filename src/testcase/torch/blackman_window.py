@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.blackman_window)
-class TorchBlackmanwindowTestCase(TorBencherTestCaseBase):
+class TorchBlackmanUwindowTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_blackman_window_correctness(self):
         # Randomly generate the window length (positive integer)

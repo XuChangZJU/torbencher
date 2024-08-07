@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.linalg.lu_solve)
-class TorchLinalgLusolveTestCase(TorBencherTestCaseBase):
+class TorchLinalgLuUsolveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_lu_solve_correctness(self):
         # Random dimension for the square matrix A

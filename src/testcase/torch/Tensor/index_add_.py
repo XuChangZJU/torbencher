@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.index_add_)
-class TorchTensorIndexaddTestCase(TorBencherTestCaseBase):
+class TorchTensorIndexUaddUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_index_add_correctness(self):
         dim = random.randint(0, 2)  # Random dimension for the operation (0, 1, or 2)

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.row_stack)
-class TorchRowstackTestCase(TorBencherTestCaseBase):
+class TorchRowUstackTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_row_stack_correctness(self):
         num_of_tensors = random.randint(2, 5)  # Random number of tensors to stack

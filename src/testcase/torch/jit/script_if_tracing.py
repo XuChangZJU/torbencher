@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.jit.script_if_tracing)
-class TorchJitScriptiftracingTestCase(TorBencherTestCaseBase):
+class TorchJitScriptUifUtracingTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_script_if_tracing_correctness(self):
         # Define a simple function to be compiled

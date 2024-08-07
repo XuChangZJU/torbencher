@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.gumbel_softmax)
-class TorchNnFunctionalGumbelsoftmaxTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalGumbelUsoftmaxTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_gumbel_softmax_correctness(self):
         # Randomly generate input tensor dimension

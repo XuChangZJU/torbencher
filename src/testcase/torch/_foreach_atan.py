@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_atan)
-class TorchForeachatanTestCase(TorBencherTestCaseBase):
+class TorchUforeachUatanTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_atan_correctness(self):
         # foreach_atan requires the same number of elements for each Tensor in the list

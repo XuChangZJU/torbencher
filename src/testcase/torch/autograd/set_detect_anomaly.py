@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.set_detect_anomaly)
-class TorchAutogradSetdetectanomalyTestCase(TorBencherTestCaseBase):
+class TorchAutogradSetUdetectUanomalyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_detect_anomaly_correctness(self):
         mode = random.choice([True, False])  # Randomly choose mode

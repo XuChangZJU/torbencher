@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.checkpoint.set_checkpoint_debug_enabled)
-class TorchUtilsCheckpointSetcheckpointdebugenabledTestCase(TorBencherTestCaseBase):
+class TorchUtilsCheckpointSetUcheckpointUdebugUenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_checkpoint_debug_enabled_correctness(self):
         # Randomly enable or disable checkpoint debug mode

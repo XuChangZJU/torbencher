@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.acos_)
-class TorchTensorAcosTestCase(TorBencherTestCaseBase):
+class TorchTensorAcosUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_acos__correctness(self):
         # Generate random dimension and size for the tensor

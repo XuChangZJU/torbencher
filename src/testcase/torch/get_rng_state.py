@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.get_rng_state)
-class TorchGetrngstateTestCase(TorBencherTestCaseBase):
+class TorchGetUrngUstateTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_get_rng_state_correctness(self):
         # Generate random tensors before getting the RNG state

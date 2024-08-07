@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.abs_)
-class TorchTensorAbsTestCase(TorBencherTestCaseBase):
+class TorchTensorAbsUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_abs__correctness(self):
         # Generate random dimension for the tensor

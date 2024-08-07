@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.fake_quantize_per_channel_affine)
-class TorchFakequantizeperchannelaffineTestCase(TorBencherTestCaseBase):
+class TorchFakeUquantizeUperUchannelUaffineTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_fake_quantize_per_channel_affine_correctness(self):
         dim = random.randint(2, 4)  # Dimension should be larger than 2 to avoid broadcasting issue

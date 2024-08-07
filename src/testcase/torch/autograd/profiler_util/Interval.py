@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.profiler_util.Interval)
-class TorchAutogradProfilerutilIntervalTestCase(TorBencherTestCaseBase):
+class TorchAutogradProfilerUutilIntervalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_Interval_correctness(self):
         # Generate random start and end times

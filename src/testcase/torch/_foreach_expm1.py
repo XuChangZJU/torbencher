@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_expm1)
-class TorchForeachexpm1TestCase(TorBencherTestCaseBase):
+class TorchUforeachUexpm1TestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_expm1_correctness(self):
         # foreach_expm1 requires the length of input list to be larger than 0

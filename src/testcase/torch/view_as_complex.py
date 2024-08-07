@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.view_as_complex)
-class TorchViewascomplexTestCase(TorBencherTestCaseBase):
+class TorchViewUasUcomplexTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_view_as_complex_correctness(self):
         # Random dimension for the tensors (at least 1)

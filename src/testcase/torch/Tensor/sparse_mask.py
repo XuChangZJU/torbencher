@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.sparse_mask)
-class TorchTensorSparsemaskTestCase(TorBencherTestCaseBase):
+class TorchTensorSparseUmaskTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_sparse_mask_correctness(self):
         # Randomly generate dimensions for the tensors

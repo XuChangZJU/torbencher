@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.special.airy_ai)
-class TorchSpecialAiryaiTestCase(TorBencherTestCaseBase):
+class TorchSpecialAiryUaiTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_airy_ai_correctness(self):
         # Randomly generate input tensor data

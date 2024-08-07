@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.reciprocal_)
-class TorchTensorReciprocalTestCase(TorBencherTestCaseBase):
+class TorchTensorReciprocalUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_reciprocal__correctness(self):
         """test the correctness of torch.Tensor.reciprocal_

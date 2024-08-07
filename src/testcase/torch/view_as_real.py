@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.view_as_real)
-class TorchViewasrealTestCase(TorBencherTestCaseBase):
+class TorchViewUasUrealTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_view_as_real_correctness(self):
         # Generate random dimension for the tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.linalg.ldl_factor_ex)
-class TorchLinalgLdlfactorexTestCase(TorBencherTestCaseBase):
+class TorchLinalgLdlUfactorUexTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_ldl_factor_ex_correctness(self):
         # Random dimension for the tensor

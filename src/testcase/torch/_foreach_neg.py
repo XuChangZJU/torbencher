@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_neg)
-class TorchForeachnegTestCase(TorBencherTestCaseBase):
+class TorchUforeachUnegTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_neg_correctness(self):
         # foreach_neg requires the same dtype

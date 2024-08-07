@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.function.FunctionCtx.save_for_backward)
-class TorchAutogradFunctionFunctionctxSaveforbackwardTestCase(TorBencherTestCaseBase):
+class TorchAutogradFunctionFunctionctxSaveUforUbackwardTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_save_for_backward_correctness(self):
         # Define a custom function to test save_for_backward

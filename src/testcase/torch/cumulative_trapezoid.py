@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.cumulative_trapezoid)
-class TorchCumulativetrapezoidTestCase(TorBencherTestCaseBase):
+class TorchCumulativeUtrapezoidTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cumulative_trapezoid_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

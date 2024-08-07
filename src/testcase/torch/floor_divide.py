@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.floor_divide)
-class TorchFloordivideTestCase(TorBencherTestCaseBase):
+class TorchFloorUdivideTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_floor_divide_correctness(self):
         # Define the dimension and size of the tensors

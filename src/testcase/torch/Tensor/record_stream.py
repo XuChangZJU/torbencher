@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.record_stream)
-class TorchTensorRecordstreamTestCase(TorBencherTestCaseBase):
+class TorchTensorRecordUstreamTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_record_stream_correctness(self):
         # Check if CUDA is available

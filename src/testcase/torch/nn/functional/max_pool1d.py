@@ -6,7 +6,7 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.max_pool1d)
-class TorchNnFunctionalMaxpool1dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalMaxUpool1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_max_pool1d_correctness(self):
         # Randomly generate dimensions for the input tensor

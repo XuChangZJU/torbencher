@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_tan)
-class TorchForeachtanTestCase(TorBencherTestCaseBase):
+class TorchUforeachUtanTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_tan_correctness(self):
         # Define the dimension and size of the input tensors

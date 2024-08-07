@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.manual_seed)
-class TorchManualseedTestCase(TorBencherTestCaseBase):
+class TorchManualUseedTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_manual_seed_correctness(self):
         seed = random.randint(-(2 ** 63), 2 ** 63 - 1)  # Seed for random number generator

@@ -4,7 +4,7 @@ import random
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 
-class TorchCpuStreamContextTestCase(TorBencherTestCaseBase):
+class TorchCpuStreamcontextTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_stream_context_correctness(self):
 

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.float_power)
-class TorchFloatpowerTestCase(TorBencherTestCaseBase):
+class TorchFloatUpowerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_float_power_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

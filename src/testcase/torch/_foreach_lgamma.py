@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_lgamma)
-class TorchForeachlgammaTestCase(TorBencherTestCaseBase):
+class TorchUforeachUlgammaTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_lgamma_correctness(self):
         # foreach_lgamma requires the input to be a list of tensors

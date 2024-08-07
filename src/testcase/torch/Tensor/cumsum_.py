@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.cumsum_)
-class TorchTensorCumsumTestCase(TorBencherTestCaseBase):
+class TorchTensorCumsumUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cumsum__correctness(self):
         # Random dimension for the tensors

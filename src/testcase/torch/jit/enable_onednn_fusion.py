@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.jit.enable_onednn_fusion)
-class TorchJitEnableonednnfusionTestCase(TorBencherTestCaseBase):
+class TorchJitEnableUonednnUfusionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_enable_onednn_fusion_correctness(self):
         # Randomly enable or disable onednn JIT fusion

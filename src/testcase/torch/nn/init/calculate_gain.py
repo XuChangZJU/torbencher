@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.init.calculate_gain)
-class TorchNnInitCalculategainTestCase(TorBencherTestCaseBase):
+class TorchNnInitCalculateUgainTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_calculate_gain_correctness(self):
         # Define possible nonlinearities and their expected gains

@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.profiler.tensorboard_trace_handler)
-class TorchProfilerTensorboardtracehandlerTestCase(TorBencherTestCaseBase):
+class TorchProfilerTensorboardUtraceUhandlerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_tensorboard_trace_handler_correctness(self):
         # Generate random parameters

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.linalg.inv_ex)
-class TorchLinalgInvexTestCase(TorBencherTestCaseBase):
+class TorchLinalgInvUexTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_linalg_inv_ex_correctness(self):
         # Generate random dimension for the square matrix

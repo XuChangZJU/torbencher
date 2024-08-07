@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.one_hot)
-class TorchNnFunctionalOnehotTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalOneUhotTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_one_hot_correctness(self):
         # Random dimension for the tensor

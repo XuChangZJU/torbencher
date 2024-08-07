@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.mha.set_fastpath_enabled)
-class TorchBackendsMhaSetfastpathenabledTestCase(TorBencherTestCaseBase):
+class TorchBackendsMhaSetUfastpathUenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_fastpath_enabled_correctness(self):
         # Randomly enable or disable the fastpath

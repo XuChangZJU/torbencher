@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.copy_)
-class TorchTensorCopyTestCase(TorBencherTestCaseBase):
+class TorchTensorCopyUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_copy_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

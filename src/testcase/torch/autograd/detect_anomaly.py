@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.detect_anomaly)
-class TorchAutogradDetectanomalyTestCase(TorBencherTestCaseBase):
+class TorchAutogradDetectUanomalyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_detect_anomaly_correctness(self):
         class MyFunc(torch.autograd.Function):

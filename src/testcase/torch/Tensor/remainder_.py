@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.remainder_)
-class TorchTensorRemainderTestCase(TorBencherTestCaseBase):
+class TorchTensorRemainderUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_remainder__correctness(self):
         # Randomly generate the dimension of the input tensor

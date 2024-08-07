@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.lgamma_)
-class TorchTensorLgammaTestCase(TorBencherTestCaseBase):
+class TorchTensorLgammaUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_lgamma__correctness(self):
         # Randomly generate the input tensor size

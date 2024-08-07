@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.triangular_solve)
-class TorchTriangularsolveTestCase(TorBencherTestCaseBase):
+class TorchTriangularUsolveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_triangular_solve_correctness(self):
         # Randomly generate matrix dimensions

@@ -5,7 +5,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 
 
-class TorchAstensorTestCase(TorBencherTestCaseBase):
+class TorchAsUtensorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_as_tensor_correctness(self):
         # Generate random dimension and size for the tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.masked_scatter)
-class TorchTensorMaskedscatterTestCase(TorBencherTestCaseBase):
+class TorchTensorMaskedUscatterTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_masked_scatter_correctness(self):
         # Define the dimension and size of the tensors

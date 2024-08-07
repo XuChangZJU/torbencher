@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.cuda.cufft_plan_cache.torch.backends.cuda.math_sdp_enabled)
-class TorchBackendsCudaCufftplancacheTorchBackendsCudaMathsdpenabledTestCase(TorBencherTestCaseBase):
+class TorchBackendsCudaCufftplancacheTorchBackendsCudaMathUsdpUenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cufft_plan_cache_correctness(self):
         # Randomly generate the size of the tensor

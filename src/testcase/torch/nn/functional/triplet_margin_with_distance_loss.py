@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.triplet_margin_with_distance_loss)
-class TorchNnFunctionalTripletmarginwithdistancelossTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalTripletUmarginUwithUdistanceUlossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_triplet_margin_with_distance_loss_correctness(self):
         # Random dimension for the tensors

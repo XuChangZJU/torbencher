@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._assert)
-class TorchAssertTestCase(TorBencherTestCaseBase):
+class TorchUassertTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_assert_correctness(self):
         tensor_size = [random.randint(1, 4) for _ in

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.transpose_)
-class TorchTensorTransposeTestCase(TorBencherTestCaseBase):
+class TorchTensorTransposeUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_transpose__correctness(self):
         dim = random.randint(2, 4)  # Random dimension for the tensors, should be larger than 1

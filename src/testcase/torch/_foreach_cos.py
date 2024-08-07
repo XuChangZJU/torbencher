@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_cos)
-class TorchForeachcosTestCase(TorBencherTestCaseBase):
+class TorchUforeachUcosTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_cos_correctness(self):
         # foreach_cos input is a List[Tensor]

@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.nll_loss)
-class TorchNnFunctionalNlllossTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalNllUlossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_nll_loss_correctness(self):
         # Randomly choose dimensions for the input tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.parameters_to_vector)
-class TorchNnUtilsParameterstovectorTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsParametersUtoUvectorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_parameters_to_vector_correctness(self):
         # Generate random dimension for the tensors

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.binary_cross_entropy_with_logits)
-class TorchNnFunctionalBinarycrossentropywithlogitsTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalBinaryUcrossUentropyUwithUlogitsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_binary_cross_entropy_with_logits_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

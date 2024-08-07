@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.cuda.cufft_plan_cache.torch.backends.cuda.preferred_linalg_library)
-class TorchBackendsCudaCufftplancacheTorchBackendsCudaPreferredlinalglibraryTestCase(TorBencherTestCaseBase):
+class TorchBackendsCudaCufftUplanUcacheTorchBackendsCudaPreferredUlinalgUlibraryTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_preferred_linalg_library_correctness(self):
         # No input parameters for torch.backends.cuda.preferred_linalg_library

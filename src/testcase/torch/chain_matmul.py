@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.chain_matmul)
-class TorchChainmatmulTestCase(TorBencherTestCaseBase):
+class TorchChainUmatmulTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_chain_matmul_correctness(self):
         # Generate random dimensions for the matrices

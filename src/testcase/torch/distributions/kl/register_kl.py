@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.kl.register_kl)
-class TorchDistributionsKlRegisterklTestCase(TorBencherTestCaseBase):
+class TorchDistributionsKlRegisterUklTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_register_kl_correctness(self):
         # Define a custom KL divergence function for Normal distributions

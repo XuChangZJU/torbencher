@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.init.eye_)
-class TorchNnInitEyeTestCase(TorBencherTestCaseBase):
+class TorchNnInitEyeUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_eye_correctness(self):
         # Randomly generate the dimension of the tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.cpu.is_available)
-class TorchCpuIsavailableTestCase(TorBencherTestCaseBase):
+class TorchCpuIsUavailableTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cpu_is_available_correctness(self):
         # No specific parameters to randomize for torch.cpu.is_available()

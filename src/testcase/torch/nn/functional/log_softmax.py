@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.log_softmax)
-class TorchNnFunctionalLogsoftmaxTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalLogUsoftmaxTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_log_softmax_correctness(self):
         # Randomly generate the dimension of the input tensor

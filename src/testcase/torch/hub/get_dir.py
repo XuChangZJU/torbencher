@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.hub.get_dir)
-class TorchHubGetdirTestCase(TorBencherTestCaseBase):
+class TorchHubGetUdirTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_get_dir_correctness(self):
         # No random parameters needed for this test case

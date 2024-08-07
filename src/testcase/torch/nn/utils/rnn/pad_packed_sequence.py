@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.rnn.pad_packed_sequence)
-class TorchNnUtilsRnnPadpackedsequenceTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsRnnPadUpackedUsequenceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_pad_packed_sequence_correctness(self):
         # Randomly generate batch size and max sequence length

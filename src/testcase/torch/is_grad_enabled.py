@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.is_grad_enabled)
-class TorchIsgradenabledTestCase(TorBencherTestCaseBase):
+class TorchIsUgradUenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_grad_enabled_correctness(self):
         # No need for random parameters, we just test the function's output in different grad states

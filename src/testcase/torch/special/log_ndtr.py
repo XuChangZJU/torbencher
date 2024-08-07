@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.special.log_ndtr)
-class TorchSpecialLogndtrTestCase(TorBencherTestCaseBase):
+class TorchSpecialLogUndtrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_log_ndtr_correctness(self):
         """

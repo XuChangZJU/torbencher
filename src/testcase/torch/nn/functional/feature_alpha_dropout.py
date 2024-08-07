@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.feature_alpha_dropout)
-class TorchNnFunctionalFeaturealphadropoutTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalFeatureUalphaUdropoutTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_feature_alpha_dropout_correctness(self):
         """

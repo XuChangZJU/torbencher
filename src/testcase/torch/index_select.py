@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.index_select)
-class TorchIndexselectTestCase(TorBencherTestCaseBase):
+class TorchIndexUselectTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_index_select_correctness(self):
         # Randomly generate the dimension of the input tensor

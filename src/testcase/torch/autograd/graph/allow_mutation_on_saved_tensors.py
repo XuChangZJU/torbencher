@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.graph.allow_mutation_on_saved_tensors)
-class TorchAutogradGraphAllowmutationonsavedtensorsTestCase(TorBencherTestCaseBase):
+class TorchAutogradGraphAllowUmutationUonUsavedUtensorsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_allow_mutation_on_saved_tensors_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.q_per_channel_zero_points)
-class TorchTensorQperchannelzeropointsTestCase(TorBencherTestCaseBase):
+class TorchTensorQUperUchannelUzeroUpointsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_q_per_channel_zero_points_correctness(self):
         dim = random.randint(1, 4)

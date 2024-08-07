@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.mse_loss)
-class TorchNnFunctionalMselossTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalMseUlossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_mse_loss_correctness(self):
         # Randomly generate input tensor size

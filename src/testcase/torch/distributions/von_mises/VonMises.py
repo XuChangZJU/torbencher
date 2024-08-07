@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.von_mises.VonMises)
-class TorchDistributionsVonmisesVonmisesTestCase(TorBencherTestCaseBase):
+class TorchDistributionsVonUmisesVonmisesTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_VonMises_correctness(self):
         # Random dimension for the tensors

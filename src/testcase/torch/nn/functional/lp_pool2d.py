@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.lp_pool2d)
-class TorchNnFunctionalLppool2dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalLpUpool2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_lp_pool2d_correctness(self):
         # Randomly generate dimensions for the input tensor

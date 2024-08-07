@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.weight_norm)
-class TorchNnUtilsWeightnormTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsWeightUnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_weight_norm_correctness(self):
         # Define the dimensions of the weight tensor

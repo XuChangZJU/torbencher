@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.addbmm_)
-class TorchTensorAddbmmTestCase(TorBencherTestCaseBase):
+class TorchTensorAddbmmUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_addbmm__correctness(self):
         # Random dimensions for the batch tensors

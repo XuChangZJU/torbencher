@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.new_tensor)
-class TorchTensorNewtensorTestCase(TorBencherTestCaseBase):
+class TorchTensorNewUtensorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_new_tensor_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

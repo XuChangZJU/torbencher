@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.arccos_)
-class TorchTensorArccosTestCase(TorBencherTestCaseBase):
+class TorchTensorArccosUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_arccos__correctness(self):
         # Randomly generate the dimension of the input tensor

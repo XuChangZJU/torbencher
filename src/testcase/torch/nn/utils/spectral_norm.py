@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.spectral_norm)
-class TorchNnUtilsSpectralnormTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsSpectralUnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_spectral_norm_correctness(self):
         # Define the input size for the Linear layer

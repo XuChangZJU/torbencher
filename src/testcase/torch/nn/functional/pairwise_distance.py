@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.pairwise_distance)
-class TorchNnFunctionalPairwisedistanceTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalPairwiseUdistanceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_pairwise_distance_correctness(self):
         # Random dimension for the tensors

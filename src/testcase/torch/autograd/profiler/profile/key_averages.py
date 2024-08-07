@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.profiler.profile.key_averages)
-class TorchAutogradProfilerProfileKeyaveragesTestCase(TorBencherTestCaseBase):
+class TorchAutogradProfilerProfileKeyUaveragesTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_key_averages_correctness(self):
         """

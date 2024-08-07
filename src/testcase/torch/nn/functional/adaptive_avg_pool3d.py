@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.adaptive_avg_pool3d)
-class TorchNnFunctionalAdaptiveavgpool3dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalAdaptiveUavgUpool3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_adaptive_avg_pool3d_correctness(self):
         # Randomly generate dimensions for the input tensor

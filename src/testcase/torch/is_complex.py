@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.is_complex)
-class TorchIscomplexTestCase(TorBencherTestCaseBase):
+class TorchIsUcomplexTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_complex_correctness(self):
         # Create random dimension and number of elements for the tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_acos)
-class TorchForeachacosTestCase(TorBencherTestCaseBase):
+class TorchUforeachUacosTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_acos_correctness(self):
         # foreach_acos requires the input tensors to be in the range [-1, 1]

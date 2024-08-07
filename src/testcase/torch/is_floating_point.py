@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.is_floating_point)
-class TorchIsfloatingpointTestCase(TorBencherTestCaseBase):
+class TorchIsUfloatingUpointTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_floating_point_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

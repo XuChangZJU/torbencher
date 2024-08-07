@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.fx.symbolic_trace)
-class TorchFxSymbolictraceTestCase(TorBencherTestCaseBase):
+class TorchFxSymbolicUtraceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_symbolic_trace_correctness(self):
         # Define a simple function with control flow

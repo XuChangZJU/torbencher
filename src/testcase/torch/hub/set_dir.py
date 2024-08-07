@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.hub.set_dir)
-class TorchHubSetdirTestCase(TorBencherTestCaseBase):
+class TorchHubSetUdirTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_dir_correctness(self):
         # torch.hub.set_dir(d: str)

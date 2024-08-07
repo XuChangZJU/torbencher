@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.greater_equal)
-class TorchGreaterequalTestCase(TorBencherTestCaseBase):
+class TorchGreaterUequalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_greater_equal_correctness(self):
         # Random dimension for the tensors

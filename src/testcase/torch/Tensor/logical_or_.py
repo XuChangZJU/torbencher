@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.logical_or_)
-class TorchTensorLogicalorTestCase(TorBencherTestCaseBase):
+class TorchTensorLogicalUorUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_logical_or__correctness(self):
         # Define the dimension and size of the tensors randomly

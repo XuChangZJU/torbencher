@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.fill_diagonal_)
-class TorchTensorFilldiagonalTestCase(TorBencherTestCaseBase):
+class TorchTensorFillUdiagonalUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_fill_diagonal__correctness(self):
         # Randomly generate the dimension of the tensor (at least 2)

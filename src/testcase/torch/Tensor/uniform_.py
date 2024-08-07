@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.uniform_)
-class TorchTensorUniformTestCase(TorBencherTestCaseBase):
+class TorchTensorUniformUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_uniform__correctness(self):
         # Random dimension for the tensors

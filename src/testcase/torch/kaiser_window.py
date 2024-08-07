@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.kaiser_window)
-class TorchKaiserwindowTestCase(TorBencherTestCaseBase):
+class TorchKaiserUwindowTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_kaiser_window_correctness(self):
         # window_length: length of the window.

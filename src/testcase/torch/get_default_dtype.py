@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.get_default_dtype)
-class TorchGetdefaultdtypeTestCase(TorBencherTestCaseBase):
+class TorchGetUdefaultUdtypeTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_get_default_dtype_correctness(self):
         initial_dtype = torch.get_default_dtype()  # Get the initial default dtype

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.optim.Optimizer.zero_grad)
-class TorchOptimOptimizerZerogradTestCase(TorBencherTestCaseBase):
+class TorchOptimOptimizerZeroUgradTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_zero_grad_correctness(self):
         # Randomly generate the size of the model

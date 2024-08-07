@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_cosh_)
-class TorchForeachcoshTestCase(TorBencherTestCaseBase):
+class TorchUforeachUcoshUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_cosh_correctness(self):
         # Generate random input parameters for torch._foreach_cosh_

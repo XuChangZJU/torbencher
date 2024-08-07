@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.logit_)
-class TorchTensorLogitTestCase(TorBencherTestCaseBase):
+class TorchTensorLogitUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_logit__correctness(self):
         """

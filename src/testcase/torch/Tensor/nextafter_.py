@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.nextafter_)
-class TorchTensorNextafterTestCase(TorBencherTestCaseBase):
+class TorchTensorNextafterUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_nextafter__correctness(self):
         # Generate random dimension for the tensors

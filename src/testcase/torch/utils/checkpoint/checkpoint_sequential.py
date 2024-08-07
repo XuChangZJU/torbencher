@@ -6,7 +6,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 
 
-class TorchUtilsCheckpointCheckpointsequentialTestCase(TorBencherTestCaseBase):
+class TorchUtilsCheckpointCheckpointUsequentialTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_checkpoint_sequential_correctness(self):
         # 随机生成层的数量

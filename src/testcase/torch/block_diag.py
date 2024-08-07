@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.block_diag)
-class TorchBlockdiagTestCase(TorBencherTestCaseBase):
+class TorchBlockUdiagTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_block_diag_correctness(self):
         # Generate random dimensions for the tensors

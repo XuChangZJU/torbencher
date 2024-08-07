@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.mixture_same_family.MixtureSameFamily)
-class TorchDistributionsMixturesamefamilyMixturesamefamilyTestCase(TorBencherTestCaseBase):
+class TorchDistributionsMixtureUsameUfamilyMixturesamefamilyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_MixtureSameFamily_correctness(self):
         # Randomly generate batch_shape for mixture_distribution

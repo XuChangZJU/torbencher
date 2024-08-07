@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.rnn.pad_sequence)
-class TorchNnUtilsRnnPadsequenceTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsRnnPadUsequenceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_pad_sequence_correctness(self):
         # Randomly generate the number of sequences

@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.prune.l1_unstructured)
-class TorchNnUtilsPruneL1unstructuredTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsPruneL1UunstructuredTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_l1_unstructured_correctness(self):
         # Randomly generate dimensions for the Linear layer

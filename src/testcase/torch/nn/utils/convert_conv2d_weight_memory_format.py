@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.convert_conv2d_weight_memory_format)
-class TorchNnUtilsConvertconv2dweightmemoryformatTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsConvertUconv2dUweightUmemoryUformatTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_convert_conv2d_weight_memory_format_correctness(self):
         # Random input size

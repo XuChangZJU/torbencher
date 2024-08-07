@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.generate_methods_for_privateuse1_backend)
-class TorchUtilsGeneratemethodsforprivateuse1backendTestCase(TorBencherTestCaseBase):
+class TorchUtilsGenerateUmethodsUforUprivateuse1UbackendTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_generate_methods_for_privateuse1_backend_correctness(self):
         # Randomly decide whether to register methods for torch.Tensor, torch.nn.Module, and torch.Storage

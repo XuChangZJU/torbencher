@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.data_ptr)
-class TorchTensorDataptrTestCase(TorBencherTestCaseBase):
+class TorchTensorDataUptrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_data_ptr_correctness(self):
         # Generate random dimension and size for the tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.lu_unpack)
-class TorchLuunpackTestCase(TorBencherTestCaseBase):
+class TorchLuUunpackTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_lu_unpack_correctness(self):
         # Randomly choose the dimensions for the tensor

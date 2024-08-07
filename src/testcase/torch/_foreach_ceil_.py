@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_ceil_)
-class TorchForeachceilTestCase(TorBencherTestCaseBase):
+class TorchUforeachUceilUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_ceil_correctness(self):
         # foreach_ceil_ is an inplace function. So we test its correctness by comparing the result before and after the function call.

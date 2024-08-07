@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.bitwise_xor_)
-class TorchTensorBitwisexorTestCase(TorBencherTestCaseBase):
+class TorchTensorBitwiseUxorUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_bitwise_xor__correctness(self):
         # Randomly generate input tensor size

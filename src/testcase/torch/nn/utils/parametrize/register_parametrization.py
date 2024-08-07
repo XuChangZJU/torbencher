@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.parametrize.register_parametrization)
-class TorchNnUtilsParametrizeRegisterparametrizationTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsParametrizeRegisterUparametrizationTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_register_parametrization_correctness(self):
         # Randomly generate dimensions for the linear layer

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.scaled_dot_product_attention)
-class TorchNnFunctionalScaleddotproductattentionTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalScaledUdotUproductUattentionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_scaled_dot_product_attention_correctness(self):
         # Random shapes for query, key, and value tensors

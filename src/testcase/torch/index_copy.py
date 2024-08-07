@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.index_copy)
-class TorchIndexcopyTestCase(TorBencherTestCaseBase):
+class TorchIndexUcopyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_index_copy_correctness(self):
         # Randomly generate tensor dimensions

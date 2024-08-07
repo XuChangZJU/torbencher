@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.prune.global_unstructured)
-class TorchNnUtilsPruneGlobalunstructuredTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsPruneGlobalUunstructuredTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_global_unstructured_correctness(self):
         # Define the size of the neural network

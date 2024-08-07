@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.cholesky_inverse)
-class TorchCholeskyinverseTestCase(TorBencherTestCaseBase):
+class TorchCholeskyUinverseTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cholesky_inverse_correctness(self):
         # Randomly generate matrix dimension sizes

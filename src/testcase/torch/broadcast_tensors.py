@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.broadcast_tensors)
-class TorchBroadcasttensorsTestCase(TorBencherTestCaseBase):
+class TorchBroadcastUtensorsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_broadcast_tensors_correctness(self):
         # Randomly generate dimensions for two tensors

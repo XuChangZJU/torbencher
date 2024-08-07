@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.expand_as)
-class TorchTensorExpandasTestCase(TorBencherTestCaseBase):
+class TorchTensorExpandUasTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_expand_as_correctness(self):
         # Generate random dimensions for the base tensor

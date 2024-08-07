@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.svd_lowrank)
-class TorchSvdlowrankTestCase(TorBencherTestCaseBase):
+class TorchSvdUlowrankTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_svd_lowrank_correctness(self):
         dim1 = random.randint(1, 4)  # Random dimension for the tensor

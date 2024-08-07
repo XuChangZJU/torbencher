@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.fuse_linear_bn_eval)
-class TorchNnUtilsFuselinearbnevalTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsFuseUlinearUbnUevalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_fuse_linear_bn_eval_correctness(self):
         # Randomly generate input size for the linear layer

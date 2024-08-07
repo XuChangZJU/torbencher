@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.data._utils.collate.collate)
-class TorchUtilsDataUtilsCollateCollateTestCase(TorBencherTestCaseBase):
+class TorchUtilsDataUutilsCollateCollateTestCase(TorBencherTestCaseBase):
     @staticmethod
     @test_api_version.larger_than("1.1.3")
     def collate_tensor_fn(batch, *, collate_fn_map):

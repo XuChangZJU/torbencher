@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.pixel_shuffle)
-class TorchNnFunctionalPixelshuffleTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalPixelUshuffleTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_pixel_shuffle_correctness(self):
         # Randomly generate input tensor shape

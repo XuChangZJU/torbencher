@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.logical_xor)
-class TorchTensorLogicalxorTestCase(TorBencherTestCaseBase):
+class TorchTensorLogicalUxorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_logical_xor_correctness(self):
         # Generate random dimension and size for input tensors

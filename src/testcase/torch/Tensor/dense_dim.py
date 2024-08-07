@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.dense_dim)
-class TorchTensorDensedimTestCase(TorBencherTestCaseBase):
+class TorchTensorDenseUdimTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_dense_dim_correctness(self):
         # Randomly decide if the tensor is sparse or not

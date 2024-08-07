@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.compiled_with_cxx11_abi)
-class TorchCompiledwithcxx11abiTestCase(TorBencherTestCaseBase):
+class TorchCompiledUwithUcxx11UabiTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_compiled_with_cxx11_abi_correctness(self):
         # No random parameters needed for this test as it checks a build configuration.

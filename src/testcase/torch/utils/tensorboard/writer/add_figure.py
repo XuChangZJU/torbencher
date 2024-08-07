@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.tensorboard.writer.add_figure)
-class TorchUtilsTensorboardWriterAddfigureTestCase(TorBencherTestCaseBase):
+class TorchUtilsTensorboardWriterAddUfigureTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_add_figure_correctness(self):
         # Create a random figure

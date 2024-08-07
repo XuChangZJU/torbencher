@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.jit.set_fusion_strategy)
-class TorchJitSetfusionstrategyTestCase(TorBencherTestCaseBase):
+class TorchJitSetUfusionUstrategyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_fusion_strategy_correctness(self):
         # Randomly generate fusion strategy

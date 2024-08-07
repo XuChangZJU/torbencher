@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.cuda.is_built)
-class TorchBackendsCudaIsbuiltTestCase(TorBencherTestCaseBase):
+class TorchBackendsCudaIsUbuiltTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_built_correctness(self):
         # No input parameters needed for torch.backends.cuda.is_built

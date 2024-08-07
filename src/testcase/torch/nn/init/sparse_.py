@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.init.sparse_)
-class TorchNnInitSparseTestCase(TorBencherTestCaseBase):
+class TorchNnInitSparseUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_sparse_correctness(self):
         # Randomly generate dimensions for a 2D tensor

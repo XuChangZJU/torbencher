@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.tensorboard.writer.add_pr_curve)
-class TorchUtilsTensorboardWriterAddprcurveTestCase(TorBencherTestCaseBase):
+class TorchUtilsTensorboardWriterAddUprUcurveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_add_pr_curve_correctness(self):
         writer = SummaryWriter()

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.fix_)
-class TorchTensorFixTestCase(TorBencherTestCaseBase):
+class TorchTensorFixUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_fix__correctness(self):
         # Define the dimension and size of the tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.negative_binomial.NegativeBinomial)
-class TorchDistributionsNegativebinomialNegativebinomialTestCase(TorBencherTestCaseBase):
+class TorchDistributionsNegativeUbinomialNegativebinomialTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_torch_distributions_negative_binomial_NegativeBinomial_correctness(self):
         # Generate random parameters for NegativeBinomial distribution

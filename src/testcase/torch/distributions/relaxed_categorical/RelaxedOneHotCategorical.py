@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.relaxed_categorical.RelaxedOneHotCategorical)
-class TorchDistributionsRelaxedcategoricalRelaxedonehotcategoricalTestCase(TorBencherTestCaseBase):
+class TorchDistributionsRelaxedUcategoricalRelaxedonehotcategoricalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_RelaxedOneHotCategorical_correctness(self):
         """

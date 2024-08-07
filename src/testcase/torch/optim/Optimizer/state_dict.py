@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.optim.Optimizer.state_dict)
-class TorchOptimOptimizerStatedictTestCase(TorBencherTestCaseBase):
+class TorchOptimOptimizerStateUdictTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_optimizer_state_dict_correctness(self):
         # Randomly generate the number of parameters

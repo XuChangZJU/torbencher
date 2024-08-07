@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.quantized_max_pool2d)
-class TorchQuantizedmaxpool2dTestCase(TorBencherTestCaseBase):
+class TorchQuantizedUmaxUpool2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_quantized_max_pool2d_correctness(self):
         # Random 4D tensor dimensions (N, C, H, W)

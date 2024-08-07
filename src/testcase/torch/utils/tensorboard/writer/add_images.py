@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.tensorboard.writer.add_images)
-class TorchUtilsTensorboardWriterAddimagesTestCase(TorBencherTestCaseBase):
+class TorchUtilsTensorboardWriterAddUimagesTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_add_images_correctness(self):
         writer = SummaryWriter()

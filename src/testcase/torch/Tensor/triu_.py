@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.triu_)
-class TorchTensorTriuTestCase(TorBencherTestCaseBase):
+class TorchTensorTriuUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_triu_correctness(self):
         dim = random.randint(2, 4)  # Random dimension for the tensor, at least 2 to form a matrix

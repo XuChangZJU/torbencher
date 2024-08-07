@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.cuda.cufft_plan_cache.torch.backends.cuda.sdp_kernel)
-class TorchBackendsCudaCufftplancacheTorchBackendsCudaSdpkernelTestCase(TorBencherTestCaseBase):
+class TorchBackendsCudaCufftplancacheTorchBackendsCudaSdpUkernelTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cufft_plan_cache_correctness(self):
         # Check if CUDA is available

@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.export.graph_signature.OutputSpec)
-class TorchExportGraphsignatureOutputspecTestCase(TorBencherTestCaseBase):
+class TorchExportGraphUsignatureOutputspecTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_OutputSpec_correctness(self):
         # Generate random parameters for OutputSpec

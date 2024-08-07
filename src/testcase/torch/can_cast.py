@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.can_cast)
-class TorchCancastTestCase(TorBencherTestCaseBase):
+class TorchCanUcastTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_can_cast_correctness(self):
         # Define the list of all possible torch data types

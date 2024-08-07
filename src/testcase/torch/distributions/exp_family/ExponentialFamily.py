@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.exp_family.ExponentialFamily)
-class TorchDistributionsExpfamilyExponentialfamilyTestCase(TorBencherTestCaseBase):
+class TorchDistributionsExpUfamilyExponentialfamilyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_exponential_family_correctness(self):
         # Random dimension for the tensors

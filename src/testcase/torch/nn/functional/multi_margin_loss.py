@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.multi_margin_loss)
-class TorchNnFunctionalMultimarginlossTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalMultiUmarginUlossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_multi_margin_loss_correctness(self):
         # Randomly generate dimensions for input tensor

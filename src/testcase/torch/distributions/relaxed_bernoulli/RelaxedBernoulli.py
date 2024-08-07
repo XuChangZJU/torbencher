@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.relaxed_bernoulli.RelaxedBernoulli)
-class TorchDistributionsRelaxedbernoulliRelaxedbernoulliTestCase(TorBencherTestCaseBase):
+class TorchDistributionsRelaxedUbernoulliRelaxedbernoulliTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_relaxed_bernoulli_correctness(self):
         # Random dimension for the tensors

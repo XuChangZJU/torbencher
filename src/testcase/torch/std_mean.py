@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.std_mean)
-class TorchStdmeanTestCase(TorBencherTestCaseBase):
+class TorchStdUmeanTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_std_mean_correctness(self):
         dim = random.randint(0, 3)  # Random dimension for the tensors

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.forward_ad.unpack_dual)
-class TorchAutogradForwardadUnpackdualTestCase(TorBencherTestCaseBase):
+class TorchAutogradForwardUadUnpackUdualTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_unpack_dual_correctness(self):
         # Random dimension for the tensors

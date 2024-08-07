@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.relu_)
-class TorchNnFunctionalReluTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalReluUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_relu_correctness(self):
         # Randomly generate the dimension and size of the input tensor

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.linalg.householder_product)
-class TorchLinalgHouseholderproductTestCase(TorBencherTestCaseBase):
+class TorchLinalgHouseholderUproductTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_householder_product_correctness(self):
         # Randomly generate the size of matrix A

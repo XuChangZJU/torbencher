@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.element_size)
-class TorchTensorElementsizeTestCase(TorBencherTestCaseBase):
+class TorchTensorElementUsizeTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_element_size_correctness(self):
         # Randomly choose a dtype from a list of common dtypes

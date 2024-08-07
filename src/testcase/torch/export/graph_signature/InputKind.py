@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.export.graph_signature.InputKind)
-class TorchExportGraphsignatureInputkindTestCase(TorBencherTestCaseBase):
+class TorchExportGraphUsignatureInputkindTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_input_kind_correctness(self):
         # Generate a random tensor size

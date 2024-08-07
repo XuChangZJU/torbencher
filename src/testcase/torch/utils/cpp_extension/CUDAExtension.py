@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.cpp_extension.CUDAExtension)
-class TorchUtilsCppextensionCudaextensionTestCase(TorBencherTestCaseBase):
+class TorchUtilsCppUextensionCudaextensionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cuda_extension_correctness(self):
         # Ensure CUDA_HOME environment variable is set

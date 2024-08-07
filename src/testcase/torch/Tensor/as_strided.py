@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.as_strided)
-class TorchTensorAsstridedTestCase(TorBencherTestCaseBase):
+class TorchTensorAsUstridedTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_as_strided_correctness(self):
         # Randomly generate the size of the original tensor

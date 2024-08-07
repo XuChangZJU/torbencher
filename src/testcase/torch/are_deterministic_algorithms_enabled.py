@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.are_deterministic_algorithms_enabled)
-class TorchAredeterministicalgorithmsenabledTestCase(TorBencherTestCaseBase):
+class TorchAreUdeterministicUalgorithmsUenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_are_deterministic_algorithms_enabled_correctness(self):
         # Test with deterministic algorithms enabled

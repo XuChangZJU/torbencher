@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.clip_grad_norm_)
-class TorchNnUtilsClipgradnormTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsClipUgradUnormUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_clip_grad_norm_correctness(self):
         # Generate random dimension and number of elements for the tensor

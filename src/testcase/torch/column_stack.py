@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.column_stack)
-class TorchColumnstackTestCase(TorBencherTestCaseBase):
+class TorchColumnUstackTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_column_stack_correctness(self):
         # Define the number of tensors to stack

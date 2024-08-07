@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_cosh)
-class TorchForeachcoshTestCase(TorBencherTestCaseBase):
+class TorchUforeachUcoshTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_cosh_correctness(self):
         # foreach_cosh operator applies element-wise, so we test with a list of randomly sized tensors.

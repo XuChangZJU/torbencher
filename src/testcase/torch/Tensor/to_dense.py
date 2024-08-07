@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.to_dense)
-class TorchTensorTodenseTestCase(TorBencherTestCaseBase):
+class TorchTensorToUdenseTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_to_dense_correctness(self):
         # Randomly decide if the tensor will be sparse or dense

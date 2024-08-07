@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.clip_grad_norm)
-class TorchNnUtilsClipgradnormTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsClipUgradUnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_clip_grad_norm_correctness(self):
         # Randomly generate the number of parameters

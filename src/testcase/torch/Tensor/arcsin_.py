@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.arcsin_)
-class TorchTensorArcsinTestCase(TorBencherTestCaseBase):
+class TorchTensorArcsinUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_arcsin__correctness(self):
         # Randomly generate the dimension of the input tensor.

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.arctan2_)
-class TorchTensorArctan2TestCase(TorBencherTestCaseBase):
+class TorchTensorArctan2UTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_arctan2__correctness(self):
         # Randomly generate input tensor size

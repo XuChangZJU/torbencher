@@ -25,7 +25,7 @@ class CustomClampFunction(torch.autograd.Function):
 
 
 @test_api(CustomClampFunction.apply)
-class TorchAutogradFunctionOncedifferentiableTestCase(TorBencherTestCaseBase):
+class TorchAutogradFunctionOnceUdifferentiableTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_once_differentiable_correctness(self):
         # Randomly generate input tensor x

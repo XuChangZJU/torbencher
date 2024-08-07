@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.lowrank_multivariate_normal.LowRankMultivariateNormal)
-class TorchDistributionsLowrankmultivariatenormalLowrankmultivariatenormalTestCase(TorBencherTestCaseBase):
+class TorchDistributionsLowrankUmultivariateUnormalLowrankmultivariatenormalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_LowRankMultivariateNormal_correctness(self):
         # Randomly generate batch_shape, event_shape and rank

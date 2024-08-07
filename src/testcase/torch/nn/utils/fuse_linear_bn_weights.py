@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.fuse_linear_bn_weights)
-class TorchNnUtilsFuselinearbnweightsTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsFuseUlinearUbnUweightsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_fuse_linear_bn_weights_correctness(self):
         # Define the dimensions for the linear and batch normalization layers

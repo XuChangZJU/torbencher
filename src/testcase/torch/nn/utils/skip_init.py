@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.skip_init)
-class TorchNnUtilsSkipinitTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsSkipUinitTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_skip_init_correctness(self):
         # Randomly choose the input and output features for the Linear layer

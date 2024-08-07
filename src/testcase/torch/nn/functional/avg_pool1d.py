@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.avg_pool1d)
-class TorchNnFunctionalAvgpool1dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalAvgUpool1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_avg_pool1d_correctness(self):
         # Randomly generate minibatch size and number of input channels

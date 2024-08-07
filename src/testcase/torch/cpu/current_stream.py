@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.cpu.current_stream)
-class TorchCpuCurrentstreamTestCase(TorBencherTestCaseBase):
+class TorchCpuCurrentUstreamTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cpu_current_stream_correctness(self):
         # No input parameters to randomize

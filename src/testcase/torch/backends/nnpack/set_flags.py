@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.nnpack.set_flags)
-class TorchBackendsNnpackSetflagsTestCase(TorBencherTestCaseBase):
+class TorchBackendsNnpackSetUflagsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_flags_correctness(self):
         # Randomly generate boolean values for the flags

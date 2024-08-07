@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.from_numpy)
-class TorchFromnumpyTestCase(TorBencherTestCaseBase):
+class TorchFromUnumpyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_from_numpy_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the array

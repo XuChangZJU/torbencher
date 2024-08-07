@@ -8,7 +8,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.profiler.load_nvprof)
-class TorchAutogradProfilerLoadnvprofTestCase(TorBencherTestCaseBase):
+class TorchAutogradProfilerLoadUnvprofTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_load_nvprof_correctness(self):
         # Generate a random file path for the nvprof trace

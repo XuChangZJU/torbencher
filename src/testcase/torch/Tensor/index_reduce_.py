@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.index_reduce_)
-class TorchTensorIndexreduceTestCase(TorBencherTestCaseBase):
+class TorchTensorIndexUreduceUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_index_reduce_correctness(self):
         # Randomly choose dimension for the operation

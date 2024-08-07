@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.no_grad)
-class TorchNogradTestCase(TorBencherTestCaseBase):
+class TorchNoUgradTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_no_grad_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

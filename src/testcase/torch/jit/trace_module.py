@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.jit.trace_module)
-class TorchJitTracemoduleTestCase(TorBencherTestCaseBase):
+class TorchJitTraceUmoduleTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_trace_module_correctness(self):
         # Define the module with multiple methods

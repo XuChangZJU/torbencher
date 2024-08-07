@@ -24,7 +24,7 @@ def worker_init_fn(worker_id):
 
 
 @test_api(torch.utils.data.get_worker_info)
-class TorchUtilsDataGetworkerinfoTestCase(TorBencherTestCaseBase):
+class TorchUtilsDataGetUworkerUinfoTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_get_worker_info_correctness(self):
         dataset_size = random.randint(10, 100)  # Random dataset size between 10 and 100

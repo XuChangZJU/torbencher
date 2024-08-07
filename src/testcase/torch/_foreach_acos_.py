@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_acos_)
-class TorchForeachacosTestCase(TorBencherTestCaseBase):
+class TorchUforeachUacosUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_acos_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.embedding_bag)
-class TorchNnFunctionalEmbeddingbagTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalEmbeddingUbagTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_embedding_bag_correctness(self):
         # Randomly generate the number of embeddings and embedding dimension

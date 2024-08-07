@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.is_sparse)
-class TorchTensorIssparseTestCase(TorBencherTestCaseBase):
+class TorchTensorIsUsparseTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_sparse_correctness(self):
         # Randomly generate input size for the tensor

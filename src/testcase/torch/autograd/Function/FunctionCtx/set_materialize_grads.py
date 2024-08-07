@@ -39,7 +39,7 @@ class SimpleFunc(Function):
 
 
 @test_api(torch.autograd.function.FunctionCtx.set_materialize_grads)
-class TorchAutogradFunctionFunctionctxSetmaterializegradsTestCase(TorBencherTestCaseBase):
+class TorchAutogradFunctionFunctionctxSetUmaterializeUgradsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_materialize_grads_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

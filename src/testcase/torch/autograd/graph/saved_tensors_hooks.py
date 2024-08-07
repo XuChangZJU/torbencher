@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.graph.saved_tensors_hooks)
-class TorchAutogradGraphSavedtensorshooksTestCase(TorBencherTestCaseBase):
+class TorchAutogradGraphSavedUtensorsUhooksTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_saved_tensors_hooks_correctness(self):
         # Define pack and unpack hooks

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.init.kaiming_normal_)
-class TorchNnInitKaimingnormalTestCase(TorBencherTestCaseBase):
+class TorchNnInitKaimingUnormalUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_kaiming_normal_correctness(self):
         # Random dimension for the tensor, ensuring at least 2 dimensions

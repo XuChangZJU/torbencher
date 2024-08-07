@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.conj_physical)
-class TorchConjphysicalTestCase(TorBencherTestCaseBase):
+class TorchConjUphysicalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_conj_physical_correctness(self):
         # Generate a random dimension for the tensor

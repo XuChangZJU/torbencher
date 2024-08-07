@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.from_dlpack)
-class TorchFromdlpackTestCase(TorBencherTestCaseBase):
+class TorchFromUdlpackTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_from_dlpack_correctness(self):
         # from_dlpack support directly convert tensor since 1.10.0

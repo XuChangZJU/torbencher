@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.jit.optimize_for_inference)
-class TorchJitOptimizeforinferenceTestCase(TorBencherTestCaseBase):
+class TorchJitOptimizeUforUinferenceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_optimize_for_inference_correctness(self):
         # Define input size randomly

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.bernoulli_)
-class TorchTensorBernoulliTestCase(TorBencherTestCaseBase):
+class TorchTensorBernoulliUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_bernoulli__correctness(self):
         # Random dimension for the tensor

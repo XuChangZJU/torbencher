@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.testing.assert_allclose)
-class TorchTestingAssertallcloseTestCase(TorBencherTestCaseBase):
+class TorchTestingAssertUallcloseTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_assert_allclose_correctness(self):
         """Test correctness with small scale random parameters."""

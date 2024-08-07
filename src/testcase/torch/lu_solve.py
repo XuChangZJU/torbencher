@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.lu_solve)
-class TorchLusolveTestCase(TorBencherTestCaseBase):
+class TorchLuUsolveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_lu_solve_correctness(self):
         # Generate random sizes for the input tensors

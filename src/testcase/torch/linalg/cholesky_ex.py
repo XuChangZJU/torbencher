@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.linalg.cholesky_ex)
-class TorchLinalgCholeskyexTestCase(TorBencherTestCaseBase):
+class TorchLinalgCholeskyUexTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cholesky_ex_correctness(self):
         # Generate a random dimension for the matrix

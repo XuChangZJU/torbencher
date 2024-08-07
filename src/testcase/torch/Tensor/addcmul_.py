@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.addcmul_)
-class TorchTensorAddcmulTestCase(TorBencherTestCaseBase):
+class TorchTensorAddcmulUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_addcmul__correctness(self):
         # Randomly generate tensor dimensions and number of elements

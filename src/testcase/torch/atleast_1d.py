@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.atleast_1d)
-class TorchAtleast1dTestCase(TorBencherTestCaseBase):
+class TorchAtleastU1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_atleast_1d_correctness(self):
         # Random dimension for the first tensor

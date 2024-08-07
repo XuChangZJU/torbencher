@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.opt_einsum.get_opt_einsum)
-class TorchBackendsOpteinsumGetopteinsumTestCase(TorBencherTestCaseBase):
+class TorchBackendsOptUeinsumGetUoptUeinsumTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_get_opt_einsum_correctness(self):
         # Randomly choose a valid equation for einsum

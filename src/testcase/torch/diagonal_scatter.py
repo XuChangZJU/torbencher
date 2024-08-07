@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.diagonal_scatter)
-class TorchDiagonalscatterTestCase(TorBencherTestCaseBase):
+class TorchDiagonalUscatterTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_diagonal_scatter_correctness(self):
         # Randomly generate input tensor size

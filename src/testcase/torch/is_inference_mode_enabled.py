@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.is_inference_mode_enabled)
-class TorchIsinferencemodeenabledTestCase(TorBencherTestCaseBase):
+class TorchIsUinferenceUmodeUenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_inference_mode_enabled_correctness(self):
         # No input parameters for torch.is_inference_mode_enabled()

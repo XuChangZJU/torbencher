@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.init.orthogonal_)
-class TorchNnInitOrthogonalTestCase(TorBencherTestCaseBase):
+class TorchNnInitOrthogonalUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_orthogonal__correctness(self):
         # Randomly generate the dimension of the tensor, at least 2

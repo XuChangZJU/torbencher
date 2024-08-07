@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.profiler.itt.range_push)
-class TorchProfilerIttRangepushTestCase(TorBencherTestCaseBase):
+class TorchProfilerIttRangeUpushTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_range_push_correctness(self):
         # No random parameters for torch.profiler.itt.range_push

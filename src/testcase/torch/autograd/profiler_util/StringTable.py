@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.profiler_util.StringTable)
-class TorchAutogradProfilerutilStringtableTestCase(TorBencherTestCaseBase):
+class TorchAutogradProfilerUutilStringtableTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_string_table_correctness(self):
         # Since torch.autograd.profiler_util.StringTable does not take any parameters,

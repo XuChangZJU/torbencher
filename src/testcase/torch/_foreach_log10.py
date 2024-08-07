@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_log10)
-class TorchForeachlog10TestCase(TorBencherTestCaseBase):
+class TorchUforeachUlog10TestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_log10_correctness(self):
         # foreach_log10 requires the input to be a list of tensors

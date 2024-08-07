@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_sqrt)
-class TorchForeachsqrtTestCase(TorBencherTestCaseBase):
+class TorchUforeachUsqrtTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_sqrt_correctness(self):
         # foreach_sqrt requires the input to be a list of tensors

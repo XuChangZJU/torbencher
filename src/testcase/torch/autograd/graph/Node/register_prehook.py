@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.graph.Node.register_prehook)
-class TorchAutogradGraphNodeRegisterprehookTestCase(TorBencherTestCaseBase):
+class TorchAutogradGraphNodeRegisterUprehookTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_node_register_prehook_correctness(self):
         # Randomly generate input tensor a

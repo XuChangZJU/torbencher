@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.scatter_add)
-class TorchTensorScatteraddTestCase(TorBencherTestCaseBase):
+class TorchTensorScatterUaddTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_scatter_add_correctness(self):
         # Define the dimension of the tensor

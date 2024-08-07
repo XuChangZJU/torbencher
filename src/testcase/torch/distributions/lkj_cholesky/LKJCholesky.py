@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.lkj_cholesky.LKJCholesky)
-class TorchDistributionsLkjcholeskyLkjcholeskyTestCase(TorBencherTestCaseBase):
+class TorchDistributionsLkjUcholeskyLkjcholeskyTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_lkj_cholesky_correctness(self):
         # Random dimension for the matrices

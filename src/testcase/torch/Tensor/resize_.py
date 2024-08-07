@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.resize_)
-class TorchTensorResizeTestCase(TorBencherTestCaseBase):
+class TorchTensorResizeUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_resize_correctness(self):
         # Random dimension for the tensors

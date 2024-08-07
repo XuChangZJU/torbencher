@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.grad_mode.set_multithreading_enabled)
-class TorchAutogradGradmodeSetmultithreadingenabledTestCase(TorBencherTestCaseBase):
+class TorchAutogradGradUmodeSetUmultithreadingUenabledTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_set_multithreading_enabled_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

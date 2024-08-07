@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.cpp_extension.load_inline)
-class TorchUtilsCppextensionLoadinlineTestCase(TorBencherTestCaseBase):
+class TorchUtilsCppUextensionLoadUinlineTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_load_inline_correctness(self):
         # Ensure Ninja is installed

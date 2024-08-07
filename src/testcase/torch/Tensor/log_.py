@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.log_)
-class TorchTensorLogTestCase(TorBencherTestCaseBase):
+class TorchTensorLogUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_log__correctness(self):
         # Generate random dimension and size for the tensor

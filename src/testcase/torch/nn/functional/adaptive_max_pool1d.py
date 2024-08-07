@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.adaptive_max_pool1d)
-class TorchNnFunctionalAdaptivemaxpool1dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalAdaptiveUmaxUpool1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_adaptive_max_pool1d_correctness(self):
         # Random input size

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.get_cpp_backtrace)
-class TorchUtilsGetcppbacktraceTestCase(TorBencherTestCaseBase):
+class TorchUtilsGetUcppUbacktraceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_get_cpp_backtrace_correctness(self):
         frames_to_skip = random.randint(0, 10)  # Random number of frames to skip

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.empty_strided)
-class TorchEmptystridedTestCase(TorBencherTestCaseBase):
+class TorchEmptyUstridedTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_empty_strided_correctness(self):
         # Randomly generate valid parameters for torch.empty_strided

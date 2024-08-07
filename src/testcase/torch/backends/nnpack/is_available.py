@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.nnpack.is_available)
-class TorchBackendsNnpackIsavailableTestCase(TorBencherTestCaseBase):
+class TorchBackendsNnpackIsUavailableTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_nnpack_is_available(self):
         # Check if NNPACK is available

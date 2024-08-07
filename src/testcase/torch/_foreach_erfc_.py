@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_erfc_)
-class TorchForeacherfcTestCase(TorBencherTestCaseBase):
+class TorchUforeachUerfcUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_erfc_correctness(self):
         # foreach_erfc_ is an inplace function, so we test by comparing the result with torch.erfc

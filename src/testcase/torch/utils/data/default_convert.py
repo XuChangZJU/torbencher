@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.data.default_convert)
-class TorchUtilsDataDefaultconvertTestCase(TorBencherTestCaseBase):
+class TorchUtilsDataDefaultUconvertTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_default_convert_correctness(self):
         # Generate random input data

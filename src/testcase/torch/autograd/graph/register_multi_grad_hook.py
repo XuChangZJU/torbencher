@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.graph.register_multi_grad_hook)
-class TorchAutogradGraphRegistermultigradhookTestCase(TorBencherTestCaseBase):
+class TorchAutogradGraphRegisterUmultiUgradUhookTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_register_multi_grad_hook_correctness(self):
         # Define dimensions for the tensors

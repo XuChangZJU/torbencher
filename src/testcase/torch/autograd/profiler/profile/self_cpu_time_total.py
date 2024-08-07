@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.profiler.profile.self_cpu_time_total)
-class TorchAutogradProfilerProfileSelfcputimetotalTestCase(TorBencherTestCaseBase):
+class TorchAutogradProfilerProfileSelfUcpuUtimeUtotalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_self_cpu_time_total_correctness(self):
         """

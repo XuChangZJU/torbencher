@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_ceil)
-class TorchForeachceilTestCase(TorBencherTestCaseBase):
+class TorchUforeachUceilTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_ceil_correctness(self):
         # foreach_ceil requires the input to be a List[Tensor]

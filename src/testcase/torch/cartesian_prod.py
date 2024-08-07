@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.cartesian_prod)
-class TorchCartesianprodTestCase(TorBencherTestCaseBase):
+class TorchCartesianUprodTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cartesian_prod_correctness(self):
         # Randomly generate the number of tensors

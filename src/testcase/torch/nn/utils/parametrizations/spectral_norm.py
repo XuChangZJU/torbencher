@@ -9,7 +9,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.parametrizations.spectral_norm)
-class TorchNnUtilsParametrizationsSpectralnormTestCase(TorBencherTestCaseBase):
+class TorchNnUtilsParametrizationsSpectralUnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_spectral_norm_correctness(self):
         # Randomly generate dimensions for the Linear layer

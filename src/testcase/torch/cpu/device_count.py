@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.cpu.device_count)
-class TorchCpuDevicecountTestCase(TorBencherTestCaseBase):
+class TorchCpuDeviceUcountTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cpu_device_count_correctness(self):
         # No input parameters for torch.cpu.device_count

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_erf)
-class TorchForeacherfTestCase(TorBencherTestCaseBase):
+class TorchUforeachUerfTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_foreach_erf_correctness(self):
         # foreach_erf requires the input to be a list of tensors

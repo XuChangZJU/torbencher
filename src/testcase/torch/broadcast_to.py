@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.broadcast_to)
-class TorchBroadcasttoTestCase(TorBencherTestCaseBase):
+class TorchBroadcastUtoTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_broadcast_to_correctness(self):
         # Randomly generate dimensions: between 1 and 3

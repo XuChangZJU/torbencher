@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.export.graph_signature.CustomObjArgument)
-class TorchExportGraphsignatureCustomobjargumentTestCase(TorBencherTestCaseBase):
+class TorchExportGraphUsignatureCustomobjargumentTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_custom_obj_argument_correctness(self):
         # Randomly generate a string name for the custom object

@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.cosh_)
-class TorchTensorCoshTestCase(TorBencherTestCaseBase):
+class TorchTensorCoshUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cosh__correctness(self):
         # Generate random dimension and size for the tensor

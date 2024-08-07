@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.atleast_3d)
-class TorchAtleast3dTestCase(TorBencherTestCaseBase):
+class TorchAtleastU3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_atleast_3d_correctness(self):
         # Case 1: Input is a single tensor with dim < 3

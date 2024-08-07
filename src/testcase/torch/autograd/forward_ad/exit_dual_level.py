@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.forward_ad.exit_dual_level)
-class TorchAutogradForwardadExitduallevelTestCase(TorBencherTestCaseBase):
+class TorchAutogradForwardUadExitUdualUlevelTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_exit_dual_level_correctness(self):
         # 创建一个随机张量

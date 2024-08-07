@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.sgn_)
-class TorchTensorSgnTestCase(TorBencherTestCaseBase):
+class TorchTensorSgnUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_sgn__correctness(self):
         """

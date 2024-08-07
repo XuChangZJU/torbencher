@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.profiler_util.Kernel)
-class TorchAutogradProfilerutilKernelTestCase(TorBencherTestCaseBase):
+class TorchAutogradProfilerUutilKernelTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_Kernel_correctness(self):
         # Kernel(name, device, duration)

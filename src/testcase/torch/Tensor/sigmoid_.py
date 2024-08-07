@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.sigmoid_)
-class TorchTensorSigmoidTestCase(TorBencherTestCaseBase):
+class TorchTensorSigmoidUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_sigmoid__correctness(self):
         """

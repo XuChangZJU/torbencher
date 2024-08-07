@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.profiler._KinetoProfile)
-class TorchProfilerKinetoprofileTestCase(TorBencherTestCaseBase):
+class TorchProfilerUkinetoprofileTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_kineto_profile_correctness(self):
         # Randomly select activities from ProfilerActivity

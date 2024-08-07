@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.linalg.matrix_norm)
-class TorchLinalgMatrixnormTestCase(TorBencherTestCaseBase):
+class TorchLinalgMatrixUnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_linalg_matrix_norm_correctness(self):
         # Define the dimension of the tensor

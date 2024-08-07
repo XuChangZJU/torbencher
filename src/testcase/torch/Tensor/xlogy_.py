@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.xlogy_)
-class TorchTensorXlogyTestCase(TorBencherTestCaseBase):
+class TorchTensorXlogyUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_xlogy__correctness(self):
         # Define the dimension and size of the input tensors randomly

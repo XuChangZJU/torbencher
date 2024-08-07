@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.bitwise_left_shift)
-class TorchBitwiseleftshiftTestCase(TorBencherTestCaseBase):
+class TorchBitwiseUleftUshiftTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_bitwise_left_shift_correctness(self):
         # Define the dimension and size of the tensors

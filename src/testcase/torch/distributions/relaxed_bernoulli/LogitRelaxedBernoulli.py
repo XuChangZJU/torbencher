@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.relaxed_bernoulli.LogitRelaxedBernoulli)
-class TorchDistributionsRelaxedbernoulliLogitrelaxedbernoulliTestCase(TorBencherTestCaseBase):
+class TorchDistributionsRelaxedUbernoulliLogitrelaxedbernoulliTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_logit_relaxed_bernoulli_correctness(self):
         # Define the parameters for the LogitRelaxedBernoulli distribution

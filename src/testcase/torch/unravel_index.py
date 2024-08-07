@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.unravel_index)
-class TorchUnravelindexTestCase(TorBencherTestCaseBase):
+class TorchUnravelUindexTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_unravel_index_correctness(self):
         # Randomly generate the dimension of the shape

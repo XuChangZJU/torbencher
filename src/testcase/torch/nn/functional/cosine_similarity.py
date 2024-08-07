@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.cosine_similarity)
-class TorchNnFunctionalCosinesimilarityTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalCosineUsimilarityTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cosine_similarity_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors

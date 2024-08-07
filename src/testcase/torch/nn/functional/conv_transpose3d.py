@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.conv_transpose3d)
-class TorchNnFunctionalConvtranspose3dTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalConvUtranspose3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_conv_transpose3d_correctness(self):
         # Random input size

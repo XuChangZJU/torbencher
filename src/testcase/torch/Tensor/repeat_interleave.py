@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.repeat_interleave)
-class TorchTensorRepeatinterleaveTestCase(TorBencherTestCaseBase):
+class TorchTensorRepeatUinterleaveTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_repeat_interleave_correctness(self):
         # Random dimension for the tensors

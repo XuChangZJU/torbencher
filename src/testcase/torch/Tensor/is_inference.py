@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.is_inference)
-class TorchTensorIsinferenceTestCase(TorBencherTestCaseBase):
+class TorchTensorIsUinferenceTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_is_inference_correctness(self):
         # Create a random tensor

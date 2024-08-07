@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.cumprod_)
-class TorchTensorCumprodTestCase(TorBencherTestCaseBase):
+class TorchTensorCumprodUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_cumprod__correctness(self):
         # Random dimension for the tensor

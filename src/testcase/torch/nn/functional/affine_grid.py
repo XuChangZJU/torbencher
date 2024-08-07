@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.affine_grid)
-class TorchNnFunctionalAffinegridTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalAffineUgridTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_affine_grid_correctness(self):
         # Randomly choose between 2D and 3D affine grid

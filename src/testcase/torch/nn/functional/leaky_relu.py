@@ -7,7 +7,7 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.leaky_relu)
-class TorchNnFunctionalLeakyreluTestCase(TorBencherTestCaseBase):
+class TorchNnFunctionalLeakyUreluTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_leaky_relu_correctness(self):
         # Randomly generate the input tensor's dimension and size
