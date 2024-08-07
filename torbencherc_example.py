@@ -12,6 +12,7 @@ config = {
     ],
     "test_modules": [
         "torch",                                # From `TorchCompileTestCase` need checking on non-windows
+        "torch.Tensor", 
         "torch.nn",                             # Can B run through, Plz fixing `Failed`
         "torch.nn.functional",                  # Can B run through, Plz fixing `Failed`
         "torch.special",                        # Can B run through, Plz fixing `Failed`
@@ -53,7 +54,7 @@ config = {
         "torch.utils.data._utils.collate",    # Only one, but Well Done
     ],
     "format": "csv",
-    "num_epoch": 1,
+    "num_epoch": 30,
     "name_spec": "timestamp"
 }
 freeze_support()
