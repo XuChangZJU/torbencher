@@ -185,7 +185,7 @@ class SingleTester:
         passed = False
         try:
             if isinstance(cpuResult, object):
-                passed = type(cpuResult) == type(deviceResult)
+                passed = str(cpuResult) == str(deviceResult)
             if isinstance(cpuResult, bool):
                 passed = cpuResult == deviceResult
 
@@ -199,7 +199,9 @@ class SingleTester:
 
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):
-                    if not type(cpuResult[idx]) != type(deviceResult[idx]):
+                    if isinstance(cpuResult, object):
+                        passed = str(cpuResult[idx]) == str(deviceResult[idx])
+                    if not type(cpuResult[idx]) == type(deviceResult[idx]):
                         return False
                     if isinstance(cpuResult[idx], bool):
                         passed = cpuResult[idx] == deviceResult[idx]
