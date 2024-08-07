@@ -16,4 +16,4 @@ class TorchUforeachUlog2UTestCase(TorBencherTestCaseBase):
 
         tensor_list = [torch.randn(input_size) for _ in range(random.randint(1, 3))]
         torch._foreach_log2_(tensor_list)
-        return tensor_list[0]
+        return tensor_list
