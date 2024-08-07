@@ -12,15 +12,15 @@ config = {
     ],
     "test_modules": [
         "torch",                                # From `TorchCompileTestCase` need checking on non-windows
-        "torch.Tensor", 
+        "torch.Tensor",                         # CPU Almost Done
         "torch.nn",                             # Can B run through, Plz fixing `Failed`
         "torch.nn.functional",                  # Can B run through, Plz fixing `Failed`
         "torch.special",                        # Can B run through, Plz fixing `Failed`
-        "torch.autograd",                     # From `TorchAutogradFunctionNestediofunctionTestCase` need checking on cuda
-        "torch.utils.checkpoint",             # Well Done
-        "torch.export",                       # Windows not support Compile, and I can do nothing
-        "torch.profiler",                     # Both support, but can't be judged, no need to test
-        "torch.profiler.itt",                 # Well Done
+        "torch.autograd",                       # Can B run through, Plz fixing `Failed` and `TorchAutogradFunctionInplacefunctionTestCase` need checking on CPU
+        "torch.utils.checkpoint",               # Well Done
+        "torch.export",                         # Windows not support Compile, and Half of them are errors
+        "torch.profiler",                       # Can B run through, But some "time" can't be judged, not error then is passed.
+        "torch.profiler.itt",                   # Well Done
         "torch.testing",                        # Well Done
         "torch.nn.init",                      # CPU passed all, CUDA passed half
         "torch.fft",                            # Well Done
@@ -54,7 +54,7 @@ config = {
         "torch.utils.data._utils.collate",    # Only one, but Well Done
     ],
     "format": "csv",
-    "num_epoch": 30,
+    "num_epoch": 1,
     "name_spec": "timestamp"
 }
 freeze_support()
