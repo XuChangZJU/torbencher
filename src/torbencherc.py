@@ -280,6 +280,12 @@ class torbencherc:
                         if not passed:
                             outputResults[device][testModuleName][testcaseName][
                                 torbencherc.TestResultKey.STATUS] = "Failed"
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.COST_TIME] = sum(
+                                outputResults[device][testModuleName][testcaseName][
+                                    torbencherc.TestResultKey.COST_TIME]) / len(
+                                outputResults[device][testModuleName][testcaseName][
+                                    torbencherc.TestResultKey.COST_TIME])
                             break
                     if outputResults[device][testModuleName][testcaseName][
                         torbencherc.TestResultKey.STATUS] == "Passed":
@@ -321,20 +327,28 @@ class torbencherc:
         devices = list(testResult.keys())
         header = [torbencherc.TestResultKey.MODULE_NAME, torbencherc.TestResultKey.TESTCASE]
         for device in devices:
-            header.append(f"{device}_status")
-            header.append(f"{device}_cost_time")
+            header.append(f"{device.upper()}_status")
+            header.append(f"{device.upper()}_cost_time(ms)")
+
+        # Use a set to track which test cases have already been processed
+        processedCases = set()
+
         for device, testModules in testResult.items():
             for moduleName, testCases in testModules.items():
                 for testCase, result in testCases.items():
-                    row = [moduleName, testCase]
-                    for dev in devices:
-                        status = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
-                            torbencherc.TestResultKey.STATUS, "N/A")
-                        cost_time = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
-                            torbencherc.TestResultKey.COST_TIME, "N/A")
-                        row.append(status)
-                        row.append(cost_time)
-                    rows.append(row)
+                    if (moduleName, testCase) not in processedCases:
+                        row = [moduleName, testCase]
+                        for dev in devices:
+                            status = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
+                                torbencherc.TestResultKey.STATUS, "N/A")
+                            costTime = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
+                                torbencherc.TestResultKey.COST_TIME, "N/A")
+                            row.append(status)
+                            row.append(costTime)
+                        rows.append(row)
+                        # Mark this test case as processed
+                        processedCases.add((moduleName, testCase))
+
         return pd.DataFrame(rows, columns=header)
 
     def getFileName(self, config: dict) -> str:
