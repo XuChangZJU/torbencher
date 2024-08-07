@@ -15,5 +15,8 @@ class TorchAcosTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         input_tensor = torch.randn(input_size)  # Random tensor
+        # normalizing the input tensor to be in the range of [-1, 1]
+        input_tensor = torch.clamp(input_tensor, -1, 1)
+        
         result = torch.acos(input_tensor)
         return result
