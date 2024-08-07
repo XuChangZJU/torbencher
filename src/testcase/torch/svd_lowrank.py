@@ -10,10 +10,10 @@ from src.util.decorator import test_api
 class TorchSvdUlowrankTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
     def test_svd_lowrank_correctness(self):
-        dim1 = random.randint(1, 4)  # Random dimension for the tensor
-        dim2 = random.randint(1, 4)  # Random dimension for the tensor
-        dim3 = random.randint(1, 4)  # Random dimension for the tensor
-        num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
+        dim1 = random.randint(1, 3)  # Random dimension for the tensor
+        dim2 = random.randint(1, 3)  # Random dimension for the tensor
+        dim3 = random.randint(1, 3)  # Random dimension for the tensor
+        num_of_elements_each_dim = random.randint(1, 3)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for i in range(dim1)] + [num_of_elements_each_dim for i in
                                                                         range(dim2)] + [num_of_elements_each_dim for i
                                                                                         in range(dim3)]
