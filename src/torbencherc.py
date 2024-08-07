@@ -10,7 +10,6 @@ from .util.apitools import *
 from .singleTester import SingleTester
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
-
 class torbencherc:
     SUPPORTED_FORMATS = ["csv", 'json', 'xlsx']
     AVAILABLE_TEST_MODULES = ["torch", "torch.nn", "torch.nn.functional"]
@@ -49,6 +48,8 @@ class torbencherc:
         TESTCASE = "testcase"
         PASSED = "passed"
         FAILURE_DETAILS = "failure_details"
+        STATUS = "status"
+        COST_TIME = "cost_time(ms)"
 
     def __init__(self, config: dict):
         """
@@ -105,15 +106,13 @@ class torbencherc:
             config[torbencherc.ConfigKey.FORMAT] = torbencherc.DEFAULTS.FORMAT
         else:
             if config[torbencherc.ConfigKey.FORMAT] not in torbencherc.SUPPORTED_FORMATS:
-                raise ValueError(
-                    f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
+                raise ValueError(f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
 
         if not torbencherc.ConfigKey.NAME_SPEC in config:
             config[torbencherc.ConfigKey.NAME_SPEC] = torbencherc.DEFAULTS.NAME_SPEC
         else:
             if config[torbencherc.ConfigKey.NAME_SPEC] not in torbencherc.SUPPORTED_NAME_SPECS:
-                raise ValueError(
-                    f"Unsupported name spec {config[torbencherc.ConfigKey.NAME_SPEC]}. Supported formats are {torbencherc.SUPPORTED_NAME_SPECS}")
+                raise ValueError(f"Unsupported name spec {config[torbencherc.ConfigKey.NAME_SPEC]}. Supported formats are {torbencherc.SUPPORTED_NAME_SPECS}")
 
         return config
 
@@ -131,8 +130,7 @@ class torbencherc:
         self.result[torbencherc.ResultKey.START_TIME] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         self.result[torbencherc.ResultKey.CPU] = platform.processor()
-        self.result[torbencherc.ResultKey.MEMORY] = "{:.2f} GB".format(
-            round(psutil.virtual_memory().total / (1024 ** 3), 2))
+        self.result[torbencherc.ResultKey.MEMORY] = "{:.2f} GB".format(round(psutil.virtual_memory().total / (1024 ** 3), 2))
 
         self.result[torbencherc.ResultKey.OS] = platform.system()
         self.result[torbencherc.ResultKey.OS_RELEASE] = platform.release()
@@ -143,7 +141,7 @@ class torbencherc:
         self.result[torbencherc.ResultKey.PYTHON_VERSION] = platform.python_version()
         self.result[torbencherc.ResultKey.TORCH_VERSION] = torch.__version__
 
-    def run(self):
+    def run(self) -> dict:
         """
         **description**
         Run all the test cases on all the devices and save the results.
@@ -229,8 +227,7 @@ class torbencherc:
                 attrNames = getAttributes(module)
                 for attrName in attrNames:
                     attr = getattr(module, attrName, None)
-                    if isinstance(attr, type) and issubclass(attr, TorBencherTestCaseBase) \
-                            and attr is not TorBencherTestCaseBase:
+                    if isinstance(attr, type) and issubclass(attr, TorBencherTestCaseBase) and attr is not TorBencherTestCaseBase:
                         allTestCases[name].append(attr)
         return allTestCases
 
@@ -256,20 +253,41 @@ class torbencherc:
                 outputResults[device][testModuleName] = {}
                 for testCase in testCases:
                     testcaseName = testCase.__name__
-                    outputResults[device][testModuleName][testcaseName] = "Passed"
+                    outputResults[device][testModuleName][testcaseName] = {
+                        torbencherc.TestResultKey.STATUS: "Passed",
+                        torbencherc.TestResultKey.COST_TIME: []
+                    }
                     for _ in range(repeat):
                         try:
+                            startTime = time.monotonic_ns()
                             passed = self.tester.run(testCase, device=device, seed=seed)
+                            endTime = time.monotonic_ns()
+                            costTime = (endTime - startTime) / (1000 ** 3)
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.COST_TIME].append(costTime)
                         except Exception as e:
-                            outputResults[device][testModuleName][testcaseName] = "CompareError"
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.STATUS] = "CompareError"
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.COST_TIME] = "N/A"
                             break
                         if passed == -1:
-                            outputResults[device][testModuleName][testcaseName] = "Error"
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.STATUS] = "Error"
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.COST_TIME] = "N/A"
                             break
                         if not passed:
-                            outputResults[device][testModuleName][testcaseName] = "Failed"
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.STATUS] = "Failed"
                             break
-            self.tester.resetTester();
+                    if outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.STATUS] == "Passed":
+                        outputResults[device][testModuleName][testcaseName][torbencherc.TestResultKey.COST_TIME] = sum(
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.COST_TIME]) / len(
+                            outputResults[device][testModuleName][testcaseName][torbencherc.TestResultKey.COST_TIME])
+            self.tester.resetTester()
         return outputResults
 
     def saveResult(self, config: dict, result: dict):
@@ -301,13 +319,21 @@ class torbencherc:
         """
         rows = []
         devices = list(testResult.keys())
-        header = [torbencherc.TestResultKey.MODULE_NAME, torbencherc.TestResultKey.TESTCASE] + devices
+        header = [torbencherc.TestResultKey.MODULE_NAME, torbencherc.TestResultKey.TESTCASE]
+        for device in devices:
+            header.append(f"{device}_status")
+            header.append(f"{device}_cost_time")
         for device, testModules in testResult.items():
             for moduleName, testCases in testModules.items():
                 for testCase, result in testCases.items():
                     row = [moduleName, testCase]
                     for dev in devices:
-                        row.append(testResult[dev].get(moduleName, {}).get(testCase, "N/A"))
+                        status = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
+                            torbencherc.TestResultKey.STATUS, "N/A")
+                        cost_time = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
+                            torbencherc.TestResultKey.COST_TIME, "N/A")
+                        row.append(status)
+                        row.append(cost_time)
                     rows.append(row)
         return pd.DataFrame(rows, columns=header)
 
@@ -347,12 +373,14 @@ class torbencherc:
         fileNameSpec = self.getFileName(config)
 
         if format == "csv":
-            formattedResult.to_csv(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.csv'), index=False)
+            formattedResult.to_csv(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.csv'),
+                                   index=False)
         elif format == "json":
             formattedResult.to_json(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.json'),
                                     orient='records')
         elif format == "xlsx":
-            formattedResult.to_excel(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.xlsx'), index=False)
+            formattedResult.to_excel(os.path.join(out_dir, f'torbencherc_test_result_{fileNameSpec}.xlsx'),
+                                     index=False)
 
     def deleteNonPyFiles(self, dirPath: str = None):
         """
@@ -371,5 +399,4 @@ class torbencherc:
             for file in files:
                 if file.endswith('.cpp') or file.endswith('.pyc') or file.endswith('.c') or file.endswith('.pt'):
                     filePath = os.path.join(root, file)
-                    # print(f"Deleting file: {filePath}")
                     os.remove(filePath)
