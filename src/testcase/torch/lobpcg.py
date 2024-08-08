@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.lobpcg)
 class TorchLobpcgTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_lobpcg_correctness(self):
         # Random dimension for the tensor matrices (between 1x1 to 5x5 for simplicity)
         matrix_dim = random.randint(3, 5)

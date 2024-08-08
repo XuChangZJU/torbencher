@@ -1,6 +1,7 @@
+import random
+
 import torch
 import torch.nn as nn
-import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.utils.parametrizations.orthogonal)
 class TorchNnUtilsParametrizationsOrthogonalTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_orthogonal_correctness(self):
         # Randomly generate dimensions for the weight matrix
         in_features = random.randint(1, 10)

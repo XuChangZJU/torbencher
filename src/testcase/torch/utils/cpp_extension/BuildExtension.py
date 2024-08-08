@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.utils.cpp_extension import BuildExtension, CppExtension
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.utils.cpp_extension.BuildExtension)
 class TorchUtilsCppUextensionBuildextensionTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_build_extension_correctness(self):
         # Randomly generate a name for the extension
         extension_name = f"extension_{random.randint(1, 1000)}"

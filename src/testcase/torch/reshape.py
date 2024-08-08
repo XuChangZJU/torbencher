@@ -1,4 +1,5 @@
 import random
+
 import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.reshape)
 class TorchReshapeTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_reshape_correctness(self):
         num_dims = random.randint(2, 4)  # Random number of dimensions between 2 and 4 for reshaping purpose
         num_elements_each_dim = random.randint(2, 5)  # Random number of elements in each dimension between 2 and 5

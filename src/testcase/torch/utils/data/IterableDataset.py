@@ -30,7 +30,7 @@ class MyIterableDataset(torch.utils.data.IterableDataset):
 
 @test_api(torch.utils.data.IterableDataset)
 class TorchUtilsDataIterabledatasetTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_iterable_dataset_correctness(self):
         # Randomly generate start and end for the dataset
         start = random.randint(0, 10)

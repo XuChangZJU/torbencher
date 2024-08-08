@@ -1,6 +1,7 @@
 import os
-import torch
 import random
+
+import torch
 from torch.utils.cpp_extension import CUDAExtension
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -10,7 +11,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.utils.cpp_extension.CUDAExtension)
 class TorchUtilsCppUextensionCudaextensionTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_cuda_extension_correctness(self):
         # Ensure CUDA_HOME environment variable is set
         if 'CUDA_HOME' not in os.environ:

@@ -1,5 +1,4 @@
 import torch
-import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +7,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.is_warn_always_enabled)
 class TorchIsUwarnUalwaysUenabledTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_is_warn_always_enabled_correctness(self):
         # No random parameters needed for this test case
         # Check the initial state

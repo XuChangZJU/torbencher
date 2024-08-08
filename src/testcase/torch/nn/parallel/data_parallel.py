@@ -1,7 +1,7 @@
+import random
 import unittest
 
 import torch
-import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.parallel.data_parallel)
 class TorchNnParallelDataUparallelTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     @unittest.skipUnless(torch.cuda.device_count() >= 2, "NO ENOUGH DEVICES")
     def test_data_parallel_correctness(self):
         # Randomly generate the number of dimensions for the input tensor

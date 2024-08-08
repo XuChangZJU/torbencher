@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.export import graph_signature
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.export.graph_signature.OutputSpec)
 class TorchExportGraphUsignatureOutputspecTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_OutputSpec_correctness(self):
         # Generate random parameters for OutputSpec
         output_kind = random.choice(list(graph_signature.OutputKind))  # Randomly choose an OutputKind

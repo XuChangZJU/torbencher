@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 import torch.nn.utils.prune as prune
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -23,7 +24,7 @@ class CustomPruningMethod(prune.BasePruningMethod):
 
 @test_api(torch.nn.utils.prune.BasePruningMethod)
 class TorchNnUtilsPruneBasepruningmethodTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_custom_pruning_method_correctness(self):
         # Randomly generate tensor dimensions
         dim = random.randint(1, 4)

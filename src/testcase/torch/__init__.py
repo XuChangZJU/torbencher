@@ -28,9 +28,9 @@
 # from .reshape import TorchReshapeTestCase
 # from .sym_ite import TorchSymiteTestCase
 
-import os
 import importlib
 import logging
+import os
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 

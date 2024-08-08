@@ -1,9 +1,9 @@
+import random
 import unittest
 
 import torch
-import torch.nn as nn
 import torch.distributed as dist
-import random
+import torch.nn as nn
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -12,7 +12,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.parallel.DistributedDataParallel)
 class TorchNnParallelDistributeddataparallelTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     @unittest.skipUnless(torch.cuda.device_count() >= 2, "NO ENOUGH DEVICES")
     def test_distributed_data_parallel_correctness(self):
         # Initialize the process group

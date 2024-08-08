@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.utils.checkpoint import checkpoint
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -7,7 +8,7 @@ from src.util import test_api_version
 
 
 class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_checkpoint_correctness(self):
         # Generate random sizes for the layers
         input_features = random.randint(1, 10)

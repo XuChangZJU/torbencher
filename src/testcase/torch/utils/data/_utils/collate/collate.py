@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.utils.data._utils.collate import collate
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -10,7 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.utils.data._utils.collate.collate)
 class TorchUtilsDataUutilsCollateCollateTestCase(TorBencherTestCaseBase):
     @staticmethod
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def collate_tensor_fn(batch, *, collate_fn_map):
         return torch.stack(batch, 0)
 

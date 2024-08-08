@@ -1,10 +1,10 @@
 import functools
-import time
 import inspect
+import time
 from copy import deepcopy
 
-from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from .apitools import *
+from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
 def get_class_that_defined_method(meth):

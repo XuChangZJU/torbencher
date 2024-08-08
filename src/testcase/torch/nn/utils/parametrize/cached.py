@@ -1,14 +1,15 @@
+import random;
+
 import torch;
 import torch.nn as nn;
 import torch.nn.utils.parametrize as P;
-import random;
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
 from src.util import test_api_version;
 
 
 class TorchNnUtilsParametrizeCachedTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_cached_correctness(self):
         class SimpleModel(nn.Module):
             def __init__(self, linear_layer):

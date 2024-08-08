@@ -1,11 +1,12 @@
+import csv
 import importlib
 import inspect
+import logging
+import os
 import time
 import unittest
+
 import torch
-import os
-import csv
-import logging
 
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 

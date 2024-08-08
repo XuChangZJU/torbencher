@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.utils.spectral_norm)
 class TorchNnUtilsSpectralUnormTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_spectral_norm_correctness(self):
         # Define the input size for the Linear layer
         in_features = random.randint(1, 10)
@@ -28,4 +29,4 @@ class TorchNnUtilsSpectralUnormTestCase(TorBencherTestCaseBase):
         output_spectral_norm = spectral_norm_linear(input_data)
 
         # Return the output from the spectral normalized layer
-        return output_spectral_norm
+        return torch.allclose(output_original, output_spectral_norm)

@@ -1,7 +1,8 @@
+import random
+
 import torch
 import torch.nn as nn
 import torch.nn.utils.prune as prune
-import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -10,7 +11,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.utils.prune.ln_structured)
 class TorchNnUtilsPruneLnUstructuredTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_ln_structured_correctness(self):
         # Randomly generate dimensions for the Conv2d layer
         in_channels = random.randint(1, 10)

@@ -1,11 +1,12 @@
 import random
-import numpy as np
 import time
 
+import numpy as np
+
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from .util.CustomUnittest import MyTestRunner, MyTestLoader
 from .util.apitools import *
 from .util.decorator import randomInjector
-from .util.CustomUnittest import MyTestRunner, MyTestLoader
 
 
 class SingleTester:

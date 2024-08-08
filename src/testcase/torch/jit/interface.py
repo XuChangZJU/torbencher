@@ -1,6 +1,7 @@
-import torch
 import random
 from typing import List
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -28,7 +29,7 @@ class Impl2(InterfaceType):
 
 @test_api(torch.jit.interface)
 class TorchJitInterfaceTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def user_fn(impls: List[InterfaceType], idx: int, val: torch.Tensor) -> torch.Tensor:
         return impls[idx].run(val)
 

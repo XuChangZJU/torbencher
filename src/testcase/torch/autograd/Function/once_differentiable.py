@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -26,7 +27,7 @@ class CustomClampFunction(torch.autograd.Function):
 
 @test_api(CustomClampFunction.apply)
 class TorchAutogradFunctionOnceUdifferentiableTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_once_differentiable_correctness(self):
         # Randomly generate input tensor x
         dim = random.randint(1, 4)

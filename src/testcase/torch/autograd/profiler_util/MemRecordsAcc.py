@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -26,7 +27,7 @@ class MemRecordsAcc:
 # 测试案例类
 @test_api(torch.autograd.profiler_util.MemRecordsAcc)
 class TorchAutogradProfilerUutilMemrecordsaccTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_mem_records_acc_correctness(self):
         # 生成一个内存事件
         address = random.randint(1, 1000)

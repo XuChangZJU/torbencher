@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.utils.data.SequentialSampler)
 class TorchUtilsDataSequentialsamplerTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_sequential_sampler_correctness(self):
         # Generate random parameters for the dataset size
         dataset_size = random.randint(1, 10)

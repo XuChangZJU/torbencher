@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.utils.checkpoint import checkpoint_sequential
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -7,7 +8,7 @@ from src.util import test_api_version
 
 
 class TorchUtilsCheckpointCheckpointUsequentialTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_checkpoint_sequential_correctness(self):
         # 随机生成层的数量
         num_layers = random.randint(2, 5)

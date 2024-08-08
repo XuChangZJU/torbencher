@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch._foreach_sigmoid_)
 class TorchUforeachUsigmoidUTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_foreach_sigmoid_correctness(self):
         # foreach_sigmoid_ operator applies element-wise sigmoid to a list of tensors.
         # This test checks the correctness of foreach_sigmoid_ by comparing it to

@@ -1,14 +1,15 @@
-import time
+import importlib
 import os
 import platform
-import psutil
-import pandas as pd
-import importlib
-import torch
+import time
 
-from .util.apitools import *
+import pandas as pd
+import psutil
+
 from .singleTester import SingleTester
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from .util.apitools import *
+
 
 class torbencherc:
     SUPPORTED_FORMATS = ["csv", 'json', 'xlsx']

@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.export.graph_signature import InputSpec, InputKind, TensorArgument, SymIntArgument, ConstantArgument
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.export.graph_signature.InputSpec)
 class TorchExportGraphUsignatureInputspecTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_inputspec_tensor_argument(self):
         # Random dimension for the tensor
         dim = random.randint(1, 4)

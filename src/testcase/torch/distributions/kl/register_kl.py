@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.distributions import Normal, kl_divergence
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.distributions.kl.register_kl)
 class TorchDistributionsKlRegisterUklTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_register_kl_correctness(self):
         # Define a custom KL divergence function for Normal distributions
         @torch.distributions.kl.register_kl(Normal, Normal)

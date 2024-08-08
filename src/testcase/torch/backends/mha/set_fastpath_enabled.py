@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.backends.mha.set_fastpath_enabled)
 class TorchBackendsMhaSetUfastpathUenabledTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_set_fastpath_enabled_correctness(self):
         # Randomly enable or disable the fastpath
         enable_fastpath = random.choice([True, False])

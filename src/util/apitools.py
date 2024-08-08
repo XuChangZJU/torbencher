@@ -3,8 +3,9 @@ All the packed universal functions are stored here.
 """
 import types
 import typing
-import torch
 from collections import deque
+
+import torch
 
 
 def getAPIName(api: typing.Any) -> str:

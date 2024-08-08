@@ -1,5 +1,7 @@
-import torch
 import random
+
+import torch
+
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
@@ -36,7 +38,7 @@ class MockRNN(torch.nn.RNNBase):
 
 @test_api(torch.nn.RNNBase)
 class TorchNnRnnbaseTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_rnnbase_correctness(self):
         input_size = random.randint(1, 10)
         hidden_size = random.randint(1, 10)

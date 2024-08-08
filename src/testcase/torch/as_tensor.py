@@ -1,12 +1,13 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 
 
 class TorchAsUtensorTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_as_tensor_correctness(self):
         # Generate random dimension and size for the tensor
         dim = random.randint(1, 4)
