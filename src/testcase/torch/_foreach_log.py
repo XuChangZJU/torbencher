@@ -16,6 +16,8 @@ class TorchUforeachUlogTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
-        tensor_list = [torch.randn(input_size), torch.randn(input_size)]
+        # tensor_list = [torch.randn(input_size), torch.randn(input_size)]
+        tensor_list = [torch.abs(torch.randn(input_size)) + 1e-6,
+                       torch.abs(torch.randn(input_size)) + 1e-6]
         result = torch._foreach_log(tensor_list)
         return result

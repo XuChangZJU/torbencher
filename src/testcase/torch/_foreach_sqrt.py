@@ -18,6 +18,6 @@ class TorchUforeachUsqrtTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate a list of random tensors
-        tensor_list = [torch.randn(input_size) for _ in range(num_of_tensors)]
+        tensor_list = [torch.abs(torch.randn(input_size))  for _ in range(num_of_tensors)]
         result = torch._foreach_sqrt(tensor_list)
         return result

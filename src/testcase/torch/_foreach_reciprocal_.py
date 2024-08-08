@@ -21,4 +21,6 @@ class TorchUforeachUreciprocalUTestCase(TorBencherTestCaseBase):
 
         torch._foreach_reciprocal_(tensor_list)
         result = [torch.reciprocal(tensor) for tensor in tensor_list_copy]
-        return result
+        for i, (result_tensor, expected_tensor) in enumerate(zip(tensor_list, result)):
+            assert torch.allclose(result_tensor, expected_tensor), f"Mismatch found in tensor {i}"
+        return tensor_list

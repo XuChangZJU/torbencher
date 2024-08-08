@@ -15,7 +15,6 @@ class TorchAcoshTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
-        input_tensor = torch.randn(
-            input_size) + 1  # generate random tensor and make sure every element is in the range of [1, inf)
+        input_tensor = torch.randn(input_size).clamp(min=1.0)  # generate random tensor and make sure every element is in the range of [1, inf)
         result = torch.acosh(input_tensor)
         return result

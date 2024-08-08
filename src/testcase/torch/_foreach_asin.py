@@ -16,7 +16,10 @@ class TorchUforeachUasinTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
-        tensor_list = [torch.randn(input_size) for _ in
-                       range(random.randint(1, 3))]  # Generate a list of random tensors
+        # tensor_list = [torch.randn(input_size) for _ in
+        #                range(random.randint(1, 3))]  # Generate a list of random tensors
+
+        tensor_list = [torch.randn(input_size).clamp(min=-1.0, max=1.0) for _ in range(random.randint(1, 3))]
+
         result = torch._foreach_asin(tensor_list)
         return result

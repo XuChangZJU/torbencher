@@ -17,6 +17,6 @@ class TorchUforeachUlog10TestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
         list_len = random.randint(1, 5)
 
-        tensor_list = [torch.randn(input_size) for i in range(list_len)]
+        tensor_list = [torch.abs(torch.randn(input_size)) + 1e-6 for i in range(list_len)]
         result = torch._foreach_log10(tensor_list)
         return result
