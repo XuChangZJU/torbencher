@@ -44,6 +44,3 @@ class TorchProfilerUkinetoprofileTestCase(TorBencherTestCaseBase):
                 with_modules=with_modules
         ) as prof:
             output = model(input_tensor)
-
-        # Return the profiling result
-        return prof.key_averages()

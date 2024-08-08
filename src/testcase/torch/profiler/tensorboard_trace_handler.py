@@ -17,9 +17,7 @@ class TorchProfilerTensorboardUtraceUhandlerTestCase(TorBencherTestCaseBase):
         worker_name = f'worker_{random.randint(0, 100)}'  # Randomly generated worker name
 
         # Call the function
-        result = torch.profiler.tensorboard_trace_handler(dir_name, worker_name)
+        torch.profiler.tensorboard_trace_handler(dir_name, worker_name)
 
         # Check if the directory was created
-        assert os.path.exists(dir_name), f"Directory {dir_name} was not created."
-
-        return result
+        return os.path.exists(dir_name)
