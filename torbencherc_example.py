@@ -57,7 +57,9 @@ config = {
     "num_epoch": 1,
     "name_spec": "timestamp"
 }
-freeze_support()
-bencher = torbencherc(config)
-result = bencher.run()
-print(result)
+
+if __name__ == '__main__':
+    freeze_support()
+    bencher = torbencherc(config)
+    result = bencher.run()
+    print(result)
