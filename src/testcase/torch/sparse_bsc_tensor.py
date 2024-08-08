@@ -11,7 +11,6 @@ from src.util.decorator import test_api
 @test_api(torch.sparse_bsc_tensor)
 class TorchSparseUbscUtensorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_sparse_bsc_tensor_correctness(self):
         # Random number of blocks
         ncolblocks = random.randint(1, 4)

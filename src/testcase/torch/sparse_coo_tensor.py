@@ -11,7 +11,6 @@ from src.util.decorator import test_api
 @test_api(torch.sparse_coo_tensor)
 class TorchSparseUcooUtensorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_sparse_coo_tensor_correctness(self):
         # Number of tensor dimensions
         num_dims = random.randint(2, 4)

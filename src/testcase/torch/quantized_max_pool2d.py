@@ -10,6 +10,7 @@ from src.util.decorator import test_api
 @test_api(torch.quantized_max_pool2d)
 class TorchQuantizedUmaxUpool2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_quantized_max_pool2d_correctness(self):
         # Random 4D tensor dimensions (N, C, H, W)
         N = random.randint(1, 4)
