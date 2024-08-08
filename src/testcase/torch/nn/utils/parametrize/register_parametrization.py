@@ -14,8 +14,8 @@ class TorchNnUtilsParametrizeRegisterUparametrizationTestCase(TorBencherTestCase
     @test_api_version.larger_than("2.0.0")
     def test_register_parametrization_correctness(self):
         # Randomly generate dimensions for the linear layer
-        in_features = random.randint(1, 10)
-        out_features = random.randint(1, 10)
+        in_features = random.randint(5, 10)
+        out_features = in_features
 
         # Define a simple parametrization that makes the weight matrix symmetric
         class Symmetric(nn.Module):

@@ -13,20 +13,24 @@ from src.util.decorator import test_api
 class TorchNnUtilsPruneL1UunstructuredTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_l1_unstructured_correctness(self):
-        # Randomly generate dimensions for the Linear layer
-        in_features = random.randint(1, 10)
-        out_features = random.randint(1, 10)
+        dim = random.randint(1, 4)  # 随机维度数
+        num_of_elements_each_dim = random.randint(1, 5)  # 每个维度的随机元素数量
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
+        output_size = random.randint(1, 5)  # 输出大小
 
-        # Create a random Linear module
-        module = nn.Linear(in_features, out_features)
+        # 创建一个线性层
+        module = nn.Linear(num_of_elements_each_dim, output_size)
 
-        # Randomly choose the amount to prune
-        amount = random.uniform(0.1, 0.5)  # Fraction of parameters to prune
+        # 随机生成输入数据
+        input_data = torch.randn(input_size)
 
-        # Apply L1 unstructured pruning
-        pruned_module = prune.l1_unstructured(module, 'weight', amount)
+        # 随机剪枝比例
+        amount = random.uniform(0.0, 1.0) if random.choice([True, False]) else random.randint(1, module.weight.numel())
 
-        # Check the state_dict to ensure the mask and original weights are present
-        state_dict_keys = pruned_module.state_dict().keys()
+        # 应用 L1 Unstructured 剪枝
+        prune.l1_unstructured(module, name='weight', amount=amount)
 
-        return state_dict_keys
+        # 这里你可以检查剪枝后的权重，或者前向传播输入数据以验证结果
+        pruned_output = module(input_data)
+
+        return pruned_output
