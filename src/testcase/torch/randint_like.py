@@ -18,4 +18,4 @@ class TorchRandintUlikeTestCase(TorBencherTestCaseBase):
         low = random.randint(-10, 10)  # Random low value between -10 and 10
         high = random.randint(low + 1, 20)  # Random high value between low+1 and 20
         result = torch.randint_like(input_tensor, low, high)
-        return result
+        return result.shape
