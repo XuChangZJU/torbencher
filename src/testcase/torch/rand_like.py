@@ -16,4 +16,4 @@ class TorchRandUlikeTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
         input_tensor = torch.randn(input_size)  # Random input tensor
         result = torch.rand_like(input_tensor)
-        return result
+        return result.shape
