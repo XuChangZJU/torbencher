@@ -11,7 +11,6 @@ from src.util.decorator import test_api
 @test_api(torch.sparse_csr_tensor)
 class TorchSparseUcsrUtensorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_sparse_csr_tensor_correctness(self):
         # Random dimension sizes for the sparse matrix
         nrows = random.randint(2, 5)
