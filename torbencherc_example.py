@@ -56,6 +56,7 @@ config = {
     "format": "csv",
     "num_epoch": 1,
     "name_spec": "timestamp"
+    "debug": False
 }
 
 if __name__ == '__main__':
