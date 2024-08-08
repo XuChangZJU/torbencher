@@ -1,6 +1,7 @@
 import functools
 import time
 import inspect
+from copy import deepcopy
 
 from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from .apitools import *
@@ -148,7 +149,7 @@ def randomInjector(func, storage, testcaseName):
 
         if not storage[testcaseName]["status"]:
             rst = func(*args, **kwargs)
-            storage[testcaseName]["result"][funcName].append(rst)
+            storage[testcaseName]["result"][funcName].append(deepcopy(rst))
             return rst
         else:
             result = storage[testcaseName]["result"][funcName][storage[testcaseName]["count"][funcName]]
