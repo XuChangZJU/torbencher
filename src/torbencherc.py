@@ -29,6 +29,7 @@ class torbencherc:
         FORMAT = "format"
         NUM_EPOCH = "num_epoch"
         NAME_SPEC = "name_spec"
+        DEBUG = "debug"
 
     class ResultKey:
         CPU = "cpu"
@@ -114,6 +115,8 @@ class torbencherc:
             if config[torbencherc.ConfigKey.NAME_SPEC] not in torbencherc.SUPPORTED_NAME_SPECS:
                 raise ValueError(f"Unsupported name spec {config[torbencherc.ConfigKey.NAME_SPEC]}. Supported formats are {torbencherc.SUPPORTED_NAME_SPECS}")
 
+        if not torbencherc.ConfigKey.DEBUG in config:
+            config[torbencherc.ConfigKey.DEBUG] = True
         return config
 
     def initBasics(self):
@@ -247,6 +250,7 @@ class torbencherc:
         devices = config[torbencherc.ConfigKey.DEVICES]
         seed = config[torbencherc.ConfigKey.SEED]
         repeat = config[torbencherc.ConfigKey.NUM_EPOCH]
+        debug = config[torbencherc.ConfigKey.DEBUG]
         for device in devices:
             outputResults[device] = {}
             for testModuleName, testCases in allTestCases.items():
@@ -260,7 +264,7 @@ class torbencherc:
                     for _ in range(repeat):
                         try:
                             startTime = time.monotonic_ns()
-                            passed = self.tester.run(testCase, device=device, seed=seed)
+                            passed = self.tester.run(testCase, device=device, seed=seed, debug=debug)
                             endTime = time.monotonic_ns()
                             costTime = (endTime - startTime) / (1000 ** 3)
                             outputResults[device][testModuleName][testcaseName][
