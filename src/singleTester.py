@@ -50,9 +50,9 @@ class SingleTester:
         self.rand = torch.rand
         self.rchoice = random.choice
         self.rrandom = random.random
+        self.rshuffle = random.shuffle
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None,
-            debug: bool = True) -> bool or int:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None, debug: bool = True) -> bool or int:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
@@ -75,6 +75,7 @@ class SingleTester:
         if not seed:
             seed = time.time_ns()
 
+
         # Pre Check for whether to skipped
         if debug:
             print(f"Start precheck for {testcaseName}")
@@ -94,6 +95,7 @@ class SingleTester:
         torch.set_default_device("cpu")
         torch.manual_seed(seed)
         random.seed(seed)
+
 
         self.applyRandomInjectors(testcaseName)
         cpuReturnValues = self.runner.run(suite).getReturnValues()
@@ -167,6 +169,7 @@ class SingleTester:
         setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName))
         setattr(random, 'choice', randomInjector(self.rchoice, self.storage, testcaseName))
         setattr(random, 'random', randomInjector(self.rrandom, self.storage, testcaseName))
+        setattr(random, 'shuffle', randomInjector(self.rshuffle, self.storage, testcaseName))
 
     def injectModule(self, module: type, testcaseName: str) -> None:
         """
@@ -212,7 +215,10 @@ class SingleTester:
             if torch.is_tensor(cpuResult):
                 cpuResult = cpuResult.to(cpu)
                 deviceResult = deviceResult.to(cpu)
-                passed = torch.allclose(cpuResult, deviceResult)
+                try:
+                    passed = torch.allclose(cpuResult, deviceResult)
+                except Exception as e:
+                    passed = str(cpuResult) == str(deviceResult.to(cpu))
 
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):
@@ -277,3 +283,4 @@ class SingleTester:
         setattr(torch, 'randint', self.trandint)
         setattr(random, 'choice', self.rchoice)
         setattr(random, 'random', self.rrandom)
+        setattr(random, 'shuffle', self.rshuffle)
