@@ -1,12 +1,13 @@
-import torch;
 import random;
+
+import torch;
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
 from src.util import test_api_version;
 
 
 class TorchNnCrossentropylossTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_cross_entropy_loss_correctness(self):
         # Randomly generate the number of classes
         num_classes = random.randint(2, 10);

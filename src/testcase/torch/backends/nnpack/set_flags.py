@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.backends.nnpack.set_flags)
-class TorchBackendsNnpackSetflagsTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchBackendsNnpackSetUflagsTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_set_flags_correctness(self):
         # Randomly generate boolean values for the flags
         enabled = bool(random.randint(0, 1))

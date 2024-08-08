@@ -1,7 +1,9 @@
 import functools
-import time
 import inspect
+import time
+from copy import deepcopy
 
+from .apitools import *
 from ..testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
@@ -137,7 +139,7 @@ def randomInjector(func, storage, testcaseName):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        funcName = func.__name__
+        funcName = getAPIName(func)
         if testcaseName not in storage:
             storage[testcaseName] = {"result": {}, "status": False, "count": {}}
         if funcName not in storage[testcaseName]["result"]:
@@ -147,7 +149,7 @@ def randomInjector(func, storage, testcaseName):
 
         if not storage[testcaseName]["status"]:
             rst = func(*args, **kwargs)
-            storage[testcaseName]["result"][funcName].append(rst)
+            storage[testcaseName]["result"][funcName].append(deepcopy(rst))
             return rst
         else:
             result = storage[testcaseName]["result"][funcName][storage[testcaseName]["count"][funcName]]

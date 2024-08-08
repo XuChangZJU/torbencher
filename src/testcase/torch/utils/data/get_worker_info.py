@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.utils.data import DataLoader, Dataset, get_worker_info
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -24,8 +25,8 @@ def worker_init_fn(worker_id):
 
 
 @test_api(torch.utils.data.get_worker_info)
-class TorchUtilsDataGetworkerinfoTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUtilsDataGetUworkerUinfoTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_get_worker_info_correctness(self):
         dataset_size = random.randint(10, 100)  # Random dataset size between 10 and 100
         batch_size = random.randint(1, 10)  # Random batch size between 1 and 10

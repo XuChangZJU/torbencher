@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.get_rng_state)
-class TorchGetrngstateTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchGetUrngUstateTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_get_rng_state_correctness(self):
         # Generate random tensors before getting the RNG state
         dim = random.randint(1, 4)

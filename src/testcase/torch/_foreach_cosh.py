@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_cosh)
-class TorchForeachcoshTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUforeachUcoshTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_foreach_cosh_correctness(self):
         # foreach_cosh operator applies element-wise, so we test with a list of randomly sized tensors.
         num_tensors = random.randint(1, 5)

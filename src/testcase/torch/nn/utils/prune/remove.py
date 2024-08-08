@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.nn import Linear
 from torch.nn.utils import prune
 
@@ -10,7 +11,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.utils.prune.remove)
 class TorchNnUtilsPruneRemoveTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_remove_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension

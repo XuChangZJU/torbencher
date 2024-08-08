@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -11,8 +12,8 @@ def swap_tensors(tensor1, tensor2):
 
 
 @test_api(torch.utils.swap_tensors)
-class TorchUtilsSwaptensorsTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUtilsSwapUtensorsTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_swap_tensors_correctness(self):
         # Random dimension for the tensors
         dim = random.randint(1, 4)

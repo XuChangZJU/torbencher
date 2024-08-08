@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.movedim)
 class TorchMovedimTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_movedim_correctness(self):
         dim = random.randint(1, 4)
         input_size = [random.randint(1, 5) for _ in range(dim)]

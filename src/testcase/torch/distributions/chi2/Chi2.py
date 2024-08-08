@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.distributions.chi2.Chi2)
 class TorchDistributionsChi2Chi2TestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_chi2_correctness(self):
         # Randomly generate degrees of freedom (df) for the Chi2 distribution
         df_value = random.uniform(0.1, 10.0)  # df should be a positive value

@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.autograd import Function
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -19,8 +20,8 @@ class Inplace(Function):
 
 
 @test_api(torch.autograd.function.FunctionCtx.mark_dirty)
-class TorchAutogradFunctionFunctionctxMarkdirtyTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchAutogradFunctionFunctionctxMarkUdirtyTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_mark_dirty_correctness(self):
         # Randomly generate tensor size
         dim = random.randint(1, 4)

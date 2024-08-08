@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_abs_)
-class TorchForeachabsTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUforeachUabsUTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_foreach_abs_correctness(self):
         # foreach_abs_ operator applies element-wise abs to each tensor in a list.
         # The following code generates a list of random tensors and apply foreach_abs_ to it.

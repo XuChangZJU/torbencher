@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.record_stream)
-class TorchTensorRecordstreamTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchTensorRecordUstreamTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_record_stream_correctness(self):
         # Check if CUDA is available
         if not torch.cuda.is_available():

@@ -1,6 +1,7 @@
-import torch
 import random
-from typing import List, Dict, Tuple, Optional, Any
+from typing import List, Dict, Tuple, Optional
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.jit.isinstance)
 class TorchJitIsinstanceTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_isinstance_correctness(self):
         # Randomly choose a type to test
         type_choice = random.choice(

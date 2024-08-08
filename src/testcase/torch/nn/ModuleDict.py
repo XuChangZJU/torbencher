@@ -1,6 +1,7 @@
+import random
+
 import torch
 import torch.nn as nn
-import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.ModuleDict)
 class TorchNnModuledictTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_moduledict_correctness(self):
         # Randomly generate input tensor dimensions
         batch_size = random.randint(1, 4)

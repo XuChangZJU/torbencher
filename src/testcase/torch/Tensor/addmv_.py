@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.addmv_)
-class TorchTensorAddmvTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchTensorAddmvUTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_addmv__correctness(self):
         # Randomly generate dimensions for the matrix and vector
         rows = random.randint(1, 5)  # Random number of rows for the matrix

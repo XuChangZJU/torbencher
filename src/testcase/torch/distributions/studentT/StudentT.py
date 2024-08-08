@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.distributions.studentT.StudentT)
 class TorchDistributionsStudenttStudenttTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_studentT_correctness(self):
         # Randomly generate degrees of freedom, mean, and scale
         df = torch.tensor([random.uniform(0.1, 10.0)])  # Degrees of freedom between 0.1 and 10.0

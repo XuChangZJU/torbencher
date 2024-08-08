@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.autograd import Function
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -25,8 +26,8 @@ class TestFunction(Function):
 
 
 @test_api(torch.autograd.function.FunctionCtx.mark_non_differentiable)
-class TorchAutogradFunctionFunctionctxMarknondifferentiableTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchAutogradFunctionFunctionctxMarkUnonUdifferentiableTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_mark_non_differentiable_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensor
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension

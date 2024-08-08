@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.distributions.lowrank_multivariate_normal.LowRankMultivariateNormal)
-class TorchDistributionsLowrankmultivariatenormalLowrankmultivariatenormalTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchDistributionsLowrankUmultivariateUnormalLowrankmultivariatenormalTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_LowRankMultivariateNormal_correctness(self):
         # Randomly generate batch_shape, event_shape and rank
         batch_shape_dim = random.randint(1, 3)

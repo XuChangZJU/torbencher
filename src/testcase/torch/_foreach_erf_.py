@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_erf_)
-class TorchForeacherfTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUforeachUerfUTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_foreach_erf_correctness(self):
         # foreach_erf_ requires the same number of elements for each tensor in the list
         dim = random.randint(1, 4)

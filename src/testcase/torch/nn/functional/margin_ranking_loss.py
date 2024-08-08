@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.margin_ranking_loss)
-class TorchNnFunctionalMarginrankinglossTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnFunctionalMarginUrankingUlossTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_margin_ranking_loss_correctness(self):
         # Define the dimensions for the input tensors
         dim = random.randint(1, 4)

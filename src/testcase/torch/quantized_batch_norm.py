@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.quantized_batch_norm)
-class TorchQuantizedbatchnormTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchQuantizedUbatchUnormTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_quantized_batch_norm_correctness(self):
         # Random dimension sizes for the input tensor (NCHW format)
         batch_size = random.randint(1, 4)

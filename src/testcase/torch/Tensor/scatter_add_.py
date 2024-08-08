@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.scatter_add_)
-class TorchTensorScatteraddTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchTensorScatterUaddUTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_scatter_add__correctness(self):
         # Randomly generate tensor dimension
         dim = random.randint(1, 4)

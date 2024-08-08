@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.utils.tensorboard import SummaryWriter
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.utils.tensorboard.writer.SummaryWriter)
 class TorchUtilsTensorboardWriterSummarywriterTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_summary_writer_scalar(self):
         log_dir = f"runs/test_{random.randint(1, 1000)}"  # Random log directory
         writer = SummaryWriter(log_dir)

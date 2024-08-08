@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.lp_pool1d)
-class TorchNnFunctionalLppool1dTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnFunctionalLpUpool1dTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_lp_pool1d_correctness(self):
         # Randomly generate the number of input planes
         num_input_planes = random.randint(1, 4)

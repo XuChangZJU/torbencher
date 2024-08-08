@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.graph.saved_tensors_hooks)
-class TorchAutogradGraphSavedtensorshooksTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchAutogradGraphSavedUtensorsUhooksTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_saved_tensors_hooks_correctness(self):
         # Define pack and unpack hooks
         def pack_hook(tensor):

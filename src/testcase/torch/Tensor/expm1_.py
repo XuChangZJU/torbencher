@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.Tensor.expm1_)
-class TorchTensorExpm1TestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchTensorExpm1UTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_expm1__correctness(self):
         # Randomly generate the dimension of the input tensor.
         dim = random.randint(1, 4)

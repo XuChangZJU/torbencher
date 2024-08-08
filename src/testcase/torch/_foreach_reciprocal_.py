@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_reciprocal_)
-class TorchForeachreciprocalTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUforeachUreciprocalUTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_foreach_reciprocal_correctness(self):
         # foreach_reciprocal_ is an inplace function, so we test its correctness by comparing the result with torch.reciprocal
         dim = random.randint(1, 4)

@@ -1,10 +1,12 @@
+import csv
 import importlib
 import inspect
+import logging
+import os
 import time
 import unittest
+
 import torch
-import csv
-import logging
 
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
@@ -121,8 +123,10 @@ class bencherDebugger:
 
         try:
             self._write_results_to_csv(outputResults)
+            self.deleteNonPyFiles();
         except Exception as e:
             logging.error(f"Error writing results to CSV: {e}")
+
 
     def importModules(self, names: list, outputResults: dict) -> list:
         """
@@ -260,3 +264,13 @@ class bencherDebugger:
             dict_writer = csv.DictWriter(output_file, fieldnames=list(fieldnames))
             dict_writer.writeheader()
             dict_writer.writerows(formattedResults)
+
+    def deleteNonPyFiles(self, dirPath: str=None):
+        if not dirPath:
+            dirPath = os.path.join(os.getcwd(), "")
+        for root, dirs, files in os.walk(dirPath):
+            for file in files:
+                if file.endswith('.cpp') or file.endswith('.pyc') or file.endswith('.c') or file.endswith('.pt'):
+                    filePath = os.path.join(root, file)
+                    # print(f"Deleting file: {filePath}")
+                    os.remove(filePath)

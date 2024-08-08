@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.autograd.profiler.profile.key_averages)
-class TorchAutogradProfilerProfileKeyaveragesTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchAutogradProfilerProfileKeyUaveragesTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_key_averages_correctness(self):
         """
         Test the correctness of the key_averages function in the PyTorch profiler.

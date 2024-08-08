@@ -1,16 +1,18 @@
-import torch
 import random
-# Compute covariance matrix with frequency weights and importance weights
 
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
 
+# Compute covariance matrix with frequency weights and importance weights
+
+
 @test_api(torch.cov)
 class TorchCovTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_cov_correctness(self):
         # Random dimension for the tensor (at least 2x2 matrix for meaningful covariance computation)
         num_vars = random.randint(2, 4)  # Number of variables

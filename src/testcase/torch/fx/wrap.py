@@ -1,6 +1,7 @@
+import random
+
 import torch
 import torch.fx
-import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.fx.wrap)
 class TorchFxWrapTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_fx_wrap_correctness(self):
         # Define a custom function to be wrapped
         def my_custom_function(x, y):

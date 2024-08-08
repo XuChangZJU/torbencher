@@ -111,7 +111,7 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
 class TorchAddTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_add(self):
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)

@@ -3,10 +3,11 @@ import importlib
 import inspect
 import platform
 import time
-import unittest
+
 import psutil
 import torch
 import torch.version
+
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from .util.CustomUnittest import MyTestRunner, MyTestLoader
 

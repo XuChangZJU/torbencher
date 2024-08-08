@@ -1,4 +1,8 @@
 import random
+import numpy as np
+import time
+import torch
+import unittest
 
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from .util.apitools import *
@@ -17,7 +21,7 @@ class SingleTester:
     storage (dict): Dictionary to store intermediate values for random number injections.
 
     **Methods**
-    run(testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
+    run(testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443, debug: bool = True) -> bool or int:
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
     applyRandomInjectors(testcaseName: str) -> None:
         Apply the randomInjector decorator to random functions.
@@ -35,6 +39,8 @@ class SingleTester:
         """
         self.loader = MyTestLoader()
         self.runner = MyTestRunner(verbosity=2)
+        self.uloader = unittest.TestLoader()
+        self.urunner = unittest.TextTestRunner()
         self.storage = {}
         self.uniform = random.uniform
         self.rrandint = random.randint
@@ -45,7 +51,8 @@ class SingleTester:
         self.rchoice = random.choice
         self.rrandom = random.random
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = 443) -> bool:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None,
+            debug: bool = True) -> bool or int:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
@@ -54,9 +61,10 @@ class SingleTester:
         testcase (TorBencherTestCaseBase): The test case class to be tested.
         device (str, optional): The device to test on (e.g., 'cuda'). Defaults to cpu.
         seed (int, optional): The seed for random number generation. Defaults to 443.
+        debug (bool, optional): If True, enables debug print statements. Defaults to True.
 
         **returns**
-        passed(bool): The passed status of the testcase.
+        passed (bool): The passed status of the testcase.
 
         **raises**
         AssertionError: If the provided testcase is not a subclass of TorBencherTestCaseBase.
@@ -64,7 +72,19 @@ class SingleTester:
         """
         assert issubclass(testcase, TorBencherTestCaseBase)
         testcaseName = testcase.__name__
-        if device:
+        if not seed:
+            seed = time.time_ns()
+
+        # Pre Check for whether to skipped
+        if debug:
+            print(f"Start precheck for {testcaseName}")
+        suite = self.uloader.loadTestsFromTestCase(testcase)
+        preResult = self.urunner.run(suite)
+        if bool(preResult.skipped):
+            print(f"[SKIPPED] {testcaseName} skipped, return -2")
+            return -2
+
+        if device != "cpu":
             print(f"[INITIALIZE] Start testing {testcaseName} on {device}")
         else:
             print(f"[INITIALIZE] Start testing {testcaseName}")
@@ -76,11 +96,17 @@ class SingleTester:
         random.seed(seed)
 
         self.applyRandomInjectors(testcaseName)
-        cpuResult = self.runner.run(suite).getReturnValues()[testcaseName]
+        cpuReturnValues = self.runner.run(suite).getReturnValues()
+        if testcaseName in cpuReturnValues:
+            cpuResult = cpuReturnValues[testcaseName]
+        else:
+            print(f"[ERROR] Error run {testcaseName} on cpu, return -1")
+            return -1
         for record in self.storage.values():
             record["status"] = True
 
-        print(f"[DEBUG] result on cpu is {cpuResult}")
+        if debug:
+            print(f"[DEBUG] result on cpu is \n{cpuResult}")
 
         deviceResult = None
         passed = False
@@ -91,16 +117,21 @@ class SingleTester:
             torch.manual_seed(seed)
             random.seed(seed)
 
-            deviceResult = self.runner.run(suite).getReturnValues()[testcaseName]
-            if device == "cpu":
-                pass
+            deviceReturnValues = self.runner.run(suite).getReturnValues()
+            if testcaseName in deviceReturnValues:
+                deviceResult = deviceReturnValues[testcaseName]
             else:
-                print(f"[DEBUG] result on {device} is {deviceResult}")
-        else:
-            print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will return None here")
+                print(f"[ERROR] Error run {testcaseName} on {device}, return -1")
+                return -1
+            if device == "cpu":
+                print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
+            else:
+                if debug:
+                    print(f"[DEBUG] result on {device} is \n{deviceResult}")
 
         if cpuResult is None and deviceResult is None:
-            print(f"[WARN] Both CPU and Device have no return, if normal ignore this.")
+            print(f"[WARN] Both CPU and Device have no return, if normal ignore this, defaultly Passed.")
+            return True
         elif cpuResult is None or deviceResult is None:
             print(f"[ERROR] One of CPU or Device has no return, there must be something wrong.")
         else:
@@ -111,12 +142,13 @@ class SingleTester:
                 # Comparison
                 passed = self.judgeCommon(cpuResult, deviceResult, testcaseName)
 
-                if passed:
-                    print(testcaseName + f" has passed the test on {device}\n\n\n")
-                else:
-                    print(f"[WARN] {testcaseName} has not passed the test on {device}\n\n\n")
+                if passed and debug:
+                    print(testcaseName + f" has passed the test on {device}, return True\n\n\n")
+                elif not passed:
+                    print(f"[WARN] {testcaseName} has not passed the test on {device}, return False\n\n\n")
 
         self.resetRandom()
+        self.resetTester()
         return passed
 
     def applyRandomInjectors(self, testcaseName: str) -> None:
@@ -150,31 +182,53 @@ class SingleTester:
             setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName))
 
     def judgeCommon(self, cpuResult, deviceResult, testcaseName):
+        """
+        **description**
+        Compares the results from the CPU and the specified device to determine if they match.
+
+        **params**
+        cpuResult: The result from the CPU run.
+        deviceResult: The result from the device run.
+        testcaseName (str): The name of the test case.
+
+        **returns**
+        passed (bool): True if the results match, False otherwise.
+
+        **raises**
+        ValueError: If an error occurs during comparison, providing the test case name.
+        """
         torch.set_default_device("cpu")
         cpu = torch.device("cpu")
         passed = False
         try:
+            if isinstance(cpuResult, object):
+                passed = str(cpuResult) == str(deviceResult)
             if isinstance(cpuResult, bool):
                 passed = cpuResult == deviceResult
+
+            if type(cpuResult) == type(1) or type(cpuResult) == type(3.14):
+                passed = np.allclose(cpuResult, deviceResult)
 
             if torch.is_tensor(cpuResult):
                 cpuResult = cpuResult.to(cpu)
                 deviceResult = deviceResult.to(cpu)
                 passed = torch.allclose(cpuResult, deviceResult)
+
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):
+                    if isinstance(cpuResult, object):
+                        passed = str(cpuResult[idx]) == str(deviceResult[idx])
+                    if not type(cpuResult[idx]) == type(deviceResult[idx]):
+                        return False
                     if isinstance(cpuResult[idx], bool):
-
                         passed = cpuResult[idx] == deviceResult[idx]
                         if not passed: return False
                     if torch.is_tensor(cpuResult[idx]):
                         passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu))
                         if not passed: return False
         except Exception as e:
-            passed = False
-            raise ValueError(f"The testcase that cause the error is `{testcaseName}`") from e
+            raise ValueError(f"The testcase that cause the comparison error is `{testcaseName}`") from e
         return passed
-
 
     def sendValueToDevice(self, testcaseName: str, storage: dict, device: str) -> None:
         """
