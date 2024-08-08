@@ -18,7 +18,7 @@ class TorchXlogyTestCase(TorBencherTestCaseBase):
 
         # Generate random tensors
         input_tensor = torch.randn(input_size)
-        other_tensor = torch.randn(input_size)
+        other_tensor = torch.abs(torch.randn(input_size))
 
         # Calculate xlogy
         result = torch.xlogy(input_tensor, other_tensor)
