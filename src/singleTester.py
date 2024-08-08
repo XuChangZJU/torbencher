@@ -1,12 +1,13 @@
 import random
-import time
-
 import numpy as np
+import time
+import torch
+import unittest
 
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
-from .util.CustomUnittest import MyTestRunner, MyTestLoader
 from .util.apitools import *
 from .util.decorator import randomInjector
+from .util.CustomUnittest import MyTestRunner, MyTestLoader
 
 
 class SingleTester:
@@ -20,7 +21,7 @@ class SingleTester:
     storage (dict): Dictionary to store intermediate values for random number injections.
 
     **Methods**
-    run(testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443) -> bool:
+    run(testcase: TorBencherTestCaseBase, device: str = None, seed: int = 443, debug: bool = True) -> bool or int:
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
     applyRandomInjectors(testcaseName: str) -> None:
         Apply the randomInjector decorator to random functions.
@@ -38,6 +39,8 @@ class SingleTester:
         """
         self.loader = MyTestLoader()
         self.runner = MyTestRunner(verbosity=2)
+        self.uloader = unittest.TestLoader()
+        self.urunner = unittest.TextTestRunner()
         self.storage = {}
         self.uniform = random.uniform
         self.rrandint = random.randint
@@ -48,7 +51,7 @@ class SingleTester:
         self.rchoice = random.choice
         self.rrandom = random.random
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None) -> bool:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None, debug: bool = True) -> bool or int:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
@@ -57,6 +60,7 @@ class SingleTester:
         testcase (TorBencherTestCaseBase): The test case class to be tested.
         device (str, optional): The device to test on (e.g., 'cuda'). Defaults to cpu.
         seed (int, optional): The seed for random number generation. Defaults to 443.
+        debug (bool, optional): If True, enables debug print statements. Defaults to True.
 
         **returns**
         passed (bool): The passed status of the testcase.
@@ -69,6 +73,17 @@ class SingleTester:
         testcaseName = testcase.__name__
         if not seed:
             seed = time.time_ns()
+
+
+        # Pre Check for whether to skipped
+        if debug:
+            print(f"Start precheck for {testcaseName}")
+        suite = self.uloader.loadTestsFromTestCase(testcase)
+        preResult = self.urunner.run(suite)
+        if bool(preResult.skipped):
+            print(f"[SKIPPED] {testcaseName} skipped, return -2")
+            return -2
+
         if device != "cpu":
             print(f"[INITIALIZE] Start testing {testcaseName} on {device}")
         else:
@@ -80,6 +95,7 @@ class SingleTester:
         torch.manual_seed(seed)
         random.seed(seed)
 
+
         self.applyRandomInjectors(testcaseName)
         cpuReturnValues = self.runner.run(suite).getReturnValues()
         if testcaseName in cpuReturnValues:
@@ -90,7 +106,8 @@ class SingleTester:
         for record in self.storage.values():
             record["status"] = True
 
-        print(f"[DEBUG] result on cpu is \n{cpuResult}")
+        if debug:
+            print(f"[DEBUG] result on cpu is \n{cpuResult}")
 
         deviceResult = None
         passed = False
@@ -109,9 +126,9 @@ class SingleTester:
                 return -1
             if device == "cpu":
                 print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
-                pass
             else:
-                print(f"[DEBUG] result on {device} is \n{deviceResult}")
+                if debug:
+                    print(f"[DEBUG] result on {device} is \n{deviceResult}")
 
         if cpuResult is None and deviceResult is None:
             print(f"[WARN] Both CPU and Device have no return, if normal ignore this, defaultly Passed.")
@@ -126,10 +143,10 @@ class SingleTester:
                 # Comparison
                 passed = self.judgeCommon(cpuResult, deviceResult, testcaseName)
 
-                if passed:
-                    print(testcaseName + f" has passed the test on {device}\n\n\n")
-                else:
-                    print(f"[WARN] {testcaseName} has not passed the test on {device}\n\n\n")
+                if passed and debug:
+                    print(testcaseName + f" has passed the test on {device}, return True\n\n\n")
+                elif not passed:
+                    print(f"[WARN] {testcaseName} has not passed the test on {device}, return False\n\n\n")
 
         self.resetRandom()
         self.resetTester()
