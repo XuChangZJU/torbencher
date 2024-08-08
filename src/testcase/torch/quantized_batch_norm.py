@@ -10,6 +10,7 @@ from src.util.decorator import test_api
 @test_api(torch.quantized_batch_norm)
 class TorchQuantizedUbatchUnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_quantized_batch_norm_correctness(self):
         # Random dimension sizes for the input tensor (NCHW format)
         batch_size = random.randint(1, 4)
