@@ -21,4 +21,4 @@ class TorchTensorBernoulliTestCase(TorBencherTestCaseBase):
         input_tensor = torch.rand(input_size)
         # Apply bernoulli function
         result = input_tensor.bernoulli()
-        return result
+        return result.shape
