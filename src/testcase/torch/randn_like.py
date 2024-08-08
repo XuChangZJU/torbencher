@@ -17,4 +17,4 @@ class TorchRandnUlikeTestCase(TorBencherTestCaseBase):
 
         input_tensor = torch.randn(input_size)
         result = torch.randn_like(input_tensor)
-        return result
+        return result.shape
