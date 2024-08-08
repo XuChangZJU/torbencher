@@ -1,15 +1,14 @@
-import importlib
+import time
 import os
 import platform
-import time
-
-import pandas as pd
 import psutil
+import pandas as pd
+import importlib
+import torch                      # in `apitools`
 
+from .util.apitools import *
 from .singleTester import SingleTester
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
-from .util.apitools import *
-
 
 class torbencherc:
     SUPPORTED_FORMATS = ["csv", 'json', 'xlsx']
@@ -272,6 +271,14 @@ class torbencherc:
                             outputResults[device][testModuleName][testcaseName][
                                 torbencherc.TestResultKey.COST_TIME] = "N/A"
                             break
+
+                        if passed == -2:
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.STATUS] = "Skipped"
+                            outputResults[device][testModuleName][testcaseName][
+                                torbencherc.TestResultKey.COST_TIME] = "N/A"
+                            break
+
                         if passed == -1:
                             outputResults[device][testModuleName][testcaseName][
                                 torbencherc.TestResultKey.STATUS] = "Error"
