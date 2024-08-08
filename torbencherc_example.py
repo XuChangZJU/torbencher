@@ -55,7 +55,7 @@ config = {
     ],
     "format": "csv",
     "num_epoch": 1,
-    "name_spec": "timestamp"
+    "name_spec": "timestamp",
     "debug": False
 }
 
