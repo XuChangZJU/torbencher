@@ -17,7 +17,7 @@ class TorchTensorLog1pUTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate a random tensor 
-        input_tensor = torch.randn(input_size)
+        input_tensor =torch.clamp(torch.randn(input_size), min=-0.99)
 
         # Perform the operation
         input_tensor.log1p_()
