@@ -18,7 +18,7 @@ class TorchTensorLog2UTestCase(TorBencherTestCaseBase):
         # Create a list of input sizes for the tensor.
         input_size = [num_of_elements_each_dim for i in range(dim)]
         # Create a random tensor with the specified input size.
-        input_tensor = torch.randn(input_size)
+        input_tensor = torch.abs(torch.randn(input_size)) + 1e-5
         # Perform the in-place log2 operation.
         input_tensor.log2_()
         # Return the modified tensor.
