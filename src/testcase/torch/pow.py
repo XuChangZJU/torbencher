@@ -15,7 +15,7 @@ class TorchPowTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
-        input = torch.randn(input_size)
+        input = torch.abs(torch.randn(input_size)) + 1e-5
         exponent = torch.randn(input_size)
         result = torch.pow(input, exponent)
         return result

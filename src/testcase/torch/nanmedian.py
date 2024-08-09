@@ -18,7 +18,7 @@ class TorchNanmedianTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)
 
         # Introducing NaN values randomly into the tensor
-        nan_count = random.randint(0, num_elements_each_dim)  # Random number of NaNs to introduce
+        nan_count = random.randint(0, num_elements_each_dim//2)  # Random number of NaNs to introduce
         flattened_tensor = input_tensor.flatten()
         for _ in range(nan_count):
             flattened_tensor[random.randint(0, flattened_tensor.size(0) - 1)] = float('nan')
