@@ -17,6 +17,6 @@ class TorchTensorRsqrtTestCase(TorBencherTestCaseBase):
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(dim)]
-        input_tensor = torch.randn(input_size)  # Generate random tensor
+        input_tensor = torch.abs(torch.randn(input_size)) + 1e-6  # Generate random tensor
         result = input_tensor.rsqrt()
         return result
