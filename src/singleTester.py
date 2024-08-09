@@ -52,7 +52,8 @@ class SingleTester:
         self.rrandom = random.random
         self.rshuffle = random.shuffle
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None, debug: bool = True) -> bool or int:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None,
+            debug: bool = True) -> bool or int:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
@@ -72,9 +73,8 @@ class SingleTester:
         """
         assert issubclass(testcase, TorBencherTestCaseBase)
         testcaseName = testcase.__name__
-        if not seed:
+        if seed is None:
             seed = time.time_ns()
-
 
         # Pre Check for whether to skipped
         if debug:
@@ -95,7 +95,6 @@ class SingleTester:
         torch.set_default_device("cpu")
         torch.manual_seed(seed)
         random.seed(seed)
-
 
         self.applyRandomInjectors(testcaseName)
         cpuReturnValues = self.runner.run(suite).getReturnValues()
@@ -139,6 +138,7 @@ class SingleTester:
         else:
             if cpuResult is not None and deviceResult is not None:
                 if torch.is_tensor(deviceResult):
+                    cpuResult = cpuResult.to(torch.device("cpu"))
                     deviceResult = deviceResult.to(torch.device("cpu"))
 
                 # Comparison
@@ -212,13 +212,14 @@ class SingleTester:
             if type(cpuResult) == type(1) or type(cpuResult) == type(3.14):
                 passed = np.allclose(cpuResult, deviceResult)
 
+
             if torch.is_tensor(cpuResult):
                 cpuResult = cpuResult.to(cpu)
                 deviceResult = deviceResult.to(cpu)
                 try:
-                    passed = torch.allclose(cpuResult, deviceResult)
+                    passed = torch.allclose(cpuResult.to(cpu), deviceResult.to(cpu)) or str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
                 except Exception as e:
-                    passed = str(cpuResult) == str(deviceResult.to(cpu))
+                    passed = str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
 
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):

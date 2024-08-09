@@ -1,6 +1,7 @@
 import random
 
 import torch
+import torch.utils.data
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -16,4 +17,3 @@ class TorchUtilsDataSubsetrandomsamplerTestCase(TorBencherTestCaseBase):
         # Generate a list of indices
         indices = list(range(length_indices))
         subset_random_sampler = torch.utils.data.SubsetRandomSampler(indices)
-        return subset_random_sampler
