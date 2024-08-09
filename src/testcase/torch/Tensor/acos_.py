@@ -17,8 +17,7 @@ class TorchTensorAcosUTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate a random tensor with values between -1 and 1
-        input_tensor = torch.randn(
-            input_size) * 0.9  # Multiply by 0.9 to ensure values are within the valid range for acos
-        expected_result = torch.acos(input_tensor)
+        input_tensor = torch.randn(input_size)   # Multiply by 0.9 to ensure values are within the valid range for acos
+        input_tensor = torch.clamp(input_tensor, -1, 1)
         input_tensor.acos_()  # In-place acos operation
         return input_tensor
