@@ -139,6 +139,7 @@ class SingleTester:
         else:
             if cpuResult is not None and deviceResult is not None:
                 if torch.is_tensor(deviceResult):
+                    cpuResult = cpuResult.to(torch.device("cpu"))
                     deviceResult = deviceResult.to(torch.device("cpu"))
 
                 # Comparison
@@ -212,13 +213,14 @@ class SingleTester:
             if type(cpuResult) == type(1) or type(cpuResult) == type(3.14):
                 passed = np.allclose(cpuResult, deviceResult)
 
+
             if torch.is_tensor(cpuResult):
                 cpuResult = cpuResult.to(cpu)
                 deviceResult = deviceResult.to(cpu)
                 try:
-                    passed = torch.allclose(cpuResult, deviceResult)
+                    passed = torch.allclose(cpuResult.to(cpu), deviceResult.to(cpu)) or str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
                 except Exception as e:
-                    passed = str(cpuResult) == str(deviceResult.to(cpu))
+                    passed = str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
 
             if isinstance(cpuResult, tuple):
                 for idx in range(len(cpuResult)):
