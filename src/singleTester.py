@@ -217,7 +217,7 @@ class SingleTester:
                 cpuResult = cpuResult.to(cpu)
                 deviceResult = deviceResult.to(cpu)
                 try:
-                    passed = torch.allclose(cpuResult.to(cpu), deviceResult.to(cpu)) or str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
+                    passed = torch.allclose(cpuResult.to(cpu), deviceResult.to(cpu))#  or str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
                 except Exception as e:
                     passed = str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
 
