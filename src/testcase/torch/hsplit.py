@@ -27,7 +27,10 @@ class TorchHsplitTestCase(TorBencherTestCaseBase):
                 if num_of_cols % indices_or_sections == 0:
                     break
         else:
-            indices_or_sections = sorted(random.sample(range(1, num_of_cols), k=random.randint(1, num_of_cols - 2)))
+            num_sections = random.randint(1, num_of_cols - 1)
+            indices_or_sections = sorted([random.randint(1, num_of_cols - 1) for _ in range(num_sections)])
+            if indices_or_sections[-1] != num_of_cols:
+                indices_or_sections.append(num_of_cols)
 
         result = torch.hsplit(input_tensor, indices_or_sections)
         return result
