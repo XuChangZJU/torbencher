@@ -1,6 +1,7 @@
 import random
 
 import torch
+import torch.utils.data
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -19,4 +20,3 @@ class TorchUtilsDataSubsetTestCase(TorBencherTestCaseBase):
         # Generate random indices for subset, ensuring they are within the dataset bounds
         indices = random.sample(range(len(dataset)), random.randint(1, len(dataset)))
         subset = torch.utils.data.Subset(dataset, indices)
-        return subset
