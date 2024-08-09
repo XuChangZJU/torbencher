@@ -4,7 +4,8 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-
+def shuffle(lst):
+    return sorted(lst, key=lambda x: random.random())
 @test_api(torch.Tensor.put_)
 class TorchTensorPutUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("1.1.3")
@@ -17,8 +18,10 @@ class TorchTensorPutUTestCase(TorBencherTestCaseBase):
         length = torch.numel(origin)
 
         num_to_put = random.randint(1, length)
-        indices_to_put = torch.tensor([random.randint(0, num_to_put - 1) for _ in range(num_to_put)])
+        indices_to_put = shuffle(range(length))[:num_to_put]
+        indices_to_put = torch.tensor(indices_to_put)
         val_to_put = torch.tensor([random.random() for _ in range(num_to_put)])
 
         origin.put_(indices_to_put, val_to_put)
+        
         return origin
