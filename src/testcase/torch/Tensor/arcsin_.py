@@ -18,8 +18,9 @@ class TorchTensorArcsinUTestCase(TorBencherTestCaseBase):
         # Create a list of input sizes.
         input_size = [num_of_elements_each_dim for i in range(dim)]
         # Generate a random tensor.
-        input_tensor = torch.randn(input_size) * random.uniform(-1,
-                                                                1)  # Make sure the elements are within the valid range of arcsin.
+        input_tensor = torch.randn(input_size)
+        # Make sure the elements are within the valid range of arcsin.
+        input_tensor = torch.clamp(input_tensor, -1, 1)
         # Perform the in-place arcsin operation.
         input_tensor.arcsin_()
         return input_tensor
