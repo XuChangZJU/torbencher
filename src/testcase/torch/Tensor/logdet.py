@@ -18,6 +18,8 @@ class TorchTensorLogdetTestCase(TorBencherTestCaseBase):
         # Generate a random tensor
         tensor = torch.randn(input_size)
 
+        # Ensure the matrix is invertible by constructing it as A * A.T
+        tensor = torch.matmul(tensor, tensor.T)
         # Calculate the log determinant
         result = tensor.logdet()
         return result
