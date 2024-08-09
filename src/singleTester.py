@@ -52,7 +52,8 @@ class SingleTester:
         self.rrandom = random.random
         self.rshuffle = random.shuffle
 
-    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None, debug: bool = True) -> bool or int:
+    def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None,
+            debug: bool = True) -> bool or int:
         """
         **description**
         Runs the provided test case on CPU and optionally on a specified device, comparing the results.
@@ -72,9 +73,8 @@ class SingleTester:
         """
         assert issubclass(testcase, TorBencherTestCaseBase)
         testcaseName = testcase.__name__
-        if not seed:
+        if seed is None:
             seed = time.time_ns()
-
 
         # Pre Check for whether to skipped
         if debug:
@@ -95,7 +95,6 @@ class SingleTester:
         torch.set_default_device("cpu")
         torch.manual_seed(seed)
         random.seed(seed)
-
 
         self.applyRandomInjectors(testcaseName)
         cpuReturnValues = self.runner.run(suite).getReturnValues()
