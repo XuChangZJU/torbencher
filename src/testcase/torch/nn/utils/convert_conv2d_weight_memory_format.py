@@ -13,9 +13,9 @@ class TorchNnUtilsConvertUconv2dUweightUmemoryUformatTestCase(TorBencherTestCase
     @test_api_version.larger_than("2.0.0")
     @unittest.skipIf(not torch.cuda.is_available(), "CUDA is not available")
     def test_convert_conv2d_weight_memory_format_correctness(self):
-        input = torch.randint(1, 10, (2, 8, 4, 4), dtype=torch.float16,device="cuda")
+        input = torch.randint(1, 10, (2, 8, 4, 4), dtype=torch.float16, device="cuda")
         model = nn.Sequential(
-            nn.Conv2d(8, 4, 3).half())
+            nn.Conv2d(8, 4, 3).cuda().half())
         model = nn.utils.convert_conv2d_weight_memory_format(model, torch.channels_last)
         out = model(input)
         return out
