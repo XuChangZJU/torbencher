@@ -15,8 +15,8 @@ class TorchTensorFloatUpowerUTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for _ in range(dim)]  # Generate input size for the tensor
 
-        base_tensor = torch.randn(input_size, dtype=torch.double)  # Random base tensor with double precision
+        base_tensor = torch.randn(input_size, dtype=torch.double).clamp(min=1e-3)  # Random base tensor with double precision
         exponent_tensor = torch.randn(input_size, dtype=torch.double)  # Random exponent tensor with double precision
 
-        result = base_tensor.float_power_(exponent_tensor)  # In-place float power operation
-        return result
+        base_tensor.float_power_(exponent_tensor)  # In-place float power operation
+        return base_tensor

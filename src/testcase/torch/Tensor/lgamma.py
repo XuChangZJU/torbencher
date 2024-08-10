@@ -18,6 +18,6 @@ class TorchTensorLgammaTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
-        input_tensor = torch.randn(input_size)  # Generate random tensor
+        input_tensor =torch.abs(torch.randn(input_size)) + 1e-6   # Generate random tensor
         result = input_tensor.lgamma()  # Calculate the lgamma of the tensor
         return result

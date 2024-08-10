@@ -17,7 +17,7 @@ class TorchTensorAtanhUTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate random tensor with values in the range (-1, 1)
-        input_tensor = torch.randn(input_size) * 0.9  # Scale to ensure values are within (-1, 1)
+        input_tensor = torch.randn(input_size).clamp(-0.99, 0.99) # Scale to ensure values are within (-1, 1)
         expected_output = torch.atanh(input_tensor)
         input_tensor.atanh_()
         return input_tensor

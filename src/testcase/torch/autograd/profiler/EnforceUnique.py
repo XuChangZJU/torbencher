@@ -14,18 +14,12 @@ class TorchAutogradProfilerEnforceuniqueTestCase(TorBencherTestCaseBase):
         # Generate a random number of keys
         num_keys = random.randint(1, 10)
 
-        # Create a dictionary with unique keys
-        unique_keys = {f'key_{i}': i for i in range(num_keys)}
-
-        # Create a dictionary with duplicate keys to trigger the error
-        duplicate_keys = {f'key_{i}': i for i in range(num_keys)}
-        duplicate_keys['key_0'] = num_keys  # Add a duplicate key
-
         # Test with unique keys (should not raise an error)
-        torch.autograd.profiler.EnforceUnique().check(unique_keys)
+        for i in range(num_keys):
+            torch.autograd.profiler.EnforceUnique().see(i)
 
         # Test with duplicate keys (should raise an error)
         try:
-            torch.autograd.profiler.EnforceUnique().check(duplicate_keys)
+            torch.autograd.profiler.EnforceUnique().see(0)
         except RuntimeError as e:
             f"Expected error for duplicate keys: {e}"

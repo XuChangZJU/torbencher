@@ -20,7 +20,7 @@ class TorchTensorLgammaUTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)
 
         # Perform the lgamma_ operation
-        result = input_tensor.lgamma_()
+        input_tensor.lgamma_()
 
         # Return the result tensor
-        return result
+        return input_tensor
