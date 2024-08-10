@@ -1,11 +1,23 @@
+
+# import os
+# os.environ['KMP_DUPLICATE_LIB_OK']='True'
+
 from src.singleTester import SingleTester
+from src.testcase.torch.add import TorchAddTestCase
 
 tester = SingleTester()
 
-from src.testcase.torch.addmm import TorchAddmmTestCase
 
-tester.run(TorchAddmmTestCase, device="cuda", seed=123)
 
-from src.testcase.torch.quantized_batch_norm import TorchQuantizedUbatchUnormTestCase
+pass_result_list = []
+for i in range(100):
+    pass_result = tester.run(TorchAddTestCase, device="cpu", seed=i)
+    pass_result_list.append(pass_result)
 
-tester.run(TorchQuantizedUbatchUnormTestCase, device="cuda", seed=123)
+# print(pass_result_list)
+
+if False in pass_result_list:
+    print("Test failed")
+else:
+    print("Test passed")
+
