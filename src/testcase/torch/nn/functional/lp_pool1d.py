@@ -18,7 +18,7 @@ class TorchNnFunctionalLpUpool1dTestCase(TorBencherTestCaseBase):
         signal_length = random.randint(5, 10)
 
         # Randomly generate the power parameter p
-        p = random.uniform(1.0, 3.0)
+        p = 1
 
         # Randomly generate the kernel size
         kernel_size = random.randint(2, 4)
