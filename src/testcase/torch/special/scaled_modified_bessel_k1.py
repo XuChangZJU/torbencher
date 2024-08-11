@@ -14,8 +14,8 @@ class TorchSpecialScaledUmodifiedUbesselUk1TestCase(TorBencherTestCaseBase):
         # Randomly generate input tensor data
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)
-        input_size = [num_of_elements_each_dim for i in range(dim)]
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
         input = torch.randn(input_size)  # input tensor
-
+        input = torch.abs(input) + 1
         result = torch.special.scaled_modified_bessel_k1(input)
         return result
