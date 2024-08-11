@@ -16,9 +16,10 @@ class TorchSpecialScaledUmodifiedUbesselUk0TestCase(TorBencherTestCaseBase):
         # Generate random number of elements for each dimension
         num_of_elements_each_dim = random.randint(1, 5)
         # Generate input size
-        input_size = [num_of_elements_each_dim for i in range(dim)]
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
         # Generate random input tensor
         input_tensor = torch.randn(input_size)
+        input_tensor = torch.abs(input_tensor) + 1
         # Calculate scaled modified Bessel function of the second kind of order 0
         result = torch.special.scaled_modified_bessel_k0(input_tensor)
         return result
