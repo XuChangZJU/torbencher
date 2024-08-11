@@ -11,24 +11,26 @@ from src.util.decorator import test_api
 class TorchNnFunctionalMaxUunpool2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_max_unpool2d_correctness(self):
-        # Randomly generate dimensions for the input tensor
+        # 随机生成输入张量的维度
         batch_size = random.randint(1, 4)
         channels = random.randint(1, 4)
-        height = random.randint(4, 8)
-        width = random.randint(4, 8)
+        height = random.randint(8, 16)  # 为了保证 pooling 后的张量仍有一定的大小
+        width = random.randint(8, 16)
 
-        # Generate random input tensor
+        # 生成随机输入张量
         input_tensor = torch.randn(batch_size, channels, height, width)
 
-        # Generate random indices tensor with the same shape as input_tensor
-        indices = torch.randint(0, height * width, (batch_size, channels, height, width))
-
-        # Define kernel size, stride, and padding for max pooling
+        # 定义 max pooling 的 kernel size, stride 和 padding
         kernel_size = random.randint(2, 4)
-        stride = kernel_size  # To ensure valid unpooling, stride should be equal to kernel_size
-        padding = 0  # No padding for simplicity
+        stride = kernel_size  # 为确保 unpooling 的有效性，stride 应与 kernel_size 相同
+        padding = 0  # 为了简单起见，无 padding
 
-        # Perform max unpooling
-        output = torch.nn.functional.max_unpool2d(input_tensor, indices, kernel_size, stride, padding)
+        # 执行 max_pool2d 操作
+        pooled, indices = torch.nn.functional.max_pool2d(input_tensor, kernel_size, stride, padding,
+                                                         return_indices=True)
 
-        return output
+        # 执行 max_unpool2d 操作
+        unpooled = torch.nn.functional.max_unpool2d(pooled, indices, kernel_size, stride, padding,
+                                                    output_size=input_tensor.shape)
+
+        return pooled, unpooled
