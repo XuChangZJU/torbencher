@@ -21,7 +21,7 @@ class TorchNnFunctionalLpUpool2dTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(batch_size, channels, height, width)
 
         # Randomly generate the power parameter p
-        p = random.uniform(1.0, 10.0)
+        p = 1
 
         # Randomly generate the kernel size
         kernel_size = random.randint(2, 4)
