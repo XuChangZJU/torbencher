@@ -111,15 +111,17 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
 
 class TorchAddTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
-    def test_add_4d(self, input=None):
-        if input is not None:
-            result = torch.add(input[0], input[1], input[2])
-            return [result, input]
-        a = torch.randn(4)
-        b = torch.randn(4)
-        result = torch.add(a, b, alpha=10)
-        return result            # 仅返回结果，不需要像以前一样其他参数什么的
+    @test_api_version.larger_than("2.0.0")
+    def test_add(self):
+        dim = random.randint(1, 4)
+        num_of_elements_each_dim = random.randint(1, 5)
+        input_size = [num_of_elements_each_dim for i in range(dim)]
+
+        input_tensor = torch.randn(input_size)
+        other_tensor = torch.randn(input_size)
+
+        result = torch.add(input_tensor, other_tensor)
+        return result
 ```
 **（以下不再需要，只需要所有`__init.py`文件改为通用脚本即可，具体脚本见`src.README.md`）**  
 测试用例编写完成后，在对应模块的`__init__.py`文件中导出该用例（如果不导出该用例，框架将不会发现并测试它），如
@@ -129,14 +131,21 @@ from .add import TorchAddTestCase
 
 要点：
 1. 当前已通过扩展`unittest`的loader和runner的方法实现了对测试用例名称与测试用例计算结果的获取，应将所有的`@test_api(api)`删除，
-2. 目前已完成稳定器注入的`random`方法已有`random.randint`、`random.uniform`和`torch.randn`，在`SingleTester`未进行相应适配前尽可能使用已适配的方法
+2. 目前已完成稳定器注入的`random`方法已有`random.randint`, `random.uniform`, `torch.randn`和`torch.normal`，在`SingleTester`未进行相应适配前尽可能使用已适配的方法
 3. `torch.nn.modules`里的神经网络内部的权重初始化暂时要求以`torch.randn`的形式自行初始化，稳定器注入遇到困难：
- - 初始化方法（以`torch.nn.Linear`为例）
+ - 初始化方法（以`torch.nn.Linear`为例）  
+可使用`torch.randn`
 ```python
-        with torch.no_grad():
-            linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01)
-            linear_layer.bias = torch.nn.Parameter(torch.randn(out_features) * 0.01)
+with torch.no_grad():
+    linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features) * 0.01)
+    linear_layer.bias = torch.nn.Parameter(torch.randn(out_features) * 0.01)
 ```
-5. **返回值仅包含测试方法返回值，为None的自行判断正确性，但也可通过`SingleTester`测试其语法正确性**
+或使用`torch.normal`（**建议**，使用`torch.normal`往往**更好更规范**）  
+```python
+with torch.no_grad():
+    linear_layer.weight = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features, in_features)))
+    linear_layer.bias = torch.nn.Parameter(torch.normal(0, 0.01, size=(out_features,)))
+```
+5. **返回值仅包含测试方法返回值，返回值为为None的算子用例自行判断正确性，但也可通过`SingleTester`测试其语法正确性**
 6. 如果用例有pytorch版本限制，可以通过`@api_test_version.larger_than(ver)/less_than(ver)/between(low, high)/equal(ver)`的装饰器来标定范围
-7. 
+7. 返回值的对比主要支持数值和Tensor（依赖`torch.allclose(arg1, arg2)`），如存在多个返回值也请使用tensor合并或打包，**请勿使用**字典、集合、元组、列表等组合数据类型

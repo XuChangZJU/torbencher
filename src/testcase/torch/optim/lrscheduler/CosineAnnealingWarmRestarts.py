@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.optim.lr_scheduler.CosineAnnealingWarmRestarts)
 class TorchOptimLrschedulerCosineannealingwarmrestartsTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_CosineAnnealingWarmRestarts_correctness(self):
         # Define optimizer parameters
         learning_rate = random.uniform(0.001, 0.1)  # Random learning rate between 0.001 and 0.1

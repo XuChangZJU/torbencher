@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,13 +9,12 @@ from src.util.decorator import test_api
 
 @test_api(torch.acosh)
 class TorchAcoshTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_acosh_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
-        input_tensor = torch.randn(
-            input_size) + 1  # generate random tensor and make sure every element is in the range of [1, inf)
+        input_tensor = torch.randn(input_size).clamp(min=1.0)  # generate random tensor and make sure every element is in the range of [1, inf)
         result = torch.acosh(input_tensor)
         return result

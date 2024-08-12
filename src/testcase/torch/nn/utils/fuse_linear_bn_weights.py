@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.fuse_linear_bn_weights)
-class TorchNnUtilsFuselinearbnweightsTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnUtilsFuseUlinearUbnUweightsTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_fuse_linear_bn_weights_correctness(self):
         # Define the dimensions for the linear and batch normalization layers
         in_features = random.randint(1, 10)

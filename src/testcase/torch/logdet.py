@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,14 +9,18 @@ from src.util.decorator import test_api
 
 @test_api(torch.logdet)
 class TorchLogdetTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_logdet_correctness(self):
         # Generate a random square matrix
         dim = random.randint(1, 10)  # Random dimension for the matrix
-        input_size = [dim, dim]
+        # input_size = [dim, dim]
+        #
+        # # Generate a random tensor of the specified size
+        # input_tensor = torch.randn(input_size)
 
-        # Generate a random tensor of the specified size
-        input_tensor = torch.randn(input_size)
+        # 生成正定矩阵
+        A = torch.randn((dim, dim))
+        input_tensor = torch.mm(A, A.t())
 
         # Calculate the log determinant using torch.logdet
         result = torch.logdet(input_tensor)

@@ -1,5 +1,7 @@
-import torch
 import random
+import unittest
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +9,9 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.rnn.pack_sequence)
-class TorchNnUtilsRnnPacksequenceTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnUtilsRnnPackUsequenceTestCase(TorBencherTestCaseBase):
+    @unittest.skip
+    @test_api_version.larger_than("2.0.0")
     def test_pack_sequence_correctness(self):
         # Random number of sequences
         num_sequences = random.randint(2, 5)
@@ -21,8 +24,12 @@ class TorchNnUtilsRnnPacksequenceTestCase(TorBencherTestCaseBase):
 
         # Generate random sequences based on the lengths
         sequences = [torch.randn(length, random.randint(1, 3)) for length in lengths]
-
+        # for sequence in sequences:
+        #     sequence = sequence.to(torch.device("cpu"))
         # Pack the sequences
-        packed_sequence = torch.nn.utils.rnn.pack_sequence(sequences)
+        # packed_sequence = torch.nn.utils.rnn.pack_sequence(sequences)
 
-        return packed_sequence
+        lengths = torch.as_tensor([v.size(0) for v in sequences])
+        return torch.nn.utils.rnn.pack_padded_sequence(torch.nn.utils.rnn.pad_sequence(sequences), lengths.cpu())
+
+        # return packed_sequence

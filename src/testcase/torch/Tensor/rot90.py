@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.Tensor.rot90)
 class TorchTensorRot90TestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_rot90_correctness(self):
         # Random dimension for the tensors
         dim = random.randint(2, 4)
@@ -21,6 +22,9 @@ class TorchTensorRot90TestCase(TorBencherTestCaseBase):
         # Generate random k
         k = random.randint(1, 4)
         # Generate random dims. The dims should contain two integers.
-        dims = random.sample(range(0, dim), 2)
+        # dims = random.sample(range(0, dim), 2)
+        dims = sorted([random.randint(0, dim - 1), random.randint(0, dim - 1)])
+        while dims[0] == dims[1]:
+            dims[1] = random.randint(0, dim - 1)
         result = input_tensor.rot90(k, dims)
         return result

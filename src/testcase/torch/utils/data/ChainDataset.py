@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.utils.data import IterableDataset, ChainDataset
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -18,7 +19,7 @@ class RandomIterableDataset(IterableDataset):
 
 @test_api(torch.utils.data.ChainDataset)
 class TorchUtilsDataChaindatasetTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_chain_dataset_correctness(self):
         # Randomly generate the number of datasets to chain
         num_datasets = random.randint(2, 5)

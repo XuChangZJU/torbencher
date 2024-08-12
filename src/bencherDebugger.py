@@ -1,10 +1,12 @@
+import csv
 import importlib
 import inspect
+import logging
+import os
 import time
 import unittest
+
 import torch
-import csv
-import logging
 
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
@@ -22,6 +24,7 @@ class bencherDebugger:
         FORMAT = "format"
         INCLUDING_SUCCESS = "including_success"
         NUM_EPOCHES = "num_epoches"
+        RESULT_FILE = "result_file"
 
     class ResultKey:
         TESTCASE = "testcase"
@@ -59,6 +62,7 @@ class bencherDebugger:
         config.setdefault(bencherDebugger.ConfigKey.TEST_MODULES, bencherDebugger.AVAILABLE_TEST_MODULES)
         config.setdefault(bencherDebugger.ConfigKey.INCLUDING_SUCCESS, False)
         config.setdefault(bencherDebugger.ConfigKey.NUM_EPOCHES, 1)
+        config.setdefault(bencherDebugger.ConfigKey.RESULT_FILE, "test_results.csv")
 
         if bencherDebugger.ConfigKey.FORMAT not in config or config[
             bencherDebugger.ConfigKey.FORMAT] not in bencherDebugger.SUPPORTED_FORMATS:
@@ -119,8 +123,10 @@ class bencherDebugger:
 
         try:
             self._write_results_to_csv(outputResults)
+            self.deleteNonPyFiles();
         except Exception as e:
             logging.error(f"Error writing results to CSV: {e}")
+
 
     def importModules(self, names: list, outputResults: dict) -> list:
         """
@@ -194,7 +200,7 @@ class bencherDebugger:
         - dict: Dictionary with test results.
         """
         loader = unittest.TestLoader()
-        runner = unittest.TextTestRunner()
+        runner = unittest.TextTestRunner(verbosity=2)
 
         suite = loader.loadTestsFromTestCase(testcase)
 
@@ -254,7 +260,17 @@ class bencherDebugger:
         fieldnames = [getattr(bencherDebugger.ResultKey, col) for col in dir(bencherDebugger.ResultKey) if
                       "__" not in col]
 
-        with open('test_results.csv', 'w', newline='') as output_file:
+        with open(self.config.get(bencherDebugger.ConfigKey.RESULT_FILE), 'w', newline='') as output_file:
             dict_writer = csv.DictWriter(output_file, fieldnames=list(fieldnames))
             dict_writer.writeheader()
             dict_writer.writerows(formattedResults)
+
+    def deleteNonPyFiles(self, dirPath: str=None):
+        if not dirPath:
+            dirPath = os.path.join(os.getcwd(), "")
+        for root, dirs, files in os.walk(dirPath):
+            for file in files:
+                if file.endswith('.cpp') or file.endswith('.pyc') or file.endswith('.c') or file.endswith('.pt'):
+                    filePath = os.path.join(root, file)
+                    # print(f"Deleting file: {filePath}")
+                    os.remove(filePath)

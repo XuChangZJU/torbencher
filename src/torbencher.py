@@ -3,12 +3,13 @@ import importlib
 import inspect
 import platform
 import time
-import unittest
+
 import psutil
 import torch
 import torch.version
-from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase;
-from .util.unitest import MyTestRunner, MyTestLoader;
+
+from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from .util.CustomUnittest import MyTestRunner, MyTestLoader
 
 
 class torbencher:
@@ -107,8 +108,8 @@ class torbencher:
     def _run_tests(self, seed: int, devices: list, test_modules: list):
         output_results = {}
 
-        loader = MyTestLoader();
-        runner = MyTestRunner(verbosity=2);
+        loader = MyTestLoader()
+        runner = MyTestRunner(verbosity=2)
 
         names = [f"src.testcase.{test_module}" for test_module in test_modules]
         modules = [importlib.import_module(name) for name in names]
@@ -135,12 +136,12 @@ class torbencher:
 
         torch.manual_seed(seed)
         for device in devices:
-            # torch.set_default_device(device);
-            output_results[device] = [];
+            # torch.set_default_device(device)
+            output_results[device] = []
             for module_info in testcases_info:
                 for testcase in module_info["testcases"]:
                     suite = loader.loadTestsFromTestCase(testcase)
                     result = runner.run(suite)
-                    output_results[device].append(result.getReturnValues());
+                    output_results[device].append(result.getReturnValues())
 
         return output_results

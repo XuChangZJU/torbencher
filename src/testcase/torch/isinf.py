@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.isinf)
 class TorchIsinfTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_isinf_correctness(self):
         # Step 1: Define random dimensions and size for tensor
         dim = random.randint(1, 4)  # Random dimension for the tensor
@@ -20,10 +21,12 @@ class TorchIsinfTestCase(TorBencherTestCaseBase):
 
         # Inserting inf, -inf, nan randomly
         num_of_elements = input_tensor.numel()
-        indices_to_change = random.sample(range(num_of_elements), random.randint(1, num_of_elements))
+        # indices_to_change = random.sample(range(num_of_elements), random.randint(1, num_of_elements))
+        num_to_change = random.randint(1, num_of_elements)  # Number of elements to change
+        indices_to_change = torch.randint(0, num_of_elements, (num_to_change,))
         special_values = [float('inf'), -float('inf'), float('nan')]
 
-        for idx in indices_to_change:
+        for idx in indices_to_change.tolist():
             value_to_insert = random.choice(special_values)
             input_tensor.view(-1)[idx] = value_to_insert
 

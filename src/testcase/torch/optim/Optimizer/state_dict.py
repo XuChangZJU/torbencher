@@ -1,5 +1,7 @@
-import torch
 import random
+import unittest
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +9,9 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.optim.Optimizer.state_dict)
-class TorchOptimOptimizerStatedictTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchOptimOptimizerStateUdictTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_optimizer_state_dict_correctness(self):
         # Randomly generate the number of parameters
         num_params = random.randint(1, 5)

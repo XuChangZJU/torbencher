@@ -1,5 +1,4 @@
 import torch
-import random
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +6,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.is_nonzero)
-class TorchIsnonzeroTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchIsUnonzeroTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_is_nonzero_correctness(self):
         # is_nonzero only accept single element tensor, so dim is set to 1
         dim = 1

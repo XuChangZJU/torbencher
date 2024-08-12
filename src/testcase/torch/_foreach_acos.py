@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_acos)
-class TorchForeachacosTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUforeachUacosTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_foreach_acos_correctness(self):
         # foreach_acos requires the input tensors to be in the range [-1, 1]
         dim = random.randint(1, 4)

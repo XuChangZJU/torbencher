@@ -1,23 +1,7 @@
-# from .fuse_linear_bn_eval import TorchNnUtilsFuselinearbnevalTestCase
-# from .weight_norm import TorchNnUtilsWeightnormTestCase
-# from .convert_conv3d_weight_memory_format import TorchNnUtilsConvertconv3dweightmemoryformatTestCase
-# from .clip_grad_norm_ import TorchNnUtilsClipgradnormTestCase
-# from .spectral_norm import TorchNnUtilsSpectralnormTestCase
-# from .parameters_to_vector import TorchNnUtilsParameterstovectorTestCase
-# from .fuse_linear_bn_weights import TorchNnUtilsFuselinearbnweightsTestCase
-# from .convert_conv2d_weight_memory_format import TorchNnUtilsConvertconv2dweightmemoryformatTestCase
-# from .clip_grad_value_ import TorchNnUtilsClipgradvalueTestCase
-# from .skip_init import TorchNnUtilsSkipinitTestCase
-# from .vector_to_parameters import TorchNnUtilsVectortoparametersTestCase
-# from .fuse_conv_bn_weights import TorchNnUtilsFuseconvbnweightsTestCase
-# from .remove_weight_norm import TorchNnUtilsRemoveweightnormTestCase
-# from .clip_grad_norm import TorchNnUtilsClipgradnormTestCase
-# from .remove_spectral_norm import TorchNnUtilsRemovespectralnormTestCase
-# from .fuse_conv_bn_eval import TorchNnUtilsFuseconvbnevalTestCase
-
-import os
 import importlib
 import logging
+import os
+from inspect import isclass
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
@@ -36,8 +20,11 @@ for script_file in script_files:
     except Exception as e:
         logger.debug(f"Failed to import module {module_name}: {e}")
         continue
-
-    for attribute_name in dir(module):
-        attribute = getattr(module, attribute_name)
-        if isinstance(attribute, type) and issubclass(attribute, TorBencherTestCaseBase):
-            globals()[attribute_name] = attribute
+    try:
+        for attribute_name in dir(module):
+            attribute = getattr(module, attribute_name)
+            if isclass(attribute) and issubclass(attribute, TorBencherTestCaseBase)\
+                    and attribute is not TorBencherTestCaseBase:
+                globals()[attribute_name] = attribute
+    except Exception as e:
+        raise ValueError(f"The testcase that cause error is {attribute_name}") from e

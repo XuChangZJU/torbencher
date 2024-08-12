@@ -1,12 +1,6 @@
-# from .Function import TorchAutogradFunctionTestCase
-# from .detect_anomaly import TorchAutogradDetectanomalyTestCase
-# from .backward import TorchAutogradBackwardTestCase
-# from .grad import TorchAutogradGradTestCase
-# from .set_detect_anomaly import TorchAutogradSetdetectanomalyTestCase
-
-import os
 import importlib
 import logging
+import os
 from inspect import isclass
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -34,7 +28,3 @@ for script_file in script_files:
                 globals()[attribute_name] = attribute
     except Exception as e:
         raise ValueError(f"The testcase that cause error is {attribute_name}") from e
-
-
-
-import TorchAutogradTrueTestCase__init__

@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.profiler._KinetoProfile)
-class TorchProfilerKinetoprofileTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchProfilerUkinetoprofileTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_kineto_profile_correctness(self):
         # Randomly select activities from ProfilerActivity
         activities = [torch.profiler.ProfilerActivity.CPU]
@@ -44,6 +45,3 @@ class TorchProfilerKinetoprofileTestCase(TorBencherTestCaseBase):
                 with_modules=with_modules
         ) as prof:
             output = model(input_tensor)
-
-        # Return the profiling result
-        return prof.key_averages()

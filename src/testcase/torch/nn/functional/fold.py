@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.functional.fold)
 class TorchNnFunctionalFoldTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_fold_correctness(self):
         # Randomly generate parameters for fold operation
         batch_size = random.randint(1, 4)  # Random batch size
@@ -28,6 +29,6 @@ class TorchNnFunctionalFoldTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(batch_size, channels * kernel_size[0] * kernel_size[1], input_height * input_width)
 
         # Perform fold operation
-        result = torch.nn.functional.fold(input_tensor, (output_height, output_width), kernel_size, stride, padding,
-                                          dilation)
+        result = torch.nn.functional.fold(input_tensor, (output_height, output_width), kernel_size, dilation, padding,
+                                          stride)
         return result

@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.atleast_3d)
-class TorchAtleast3dTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchAtleastU3dTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_atleast_3d_correctness(self):
         # Case 1: Input is a single tensor with dim < 3
         dim = random.randint(0, 2)  # Random dimension for the tensor (0, 1, or 2)

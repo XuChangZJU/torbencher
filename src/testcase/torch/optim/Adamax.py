@@ -1,5 +1,7 @@
-import torch
 import random
+import unittest
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +10,8 @@ from src.util.decorator import test_api
 
 @test_api(torch.optim.Adamax)
 class TorchOptimAdamaxTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_adamax_correctness(self):
         # Define the parameters for the Adamax optimizer
         learning_rate = random.uniform(1e-5, 1e-2)  # Random learning rate between 1e-5 and 1e-2

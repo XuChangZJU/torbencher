@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.optim import SGD
 from torch.optim.lr_scheduler import ConstantLR, ExponentialLR, ChainedScheduler
 
@@ -10,7 +11,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.optim.lr_scheduler.ChainedScheduler)
 class TorchOptimLrschedulerChainedschedulerTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_chained_scheduler_correctness(self):
         # Randomly generate the number of parameters and learning rate
         num_params = random.randint(1, 10)

@@ -1,4 +1,4 @@
-from .torbencher import torbencher
 from .TorchWrapper import TorchWrapper
-from .util.bencherDebugger import bencherDebugger
-from .singletester import SingleTester;
+from .bencherDebugger import bencherDebugger
+from .singleTester import SingleTester
+from .torbencher import torbencher

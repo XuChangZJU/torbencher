@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -8,8 +9,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.rnn.pad_packed_sequence)
-class TorchNnUtilsRnnPadpackedsequenceTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnUtilsRnnPadUpackedUsequenceTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_pad_packed_sequence_correctness(self):
         # Randomly generate batch size and max sequence length
         batch_size = random.randint(1, 5)

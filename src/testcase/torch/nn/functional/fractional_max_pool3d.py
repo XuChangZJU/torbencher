@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.functional.fractional_max_pool3d)
-class TorchNnFunctionalFractionalmaxpool3dTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnFunctionalFractionalUmaxUpool3dTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_fractional_max_pool3d_correctness(self):
         # Randomly generate dimensions for the input tensor
         N = random.randint(1, 5)  # Batch size
@@ -26,10 +27,15 @@ class TorchNnFunctionalFractionalmaxpool3dTestCase(TorBencherTestCaseBase):
         # Ensure the kernel size is not larger than the input dimensions
         kernel_size = min(kernel_size, T_in, H_in, W_in)
 
+        # Define constraints to ensure output size is valid
+        max_T_out = (T_in - 1) // kernel_size + 1
+        max_H_out = (H_in - 1) // kernel_size + 1
+        max_W_out = (W_in - 1) // kernel_size + 1
+
         # Randomly generate output size for the pooling operation
-        T_out = random.randint(5, T_in - 1)
-        H_out = random.randint(5, H_in - 1)
-        W_out = random.randint(5, W_in - 1)
+        T_out = random.randint(1, max_T_out)
+        H_out = random.randint(1, max_H_out)
+        W_out = random.randint(1, max_W_out)
         output_size = (T_out, H_out, W_out)
 
         # Apply fractional max pooling

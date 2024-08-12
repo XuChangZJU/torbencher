@@ -1,12 +1,7 @@
-# from .load import TorchHubLoadTestCase
-# from .help import TorchHubHelpTestCase
-# from .set_dir import TorchHubSetdirTestCase
-# from .get_dir import TorchHubGetdirTestCase
-# from .list import TorchHubListTestCase
-
-import os
 import importlib
 import logging
+import os
+from inspect import isclass
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 
@@ -25,8 +20,11 @@ for script_file in script_files:
     except Exception as e:
         logger.debug(f"Failed to import module {module_name}: {e}")
         continue
-
-    for attribute_name in dir(module):
-        attribute = getattr(module, attribute_name)
-        if isinstance(attribute, type) and issubclass(attribute, TorBencherTestCaseBase):
-            globals()[attribute_name] = attribute
+    try:
+        for attribute_name in dir(module):
+            attribute = getattr(module, attribute_name)
+            if isclass(attribute) and issubclass(attribute, TorBencherTestCaseBase)\
+                    and attribute is not TorBencherTestCaseBase:
+                globals()[attribute_name] = attribute
+    except Exception as e:
+        raise ValueError(f"The testcase that cause error is {attribute_name}") from e

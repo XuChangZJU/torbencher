@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.Transformer)
 class TorchNnTransformerTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_transformer_correctness(self):
         # Randomly generate parameters for the Transformer model
         d_model = random.randint(128, 512)  # Number of expected features in the encoder/decoder inputs

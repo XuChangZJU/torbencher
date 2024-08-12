@@ -5,10 +5,12 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
+def shuffle(lst):
+    return sorted(lst, key=lambda x: random.random())
 
 @test_api(torch.Tensor.vsplit)
 class TorchTensorVsplitTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_vsplit_correctness(self):
         # Randomly generate the number of rows and columns for the tensor
         num_rows = random.randint(2, 10)  # Ensure at least 2 rows for splitting
@@ -17,7 +19,7 @@ class TorchTensorVsplitTestCase(TorBencherTestCaseBase):
         # Create a random tensor with the generated size
         tensor = torch.randn(num_rows, num_cols)
 
-        # Randomly decide the number of splits or the sections
+        # Randomly decide between using number of splits or specific sections
         if random.choice([True, False]):
             # Randomly choose a valid number of splits
             num_splits = random.randint(1, num_rows - 1)  # Ensure at least one split
@@ -31,7 +33,7 @@ class TorchTensorVsplitTestCase(TorBencherTestCaseBase):
                 result = torch.vsplit(tensor, num_splits)
         else:
             # Randomly generate valid sections
-            sections = sorted(random.sample(range(1, num_rows), random.randint(1, num_rows - 1)))
+            sections = shuffle(list(range(1, num_rows)))[:random.randint(1, num_rows - 1)]
             result = torch.vsplit(tensor, sections)
 
         return result

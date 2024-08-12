@@ -1,44 +1,30 @@
-import torch
-import random
-import torch.fx
+import importlib
+import logging
+import os
+from inspect import isclass
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
-from src.util import test_api_version
-from src.util.decorator import test_api
 
+# 设置日志配置
+logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-@test_api(torch.fx.__init__)
-class TorchFxInitTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
-    def test_fx_init_correctness(self):
-        # Randomly generate a name for the GraphModule
-        module_name = f"module_{random.randint(1, 1000)}"
+current_directory: str = os.path.dirname(os.path.abspath(__file__))
+script_files: list = [f for f in os.listdir(current_directory) if f.endswith('.py') and f != '__init__.py']
 
-        # Create a random tensor to serve as an example input
-        dim = random.randint(1, 4)  # Random dimension for the tensor
-        num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
-        input_size = [num_of_elements_each_dim for _ in range(dim)]
-        example_input = torch.randn(input_size)
-
-        # Create a simple function to trace
-        def simple_function(x):
-            return x + 1
-
-        # Create a symbolic trace of the function
-        traced = torch.fx.symbolic_trace(simple_function)
-
-        # Initialize the GraphModule
-        graph_module = torch.fx.GraphModule(traced, traced.graph, module_name)
-
-        # Return the graph module and example input for inspection
-        return graph_module, example_input
-
-    from .Interpreter import TorchFxInterpreterTestCase
-
-
-from .Transformer import TorchFxTransformerTestCase
-from .GraphModule import TorchFxGraphmoduleTestCase
-from .wrap import TorchFxWrapTestCase
-from .Node import TorchFxNodeTestCase
-from .replace_pattern import TorchFxReplacepatternTestCase
-from .symbolic_trace import TorchFxSymbolictraceTestCase
+for script_file in script_files:
+    module_name: str = script_file[:-3]  # Remove the .py extension
+    try:
+        module = importlib.import_module(f'.{module_name}', package=__package__)
+        # logger.debug(f"Successfully imported module {module_name}")
+    except Exception as e:
+        logger.debug(f"Failed to import module {module_name}: {e}")
+        continue
+    try:
+        for attribute_name in dir(module):
+            attribute = getattr(module, attribute_name)
+            if isclass(attribute) and issubclass(attribute, TorBencherTestCaseBase)\
+                    and attribute is not TorBencherTestCaseBase:
+                globals()[attribute_name] = attribute
+    except Exception as e:
+        raise ValueError(f"The testcase that cause error is {attribute_name}") from e

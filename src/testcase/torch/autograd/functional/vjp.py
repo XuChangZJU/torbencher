@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 from torch.autograd.functional import vjp
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
@@ -9,7 +10,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.autograd.functional.vjp)
 class TorchAutogradFunctionalVjpTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_vjp_correctness(self):
         # Define the function for vjp
         def func(x, y):

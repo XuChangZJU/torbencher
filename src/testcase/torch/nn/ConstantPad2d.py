@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.ConstantPad2d)
 class TorchNnConstantpad2dTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_ConstantPad2d_correctness(self):
         # Random input size
         dim = random.randint(2, 4)  # Dimension should be at least 2 for ConstantPad2d

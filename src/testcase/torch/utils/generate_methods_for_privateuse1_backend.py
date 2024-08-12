@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.generate_methods_for_privateuse1_backend)
-class TorchUtilsGeneratemethodsforprivateuse1backendTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUtilsGenerateUmethodsUforUprivateuse1UbackendTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_generate_methods_for_privateuse1_backend_correctness(self):
         # Randomly decide whether to register methods for torch.Tensor, torch.nn.Module, and torch.Storage
         for_tensor = random.choice([True, False])
@@ -21,11 +22,8 @@ class TorchUtilsGeneratemethodsforprivateuse1backendTestCase(TorBencherTestCaseB
 
         # Rename the privateuse1 backend to a random name
         backend_name = "backend_" + str(random.randint(1, 1000))
-        try:
-            torch.utils.rename_privateuse1_backend(backend_name)
-        except RuntimeError as e:
-            f"Error: {e}"
-            return
+        
+        torch.utils.rename_privateuse1_backend(backend_name)
 
         # Generate methods for the renamed backend
         torch.utils.generate_methods_for_privateuse1_backend(for_tensor, for_module, for_storage, unsupported_dtype)

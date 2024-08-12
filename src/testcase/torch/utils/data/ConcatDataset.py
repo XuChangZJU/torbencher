@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.utils.data.ConcatDataset)
 class TorchUtilsDataConcatdatasetTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_concatdataset_correctness(self):
         # Generate random parameters for the datasets
         num_datasets = random.randint(2, 5)  # Number of datasets to concatenate

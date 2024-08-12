@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.hsplit)
 class TorchHsplitTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_hsplit_correctness(self):
         dim = 2  # Random tensors will be 2-dimensional for visible hsplit effect
 
@@ -26,7 +27,10 @@ class TorchHsplitTestCase(TorBencherTestCaseBase):
                 if num_of_cols % indices_or_sections == 0:
                     break
         else:
-            indices_or_sections = sorted(random.sample(range(1, num_of_cols), k=random.randint(1, num_of_cols - 2)))
+            num_sections = random.randint(1, num_of_cols - 1)
+            indices_or_sections = sorted([random.randint(1, num_of_cols - 1) for _ in range(num_sections)])
+            if indices_or_sections[-1] != num_of_cols:
+                indices_or_sections.append(num_of_cols)
 
         result = torch.hsplit(input_tensor, indices_or_sections)
         return result

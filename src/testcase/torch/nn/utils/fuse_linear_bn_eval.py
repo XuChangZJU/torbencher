@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.fuse_linear_bn_eval)
-class TorchNnUtilsFuselinearbnevalTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnUtilsFuseUlinearUbnUevalTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_fuse_linear_bn_eval_correctness(self):
         # Randomly generate input size for the linear layer
         in_features = random.randint(1, 10)
@@ -37,4 +38,4 @@ class TorchNnUtilsFuselinearbnevalTestCase(TorBencherTestCaseBase):
         fused_output = fused_linear(input_tensor)
 
         # Return the original and fused outputs for comparison
-        return original_output, fused_output
+        return torch.allclose(original_output, fused_output)

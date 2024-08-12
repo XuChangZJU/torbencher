@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,8 @@ from src.util.decorator import test_api
 
 
 @test_api(torch._foreach_sqrt)
-class TorchForeachsqrtTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUforeachUsqrtTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_foreach_sqrt_correctness(self):
         # foreach_sqrt requires the input to be a list of tensors
         num_of_tensors = random.randint(1, 5)
@@ -17,6 +18,6 @@ class TorchForeachsqrtTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate a list of random tensors
-        tensor_list = [torch.randn(input_size) for _ in range(num_of_tensors)]
+        tensor_list = [torch.abs(torch.randn(input_size))  for _ in range(num_of_tensors)]
         result = torch._foreach_sqrt(tensor_list)
         return result

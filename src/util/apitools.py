@@ -1,10 +1,12 @@
 """
 All the packed universal functions are stored here.
 """
-import types;
-import typing;
-import torch;
-from collections import deque;
+import types
+import typing
+from collections import deque
+
+import torch
+
 
 def getAPIName(api: typing.Any) -> str:
     """
@@ -19,37 +21,38 @@ def getAPIName(api: typing.Any) -> str:
     """
     try:
         # for function type
-        if isinstance(api, (types.FunctionType, types.BuiltinFunctionType)):
-            apiName = api.__module__ + "." + api.__name__;
-            return apiName;
+        if isinstance(api, (types.FunctionType, types.BuiltinFunctionType, types.MethodType)):
+            apiName = api.__module__ + "." + api.__name__
+            return apiName
 
         # for class type
         elif isinstance(api, type):
-            apiName = api.__module__;
+            apiName = api.__module__
             if api.__name__[-len(api.__name__) + 1:] == apiName[-len(api.__name__) + 1:]:
-                apiName = apiName[:-len(api.__name__)] + api.__name__;
-                return apiName;
-            apiName = apiName + "." + api.__name__;
-            return apiName;
+                apiName = apiName[:-len(api.__name__)] + api.__name__
+                return apiName
+            apiName = apiName + "." + api.__name__
+            return apiName
 
         # for module type
         elif isinstance(api, types.ModuleType):
-            return api.__name__;
+            return api.__name__
 
         # for types from typing
         elif api.__module__ == "typing":
-            apiName = api.__module__ + "." + api.__name__;
-            return apiName;
+            apiName = api.__module__ + "." + api.__name__
+            return apiName
 
         # no more consideration
         else:
-            return str(type(api));
+            return str(type(api))
     except Exception as e:
         if "" in str(e):
-            return "Individual Type: " + str(api.__class__);
+            return "Individual Type: " + str(api.__class__)
         else:
-            print(str(e));
-            return "";
+            print(str(e))
+            return ""
+
 
 def isFromModule(api: types.FunctionType, module: str) -> bool:
     """
@@ -63,7 +66,8 @@ def isFromModule(api: types.FunctionType, module: str) -> bool:
     **returns**
     bool - True if the API is from the specified module, False otherwise.
     """
-    return getAPIName(api).startswith(module);
+    return getAPIName(api).startswith(module)
+
 
 def getParent(obj: (type, types.ModuleType, types.FunctionType, types.BuiltinFunctionType)) -> types.ModuleType:
     """
@@ -76,8 +80,9 @@ def getParent(obj: (type, types.ModuleType, types.FunctionType, types.BuiltinFun
     **returns**
     types.ModuleType - The parent module of the object.
     """
-    apiName = getAPIName(obj);
-    return eval(apiName[:apiName.rfind(".")]);
+    apiName = getAPIName(obj)
+    return eval(apiName[:apiName.rfind(".")])
+
 
 def getAttributes(module: types.ModuleType) -> list:
     """
@@ -90,12 +95,15 @@ def getAttributes(module: types.ModuleType) -> list:
     **returns**
     list - A list of callable and usable attributes of the module.
     """
-    attributes = [];
+    attributes = []
     try:
-        attributes = [i for i in module.__dict__.keys() if not "__" in i and callable(getattr(module, i, None)) or isinstance(getattr(module, i, None), types.ModuleType)];
+        attributes = [i for i in module.__dict__.keys() if
+                      not "__" in i and callable(getattr(module, i, None)) or isinstance(getattr(module, i, None),
+                                                                                         types.ModuleType)]
     except AttributeError as e:
-        return attributes;
-    return attributes;
+        return attributes
+    return attributes
+
 
 def testDirectAttr(obj: (type, types.ModuleType)):
     """
@@ -107,10 +115,11 @@ def testDirectAttr(obj: (type, types.ModuleType)):
     """
     for name in getAttributes(obj):
         try:
-            attr = getattr(obj, name);
-            print(f"{getAPIName(attr):<70}{name:<65}{isFromModule(attr, getAPIName(obj))}");
+            attr = getattr(obj, name)
+            print(f"{getAPIName(attr):<70}{name:<65}{isFromModule(attr, getAPIName(obj))}")
         except Exception as e:
-            raise NameError(f"The attribution that cause error is {name}") from e;
+            raise NameError(f"The attribution that cause error is {name}") from e
+
 
 def testTorch(obj: (type, types.ModuleType)):
     """
@@ -122,10 +131,11 @@ def testTorch(obj: (type, types.ModuleType)):
     """
     for name in getAttributes(obj):
         try:
-            attr = getattr(obj, name);
-            print(f"{getAPIName(attr):<70}{name:<65}{isFromModule(attr, 'torch')}");
+            attr = getattr(obj, name)
+            print(f"{getAPIName(attr):<70}{name:<65}{isFromModule(attr, 'torch')}")
         except Exception as e:
-            raise NameError(f"The attribution that cause error is {name}") from e;
+            raise NameError(f"The attribution that cause error is {name}") from e
+
 
 def isDecorated(obj: typing.Any, visited: list = None) -> bool:
     """
@@ -140,9 +150,9 @@ def isDecorated(obj: typing.Any, visited: list = None) -> bool:
     bool - True if the object is decorated, False otherwise.
     """
     if visited is None:
-        return getattr(obj, "_isDecorated", False);
+        return getattr(obj, "_isDecorated", False)
     else:
-        return getAPIName(obj) in visited;
+        return getAPIName(obj) in visited
 
 
 def torchIndex(name: str, module: types.ModuleType = torch, max_depth: int = 4, display: bool = True):
@@ -160,30 +170,29 @@ def torchIndex(name: str, module: types.ModuleType = torch, max_depth: int = 4, 
     **returns**
     A list of all matching paths.
     """
+
     def getAllPath(module, max_depth=max_depth):
 
-        results = [];
-        queue = deque([(module, "torch", 0)]);
+        results = []
+        queue = deque([(module, "torch", 0)])
         while queue:
-            current_module, current_path, depth = queue.popleft();
+            current_module, current_path, depth = queue.popleft()
             if depth > max_depth:
-                continue;
+                continue
             for attr_name in dir(current_module):
                 try:
-                    attr = getattr(current_module, attr_name);
+                    attr = getattr(current_module, attr_name)
                 except AttributeError:
-                    continue;
-                full_path = f"{current_path}.{attr_name}";
+                    continue
+                full_path = f"{current_path}.{attr_name}"
                 if isinstance(attr, types.ModuleType):
                     if attr is not torch:  # Ensure we do not recurse into torch again
-                        queue.append((attr, full_path, depth + 1));
+                        queue.append((attr, full_path, depth + 1))
                 elif isinstance(attr, (types.FunctionType, type)):
-                    if full_path.rfind(".") != -1 and full_path[full_path.rfind(".")+1:].lower() == name.lower():
-                        results.append(full_path);
+                    if full_path.rfind(".") != -1 and full_path[full_path.rfind(".") + 1:].lower() == name.lower():
+                        results.append(full_path)
                         if display:
-                            print(full_path);
-        return results;
+                            print(full_path)
+        return results
 
-    return getAllPath(module);
-
-
+    return getAllPath(module)

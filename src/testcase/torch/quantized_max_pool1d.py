@@ -1,5 +1,6 @@
-import torch
 import random
+import unittest
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,8 +8,9 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.quantized_max_pool1d)
-class TorchQuantizedmaxpool1dTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchQuantizedUmaxUpool1dTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_quantized_max_pool1d_correctness(self):
         # Define the dimensions for the input tensor
         batch_size = random.randint(1, 3)

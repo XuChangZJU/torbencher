@@ -1,7 +1,9 @@
-import torch
 import random
-import numpy as np
 from collections import namedtuple
+
+import numpy as np
+import torch
+import torch.utils.data
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -9,12 +11,12 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.utils.data.default_convert)
-class TorchUtilsDataDefaultconvertTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchUtilsDataDefaultUconvertTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
     def test_default_convert_correctness(self):
         # Generate random input data
-        input_data_type = random.randint(0,
-                                         4)  # 0: int, 1: NumPy array, 2: NamedTuple with int, 3: NamedTuple with NumPy array, 4: List of NumPy array
+        input_data_type = random.randint(0, 4)
+        # 0: int, 1: NumPy array, 2: NamedTuple with int, 3: NamedTuple with NumPy array, 4: List of NumPy array
 
         if input_data_type == 0:
             data = random.randint(-100, 100)  # Random integer

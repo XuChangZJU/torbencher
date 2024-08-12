@@ -1,5 +1,6 @@
-import torch
 import random
+
+import torch
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -8,7 +9,7 @@ from src.util.decorator import test_api
 
 @test_api(torch.nn.FractionalMaxPool3d)
 class TorchNnFractionalmaxpool3dTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+    @test_api_version.larger_than("2.0.0")
     def test_fractional_max_pool3d_correctness(self):
         # 随机生成输入张量的尺寸
         batch_size = random.randint(1, 5)  # 随机批量大小

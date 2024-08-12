@@ -1,5 +1,7 @@
+import unittest
+
 import torch
-import random
+import torch.nn as nn
 
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
@@ -7,22 +9,13 @@ from src.util.decorator import test_api
 
 
 @test_api(torch.nn.utils.convert_conv2d_weight_memory_format)
-class TorchNnUtilsConvertconv2dweightmemoryformatTestCase(TorBencherTestCaseBase):
-    @test_api_version.larger_than("1.1.3")
+class TorchNnUtilsConvertUconv2dUweightUmemoryUformatTestCase(TorBencherTestCaseBase):
+    @test_api_version.larger_than("2.0.0")
+    @unittest.skipIf(not torch.cuda.is_available(), "CUDA is not available")
     def test_convert_conv2d_weight_memory_format_correctness(self):
-        # Random input size
-        dim = random.randint(1, 4)
-        num_of_elements_each_dim = random.randint(1, 5)
-        input_size = [num_of_elements_each_dim for i in range(dim)]
-
-        # Random module parameters
-        in_channels = random.randint(1, 10)
-        out_channels = random.randint(1, 10)
-        kernel_size = (random.randint(1, 5), random.randint(1, 5))
-
-        # Create a Conv2d module
-        module = torch.nn.Conv2d(in_channels, out_channels, kernel_size)
-
-        # Convert the memory format to channels_last
-        result = torch.nn.utils.convert_conv2d_weight_memory_format(module, torch.channels_last)
-        return result
+        input = torch.randint(1, 10, (2, 8, 4, 4), dtype=torch.float16, device="cuda")
+        model = nn.Sequential(
+            nn.Conv2d(8, 4, 3).cuda().half())
+        model = nn.utils.convert_conv2d_weight_memory_format(model, torch.channels_last)
+        out = model(input)
+        return out
