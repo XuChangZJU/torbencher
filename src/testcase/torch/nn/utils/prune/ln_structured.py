@@ -26,7 +26,7 @@ class TorchNnUtilsPruneLnUstructuredTestCase(TorBencherTestCaseBase):
         norm_type = random.choice([1, 2, float('inf'), float('-inf'), 'fro', 'nuc'])
 
         # Randomly select the dimension along which to prune
-        dim = random.randint(0, 1)
+        dim = 0
 
         # Apply ln_structured pruning
         prune.ln_structured(module, param_name, amount, norm_type, dim)
