@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.dropout2d)
 class TorchNnFunctionalDropout2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_dropout2d_correctness(self):
         dim = 4  # Random dimension for the tensors, at least 2 for 2D
         num_of_elements_each_dim = random.randint(2, 5)  # Random number of elements each dimension

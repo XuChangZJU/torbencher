@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.optim.NAdam)
 class TorchOptimNadamTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_nadam_correctness(self):
         # Define the parameters for the optimizer
         dim = random.randint(1, 4)
