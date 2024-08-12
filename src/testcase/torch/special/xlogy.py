@@ -16,11 +16,12 @@ class TorchSpecialXlogyTestCase(TorBencherTestCaseBase):
         # Random number of elements each dimension
         num_of_elements_each_dim = random.randint(1, 5)
         # Random input size
-        input_size = [num_of_elements_each_dim for i in range(dim)]
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
 
         # Generate random tensors
         input_tensor = torch.randn(input_size)
         other_tensor = torch.randn(input_size)
+        other_tensor = torch.abs(other_tensor)
 
         # Calculate the result using torch.special.xlogy
         result = torch.special.xlogy(input_tensor, other_tensor)

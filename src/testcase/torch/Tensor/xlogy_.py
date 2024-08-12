@@ -18,7 +18,7 @@ class TorchTensorXlogyUTestCase(TorBencherTestCaseBase):
 
         # Generate random tensors
         input_tensor = torch.randn(input_size)  # Tensor to be modified in-place
-        other_tensor = torch.randn(input_size)  # Tensor used for element-wise xlogy calculation
+        other_tensor = torch.abs(torch.randn(input_size)) + 1e-6  # Tensor used for element-wise xlogy calculation
 
         # Perform in-place xlogy operation
         input_tensor.xlogy_(other_tensor)

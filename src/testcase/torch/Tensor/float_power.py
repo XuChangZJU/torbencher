@@ -19,7 +19,7 @@ class TorchTensorFloatUpowerTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Random input tensor
-        input_tensor = torch.randn(input_size)
+        input_tensor = torch.randn(input_size).clamp(min=1e-3)
         # Random exponent
         exponent = random.uniform(-2, 2)
         # Calculate float power

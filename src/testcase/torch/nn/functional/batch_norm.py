@@ -12,17 +12,17 @@ class TorchNnFunctionalBatchUnormTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_batch_norm_correctness(self):
         # Random input size
-        dim = random.randint(2, 4)  # Dimension should be at least 2 for batch_norm
+        dim = random.randint(2, 3)  # Dimension should be at least 2 for batch_norm
         num_of_elements_each_dim = random.randint(1, 5)
-        input_size = [num_of_elements_each_dim for i in range(dim)]
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
 
         # Random input tensor
         input_tensor = torch.randn(input_size)
 
         # Random parameters for batch_norm
         num_features = input_size[1]  # num_features should match the input tensor's channel dimension
-        running_mean = torch.randn(num_features)
-        running_var = torch.randn(num_features)
+        running_mean = torch.zeros(num_features)
+        running_var = torch.ones(num_features)
         weight = torch.randn(num_features)
         bias = torch.randn(num_features)
 

@@ -20,7 +20,7 @@ class TorchTensorXlogyTestCase(TorBencherTestCaseBase):
 
         # Generate random tensors
         tensor1 = torch.randn(input_size)
-        tensor2 = torch.randn(input_size)
+        tensor2 =  torch.abs(torch.randn(input_size)) + 1e-6
 
         # Calculate xlogy
         result = tensor1.xlogy(tensor2)

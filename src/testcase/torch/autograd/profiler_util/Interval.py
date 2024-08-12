@@ -18,4 +18,4 @@ class TorchAutogradProfilerUutilIntervalTestCase(TorBencherTestCaseBase):
         # Create an Interval object
         interval = torch.autograd.profiler_util.Interval(start, end)
 
-        return interval
+        return interval.elapsed_us()

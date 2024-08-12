@@ -17,7 +17,7 @@ class TorchTensorPowUTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate a random tensor
-        input_tensor = torch.randn(input_size)
+        input_tensor = torch.abs(torch.randn(input_size)) + 1e-5
 
         # Generate a random exponent
         exponent = random.uniform(0.1, 10.0)

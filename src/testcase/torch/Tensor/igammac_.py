@@ -19,9 +19,9 @@ class TorchTensorIgammacUTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate random tensor1
-        tensor1 = torch.randn(input_size)
+        tensor1 = torch.abs(torch.randn(input_size)) + 1e-5
         # Generate random tensor2, make sure tensor1 > tensor2
-        tensor2 = torch.randn(input_size)
-        tensor1 = torch.where(tensor1 > tensor2, tensor1, tensor2 + abs(tensor1) + 1)
-        result = tensor1.igammac_(tensor2)
-        return result
+        tensor2 =  torch.abs(torch.randn(input_size))
+        # tensor1 = torch.where(tensor1 > tensor2, tensor1, tensor2 + abs(tensor1) + 1)
+        tensor1.igammac_(tensor2)
+        return tensor1

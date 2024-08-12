@@ -11,30 +11,29 @@ from src.util.decorator import test_api
 class TorchNnFunctionalMaxUunpool3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_max_unpool3d_correctness(self):
-        # Randomly generate dimensions for the input tensor
+        # 随机生成输入张量的维度
         batch_size = random.randint(1, 4)
         channels = random.randint(1, 4)
-        depth = random.randint(4, 8)
-        height = random.randint(4, 8)
-        width = random.randint(4, 8)
+        depth = random.randint(8, 16)  # 为了保证 pooling 后的张量仍有一定的大小
+        height = random.randint(8, 16)
+        width = random.randint(8, 16)
 
-        # Generate random input tensor and indices tensor
+        # 生成随机输入张量
         input_tensor = torch.randn(batch_size, channels, depth, height, width)
-        indices_tensor = torch.randint(0, depth * height * width, (batch_size, channels, depth, height, width))
 
-        # Define kernel size, stride, and padding for max pooling
+        # 定义 max pooling 的 kernel size, stride 和 padding
         kernel_size = random.randint(2, 4)
-        stride = kernel_size  # To ensure valid unpooling, stride should be equal to kernel size
-        padding = 0  # No padding for simplicity
+        stride = kernel_size  # 为确保 unpooling 的有效性，stride 应与 kernel_size 相同
+        padding = 0  # 为了简单起见，无 padding
 
-        # Calculate the output size after unpooling
-        output_depth = (depth - 1) * stride - 2 * padding + kernel_size
-        output_height = (height - 1) * stride - 2 * padding + kernel_size
-        output_width = (width - 1) * stride - 2 * padding + kernel_size
-        output_size = (output_depth, output_height, output_width)
+        # 执行 max_pool3d 操作
+        pooled, indices = torch.nn.functional.max_pool3d(input_tensor, kernel_size, stride, padding,
+                                                         return_indices=True)
 
-        # Perform max unpooling
-        result = torch.nn.functional.max_unpool3d(input_tensor, indices_tensor, kernel_size, stride, padding,
-                                                  output_size)
+        # 计算 unpooling 后的输出尺寸 (应该是原始输入的尺寸)
+        output_size = input_tensor.size()
 
-        return result
+        # 执行 max_unpool3d 操作
+        unpooled = torch.nn.functional.max_unpool3d(pooled, indices, kernel_size, stride, padding, output_size)
+
+        return pooled, unpooled
