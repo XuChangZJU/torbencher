@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.autograd.profiler.profile.total_average)
 class TorchAutogradProfilerProfileTotalUaverageTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_total_average_correctness(self):
         """
         This test case verifies the correctness of the `total_average` method

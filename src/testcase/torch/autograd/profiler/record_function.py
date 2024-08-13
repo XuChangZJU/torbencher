@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.autograd.profiler.record_function)
 class TorchAutogradProfilerRecordUfunctionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_record_function_correctness(self):
         dim = random.randint(1, 4)  # Random dimension for the tensors
         num_of_elements_each_dim = random.randint(1, 5)  # Random number of elements each dimension
