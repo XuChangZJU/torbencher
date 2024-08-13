@@ -18,6 +18,10 @@ for i in range(100):
 
 if False in pass_result_list:
     print("Test failed")
+elif -2 in pass_result_list:
+    print("Test Skipped")
+elif -1 in pass_result_list:
+    print("Test Error")
 else:
     print("Test passed")
 
