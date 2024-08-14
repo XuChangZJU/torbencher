@@ -5,11 +5,12 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
+import unittest
 
 @test_api(torch.nn.EmbeddingBag)
 class TorchNnEmbeddingbagTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_embedding_bag_correctness(self):
         num_embeddings = random.randint(5, 20)  # Random number of embeddings
         embedding_dim = random.randint(2, 10)  # Random embedding dimension

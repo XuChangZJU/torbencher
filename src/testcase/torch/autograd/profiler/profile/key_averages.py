@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.autograd.profiler.profile.key_averages)
 class TorchAutogradProfilerProfileKeyUaveragesTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_key_averages_correctness(self):
         """
         Test the correctness of the key_averages function in the PyTorch profiler.

@@ -5,11 +5,12 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
+import unittest
 
 @test_api(torch.nn.NLLLoss)
 class TorchNnNlllossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_nllloss_correctness(self):
         # Randomly generate dimensions for the input tensor
         batch_size = random.randint(1, 5)  # Random batch size

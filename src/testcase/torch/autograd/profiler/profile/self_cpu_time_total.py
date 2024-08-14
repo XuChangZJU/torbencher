@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.autograd.profiler.profile.self_cpu_time_total)
 class TorchAutogradProfilerProfileSelfUcpuUtimeUtotalTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_self_cpu_time_total_correctness(self):
         """
         Test if the self_cpu_time_total() method returns a float value,

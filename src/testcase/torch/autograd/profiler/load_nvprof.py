@@ -1,5 +1,6 @@
 import os
 import random
+import unittest
 
 import torch
 
@@ -11,6 +12,7 @@ from src.util.decorator import test_api
 @test_api(torch.autograd.profiler.load_nvprof)
 class TorchAutogradProfilerLoadUnvprofTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skipIf(not torch.cuda.is_available(), "CUDA not available")
     def test_load_nvprof_correctness(self):
         # Generate a random file path for the nvprof trace
         file_path = f"/tmp/nvprof_trace_{random.randint(1, 1000)}.nvvp"

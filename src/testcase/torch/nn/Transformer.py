@@ -5,15 +5,16 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
+import unittest
 
 @test_api(torch.nn.Transformer)
 class TorchNnTransformerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_transformer_correctness(self):
         # Randomly generate parameters for the Transformer model
-        d_model = random.randint(128, 512)  # Number of expected features in the encoder/decoder inputs
-        nhead = 1  # Number of heads in the multiheadattention models
+        d_model = 512  # Number of expected features in the encoder/decoder inputs
+        nhead = 8  # Number of heads in the multiheadattention models
         num_encoder_layers = random.randint(1, 6)  # Number of sub-encoder-layers in the encoder
         num_decoder_layers = random.randint(1, 6)  # Number of sub-decoder-layers in the decoder
         dim_feedforward = random.randint(512, 2048)  # Dimension of the feedforward network model

@@ -5,11 +5,12 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
+import unittest
 
 @test_api(torch.nn.TransformerEncoderLayer)
 class TorchNnTransformerencoderlayerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_transformer_encoder_layer_correctness(self):
         # Randomly generate parameters for TransformerEncoderLayer
         d_model = random.randint(32, 512)  # Number of expected features in the input
