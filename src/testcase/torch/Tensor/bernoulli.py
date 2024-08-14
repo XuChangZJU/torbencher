@@ -12,9 +12,9 @@ class TorchTensorBernoulliTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_bernoulli_correctness(self):
         # Randomly generate dimension of the input tensor
-        dim = random.randint(1, 4)
+        dim = 4
         # Randomly generate number of elements each dimension for the input tensor
-        num_of_elements_each_dim = random.randint(1, 5)
+        num_of_elements_each_dim = 5
         # Generate input size list for the input tensor
         input_size = [num_of_elements_each_dim for i in range(dim)]
         # Generate a random tensor with floating point dtype

@@ -18,5 +18,4 @@ class TorchEmptyUstridedTestCase(TorBencherTestCaseBase):
 
         # Generate the tensor using torch.empty_strided
         result = torch.empty_strided(size, stride)
-
-        return result
+        return result.shape

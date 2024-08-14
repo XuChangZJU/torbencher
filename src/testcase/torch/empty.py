@@ -18,4 +18,4 @@ class TorchEmptyTestCase(TorBencherTestCaseBase):
 
         # Generate an empty tensor
         result = torch.empty(input_size)
-        return result
+        return result.shape
