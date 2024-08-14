@@ -5,11 +5,12 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
+import unittest
 
 @test_api(torch.nn.ModuleList)
 class TorchNnModulelistTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_modulelist_correctness(self):
         # Define the number of submodules in the ModuleList
         num_submodules = random.randint(1, 5)

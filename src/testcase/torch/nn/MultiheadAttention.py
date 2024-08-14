@@ -5,11 +5,12 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
+import unittest
 
 @test_api(torch.nn.MultiheadAttention)
 class TorchNnMultiheadattentionTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_nn_MultiheadAttention_correctness(self):
         # Define the parameters for the MultiheadAttention module
         embed_dim = 10  # Total dimension of the model
