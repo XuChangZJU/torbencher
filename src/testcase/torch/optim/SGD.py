@@ -48,4 +48,6 @@ class TorchOptimSgdTestCase(TorBencherTestCaseBase):
         # Perform optimization step
         optimizer.step()
 
-        return model.parameters()
+        parameter_tensors = [param.detach().clone() for param in model.parameters()]
+        return parameter_tensors
+
