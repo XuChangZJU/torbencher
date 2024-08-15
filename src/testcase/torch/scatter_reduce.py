@@ -19,8 +19,8 @@ class TorchScatterUreduceTestCase(TorBencherTestCaseBase):
 
         # Generate random tensors and parameters
         input_tensor = torch.randn(input_size)
-        index_tensor = torch.randint(0, input_size[dim], size=(
-            input_size))  # The values in index should be in the range [0, input_size[dim]-1]
+        index_tensor = torch.randint(0, input_size[dim], input_size)
+
         src_tensor = torch.randn(input_size)
         reduce_op = random.choice(["sum", "prod", "min", "max", "mean"])
 
