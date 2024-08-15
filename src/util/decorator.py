@@ -150,12 +150,20 @@ def randomInjector(func, storage, testcaseName):
         if not storage[testcaseName]["status"]:
             rst = func(*args, **kwargs)
             storage[testcaseName]["result"][funcName].append(deepcopy(rst))
-            return rst
+            if torch.is_tensor(rst):
+                lst = rst.tolist();
+                return torch.tensor(lst)
+            else:
+                return rst
         else:
             result = storage[testcaseName]["result"][funcName][storage[testcaseName]["count"][funcName]]
             storage[testcaseName]["count"][funcName] += 1
             if storage[testcaseName]["count"][funcName] == len(storage[testcaseName]["result"][funcName]):
                 storage[testcaseName]["count"][funcName] = 0
-            return result
+            if torch.is_tensor(result):
+                lst = result.tolist()
+                return torch.tensor(lst)
+            else:
+                return result
 
     return wrapper
