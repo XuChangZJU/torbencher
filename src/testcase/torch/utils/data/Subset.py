@@ -17,8 +17,8 @@ class TorchUtilsDataSubsetTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
         dataset_tensor = torch.randn(input_size)
         dataset = torch.utils.data.TensorDataset(dataset_tensor)
-        # Generate random indices for subset, ensuring they are within the dataset bounds
-        indices = random.sample(range(len(dataset)), random.randint(1, len(dataset)))
+        # Generate random indices for subset, ensuring they are within the dataset bounds, do not use random.sample
+        indices = [random.randint(0, len(dataset) - 1) for _ in range(random.randint(1, len(dataset)))]
         subset = torch.utils.data.Subset(dataset, indices)
         # extract tensors from the subset
         subset_tensors = [dataset[i] for i in subset.indices]
