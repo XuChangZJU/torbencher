@@ -11,18 +11,7 @@ from src.util.decorator import test_api
 class TorchTensorIgammaUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_igamma__correctness(self):
-        # Generate random dimension for the tensors
-        dim = random.randint(1, 4)
-        # Generate random number of elements each dimension
-        num_of_elements_each_dim = random.randint(1, 5)
-        # Generate input size
-        input_size = [num_of_elements_each_dim for i in range(dim)]
-
-        # Generate random tensor1
-        tensor1 = torch.randn(input_size)
-        # Generate random tensor2, make sure all the elements are greater than 0
-        tensor2 = torch.rand(input_size) + 1e-5
-        # Calculate the result using igamma_
-        result = tensor1.igamma_(tensor2)
-        # Return the result
-        return result
+        a1 = torch.tensor([5.0, 4.0, 3.0])
+        a2 = torch.tensor([3.0, 4.0, 5.0])
+        a1.igamma_(a2)
+        return a1

@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.Generator)
 class TorchGeneratorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skipIf(not torch.cuda.is_available(), "CUDA is not available")
     def test_generator_correctness(self):
         # Randomly choose between 'cpu' and 'cuda' device
         device_type = 'cpu' if random.random() < 0.5 else 'cuda'

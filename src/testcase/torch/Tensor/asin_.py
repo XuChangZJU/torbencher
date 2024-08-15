@@ -18,6 +18,6 @@ class TorchTensorAsinUTestCase(TorBencherTestCaseBase):
         num_of_elements_each_dim = random.randint(1, 5)
         input_size = [num_of_elements_each_dim for i in range(dim)]
         input_tensor = torch.randn(input_size)  # Generate random tensor data
-        input_tensor.requires_grad = True  # Enable gradient calculation
+        input_tensor = torch.clamp(input_tensor, -1, 1)
         input_tensor.asin_()  # In-place asin operation
         return input_tensor
