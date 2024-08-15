@@ -152,7 +152,7 @@ def randomInjector(func, storage, testcaseName):
             storage[testcaseName]["result"][funcName].append(deepcopy(rst))
             if torch.is_tensor(rst):
                 lst = rst.tolist();
-                return torch.tensor(lst)
+                return torch.tensor(lst, requires_grad=True)
             else:
                 return rst
         else:
@@ -162,7 +162,7 @@ def randomInjector(func, storage, testcaseName):
                 storage[testcaseName]["count"][funcName] = 0
             if torch.is_tensor(result):
                 lst = result.tolist()
-                return torch.tensor(lst)
+                return torch.tensor(lst, requires_grad=True)
             else:
                 return result
 
