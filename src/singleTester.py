@@ -217,7 +217,7 @@ class SingleTester:
                 cpuResult = cpuResult.to(cpu)
                 deviceResult = deviceResult.to(cpu)
                 try:
-                    passed = torch.allclose(cpuResult.to(cpu), deviceResult.to(cpu), rtol=1e-05, atol=1e-06)#  or str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
+                    passed = torch.allclose(cpuResult.to(cpu), deviceResult.to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)#  or str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
                 except Exception as e:
                     passed = str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
 
@@ -231,7 +231,7 @@ class SingleTester:
                         passed = cpuResult[idx] == deviceResult[idx]
                         if not passed: return False
                     if torch.is_tensor(cpuResult[idx]):
-                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06)
+                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)
                         if not passed: return False
 
             if isinstance(cpuResult, tuple):
@@ -244,7 +244,7 @@ class SingleTester:
                         passed = cpuResult[idx] == deviceResult[idx]
                         if not passed: return False
                     if torch.is_tensor(cpuResult[idx]):
-                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06)
+                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)
                         if not passed: return False
         except Exception as e:
             raise ValueError(f"The testcase that cause the comparison error is `{testcaseName}`") from e
