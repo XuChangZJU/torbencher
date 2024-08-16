@@ -11,29 +11,6 @@ from src.util.decorator import test_api
 class TorchDsplitTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_dsplit_correctness(self):
-        # Random dimensions for the tensor to ensure it has three or more dimensions
-        dim1 = random.randint(1, 4)
-        dim2 = random.randint(1, 4)
-        dim3 = random.randint(2, 4)  # Ensure dim3 is at least 2 to avoid empty range error
-        input_shape = [dim1, dim2, dim3]
+        t = torch.arange(16.0).reshape(2, 2, 4)
+        return torch.dsplit(t, 2), torch.dsplit(t, [3, 6])
 
-        # Generate a random tensor with the specified dimensions
-        tensor = torch.randn(input_shape)
-
-        # Randomly choose whether indices_or_sections will be an integer or a list of integers
-        if random.choice([True, False]):
-            # If integer, ensure it evenly divides the third dimension
-            while True:
-                sections = random.randint(1, dim3)
-                if dim3 % sections == 0:
-                    break
-            result = torch.dsplit(tensor, sections)
-        else:
-            # If list, create a list of valid split indices in the range of the third dimension
-            if dim3 > 1:
-                indices = sorted(random.sample(range(1, dim3), random.randint(1, dim3 - 1)))
-            else:
-                indices = []
-            result = torch.dsplit(tensor, indices)
-
-        return result
