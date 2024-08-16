@@ -25,6 +25,6 @@ class TorchIndexUselectTestCase(TorBencherTestCaseBase):
         # The number of indices should be less than or equal to the size of the dimension being indexed
         num_of_indices = random.randint(1, input_size[dim_to_index])
         # The indices should be within the range of the dimension being indexed
-        indices = torch.tensor(random.sample(range(input_size[dim_to_index]), num_of_indices), dtype=torch.int64)
+        indices = torch.randint(0, input_size[dim_to_index], (num_of_indices,))
         result = torch.index_select(input_tensor, dim_to_index, indices)
         return result
