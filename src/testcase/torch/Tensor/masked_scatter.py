@@ -19,7 +19,7 @@ class TorchTensorMaskedUscatterTestCase(TorBencherTestCaseBase):
         # Generate random tensors
         self_tensor = torch.randn(input_size)
         # Generate a random mask with the same shape as self_tensor
-        mask = torch.randint(0, 2, size=input_size, dtype=torch.bool)
+        mask = torch.randint(0, 2, input_size, dtype=torch.bool)
         # Generate a source tensor with shape broadcastable to self_tensor where mask is True
         source_tensor = torch.randn(mask.sum().item())
 
