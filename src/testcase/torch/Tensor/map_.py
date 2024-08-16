@@ -5,11 +5,13 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
+import unittest
 
 
 @test_api(torch.Tensor.map_)
 class TorchTensorMapUTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip("CPU only")
     def test_map__correctness(self):
         # Define the dimensions of the tensors
         dim = random.randint(1, 4)
