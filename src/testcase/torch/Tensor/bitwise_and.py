@@ -17,7 +17,7 @@ class TorchTensorBitwiseUandTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate random tensors with integer values
-        tensor1 = torch.randint(low=0, high=10, size=input_size)  # Generate integers for bitwise operations
-        tensor2 = torch.randint(low=0, high=10, size=input_size)  # Generate integers for bitwise operations
+        tensor1 = torch.randint(1, 10, input_size)
+        tensor2 = torch.randint(1, 10, input_size)
         result = tensor1.bitwise_and(tensor2)
         return result
