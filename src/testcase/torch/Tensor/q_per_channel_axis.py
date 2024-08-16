@@ -16,8 +16,7 @@ class TorchTensorQUperUchannelUaxisTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
         q_per_channel_axis = random.randint(0, dim - 1)  # Randomly select the axis for per-channel quantization
         scales = torch.randn(input_size[q_per_channel_axis])  # Generate random scales for quantization
-        zero_points = torch.randint(0, 256, size=(
-        input_size[q_per_channel_axis],))  # Generate random zero_points for quantization
+        zero_points = torch.randint(0, 256, (input_size[q_per_channel_axis],))  # Generate random zero_points for quantization
         tensor = torch.randn(input_size)
         quantized_tensor = torch.quantize_per_channel(tensor, scales, zero_points, q_per_channel_axis,
                                                       torch.quint8)  # Quantize the tensor

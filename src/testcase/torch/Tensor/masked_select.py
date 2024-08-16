@@ -17,6 +17,6 @@ class TorchTensorMaskedUselectTestCase(TorBencherTestCaseBase):
 
         input_tensor = torch.randn(input_size)
         # Generate a random boolean mask with the same shape as the input tensor
-        mask = torch.randint(0, 2, size=input_size, dtype=torch.bool)
+        mask = torch.randint(0, 2, input_size, dtype=torch.bool)
         result = input_tensor.masked_select(mask)
         return result

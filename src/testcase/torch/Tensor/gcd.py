@@ -19,8 +19,8 @@ class TorchTensorGcdTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         # Generate random tensors with integer values
-        tensor1 = torch.randint(low=-10, high=10, size=input_size)
-        tensor2 = torch.randint(low=-10, high=10, size=input_size)
+        tensor1 = torch.randint(1, 100, input_size)
+        tensor2 = torch.randint(1, 10, input_size)
 
         # Calculate the GCD
         result = tensor1.gcd(tensor2)

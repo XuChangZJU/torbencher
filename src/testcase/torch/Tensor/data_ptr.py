@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.Tensor.data_ptr)
 class TorchTensorDataUptrTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip("Address not deterministic")
     def test_data_ptr_correctness(self):
         # Generate random dimension and size for the tensor
         dim = random.randint(1, 4)

@@ -22,6 +22,6 @@ class TorchTensorNumpyTestCase(TorBencherTestCaseBase):
         tensor = torch.randn(input_size)
 
         # Convert the tensor to a NumPy array
-        numpy_array = tensor.numpy()
+        numpy_array = tensor.to("cpu").numpy()
 
         return numpy_array

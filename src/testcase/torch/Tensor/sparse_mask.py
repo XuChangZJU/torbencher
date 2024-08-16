@@ -24,7 +24,7 @@ class TorchTensorSparseUmaskTestCase(TorBencherTestCaseBase):
         # Generate random indices for the sparse tensor
         num_sparse_elements = random.randint(1, num_of_elements_each_dim * 2)
         sparse_indices = torch.cat(
-            [torch.randint(0, input_size[i], size=(num_sparse_elements,)) for i in range(dim)]).reshape(dim,
+            [torch.randint(0, input_size[i], (num_sparse_elements,)) for i in range(dim)]).reshape(dim,
                                                                                                         num_sparse_elements)
 
         # Generate random values for the sparse tensor

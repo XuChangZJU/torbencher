@@ -17,6 +17,6 @@ class TorchTakeUalongUdimTestCase(TorBencherTestCaseBase):
 
         input_tensor = torch.randn(input_size)
         indices = torch.randint(0, input_tensor.size(dim=random.randint(0, len(input_size) - 1)),
-                                size=input_size)  # Generate random indices within the valid range
+                                input_size)  # Generate random indices within the valid range
         result = torch.take_along_dim(input_tensor, indices)
         return result
