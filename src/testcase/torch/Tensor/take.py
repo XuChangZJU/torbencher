@@ -21,7 +21,7 @@ class TorchTensorTakeTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(input_size)
         # Generate random indices tensor with the same number of dimensions as input_tensor
         # The elements in indices tensor should be within the range of the input_tensor size
-        indices_tensor = torch.randint(0, input_tensor.numel(), size=input_size)
+        indices_tensor = torch.randint(0, input_tensor.numel(), input_size)
         # Call torch.Tensor.take()
         result = input_tensor.take(indices_tensor)
         return result
