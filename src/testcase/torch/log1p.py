@@ -16,5 +16,7 @@ class TorchLog1pTestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         input_tensor = torch.randn(input_size)  # Random tensor
+        # make sure input_tensor is greater than 
+        input_tensor = torch.clamp(input_tensor, min=-0.9999999)
         result = torch.log1p(input_tensor)
         return result
