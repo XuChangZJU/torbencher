@@ -72,6 +72,6 @@ if __name__ == '__main__':
         task_config["test_modules"] = [
             task_config["test_modules"][i]
         ]
-        task_results.append(pool.apply_async(task, (task_config,)))
+        task_results.append(pool.apply(task, (task_config,)))
     pool.close()
     pool.join()
