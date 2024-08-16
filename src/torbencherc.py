@@ -263,10 +263,10 @@ class torbencherc:
                 torbencherc.TestResultKey.STATUS: "Passed",
                 torbencherc.TestResultKey.COST_TIME: []
             }
-            for _ in range(repeat):
+            for i in range(repeat):
                 try:
                     startTime = time.perf_counter_ns()
-                    passed = self.tester.run(testCase, device=device, seed=seed, debug=debug)
+                    passed = self.tester.run(testCase, device=device, seed = seed+i, debug=debug)
                     endTime = time.perf_counter_ns()
                     costTime = (endTime - startTime) / (1000 ** 3)
                     outputResults[device][testModuleName][testcaseName][
