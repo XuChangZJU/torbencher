@@ -1,14 +1,15 @@
-import time
+import importlib
 import os
 import platform
-import psutil
-import pandas as pd
-import importlib
-import torch                      # in `apitools`
+import time
 
-from .util.apitools import *
+import pandas as pd
+import psutil
+
 from .singleTester import SingleTester
 from .testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
+from .util.apitools import *
+
 
 class torbencherc:
     SUPPORTED_FORMATS = ["csv", 'json', 'xlsx']
@@ -107,13 +108,15 @@ class torbencherc:
             config[torbencherc.ConfigKey.FORMAT] = torbencherc.DEFAULTS.FORMAT
         else:
             if config[torbencherc.ConfigKey.FORMAT] not in torbencherc.SUPPORTED_FORMATS:
-                raise ValueError(f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
+                raise ValueError(
+                    f"Unsupported format {config[torbencherc.ConfigKey.FORMAT]}. Supported formats are {torbencherc.SUPPORTED_FORMATS}")
 
         if not torbencherc.ConfigKey.NAME_SPEC in config:
             config[torbencherc.ConfigKey.NAME_SPEC] = torbencherc.DEFAULTS.NAME_SPEC
         else:
             if config[torbencherc.ConfigKey.NAME_SPEC] not in torbencherc.SUPPORTED_NAME_SPECS:
-                raise ValueError(f"Unsupported name spec {config[torbencherc.ConfigKey.NAME_SPEC]}. Supported formats are {torbencherc.SUPPORTED_NAME_SPECS}")
+                raise ValueError(
+                    f"Unsupported name spec {config[torbencherc.ConfigKey.NAME_SPEC]}. Supported formats are {torbencherc.SUPPORTED_NAME_SPECS}")
 
         if not torbencherc.ConfigKey.DEBUG in config:
             config[torbencherc.ConfigKey.DEBUG] = True
@@ -173,8 +176,8 @@ class torbencherc:
         **returns**
         - dict: Test results.
         """
-        if torch.__version__ < "2.1.0":
-            raise RuntimeError("Torch version must be greater than 2.1.0")
+        if torch.__version__ < "2.0.0":
+            raise RuntimeError("Torch version must be greater than 2.0.0")
 
         outputResults = {}
         names = [f"src.testcase.{test_module}" for test_module in config[torbencherc.ConfigKey.TEST_MODULES]]
@@ -230,7 +233,9 @@ class torbencherc:
                 attrNames = getAttributes(module)
                 for attrName in attrNames:
                     attr = getattr(module, attrName, None)
-                    if isinstance(attr, type) and issubclass(attr, TorBencherTestCaseBase) and attr is not TorBencherTestCaseBase:
+                    if isinstance(attr, type) \
+                            and issubclass(attr, TorBencherTestCaseBase) \
+                            and attr is not TorBencherTestCaseBase:
                         allTestCases[name].append(attr)
         return allTestCases
 
