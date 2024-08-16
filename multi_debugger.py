@@ -14,7 +14,7 @@ def run_debugger(modules: list, result_file: str):
             "result_file": result_file
         }
     )
-    result = debugger.run()
+    debugger.run()
 
 
 if __name__ == '__main__':

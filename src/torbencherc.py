@@ -256,60 +256,64 @@ class torbencherc:
         seed = config[torbencherc.ConfigKey.SEED]
         repeat = config[torbencherc.ConfigKey.NUM_EPOCH]
         debug = config[torbencherc.ConfigKey.DEBUG]
+
+        def repeat_test(testCase):
+            testcaseName = testCase.__name__
+            outputResults[device][testModuleName][testcaseName] = {
+                torbencherc.TestResultKey.STATUS: "Passed",
+                torbencherc.TestResultKey.COST_TIME: []
+            }
+            for _ in range(repeat):
+                try:
+                    startTime = time.perf_counter_ns()
+                    passed = self.tester.run(testCase, device=device, seed=seed, debug=debug)
+                    endTime = time.perf_counter_ns()
+                    costTime = (endTime - startTime) / (1000 ** 3)
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.COST_TIME].append(costTime)
+                except Exception as e:
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.STATUS] = "CompareError"
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.COST_TIME] = "N/A"
+                    break
+
+                if passed == -2:
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.STATUS] = "Skipped"
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.COST_TIME] = "N/A"
+                    break
+
+                if passed == -1:
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.STATUS] = "Error"
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.COST_TIME] = "N/A"
+                    break
+                if not passed:
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.STATUS] = "Failed"
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.COST_TIME] = sum(
+                        outputResults[device][testModuleName][testcaseName][
+                            torbencherc.TestResultKey.COST_TIME]) / len(
+                        outputResults[device][testModuleName][testcaseName][
+                            torbencherc.TestResultKey.COST_TIME])
+                    break
+            if outputResults[device][testModuleName][testcaseName][
+                torbencherc.TestResultKey.STATUS] == "Passed":
+                outputResults[device][testModuleName][testcaseName][torbencherc.TestResultKey.COST_TIME] = sum(
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.COST_TIME]) / len(
+                    outputResults[device][testModuleName][testcaseName][torbencherc.TestResultKey.COST_TIME])
+
         for device in devices:
             outputResults[device] = {}
             for testModuleName, testCases in allTestCases.items():
                 outputResults[device][testModuleName] = {}
                 for testCase in testCases:
-                    testcaseName = testCase.__name__
-                    outputResults[device][testModuleName][testcaseName] = {
-                        torbencherc.TestResultKey.STATUS: "Passed",
-                        torbencherc.TestResultKey.COST_TIME: []
-                    }
-                    for _ in range(repeat):
-                        try:
-                            startTime = time.monotonic_ns()
-                            passed = self.tester.run(testCase, device=device, seed=seed, debug=debug)
-                            endTime = time.monotonic_ns()
-                            costTime = (endTime - startTime) / (1000 ** 3)
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.COST_TIME].append(costTime)
-                        except Exception as e:
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.STATUS] = "CompareError"
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.COST_TIME] = "N/A"
-                            break
-
-                        if passed == -2:
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.STATUS] = "Skipped"
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.COST_TIME] = "N/A"
-                            break
-
-                        if passed == -1:
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.STATUS] = "Error"
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.COST_TIME] = "N/A"
-                            break
-                        if not passed:
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.STATUS] = "Failed"
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.COST_TIME] = sum(
-                                outputResults[device][testModuleName][testcaseName][
-                                    torbencherc.TestResultKey.COST_TIME]) / len(
-                                outputResults[device][testModuleName][testcaseName][
-                                    torbencherc.TestResultKey.COST_TIME])
-                            break
-                    if outputResults[device][testModuleName][testcaseName][
-                        torbencherc.TestResultKey.STATUS] == "Passed":
-                        outputResults[device][testModuleName][testcaseName][torbencherc.TestResultKey.COST_TIME] = sum(
-                            outputResults[device][testModuleName][testcaseName][
-                                torbencherc.TestResultKey.COST_TIME]) / len(
-                            outputResults[device][testModuleName][testcaseName][torbencherc.TestResultKey.COST_TIME])
+                    repeat_test(testCase)
             self.tester.resetTester()
         return outputResults
 
