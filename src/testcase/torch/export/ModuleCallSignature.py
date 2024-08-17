@@ -1,5 +1,4 @@
 import random
-
 import torch
 from torch.export import ModuleCallSignature
 from torch.export.graph_signature import TensorArgument, SymIntArgument, ConstantArgument
@@ -8,7 +7,6 @@ from torch.utils._pytree import TreeSpec
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
 
 @test_api(torch.export.ModuleCallSignature)
 class TorchExportModulecallsignatureTestCase(TorBencherTestCaseBase):
@@ -30,9 +28,10 @@ class TorchExportModulecallsignatureTestCase(TorBencherTestCaseBase):
         inputs += [ConstantArgument(random.uniform(0.1, 10.0)) for _ in range(random.randint(0, 2))]
         outputs += [ConstantArgument(random.uniform(0.1, 10.0)) for _ in range(random.randint(0, 2))]
 
-        # Generate random TreeSpec for in_spec and out_spec
-        in_spec = TreeSpec(None, None, [])
-        out_spec = TreeSpec(None, None, [])
+        # Generate valid TreeSpec for in_spec and out_spec
+        # Here we assume the data structure is a list.
+        in_spec = TreeSpec(list, None, [])
+        out_spec = TreeSpec(list, None, [])
 
         # Create ModuleCallSignature instance
         module_call_signature = ModuleCallSignature(inputs, outputs, in_spec, out_spec)

@@ -22,12 +22,12 @@ class TorchNnCtclossTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(T, N, C).log_softmax(2).detach().requires_grad_()
 
         # Initialize random batch of targets (0 = blank, 1:C = classes)
-        target_tensor = torch.randint(low=1, high=C, size=(N, S), dtype=torch.long)
-
+        # target_tensor = torch.randint(low=1, high=C, size=(N, S), dtype=torch.long)
+        target_tensor = torch.clamp(torch.randn(N, S) * C, min=1, max=C - 1).long()
         # Input lengths and target lengths
         input_lengths = torch.full(size=(N,), fill_value=T, dtype=torch.long)
-        target_lengths = torch.randint(low=S_min, high=S, size=(N,), dtype=torch.long)
-
+        # target_lengths = torch.randint(low=S_min, high=S, size=(N,), dtype=torch.long)
+        target_lengths = torch.clamp(torch.randn(N) * (S - S_min) + S_min, min=S_min, max=S - 1).long()
         # Initialize CTCLoss
         ctc_loss = torch.nn.CTCLoss()
 
