@@ -5,10 +5,6 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util.decorator import test_api
 from src.util import test_api_version
 
-# 设置随机种子以确保结果的可重复性
-random.seed(0)
-torch.manual_seed(0)
-
 @test_api(torch.utils.checkpoint.checkpoint)
 class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
