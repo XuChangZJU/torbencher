@@ -126,6 +126,7 @@ class SingleTester:
                 return -1
             if device == "cpu":
                 print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
+                print(f"[DEBUG] result on {device} is \n{deviceResult}")    
             else:
                 if debug:
                     print(f"[DEBUG] result on {device} is \n{deviceResult}")
