@@ -221,18 +221,6 @@ class SingleTester:
                 except Exception as e:
                     passed = str(cpuResult.to(cpu)) == str(deviceResult.to(cpu))
 
-            if isinstance(cpuResult, list):
-                for idx in range(len(cpuResult)):
-                    if isinstance(cpuResult, object):
-                        passed = str(cpuResult[idx]) == str(deviceResult[idx])
-                    if not type(cpuResult[idx]) == type(deviceResult[idx]):
-                        return False
-                    if isinstance(cpuResult[idx], bool):
-                        passed = cpuResult[idx] == deviceResult[idx]
-                        if not passed: return False
-                    if torch.is_tensor(cpuResult[idx]):
-                        passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)
-                        if not passed: return False
 
             if isinstance(cpuResult, (tuple, list)):
                 for idx in range(len(cpuResult)):
