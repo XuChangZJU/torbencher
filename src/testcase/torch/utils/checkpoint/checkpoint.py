@@ -1,5 +1,6 @@
 import random
 import torch
+
 from torch.utils.checkpoint import checkpoint
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util.decorator import test_api
