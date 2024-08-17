@@ -234,7 +234,7 @@ class SingleTester:
                         passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)
                         if not passed: return False
 
-            if isinstance(cpuResult, tuple):
+            if isinstance(cpuResult, tuple, list):
                 for idx in range(len(cpuResult)):
                     if isinstance(cpuResult, object):
                         passed = str(cpuResult[idx]) == str(deviceResult[idx])
