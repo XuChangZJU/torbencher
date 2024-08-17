@@ -10,7 +10,7 @@ import unittest
 @test_api(torch.nn.Conv3d)
 class TorchNnConv3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_conv3d_correctness(self):
         # Randomly generate input dimensions
         N = random.randint(1, 4)  # Batch size
@@ -31,6 +31,10 @@ class TorchNnConv3dTestCase(TorBencherTestCaseBase):
 
         # Initialize Conv3d layer
         conv3d_layer = torch.nn.Conv3d(C_in, C_out, kernel_size, stride, padding, dilation)
+
+        with torch.no_grad():
+            conv3d_layer.weight = torch.nn.Parameter(torch.randn(C_out, C_in, kernel_size, kernel_size, kernel_size) * 0.01)
+            conv3d_layer.bias = torch.nn.Parameter(torch.randn(C_out) * 0.01)
 
         # Apply Conv3d layer to input tensor
         output_tensor = conv3d_layer(input_tensor)
