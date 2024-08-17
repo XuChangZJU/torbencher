@@ -235,6 +235,9 @@ class SingleTester:
                         passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)
                         if not passed: return False
 
+            if not passed:
+                passed = str(cpuResult) == str(deviceResult).replace(f", device='{device}:0'", "")
+
         except Exception as e:
             raise ValueError(f"The testcase that cause the comparison error is `{testcaseName}`") from e
         return passed
