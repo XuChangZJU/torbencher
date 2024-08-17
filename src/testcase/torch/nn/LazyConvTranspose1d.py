@@ -10,7 +10,7 @@ import unittest
 @test_api(torch.nn.LazyConvTranspose1d)
 class TorchNnLazyconvtranspose1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_lazy_conv_transpose1d_correctness(self):
         # Randomly generate parameters for LazyConvTranspose1d
         out_channels = random.randint(1, 10)  # Number of output channels
@@ -31,5 +31,16 @@ class TorchNnLazyconvtranspose1dTestCase(TorBencherTestCaseBase):
                                                              dilation=dilation)
 
         # Apply the layer to the input tensor
+        output_tensor = lazy_conv_transpose1d(input_tensor)
+
+        # Manually initialize the weights and biases using random methods
+        with torch.no_grad():
+            lazy_conv_transpose1d.weight = torch.nn.Parameter(
+                torch.randn(lazy_conv_transpose1d.weight.shape) * 0.01
+            )
+            if lazy_conv_transpose1d.bias is not None:
+                lazy_conv_transpose1d.bias = torch.nn.Parameter(
+                    torch.randn(lazy_conv_transpose1d.bias.shape) * 0.01
+                )
         output_tensor = lazy_conv_transpose1d(input_tensor)
         return output_tensor
