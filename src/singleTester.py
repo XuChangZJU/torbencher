@@ -142,7 +142,7 @@ class SingleTester:
                     deviceResult = deviceResult.to(torch.device("cpu"))
 
                 # Comparison
-                passed = self.judgeCommon(cpuResult, deviceResult, testcaseName)
+                passed = self.judgeCommon(cpuResult, deviceResult, testcaseName, device)
 
                 if passed and debug:
                     print(testcaseName + f" has passed the test on {device}, return True\n\n\n")
@@ -184,7 +184,7 @@ class SingleTester:
             obj = getattr(module, attr)
             setattr(torch.nn, obj.__name__, randomInjector(obj, self.storage, testcaseName))
 
-    def judgeCommon(self, cpuResult, deviceResult, testcaseName):
+    def judgeCommon(self, cpuResult, deviceResult, testcaseName, device):
         """
         **description**
         Compares the results from the CPU and the specified device to determine if they match.
@@ -234,7 +234,7 @@ class SingleTester:
                         passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)
                         if not passed: return False
 
-            if isinstance(cpuResult, tuple):
+            if isinstance(cpuResult, (tuple, list)):
                 for idx in range(len(cpuResult)):
                     if isinstance(cpuResult, object):
                         passed = str(cpuResult[idx]) == str(deviceResult[idx])
@@ -246,6 +246,8 @@ class SingleTester:
                     if torch.is_tensor(cpuResult[idx]):
                         passed = torch.allclose(cpuResult[idx].to(cpu), deviceResult[idx].to(cpu), rtol=1e-05, atol=1e-06, equal_nan=True)
                         if not passed: return False
+            
+           
         except Exception as e:
             raise ValueError(f"The testcase that cause the comparison error is `{testcaseName}`") from e
         return passed
