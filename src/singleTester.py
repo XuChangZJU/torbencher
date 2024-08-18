@@ -168,9 +168,11 @@ class SingleTester:
         setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName))
         setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName))
         setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName))
+        setattr(torch, "randperm", randomInjector(self.trandint, self.storage, testcaseName))
         setattr(random, 'choice', randomInjector(self.rchoice, self.storage, testcaseName))
         setattr(random, 'random', randomInjector(self.rrandom, self.storage, testcaseName))
         setattr(random, 'shuffle', randomInjector(self.rshuffle, self.storage, testcaseName))
+
 
     def injectModule(self, module: type, testcaseName: str) -> None:
         """
