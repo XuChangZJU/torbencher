@@ -10,7 +10,7 @@ import unittest
 @test_api(torch.nn.LazyConv1d)
 class TorchNnLazyconv1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_lazyconv1d_correctness(self):
         while True:
             out_channels = random.randint(1, 10)
@@ -45,6 +45,19 @@ class TorchNnLazyconv1dTestCase(TorBencherTestCaseBase):
 
         # Initialize LazyConv1d layer
         lazy_conv1d = torch.nn.LazyConv1d(out_channels, kernel_size, stride, padding, dilation, groups, bias)
+
+        # Apply LazyConv1d to input tensor
+        result = lazy_conv1d(input_tensor)
+
+        # Initialize weights and biases manually
+        with torch.no_grad():
+            # Initialize weights
+            conv_weight_shape = lazy_conv1d.weight.shape
+            lazy_conv1d.weight = torch.nn.Parameter(torch.randn(conv_weight_shape) * 0.01)
+
+            # Initialize biases if bias=True
+            if lazy_conv1d.bias is not None:
+                lazy_conv1d.bias = torch.nn.Parameter(torch.randn(lazy_conv1d.bias.shape) * 0.01)
 
         # Apply LazyConv1d to input tensor
         result = lazy_conv1d(input_tensor)
