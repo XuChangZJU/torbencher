@@ -16,8 +16,11 @@ class TorchRot90TestCase(TorBencherTestCaseBase):
         input_size = [num_of_elements_each_dim for i in range(dim)]
 
         input_tensor = torch.randn(input_size)
-        k = random.randint(-5, 5)  # Random k value
-        dims_value = random.sample(range(0, dim), 2)  # Randomly select two different values from 0 to dim - 1
-        dims = [dims_value[0], dims_value[1]]
+        k = random.randint(0, 5)  # Random k value
+        # dims_value = random.sample(range(0, dim), 2)  # Randomly select two different values from 0 to dim - 1
+        dims = random.randint(0, dim-1), random.randint(0, dim-1)
+        while dims[0] == dims[1]:
+            dims = random.randint(0, dim-1), random.randint(0, dim-1)
+
         result = torch.rot90(input_tensor, k, dims)
         return result
