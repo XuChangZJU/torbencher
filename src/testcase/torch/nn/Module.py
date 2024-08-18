@@ -11,7 +11,7 @@ import unittest
 @test_api(torch.nn.Module)
 class TorchNnModuleTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_nn_module_correctness(self):
         class RandomModel(torch.nn.Module):
             def __init__(self):
@@ -24,6 +24,16 @@ class TorchNnModuleTestCase(TorBencherTestCaseBase):
                 self.conv1 = torch.nn.Conv2d(in_channels1, out_channels1, kernel_size)
                 self.conv2 = torch.nn.Conv2d(out_channels1, out_channels1,
                                              kernel_size)  # Use out_channels1 here as well
+                self.initialize_weights()
+            def initialize_weights(self):
+
+                with torch.no_grad():
+                    # Initialize weights with normal distribution
+                    self.conv1.weight.copy_(torch.normal(0.0, 0.01, self.conv1.weight.size()))
+                    self.conv1.bias.copy_(torch.normal(0.0, 0.01, self.conv1.bias.size()))
+
+                    self.conv2.weight.copy_(torch.normal(0.0, 0.01, self.conv2.weight.size()))
+                    self.conv2.bias.copy_(torch.normal(0.0, 0.01, self.conv2.bias.size()))
 
             def forward(self, x):
                 x = torch.nn.functional.relu(self.conv1(x))
