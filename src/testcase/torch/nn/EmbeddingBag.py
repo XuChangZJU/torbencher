@@ -10,13 +10,15 @@ import unittest
 @test_api(torch.nn.EmbeddingBag)
 class TorchNnEmbeddingbagTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_embedding_bag_correctness(self):
         num_embeddings = random.randint(5, 20)  # Random number of embeddings
         embedding_dim = random.randint(2, 10)  # Random embedding dimension
         mode = random.choice(['sum', 'mean', 'max'])  # Random mode selection
 
         embedding_bag = torch.nn.EmbeddingBag(num_embeddings, embedding_dim, mode=mode)
+
+        with torch.no_grad():
+            embedding_bag.weight = torch.nn.Parameter(torch.randn(num_embeddings, embedding_dim))
 
         # Generate random input tensor with indices
         input_length = random.randint(5, 15)  # Random length of input tensor
