@@ -12,7 +12,7 @@ import unittest
 @test_api(torch.nn.ModuleDict)
 class TorchNnModuledictTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_moduledict_correctness(self):
         # Randomly generate input tensor dimensions
         batch_size = random.randint(1, 4)
@@ -28,6 +28,16 @@ class TorchNnModuledictTestCase(TorBencherTestCaseBase):
             'lrelu': nn.LeakyReLU(),
             'prelu': nn.PReLU()
         })
+        with torch.no_grad():
+            # Initialize Conv2d weights and biases
+            conv_layer = module_dict['conv']
+            conv_layer.weight = nn.Parameter(torch.normal(0, 0.01, conv_layer.weight.shape))
+            if conv_layer.bias is not None:
+                conv_layer.bias = nn.Parameter(torch.normal(0, 0.01, conv_layer.bias.shape))
+
+            # Initialize PReLU weights
+            prelu_layer = module_dict['prelu']
+            prelu_layer.weight = nn.Parameter(torch.normal(0, 0.01, prelu_layer.weight.shape))
 
         # Randomly select a module from the ModuleDict
         choice = random.choice(['conv', 'pool'])
