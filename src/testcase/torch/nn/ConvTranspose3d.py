@@ -7,10 +7,10 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 import unittest
 
+
 @test_api(torch.nn.ConvTranspose3d)
 class TorchNnConvtranspose3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_conv_transpose3d_correctness(self):
         # Randomly generate parameters for ConvTranspose3d
         in_channels = random.randint(1, 10)
@@ -23,9 +23,13 @@ class TorchNnConvtranspose3dTestCase(TorBencherTestCaseBase):
         groups = 1
         # Create ConvTranspose3d layer with random parameters
         conv_transpose3d = torch.nn.ConvTranspose3d(
-            in_channels, out_channels, kernel_size, stride, padding, output_padding, groups, dilation
+            in_channels, out_channels, kernel_size, stride, padding, output_padding, groups, dilation=dilation
         )
-
+        with torch.no_grad():
+            conv_transpose3d.weight = torch.nn.Parameter(
+                torch.randn(conv_transpose3d.in_channels, conv_transpose3d.out_channels // conv_transpose3d.groups,
+                            *conv_transpose3d.kernel_size))
+            conv_transpose3d.bias = torch.nn.Parameter(torch.randn(conv_transpose3d.out_channels))
         # Randomly generate input tensor size
         batch_size = random.randint(1, 5)
         depth = random.randint(10, 20)

@@ -5,12 +5,12 @@ import torch
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-import unittest 
+import unittest
+
 
 @test_api(torch.nn.Embedding)
 class TorchNnEmbeddingTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_embedding_correctness(self):
         # Randomly generate the size of the dictionary of embeddings
         num_embeddings = random.randint(5, 20)
@@ -19,6 +19,9 @@ class TorchNnEmbeddingTestCase(TorBencherTestCaseBase):
 
         # Create the Embedding layer
         embedding_layer = torch.nn.Embedding(num_embeddings, embedding_dim)
+
+        with torch.no_grad():
+            embedding_layer.weight = torch.nn.Parameter(torch.randn(num_embeddings, embedding_dim))
 
         # Randomly generate the input indices
         batch_size = random.randint(1, 5)
