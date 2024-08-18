@@ -16,7 +16,7 @@ class TorchNnFunctionalDropout3dTestCase(TorBencherTestCaseBase):
         # Random input size
         dim = random.randint(4, 5)
         num_of_elements_each_dim = random.randint(1, 5)
-        input_size = [num_of_elements_each_dim for i in range(dim)]
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
 
         # Random input tensor
         input_tensor = torch.randn(input_size)
