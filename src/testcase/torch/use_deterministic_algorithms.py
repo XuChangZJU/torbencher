@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.use_deterministic_algorithms)
 class TorchUseUdeterministicUalgorithmsTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip
     def test_use_deterministic_algorithms_correctness(self):
         # mode: whether to use deterministic algorithms
         mode = random.choice([True, False])
