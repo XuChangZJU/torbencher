@@ -17,6 +17,12 @@ class TorchNnModulesModuleRegisterUmoduleUfullUbackwardUhookTestCase(TorBencherT
                 super(SimpleNet, self).__init__()
                 self.fc1 = torch.nn.Linear(10, 5)
                 self.fc2 = torch.nn.Linear(5, 2)
+                with torch.no_grad():
+                    self.fc1.weight = torch.nn.Parameter(torch.randn(5, 10))
+                    self.fc1.bias = torch.nn.Parameter(torch.randn(5))
+                with torch.no_grad():
+                    self.fc2.weight = torch.nn.Parameter(torch.randn(2, 5))
+                    self.fc2.bias = torch.nn.Parameter(torch.randn(2))
 
             def forward(self, x):
                 x = torch.relu(self.fc1(x))
