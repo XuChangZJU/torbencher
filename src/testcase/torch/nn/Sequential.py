@@ -12,8 +12,6 @@ import unittest
 class TorchNnSequentialTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     def test_sequential_correctness(self):
-        torch.manual_seed(0)
-        random.seed(0)
 
         input_size = random.randint(4, 16)
         hidden_size = random.randint(4, 16)
@@ -22,10 +20,20 @@ class TorchNnSequentialTestCase(TorBencherTestCaseBase):
         batch_size = random.randint(4, 16)
         input_tensor = torch.randn(batch_size, input_size)
 
+        l1= torch.nn.Linear(input_size, hidden_size)
+        with torch.no_grad():
+            l1.weight.copy_(torch.randn(hidden_size, input_size) * 0.01)
+            l1.bias.copy_(torch.randn(hidden_size) * 0.01)
+
+        l2 = torch.nn.Linear(hidden_size, output_size)
+        with torch.no_grad():
+            l2.weight.copy_(torch.randn(output_size, hidden_size) * 0.01)
+            l2.bias.copy_(torch.randn(output_size) * 0.01)
+
         model = torch.nn.Sequential(
-            torch.nn.Linear(input_size, hidden_size),
+            l1,
             torch.nn.ReLU(),
-            torch.nn.Linear(hidden_size, output_size)
+            l2
         )
 
         # Pass the input tensor through the Sequential model
