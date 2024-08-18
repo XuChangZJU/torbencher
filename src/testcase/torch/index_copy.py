@@ -14,7 +14,7 @@ class TorchIndexUcopyTestCase(TorBencherTestCaseBase):
         # Randomly generate tensor dimensions
         dim = random.randint(1, 4)
         num_of_elements_each_dim = random.randint(1, 5)
-        input_size = [num_of_elements_each_dim for i in range(dim)]
+        input_size = [num_of_elements_each_dim for _ in range(dim)]
 
         # Create input tensor
         input_tensor = torch.randn(input_size)
@@ -24,7 +24,7 @@ class TorchIndexUcopyTestCase(TorBencherTestCaseBase):
 
         # Generate random indices to copy to
         index_size = random.randint(1, input_size[dim_to_copy])
-        indices = torch.randperm(input_size[dim_to_copy])[:index_size]
+        indices = torch.randint(0, input_size[dim_to_copy], (index_size,))
 
         # Create source tensor with matching size along the copy dimension
         source_size = input_size.copy()
