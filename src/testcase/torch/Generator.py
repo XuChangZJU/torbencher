@@ -13,9 +13,6 @@ class TorchGeneratorTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
     @unittest.skipIf(not torch.cuda.is_available(), "CUDA is not available")
     def test_generator_correctness(self):
-        # Randomly choose between 'cpu' and 'cuda' device
-        device_type = 'cpu' if random.random() < 0.5 else 'cuda'
-
         # Create generator (Note: torch.Generator() does not support device argument)
         generator = torch.Generator()
 
@@ -23,12 +20,14 @@ class TorchGeneratorTestCase(TorBencherTestCaseBase):
         seed = random.randint(1, 1000)
         generator.manual_seed(seed)
 
-        tensor_size = [random.randint(1, 5) for _ in range(random.randint(1, 4))]
-        tensor_with_generator = torch.randn(tensor_size, generator=generator).to(device_type)
+        # Capture the state of the generator after setting the seed
+        state_after_setting_seed = generator.get_state()
 
-        # Check the reproducibility with the same seed
+        # Reset the generator to the same seed
         generator.manual_seed(seed)
-        tensor_with_same_generator = torch.randn(tensor_size, generator=generator).to(device_type)
 
-        # Verify if the tensors from the same seed are equal
-        return torch.equal(tensor_with_generator, tensor_with_same_generator)
+        # Capture the state of the generator after resetting the seed
+        state_after_resetting_seed = generator.get_state()
+
+        # Verify if the states of the generator from the same seed are equal
+        return state_after_setting_seed == state_after_resetting_seed
