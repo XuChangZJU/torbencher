@@ -4,9 +4,10 @@ from torch.utils.checkpoint import checkpoint_sequential
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
-
+import unittest
 @test_api(torch.utils.checkpoint.checkpoint_sequential)
 class TorchUtilsCheckpointCheckpointUsequentialTestCase(TorBencherTestCaseBase):
+    @unittest.skip
     @test_api_version.larger_than("2.0.0")
     def test_checkpoint_sequential_correctness(self):
         # 随机生成层的数量

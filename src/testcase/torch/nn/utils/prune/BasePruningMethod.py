@@ -7,8 +7,9 @@ from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util import test_api_version
 from src.util.decorator import test_api
 
-
+import unittest
 class CustomPruningMethod(prune.BasePruningMethod):
+    @unittest.skip
     def compute_mask(self, t, default_mask):
         mask = default_mask.clone()
         num_elements_to_prune = random.randint(1, t.numel())

@@ -30,9 +30,15 @@ class TorchNnUtilsParametrizeCachedTestCase(TorBencherTestCaseBase):
         # Initialize the linear layer
         linear_layer = nn.Linear(in_features, out_features)
 
-        # Initialize weights and biases
-        linear_layer.weight.data.normal_(0, 1)
-        linear_layer.bias.data.normal_(0, 1)
+        # Initialize weights and biases manually
+        with torch.no_grad():
+            # Generate random values from a normal distribution
+            weight_data = torch.normal(0, 0.01, (out_features, in_features))  # 注意这里没有使用关键字参数'size'
+            bias_data = torch.normal(0, 0.01, (out_features,))
+
+            # Set the parameters
+            linear_layer.weight = nn.Parameter(weight_data)
+            linear_layer.bias = nn.Parameter(bias_data)
 
         # Register parametrization
         P.register_parametrization(linear_layer, 'weight', nn.Identity())
