@@ -10,7 +10,7 @@ import unittest
 @test_api(torch.nn.NLLLoss)
 class TorchNnNlllossTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_nllloss_correctness(self):
         # Randomly generate dimensions for the input tensor
         batch_size = random.randint(1, 5)  # Random batch size
@@ -22,7 +22,10 @@ class TorchNnNlllossTestCase(TorBencherTestCaseBase):
         input_tensor = torch.randn(batch_size, num_classes, height, width, requires_grad=True)
 
         # Generate random target tensor with class indices
-        target_tensor = torch.empty(batch_size, height, width, dtype=torch.long).random_(0, num_classes)
+        # target_tensor = torch.empty(batch_size, height, width, dtype=torch.long).random_(0, num_classes)
+
+        # Generate random target tensor with class indices
+        target_tensor = torch.randint(0, num_classes, (batch_size, height, width), dtype=torch.long)
 
         # Initialize LogSoftmax and NLLLoss modules
         log_softmax = torch.nn.LogSoftmax(dim=1)

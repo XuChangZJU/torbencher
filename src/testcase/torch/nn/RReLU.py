@@ -10,7 +10,7 @@ import unittest
 @test_api(torch.nn.RReLU)
 class TorchNnRreluTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    @unittest.skip("内部随机")
     def test_rrelu_correctness(self):
         # Random dimension for the tensors
         dim = random.randint(1, 4)

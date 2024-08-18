@@ -10,7 +10,7 @@ import unittest
 @test_api(torch.nn.Dropout)
 class TorchNnDropoutTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    @unittest.skip("内部随机")
     def test_dropout_correctness(self):
         # Randomly generate input size
         dim = random.randint(1, 4)

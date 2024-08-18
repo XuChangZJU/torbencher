@@ -11,7 +11,7 @@ import unittest
 @test_api(torch.nn.ConvTranspose2d)
 class TorchNnConvtranspose2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_conv_transpose2d_correctness(self):
         # Randomly generate parameters for ConvTranspose2d
         in_channels = random.randint(2, 10)
@@ -26,7 +26,10 @@ class TorchNnConvtranspose2dTestCase(TorBencherTestCaseBase):
         conv_transpose2d = torch.nn.ConvTranspose2d(
             in_channels, out_channels, kernel_size, stride, padding, output_padding, groups, dilation
         )
-
+        with torch.no_grad():
+            conv_transpose2d.weight = torch.nn.Parameter(torch.randn(conv_transpose2d.weight.shape) * 0.01)
+            if conv_transpose2d.bias is not None:
+                conv_transpose2d.bias = torch.nn.Parameter(torch.randn(conv_transpose2d.bias.shape) * 0.01)
         # Randomly generate input tensor size
         batch_size = random.randint(1, 5)
         height = random.randint(10, 20)

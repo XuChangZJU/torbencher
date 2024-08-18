@@ -10,7 +10,7 @@ import unittest
 @test_api(torch.nn.LPPool1d)
 class TorchNnLppool1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_LPPool1d_correctness(self):
         # Random input size
         batch_size = random.randint(1, 10)
@@ -26,7 +26,7 @@ class TorchNnLppool1dTestCase(TorBencherTestCaseBase):
         p = random.uniform(1.0, 10.0)
 
         # Create input tensor
-        input_tensor = torch.randn(input_size)
+        input_tensor = abs(torch.randn(input_size))
 
         # Create LPPool1d module
         lp_pool = torch.nn.LPPool1d(kernel_size, stride)

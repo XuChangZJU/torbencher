@@ -6,10 +6,10 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 import unittest
 
+
 @test_api(torch.nn.Bilinear)
 class TorchNnBilinearTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_bilinear_correctness(self):
         # Randomly generate the size of each input sample with smaller range
         in1_features = random.randint(1, 5)  # Reduced range
@@ -18,6 +18,10 @@ class TorchNnBilinearTestCase(TorBencherTestCaseBase):
 
         # Create a Bilinear layer with the generated sizes
         bilinear_layer = torch.nn.Bilinear(in1_features, in2_features, out_features)
+
+        with torch.no_grad():
+            bilinear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in1_features, in2_features))
+            bilinear_layer.bias = torch.nn.Parameter(torch.randn(out_features))
 
         # Randomly generate the batch size
         batch_size = 2  # Reduced range
@@ -30,4 +34,3 @@ class TorchNnBilinearTestCase(TorBencherTestCaseBase):
         output = bilinear_layer(input1, input2)
 
         return output
-

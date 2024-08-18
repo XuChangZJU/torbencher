@@ -7,10 +7,10 @@ from src.util import test_api_version
 from src.util.decorator import test_api
 import unittest
 
+
 @test_api(torch.nn.Conv1d)
 class TorchNnConv1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_Conv1d_correctness(self):
         # Random input size (N, C_in, L_in)
         batch_size = random.randint(1, 5)  # Reduced batch size for simplicity
@@ -25,10 +25,13 @@ class TorchNnConv1dTestCase(TorBencherTestCaseBase):
 
         # Create Conv1d module and random input tensor
         conv1d = torch.nn.Conv1d(in_channels, out_channels, kernel_size, stride)
+        with torch.no_grad():
+            conv1d.weight = torch.nn.Parameter(
+                torch.randn(conv1d.out_channels, conv1d.in_channels // conv1d.groups, *conv1d.kernel_size))
+            conv1d.bias = torch.nn.Parameter(torch.randn(out_channels))
         input_tensor = torch.randn(input_size)
 
         # Perform convolution
         output_tensor = conv1d(input_tensor)
 
         return output_tensor
-

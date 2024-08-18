@@ -10,7 +10,6 @@ import unittest
 @test_api(torch.nn.Conv2d)
 class TorchNnConv2dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
     def test_conv2d_correctness(self):
         # Randomly generate parameters for Conv2d
         in_channels = random.randint(1, 10)  # Number of input channels
@@ -29,6 +28,11 @@ class TorchNnConv2dTestCase(TorBencherTestCaseBase):
         # Create Conv2d layer with generated parameters
         conv2d_layer = torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding, dilation)
 
+        with torch.no_grad():
+            conv2d_layer.weight = torch.nn.Parameter(
+                torch.randn(conv2d_layer.out_channels, conv2d_layer.in_channels // conv2d_layer.groups,
+                            *conv2d_layer.kernel_size))
+            conv2d_layer.bias = torch.nn.Parameter(torch.randn(conv2d_layer.out_channels))
         # Apply Conv2d layer to input tensor
         output_tensor = conv2d_layer(input_tensor)
         return output_tensor

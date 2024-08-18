@@ -12,4 +12,7 @@ class TorchIsUdeterministicUalgorithmsUwarnUonlyUenabledTestCase(TorBencherTestC
         # Test the correctness of torch.is_deterministic_algorithms_warn_only_enabled
         torch.use_deterministic_algorithms(mode=True, warn_only=True)  # set warn_only to True
         result = torch.is_deterministic_algorithms_warn_only_enabled()
+
+        torch.use_deterministic_algorithms(False)
+
         return result
