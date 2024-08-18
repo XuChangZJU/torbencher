@@ -11,7 +11,7 @@ import unittest
 @test_api(torch.nn.LazyConv3d)
 class TorchNnLazyconv3dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    # @unittest.skip
     def test_lazyconv3d_correctness(self):
         # Randomly generate parameters for LazyConv3d
         out_channels = random.randint(1, 10)
@@ -52,4 +52,15 @@ class TorchNnLazyconv3dTestCase(TorBencherTestCaseBase):
         # Apply LazyConv3d to the input tensor
         result = lazy_conv3d(input_tensor)
 
+        # Manually initialize the weights and biases using different methods
+        with torch.no_grad():
+            # Use torch.randn to generate random weights and scale them
+            weight_init = torch.randn(lazy_conv3d.weight.shape) * 0.01
+            lazy_conv3d.weight = torch.nn.Parameter(weight_init)
+
+            # Optionally, initialize bias using random.uniform
+            if lazy_conv3d.bias is not None:
+                bias_init = torch.tensor([random.uniform(-0.1, 0.1) for _ in range(lazy_conv3d.bias.numel())])
+                lazy_conv3d.bias = torch.nn.Parameter(bias_init)
+        result = lazy_conv3d(input_tensor)
         return result
