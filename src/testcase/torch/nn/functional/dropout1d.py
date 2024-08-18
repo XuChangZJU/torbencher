@@ -11,7 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.dropout1d)
 class TorchNnFunctionalDropout1dTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
-    @unittest.skip
+    @unittest.skip("内部随机")
     def test_dropout1d_correctness(self):
         batch_size = random.randint(1, 4)  # Random batch size
         num_channels = random.randint(1, 4)  # Random number of channels

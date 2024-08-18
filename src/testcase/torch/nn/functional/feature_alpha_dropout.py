@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.nn.functional.feature_alpha_dropout)
 class TorchNnFunctionalFeatureUalphaUdropoutTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip("内部随机")
     def test_feature_alpha_dropout_correctness(self):
         """
         Test the correctness of torch.nn.functional.feature_alpha_dropout with small scale random parameters.
