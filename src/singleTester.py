@@ -51,6 +51,7 @@ class SingleTester:
         self.rchoice = random.choice
         self.rrandom = random.random
         self.rshuffle = random.shuffle
+        self.rrandperm = torch.randperm
 
     def run(self, testcase: TorBencherTestCaseBase, device: str = "cpu", seed: int = None,
             debug: bool = True) -> bool or int:
@@ -168,7 +169,7 @@ class SingleTester:
         setattr(torch, 'normal', randomInjector(self.normal, self.storage, testcaseName))
         setattr(torch, 'rand', randomInjector(self.rand, self.storage, testcaseName))
         setattr(torch, "randint", randomInjector(self.trandint, self.storage, testcaseName))
-        setattr(torch, "randperm", randomInjector(self.trandint, self.storage, testcaseName))
+        setattr(torch, "randperm", randomInjector(self.rrandperm, self.storage, testcaseName))
         setattr(random, 'choice', randomInjector(self.rchoice, self.storage, testcaseName))
         setattr(random, 'random', randomInjector(self.rrandom, self.storage, testcaseName))
         setattr(random, 'shuffle', randomInjector(self.rshuffle, self.storage, testcaseName))
@@ -293,3 +294,4 @@ class SingleTester:
         setattr(random, 'choice', self.rchoice)
         setattr(random, 'random', self.rrandom)
         setattr(random, 'shuffle', self.rshuffle)
+        setattr(torch, 'randperm', self.rrandperm)
