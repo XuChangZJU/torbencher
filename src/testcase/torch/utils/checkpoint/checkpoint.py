@@ -1,6 +1,5 @@
 import random
 import torch
-
 from torch.utils.checkpoint import checkpoint
 from src.testcase.TorBencherTestCaseBase import TorBencherTestCaseBase
 from src.util.decorator import test_api
@@ -24,13 +23,14 @@ class TorchUtilsCheckpointCheckpointTestCase(TorBencherTestCaseBase):
                 self.linear2 = torch.nn.Linear(hidden_features, output_features)
 
                 # Initialize the weights and biases using normal distribution
-                # First create a tensor of the appropriate shape, then fill it with values from a normal distribution
                 with torch.no_grad():
-                    self.linear1.weight.data.normal_(mean=0.0, std=1.0)
-                    self.linear1.bias.data.normal_(mean=0.0, std=1.0)
+                    # For linear1
+                    self.linear1.weight.data = torch.normal(0.0, 1.0, self.linear1.weight.shape)
+                    self.linear1.bias.data = torch.normal(0.0, 1.0, self.linear1.bias.shape)
 
-                    self.linear2.weight.data.normal_(mean=0.0, std=1.0)
-                    self.linear2.bias.data.normal_(mean=0.0, std=1.0)
+                    # For linear2
+                    self.linear2.weight.data = torch.normal(0.0, 1.0, self.linear2.weight.shape)
+                    self.linear2.bias.data = torch.normal(0.0, 1.0, self.linear2.bias.shape)
 
             def forward(self, x):
                 x = self.linear1(x)
