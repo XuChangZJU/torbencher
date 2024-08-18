@@ -1,11 +1,6 @@
 from src.torbencherc import torbencherc
 from multiprocessing import freeze_support
 
-import sys
-import time
-
-
-
 config = {
     "out_dir": "./results",
     "seed": 1234567890,
@@ -65,18 +60,7 @@ config = {
 }
 
 if __name__ == '__main__':
-    # 打开一个文件用于写入
-    log_file = open(f'loginfo_{time.time()}.log', 'w')
-
-    # 将标准输出重定向到文件
-    sys.stdout = log_file
-    sys.stderr = log_file
-
-
     freeze_support()
     bencher = torbencherc(config)
     result = bencher.run()
     print(result)
-
-
-    log_file.close()
