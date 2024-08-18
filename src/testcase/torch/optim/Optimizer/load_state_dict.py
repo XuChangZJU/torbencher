@@ -22,6 +22,9 @@ class TorchOptimOptimizerLoadUstateUdictTestCase(TorBencherTestCaseBase):
 
         # Define a simple model
         linear = torch.nn.Linear(num_of_elements_each_dim, num_of_elements_each_dim)
+        with torch.no_grad():
+            linear.weight = torch.nn.Parameter(torch.randn(num_of_elements_each_dim,num_of_elements_each_dim))
+            linear.bias = torch.nn.Parameter(torch.randn(num_of_elements_each_dim))
 
         # Create an optimizer
         optimizer = torch.optim.Adam([tensor1, tensor2], lr=0.1)
