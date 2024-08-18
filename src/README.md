@@ -133,7 +133,7 @@ debugger.run()
 from src.testcase.yourTestCaseModule import yourTestCase
 
 tester = SingleTester()                                 # 无参实例化SingleTester
-tester.run(yourTestCase, device='cuda', seed=443)       # 使用SingleTester测试算子用例
+tester.run(yourTestCase, device='cuda', seed=443, debug=True)       # 使用SingleTester测试算子用例
 ```
 ## 部分模块和运行原理简介
 ### MyTestCaseLoader
