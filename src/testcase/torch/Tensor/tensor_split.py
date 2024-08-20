@@ -24,8 +24,9 @@ class TorchTensorTensorUsplitTestCase(TorBencherTestCaseBase):
         if random.choice([True, False]):
             # Randomly generate indices for splitting
             if num_of_elements_each_dim > 1:
-                indices = sorted(
-                    random.sample(range(1, num_of_elements_each_dim), random.randint(1, num_of_elements_each_dim - 1)))
+                indices = sorted(set(random.randint(1, num_of_elements_each_dim - 1) for _ in range(random.randint(1, num_of_elements_each_dim - 1))))
+                # indices = sorted(
+                #     random.sample(range(1, num_of_elements_each_dim), random.randint(1, num_of_elements_each_dim - 1)))
                 result = torch.tensor_split(tensor, indices, dim=0)
             else:
                 result = [tensor]  # If there's only one element, no split is possible
