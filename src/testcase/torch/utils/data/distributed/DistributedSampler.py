@@ -1,4 +1,5 @@
 import random
+import unittest
 
 import torch
 
@@ -10,6 +11,7 @@ from src.util.decorator import test_api
 @test_api(torch.utils.data.distributed.DistributedSampler)
 class TorchUtilsDataDistributedDistributedsamplerTestCase(TorBencherTestCaseBase):
     @test_api_version.larger_than("2.0.0")
+    @unittest.skip("内部随机")
     def test_DistributedSampler_correctness(self):
         # Random parameters for DistributedSampler
         num_replicas = random.randint(1, 4)  # Number of replicas
