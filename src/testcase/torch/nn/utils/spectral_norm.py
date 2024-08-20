@@ -17,6 +17,9 @@ class TorchNnUtilsSpectralUnormTestCase(TorBencherTestCaseBase):
 
         # Create a Linear layer
         linear_layer = torch.nn.Linear(in_features, out_features)
+        with torch.no_grad():
+            linear_layer.weight = torch.nn.Parameter(torch.randn(out_features, in_features))
+            linear_layer.bias = torch.nn.Parameter(torch.randn(out_features))
 
         # Apply spectral normalization to the Linear layer
         spectral_norm_linear = torch.nn.utils.spectral_norm(linear_layer)
