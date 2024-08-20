@@ -28,6 +28,9 @@ class TorchNnDataparallelTestCase(TorBencherTestCaseBase):
 
         # Wrap the model with DataParallel
         model_parallel = torch.nn.DataParallel(model, device_ids=device_ids)
+        with torch.no_grad():
+            model.weight = torch.nn.Parameter(torch.randn(num_features, num_features))
+            model.bias = torch.nn.Parameter(torch.randn(num_features))
 
         # Generate a random input tensor with the batch size and number of features
         input_tensor = torch.randn(batch_size, num_features)
