@@ -42,6 +42,7 @@ class SingleTester:
         self.uloader = unittest.TestLoader()
         self.urunner = unittest.TextTestRunner()
         self.storage = {}
+        self.ErrsNFails = None
         self.uniform = random.uniform
         self.rrandint = random.randint
         self.trandint = torch.randint
@@ -82,6 +83,10 @@ class SingleTester:
             print(f"Start precheck for {testcaseName}")
         suite = self.uloader.loadTestsFromTestCase(testcase)
         preResult = self.urunner.run(suite)
+        if bool(preResult.errors):
+            self.ErrsNFails = preResult.errors[-1]
+        if bool(preResult.failures):
+            self.ErrsNFails = preResult.failures[-1]
         if bool(preResult.skipped):
             print(f"[SKIPPED] {testcaseName} skipped, return -2")
             return -2
@@ -114,6 +119,16 @@ class SingleTester:
         passed = False
         if device:
             torch.set_default_device(device)
+
+            self.resetRandom()
+            suite = self.uloader.loadTestsFromTestCase(testcase)
+            preDeviceResult = self.urunner.run(suite)
+            if bool(preDeviceResult.errors):
+                self.ErrsNFails = preDeviceResult.errors[-1]
+            if bool(preDeviceResult.failures):
+                self.ErrsNFails = preDeviceResult.failures[-1]
+
+
             suite = self.loader.loadTestsFromTestCase(testcase)
             self.sendValueToDevice(testcaseName, self.storage, device)
             torch.manual_seed(seed)
@@ -127,7 +142,7 @@ class SingleTester:
                 return -1
             if device == "cpu":
                 print(f"[DEVICE TESTING REMINDER] Don't forget to test on device, or it will be lack of compatibility.")
-                print(f"[DEBUG] result on {device} is \n{deviceResult}")    
+                # print(f"[DEBUG] result on {device} is \n{deviceResult}")
             else:
                 if debug:
                     print(f"[DEBUG] result on {device} is \n{deviceResult}")
@@ -276,6 +291,28 @@ class SingleTester:
         self.loader = MyTestLoader()
         self.runner = MyTestRunner(verbosity=2)
         self.storage = {}
+
+    def resetErrsNFails(self) -> None:
+        """
+        **description**
+        Resets the `ErrsNFails` attribute to None, clearing any stored errors or failures.
+
+        **params**
+        None
+        """
+        self.ErrsNFails = None
+
+    def getErrsNFails(self) -> Exception or None:
+        """
+        **description**
+        Returns the stored error or failure information and resets `ErrsNFails` to None.
+
+        **returns**
+        e (Exception or None): The stored error or failure, if any, otherwise None.
+        """
+        e = self.ErrsNFails
+        self.resetErrsNFails()
+        return e
 
     def resetRandom(self) -> None:
         """
