@@ -52,6 +52,7 @@ class torbencherc:
         FAILURE_DETAILS = "failure_details"
         STATUS = "status"
         COST_TIME = "cost_time(ms)"
+        ERRSNFAILS = "errs_and_fails"
 
     def __init__(self, config: dict):
         """
@@ -290,6 +291,8 @@ class torbencherc:
                         torbencherc.TestResultKey.STATUS] = "Error"
                     outputResults[device][testModuleName][testcaseName][
                         torbencherc.TestResultKey.COST_TIME] = "N/A"
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.ERRSNFAILS] = self.tester.getErrsNFails()
                     break
                 if not passed:
                     outputResults[device][testModuleName][testcaseName][
@@ -348,8 +351,9 @@ class torbencherc:
         devices = list(testResult.keys())
         header = [torbencherc.TestResultKey.MODULE_NAME, torbencherc.TestResultKey.TESTCASE]
         for device in devices:
-            header.append(f"{device.upper()}_status")
-            header.append(f"{device.upper()}_cost_time(ms)")
+            header.append(f"{device.upper()}_{torbencherc.TestResultKey.STATUS}")
+            header.append(f"{device.upper()}_{torbencherc.TestResultKey.COST_TIME}")
+            header.append(f"{device.upper()}_{torbencherc.TestResultKey.ERRSNFAILS}")
 
         # Use a set to track which test cases have already been processed
         processedCases = set()
@@ -364,10 +368,12 @@ class torbencherc:
                                 torbencherc.TestResultKey.STATUS, "N/A")
                             costTime = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
                                 torbencherc.TestResultKey.COST_TIME, "N/A")
+                            errsNFails = testResult[dev].get(moduleName, {}).get(testCase, {}).get(
+                                torbencherc.TestResultKey.ERRSNFAILS, None)
                             row.append(status)
                             row.append(costTime)
+                            row.append(errsNFails)
                         rows.append(row)
-                        # Mark this test case as processed
                         processedCases.add((moduleName, testCase))
 
         return pd.DataFrame(rows, columns=header)
