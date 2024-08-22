@@ -277,6 +277,8 @@ class torbencherc:
                         torbencherc.TestResultKey.STATUS] = "CompareError"
                     outputResults[device][testModuleName][testcaseName][
                         torbencherc.TestResultKey.COST_TIME] = "N/A"
+                    outputResults[device][testModuleName][testcaseName][
+                        torbencherc.TestResultKey.ERRSNFAILS] = e
                     break
 
                 if passed == -2:
