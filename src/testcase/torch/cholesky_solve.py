@@ -20,7 +20,7 @@ class TorchCholeskyUsolveTestCase(TorBencherTestCaseBase):
         # Generate random positive-definite matrix A with shape (*, n, n)
         A_shape = [n, n] if batch_dims == 0 else [random.randint(1, 3) for _ in range(batch_dims)] + [n, n]
         A = torch.randn(A_shape)
-        A = A @ A.transpose(-2, -1) + torch.eye(n) * 1e-3
+        A = A @ A.transpose(-2, -1) + torch.eye(n, device=A.device) * 1e-3
 
         # Extract Cholesky decomposition
         L = torch.linalg.cholesky(A)
