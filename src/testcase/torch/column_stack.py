@@ -34,10 +34,10 @@ class TorchColumnUstackTestCase(TorBencherTestCaseBase):
         max_size0 = max(tensor.size(0) for tensor in tensors)
         for i in range(len(tensors)):
             if tensors[i].dim() == 1:
-                tensors[i] = torch.cat([tensors[i], torch.zeros(max_size0 - tensors[i].size(0))])
+                tensors[i] = torch.cat([tensors[i], torch.zeros(max_size0 - tensors[i].size(0), device=tensors[i].device)])
             else:
-                tensors[i] = torch.cat([tensors[i], torch.zeros(max_size0 - tensors[i].size(0), tensors[i].size(1))],
-                                       dim=0)
+                tensors[i] = torch.cat([tensors[i], torch.zeros(max_size0 - tensors[i].size(0), tensors[i].size(1),
+                                                                device=tensors[i].device)], dim=0)
 
         # Perform the column_stack operation
         result = torch.column_stack(tensors)
