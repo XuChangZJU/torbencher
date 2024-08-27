@@ -20,7 +20,7 @@ class TorchCholeskyUinverseTestCase(TorBencherTestCaseBase):
 
         # Create a symmetric positive-definite matrix A by using random values
         A = torch.randn(matrix_size)
-        A = A @ A.transpose(-1, -2) + torch.eye(n) * 1e-3  # Symmetric positive-definite matrix
+        A = A @ A.transpose(-1, -2) + torch.eye(n, device=A.device) * 1e-3  # Symmetric positive-definite matrix
 
         # Compute the Cholesky decomposition of A
         L = torch.linalg.cholesky(A)

@@ -18,7 +18,7 @@ class TorchCholeskyTestCase(TorBencherTestCaseBase):
 
         # Create a random tensor and ensure it's symmetric positive-definite by matrix multiplication
         A = torch.randn(input_size)
-        A = A @ A.mT + 1e-3 * torch.eye(matrix_dim).expand_as(A)  # Make symmetric positive-definite
+        A = A @ A.mT + 1e-3 * torch.eye(matrix_dim, device=A.device).expand_as(A)  # Make symmetric positive-definite
 
         upper = random.choice([True, False])  # Randomly choose upper or lower triangular matrix
 
