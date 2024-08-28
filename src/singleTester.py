@@ -129,6 +129,7 @@ class SingleTester:
                 self.ErrsNFails = preDeviceResult.failures[-1]
 
 
+            self.applyRandomInjectors(testcaseName)
             suite = self.loader.loadTestsFromTestCase(testcase)
             self.sendValueToDevice(testcaseName, self.storage, device)
             torch.manual_seed(seed)
